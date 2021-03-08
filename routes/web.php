@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::group(['prefix'=>'dashboard','as'=>'dashboard.'], function() {
+            Route::get('/home', function () {
+                dd('home');
+            })->name('home');
+    });
+    
+    Route::get('/', function () {
+        // Uses first & second middleware...
+    });
+
+    Route::get('/user/profile', function () {
+        // Uses first & second middleware...
+    });
+});
+
+Route::get('/login', [AuthController::class, 'index'])->name('login');
