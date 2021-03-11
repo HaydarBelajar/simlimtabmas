@@ -35,3 +35,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');

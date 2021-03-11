@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Traits\AuthTraits;
 
 class AuthController extends Controller
 {
+    use AuthTraits;
+
     public function index(Request $request)
     {
         return view('auth.login');
@@ -20,15 +23,16 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
+        
+        $doAuth = $this->auth($credentials);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            return redirect()->intended('dashboard');
+        $error = json_decode($doAuth, true);
+        if (isset($error['error'])){
+            return back()->withErrors([
+                'email' => 'The provided credentials do not match our records.',
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return redirect()->intended('dashboard');
     }
 }
