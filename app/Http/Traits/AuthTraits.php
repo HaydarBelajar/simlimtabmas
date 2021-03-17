@@ -3,11 +3,10 @@
 namespace App\Http\Traits;
 
 use GuzzleHttp\Client;
-use Cookie;
 use Illuminate\Support\Facades\Log;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7;
-
+use Session;
 
 trait AuthTraits
 {
@@ -28,14 +27,13 @@ trait AuthTraits
         if ($method == 'POST') {
             if ($type == 'auth') {
                 try {
-                    $res = $client->request('POST', 'http://unisa-laravel.test/api/auth/login', $param);
+                    $res = $client->request('POST', env('API_URL').'auth/login', $param);
                     $body = json_decode($res->getBody(), true);
                 } catch (ClientException  $e) {
                     $response = $e->getResponse();
                     return $response->getBody()->getContents();
                 }   
-
-                cookie('kucingku', $body['access_token'], $body['expires_in']);
+                Session::put('kucingku', $body['access_token']);
 
                 return true;
             }

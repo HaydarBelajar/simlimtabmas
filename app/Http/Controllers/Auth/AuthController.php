@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Traits\AuthTraits;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -33,6 +34,6 @@ class AuthController extends Controller
             ]);
         }
 
-        return redirect()->intended('dashboard');
+        return redirect()->intended('dashboard/home');
     }
 }

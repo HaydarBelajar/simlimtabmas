@@ -1,7 +1,7 @@
-@extends('v1.admin.layout')
-@extends('v1.admin.header')
-@extends('v1.admin.body')
-@extends('v1.admin.footer')
+@extends('admin.layout')
+@extends('admin.header')
+@extends('admin.body')
+@extends('admin.footer')
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->

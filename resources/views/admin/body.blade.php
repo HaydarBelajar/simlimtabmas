@@ -10,7 +10,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="{{ route('home') }}" class="nav-link">{{ env('APP_NAME') }}</a>
+          <a href="{{ route('dashboard.home') }}" class="nav-link">{{ env('APP_NAME') }}</a>
         </li>
       </ul>
 
@@ -44,7 +44,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="{{ route('admin.pengguna.index') }}" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
                   Data Admin
@@ -52,7 +52,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('admin.siswa.index') }}" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
                   Data Siswa
@@ -68,7 +68,7 @@
               </a>
             </li> -->
             <li class="nav-item">
-              <a href="{{ route('admin.pelajaran.index') }}" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
                   Data Mata Pelajaran
@@ -76,7 +76,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('admin.lintas-minat.index') }}" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
                   Data Kelas Lintas Minat
@@ -84,7 +84,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('admin.kalkulasi.index') }}" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
                   Hasil Perhitungan
@@ -92,7 +92,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+              <a class="nav-link" href="" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
@@ -100,7 +100,7 @@
                 </p>
               </a>
 
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              <form id="logout-form" action="" method="POST" style="display: none;">
                 @csrf
               </form>
             </li>
