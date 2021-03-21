@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use App\Providers\RouteServiceProvider;
 use Session;
 
 class Authenticate extends Middleware
@@ -15,7 +16,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (!Session::has('kucingku')) {
+        if (! $request->expectsJson()) {
             return route('login');
         }
     }

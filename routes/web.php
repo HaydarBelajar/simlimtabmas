@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth.token'])->group(function () {
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::group(['prefix'=>'dashboard','as'=>'dashboard.'], function() {
-            Route::get('/home', function () {
-                dd('home');
-            })->name('home');
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
     });
     
     Route::get('/', function () {
@@ -34,5 +34,4 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
