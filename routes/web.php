@@ -19,8 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+
 Route::middleware(['auth.token'])->group(function () {
-    Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::group(['prefix'=>'dashboard','as'=>'dashboard.'], function() {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
     });

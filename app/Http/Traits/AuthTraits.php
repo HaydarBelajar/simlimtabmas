@@ -32,8 +32,8 @@ trait AuthTraits
                 } catch (ClientException  $e) {
                     $response = $e->getResponse();
                     return $response->getBody()->getContents();
-                }   
-                Session::put('kucingku', $body['access_token']);
+                }
+                Session::put('kucingku', $body['data']['access_token']);
 
                 return true;
             }

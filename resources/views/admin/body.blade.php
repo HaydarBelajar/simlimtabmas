@@ -9,9 +9,6 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="{{ route('dashboard.home') }}" class="nav-link">{{ env('APP_NAME') }}</a>
-        </li>
       </ul>
 
       <!-- Right navbar links -->
@@ -33,7 +30,7 @@
         alt="AdminLTE Logo"
         class="brand-image img-circle elevation-3"
         style="opacity: .8"> --}}
-        <span class="brand-text font-weight-light">SMA Negeri 1 Grobogan</span>
+        <span class="brand-text font-weight-light">SIMLITABMAS</span>
       </a>
 
       <!-- Sidebar -->
@@ -47,7 +44,7 @@
               <a href="" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
-                  Data Admin
+                  Beranda
                 </p>
               </a>
             </li>
@@ -55,7 +52,7 @@
               <a href="" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
-                  Data Siswa
+                  Penelitian
                 </p>
               </a>
             </li>
@@ -71,7 +68,7 @@
               <a href="" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
-                  Data Mata Pelajaran
+                  Pengabdian
                 </p>
               </a>
             </li>
@@ -79,7 +76,7 @@
               <a href="" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
-                  Data Kelas Lintas Minat
+                  Pelaksanaan Kegiatan
                 </p>
               </a>
             </li>
@@ -87,7 +84,15 @@
               <a href="" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
-                  Hasil Perhitungan
+                  Riwayat Usulan
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                  Pendaftaran Reviewer
                 </p>
               </a>
             </li>
