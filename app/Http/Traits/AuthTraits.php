@@ -18,6 +18,7 @@ trait AuthTraits
                 'password' => $data['password']
             ]
         ];
+
         return $this->connectAPI('POST', $param, 'auth');
     }
 
@@ -29,13 +30,23 @@ trait AuthTraits
                 try {
                     $res = $client->request('POST', env('API_URL').'auth/login', $param);
                     $body = json_decode($res->getBody(), true);
+                    
+                    // Simpan credential di session
+                    Session::put('kucingku', $body['data']['access_token']);
+
+                    return $body;
                 } catch (ClientException  $e) {
                     $response = $e->getResponse();
-                    return $response->getBody()->getContents();
-                }
-                Session::put('kucingku', $body['data']['access_token']);
 
-                return true;
+                    $detail = [
+                        "status_code" => $response->getStatusCode(),
+                        "reason" => $response->getReasonPhrase(),
+                    ];
+
+                    return $detail;
+                    // return $response->getBody()->getContents();
+                }
+
             }
         }
     }

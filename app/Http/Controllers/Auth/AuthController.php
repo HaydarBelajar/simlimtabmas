@@ -27,13 +27,12 @@ class AuthController extends Controller
         
         $doAuth = $this->auth($credentials);
 
-        $error = json_decode($doAuth, true);
-        if (isset($error['error'])){
+        if (isset($doAuth['status_code']) && $doAuth['status_code'] > 200){
             return back()->withErrors([
-                'email' => 'The provided credentials do not match our records.',
+                'email' => $doAuth['reason'],
             ]);
         }
-
+        
         return redirect()->intended('dashboard/home');
     }
 }
