@@ -55,112 +55,52 @@
               aria-selected="false">HKI</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="artikel-prosiding-tab" data-toggle="pill" href="#artikel-prosiding" role="tab" 
+            <a class="nav-link" id="artikel-prosiding-tab" data-toggle="pill" href="#artikel-prosiding" role="tab"
               aria-controls="artikel-prosiding" aria-selected="false">Artikel Prosiding</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="buku-tab" data-toggle="pill" href="#buku" role="tab" 
-              aria-controls="buku" aria-selected="false">Buku</a>
+            <a class="nav-link" id="buku-tab" data-toggle="pill" href="#buku" role="tab" aria-controls="buku"
+              aria-selected="false">Buku</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="karya-monumental-tab" data-toggle="pill" href="#karya-monumental" role="tab" 
+            <a class="nav-link" id="karya-monumental-tab" data-toggle="pill" href="#karya-monumental" role="tab"
               aria-controls="karya-monumental" aria-selected="false">Karya Monumental</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="naskah-akademik-tab" data-toggle="pill" href="#naskah-akademik" role="tab" 
+            <a class="nav-link" id="naskah-akademik-tab" data-toggle="pill" href="#naskah-akademik" role="tab"
               aria-controls="naskah-akademik" aria-selected="false">Naskah Akademik/ Urgensi</a>
           </li>
         </ul>
         <div class="tab-content" id="custom-content-below-tabContent">
           <div class="tab-pane fade show active" id="identitas" role="tabpanel" aria-labelledby="identitas-tab">
-            <div class="card card-default color-palette-box">
-              <div class="card-header">
-                <h3 class="card-title">
-                  {{-- Identitas --}}
-                </h3>
-              </div>
-              <div class="card-body">
-                <div class="col-12">
-                  <h5>Theme Colors</h5>
-                </div>
-                <!-- /.col-12 -->
-                <div class="row">
-                  <div class="col-sm-4 col-md-2">
-                    <h4 class="text-center">Primary</h4>
-
-                    <div class="color-palette-set">
-                      <div class="bg-primary color-palette"><span>#007bff</span></div>
-                      <div class="bg-primary disabled color-palette"><span>Disabled</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            @include('admin.content.sub-content.home-identitas')
           </div>
           <div class="tab-pane fade" id="sinta" role="tabpanel" aria-labelledby="sinta-tab">
-            Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor,
-            et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum
-            primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus
-            interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit
-            amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+            @include('admin.content.sub-content.home-sinta')
           </div>
           <div class="tab-pane fade" id="penelitian" role="tabpanel" aria-labelledby="penelitian-tab">
-            Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi
-            placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla.
-            Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a,
-            malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus
-            efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae
-            gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus
-            tincidunt eleifend ac ornare magna.
+            @include('admin.content.sub-content.home-penelitian')
           </div>
           <div class="tab-pane fade" id="pengabdian" role="tabpanel" aria-labelledby="pengabdian-tab">
-            Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare
-            sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie
-            tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra.
-            Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim.
-            In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+            @include('admin.content.sub-content.home-pengabdian')
           </div>
           <div class="tab-pane fade" id="artikel-jurnal" role="tabpanel" aria-labelledby="artikel-jurnal-tab">
-            Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare
-            sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie
-            tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra.
-            Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim.
-            In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+            @include('admin.content.sub-content.home-artikel-jurnal')
           </div>
           <div class="tab-pane fade" id="hki" role="tabpanel" aria-labelledby="hki-tab">
-            Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare
-            sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie
-            tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra.
-            Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim.
-            In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+            @include('admin.content.sub-content.home-hki')
           </div>
           <div class="tab-pane fade" id="artikel-prosiding" role="tabpanel" aria-labelledby="artikel-prosiding-tab">
-            Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare
-            sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie
-            tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra.
-            Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim.
-            In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+            @include('admin.content.sub-content.home-artikel-prosiding')
           </div>
           <div class="tab-pane fade" id="buku" role="tabpanel" aria-labelledby="buku-tab">
-            Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare
-            sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie
-            tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra.
-            Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim.
-            In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+            @include('admin.content.sub-content.home-buku')
           </div>
           <div class="tab-pane fade" id="karya-monumental" role="tabpanel" aria-labelledby="karya-monumental-tab">
-            Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare
-            sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie
-            tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra.
-            Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim.
-            In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+            @include('admin.content.sub-content.home-karya-monumental')
           </div>
           <div class="tab-pane fade" id="naskah-akademik" role="tabpanel" aria-labelledby="naskah-akademik-tab">
-            Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare
-            sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie
-            tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra.
-            Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim.
-            In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+            @include('admin.content.sub-content.home-naskah-akademik')
           </div>
         </div>
       </div>
