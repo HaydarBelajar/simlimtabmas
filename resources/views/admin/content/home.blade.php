@@ -40,11 +40,11 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" id="penelitian-tab" data-toggle="pill" href="#penelitian" role="tab"
-              aria-controls="penelitian" aria-selected="false">Penelitian</a>
+              aria-controls="penelitian" aria-selected="false">Riwayat Penelitian</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="pengabdian-tab" data-toggle="pill" href="#pengabdian" role="tab"
-              aria-controls="pengabdian" aria-selected="false">Pengabdian</a>
+              aria-controls="pengabdian" aria-selected="false">Riwayat Pengabdian</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="artikel-jurnal-tab" data-toggle="pill" href="#artikel-jurnal" role="tab"
