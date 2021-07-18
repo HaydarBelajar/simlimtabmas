@@ -24,7 +24,7 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        
+
         $doAuth = $this->auth($credentials);
 
         if (isset($doAuth['status_code']) && $doAuth['status_code'] > 200){
@@ -32,7 +32,14 @@ class AuthController extends Controller
                 'email' => $doAuth['reason'],
             ]);
         }
-        
+
         return redirect()->intended('dashboard/home');
+    }
+
+    public function logout(Request $request) {
+        $request->session()->flush();
+
+        return redirect()->route('login');
+
     }
 }

@@ -22,7 +22,7 @@ trait AuthTraits
         return $this->connectAPI('POST', $param, 'auth');
     }
 
-    public function connectAPI($method, $param, $type) 
+    public function connectAPI($method, $param, $type)
     {
         $client = new Client();
         if ($method == 'POST') {
@@ -30,9 +30,9 @@ trait AuthTraits
                 try {
                     $res = $client->request('POST', env('API_URL').'auth/login', $param);
                     $body = json_decode($res->getBody(), true);
-                    
+
                     // Simpan credential di session
-                    Session::put('kucingku', $body['data']['access_token']);
+                    Session::put('kucingku', $body['data']);
 
                     return $body;
                 } catch (ClientException  $e) {

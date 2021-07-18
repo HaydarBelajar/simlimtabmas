@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\UserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,17 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth.token'])->group(function () {
     Route::group(['prefix'=>'dashboard','as'=>'dashboard.'], function() {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
     });
-    
+
+    Route::group(['prefix'=>'manage-user','as'=>'manage-user.'], function() {
+        Route::get('/list', [UserManagementController::class, 'index'])->name('list');
+    });
+
     Route::get('/', function () {
         // Uses first & second middleware...
     });
