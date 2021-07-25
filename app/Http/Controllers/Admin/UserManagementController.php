@@ -9,7 +9,16 @@ use DataTables;
 
 class UserManagementController extends Controller
 {
+    private $controllerDetails;
     use AuthTraits;
+
+    public function __construct()
+    {
+        $this->controllerDetails = [
+            "currentPage" => "Manajemen Pengguna",
+            "pageDescription" => "Halaman Manajemen Pengguna"
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +26,9 @@ class UserManagementController extends Controller
      */
     public function index(Request $request)
     {
-        return view('admin.content.menu-user-list');
+        return view('admin.content.menu-user-list')->with([
+            'detailController' => $this->controllerDetails,
+        ]);
         // dd($request->session()->all());
     }
 
