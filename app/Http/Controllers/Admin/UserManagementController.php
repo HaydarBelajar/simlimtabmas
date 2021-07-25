@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Traits\AuthTraits;
 
 class UserManagementController extends Controller
 {
+    use AuthTraits;
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +16,8 @@ class UserManagementController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request->session()->all());
+        return view('admin.content.menu-user-list');
+        // dd($request->session()->all());
     }
 
     /**
@@ -81,5 +84,13 @@ class UserManagementController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAll(Request $request) {
+        // Param datatables harus dikirim ke be juga
+        $dataTablesParam = $request->all();
+
+        $getData = $this->preProcess($dataTablesParam, 'user/get-all');
+        return $getData['data']['original'];
     }
 }

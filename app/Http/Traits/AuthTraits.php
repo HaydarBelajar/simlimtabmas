@@ -19,10 +19,24 @@ trait AuthTraits
             ]
         ];
 
-        return $this->connectAPI('POST', $param, 'auth');
+        return $this->connectAPI('POST', $param, 'auth', null);
     }
 
-    public function connectAPI($method, $param, $type)
+    public function preProcess($data, $endPoint)
+    {
+        $sessionData = Session('kucingku');
+
+        $param = [
+            'headers' => [
+                'Authorization'      => 'Bearer '.$sessionData['access_token']
+            ],
+            'form_params' => $data
+        ];
+
+        return $this->connectAPI('POST', $param, 'data', $endPoint);
+    }
+
+    public function connectAPI($method, $param, $type, $endPoint)
     {
         $client = new Client();
         if ($method == 'POST') {
@@ -47,6 +61,22 @@ trait AuthTraits
                     // return $response->getBody()->getContents();
                 }
 
+            } elseif ($type == 'data') {
+                try {
+                    $res = $client->request('POST', env('API_URL').$endPoint, $param);
+                    $body = json_decode($res->getBody(), true);
+
+                    return $body;
+                } catch (ClientException  $e) {
+                    $response = $e->getResponse();
+
+                    $detail = [
+                        "status_code" => $response->getStatusCode(),
+                        "reason" => $response->getReasonPhrase(),
+                    ];
+
+                    return $detail;
+                }
             }
         }
     }
