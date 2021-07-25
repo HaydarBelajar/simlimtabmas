@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Traits\AuthTraits;
+use DataTables;
 
 class UserManagementController extends Controller
 {
@@ -89,8 +90,19 @@ class UserManagementController extends Controller
     public function getAll(Request $request) {
         // Param datatables harus dikirim ke be juga
         $dataTablesParam = $request->all();
+        $getData = $this->postAPI($dataTablesParam, 'user/get-all');
 
-        $getData = $this->preProcess($dataTablesParam, 'user/get-all');
-        return $getData['data']['original'];
+        $data = $getData['data'];
+
+        $dataTables =  DataTables::of($data)
+        ->addColumn('action', function ($data) {
+            $button = '<button type="button" name="edit" id="' . $data['id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
+            $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['id'] . '" class="delete btn btn-danger btn-sm" ' . ($data['id'] == 1 ? "disabled" : "") . '>Delete</button>';
+            return $button;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+        
+        return $dataTables;
     }
 }

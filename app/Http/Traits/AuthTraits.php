@@ -22,7 +22,7 @@ trait AuthTraits
         return $this->connectAPI('POST', $param, 'auth', null);
     }
 
-    public function preProcess($data, $endPoint)
+    public function postAPI($data, $endPoint)
     {
         $sessionData = Session('kucingku');
 
@@ -58,7 +58,6 @@ trait AuthTraits
                     ];
 
                     return $detail;
-                    // return $response->getBody()->getContents();
                 }
 
             } elseif ($type == 'data') {
@@ -74,6 +73,10 @@ trait AuthTraits
                         "status_code" => $response->getStatusCode(),
                         "reason" => $response->getReasonPhrase(),
                     ];
+
+                    if ($detail['status_code'] == 401 && $detail['reason'] == "Unauthorized") {
+                        return redirect()->route('login');
+                    }
 
                     return $detail;
                 }
