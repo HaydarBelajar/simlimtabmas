@@ -31,6 +31,7 @@ Route::middleware(['auth.token'])->group(function () {
     Route::group(['prefix'=>'manage-user','as'=>'manage-user.'], function() {
         Route::get('/list', [UserManagementController::class, 'index'])->name('list');
         Route::get('/get-all', [UserManagementController::class, 'getAll'])->name('get-all');
+        Route::get('/delete/{id}', [UserManagementController::class, 'destroy'])->name('delete');
     });
 
     Route::get('/', function () {

@@ -26,6 +26,7 @@ class UserManagementController extends Controller
      */
     public function index(Request $request)
     {
+
         return view('admin.content.menu-user-list')->with([
             'detailController' => $this->controllerDetails,
         ]);
@@ -95,7 +96,11 @@ class UserManagementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $param = [
+            'user_id' => $id
+        ];
+        $getData = $this->postAPI($param, 'user/delete');
+        return $getData;
     }
 
     public function getAll(Request $request) {
@@ -113,7 +118,7 @@ class UserManagementController extends Controller
         })
         ->rawColumns(['action'])
         ->make(true);
-        
+
         return $dataTables;
     }
 }
