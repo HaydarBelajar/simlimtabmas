@@ -77,10 +77,9 @@
                                     <div class="form-group">
                                         <label>Role</label>
                                         <select class="custom-select" name="role" id="role">
-                                            <option selected>Wewenang</option>
-                                            @if (!empty($roleList))
-                                                @foreach ($roleList as $role)
-                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                            @if (!empty($rolesOptions))
+                                                @foreach ($rolesOptions as $role)
+                                                    <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
                                                 @endforeach
                                             @endif
                                         </select>

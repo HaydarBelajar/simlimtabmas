@@ -26,11 +26,13 @@ class UserManagementController extends Controller
      */
     public function index(Request $request)
     {
+        $param = [];
+        $getRoles = $this->postAPI($param, 'role/get-all');
 
         return view('admin.content.menu-user-list')->with([
             'detailController' => $this->controllerDetails,
+            'rolesOptions' => isset($getRoles['data']) ? $getRoles['data'] : []
         ]);
-        // dd($request->session()->all());
     }
 
     /**
