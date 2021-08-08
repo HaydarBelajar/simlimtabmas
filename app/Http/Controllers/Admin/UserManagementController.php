@@ -42,7 +42,7 @@ class UserManagementController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -53,7 +53,16 @@ class UserManagementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $param = [
+            'username' => $request->username,
+            'fullname' => $request->fullname,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => $request->password,
+            'confirmPassword' => $request->confirmpassword
+        ];
+        $getRoles = $this->postAPI($param, 'user/create');
+        return $getRoles;
     }
 
     /**
@@ -85,9 +94,9 @@ class UserManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

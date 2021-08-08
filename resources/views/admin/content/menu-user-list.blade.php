@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-form-label">Nama Lengkap : </label>
-                                        <input type="text" name="full-name" id="full-name" class="form-control"
+                                        <input type="text" name="fullname" id="full-name" class="form-control"
                                                maxlength="35" required/>
                                     </div>
                                     <div class="form-group">
@@ -91,12 +91,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-form-label">Confirm Password : </label>
-                                        <input type="password" name="confirm-password" id="confirm-password"
+                                        <input type="password" name="confirmpassword" id="confirm-password"
                                                class="form-control" maxlength="35" required/>
                                     </div>
                                     <br/>
                                     <div class="modal-footer">
-                                        <input type="hidden" name="action" id="action" value="Add"/>
+                                        <input type="hidden" name="action" id="action" value="Simpan"/>
                                         <input type="hidden" name="course_id" id="course-id"/>
                                         <input type="submit" name="action_button" id="action_button"
                                                class="btn btn-primary" value="Add"/>
@@ -199,14 +199,50 @@
                         }
                     ]
                 });
+
+                $('#edit-form').on('submit', function(event) {
+                    event.preventDefault();
+                    var action_url = '';
+
+                    if ($('#action').val() == 'Simpan') {
+                    action_url = "{{ route('manage-user.create') }}";
+                    }
+
+                    if ($('#action').val() == 'Edit') {
+                    action_url = "{{ route('manage-user.update') }}";
+                    }
+
+                    $.ajax({
+                    url: action_url,
+                    method: "POST",
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    success: function(data) {
+                        var html = '';
+                        if (data.errors) {
+                            html = '<div class="alert alert-danger">';
+                            html += '<p>' + data.errors + '</p>';
+                            html += '</div>';
+                        }
+                        if (data.success) {
+                            alert("Data telah sukses ditambahkan atau dirubah");
+                            html = '<div class="alert alert-success">' + data.success + '</div>';
+                            $('#edit-form')[0].reset();
+                            $('#user-table').DataTable().ajax.reload();
+                        }
+                        $('#form-result').html(html);
+                        $('#formModal').modal('hide');
+                    }
+                    });
+                });
             });
 
-            function buildAjaxData() {
-                var settings = $("#user-table").dataTable().fnSettings();
+            // function buildAjaxData() {
+            //     var settings = $("#user-table").dataTable().fnSettings();
 
-                var obj = {
+            //     var obj = {
                     //default params
-                    "draw": settings.iDraw,
+                    // "draw": settings.iDraw,
                     // "start" : settings._iDisplayStart,
                     // "length" : settings._iDisplayLength,
                     // "columns" : "",
@@ -215,7 +251,7 @@
                     // "cmd" : "refresh",
                     // "from": $("#from-date").val()+" "+$("#from-time").val(),
                     // "to"  : $("#to-date").val()+" "+$("#to-time").val()
-                };
+                // };
 
                 //building the columns
                 // var col = new Array(); // array
@@ -234,11 +270,8 @@
                 //assigning
                 // obj.columns = col;
                 // obj.order = ord;
-
-                return obj;
-
-
-            }
+                // return obj;
+            // }
         </script>
     @endpush
 @endsection

@@ -32,6 +32,8 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/list', [UserManagementController::class, 'index'])->name('list');
         Route::get('/get-all', [UserManagementController::class, 'getAll'])->name('get-all');
         Route::get('/delete/{id}', [UserManagementController::class, 'destroy'])->name('delete');
+        Route::post('/create', [UserManagementController::class, 'store'])->name('create');
+        Route::post('/update', [UserManagementController::class, 'update'])->name('update');
     });
 
     Route::get('/', function () {
