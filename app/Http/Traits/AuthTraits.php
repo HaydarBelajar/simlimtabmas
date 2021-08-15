@@ -5,8 +5,10 @@ namespace App\Http\Traits;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Psr7;
 use Session;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 trait AuthTraits
 {
@@ -79,6 +81,15 @@ trait AuthTraits
                         return redirect()->route('login');
                     }
 
+                    return $detail;
+                } catch (ServerException | HttpException $e) {
+                    $response = $e->getResponse();
+                    $message = json_decode($response->getBody()->getContents());
+
+                    $detail = [
+                        "status_code" => $response->getStatusCode(),
+                        "reason" =>  $message->error,
+                    ];
                     return $detail;
                 }
             }

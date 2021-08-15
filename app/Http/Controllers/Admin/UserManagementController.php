@@ -62,7 +62,7 @@ class UserManagementController extends Controller
             'confirmPassword' => $request->confirmpassword
         ];
         $getRoles = $this->postAPI($param, 'user/create');
-        return $getRoles;
+        return json_encode($getRoles);
     }
 
     /**

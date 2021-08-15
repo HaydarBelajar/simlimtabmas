@@ -30,6 +30,7 @@
                         <div class="top-button-group" style="margin-bottom: 20px;">
                             <button type="button" class="btn btn-primary add-user">Tambah Pengguna baru</button>
                         </div>
+                        <span id="notification"></span>
                         <table id="user-table" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                             <tr>
@@ -53,7 +54,6 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <span id="form-result"></span>
                                 <!-- <div class="alert alert-danger" role="alert">
                                   This is a danger alert—check it out!
                                 </div> -->
@@ -137,7 +137,7 @@
         <script>
             $(document).ready(function () {
                 $(document).on('click', '.add-user', function() {
-                    $('#form-result').html('');
+                    $('#notification').html('');
                     $('#formModal').modal('show');
                     $('#action_button').val('Simpan');
                     $('#action').val('Simpan');
@@ -213,26 +213,32 @@
                     }
 
                     $.ajax({
-                    url: action_url,
-                    method: "POST",
-                    data: $(this).serialize(),
-                    dataType: "json",
-                    success: function(data) {
-                        var html = '';
-                        if (data.errors) {
-                            html = '<div class="alert alert-danger">';
-                            html += '<p>' + data.errors + '</p>';
-                            html += '</div>';
+                        url: action_url,
+                        method: "POST",
+                        data: $(this).serialize(),
+                        dataType: "json",
+                        success: function(data) {
+                            console.log('sukses', data);
+                            var html = '';
+                            if (data.errors) {
+                                html = '<div class="alert alert-danger">';
+                                html += '<p>' + data.errors + '</p>';
+                                html += '</div>';
+                            }else if (data.reason){
+                                html = '<div class="alert alert-danger">';
+                                html += '<p>' + data.reason + '</p>';
+                                html += '</div>';
+                            }
+
+                            if (data.success) {
+                                alert("Data telah sukses ditambahkan atau dirubah");
+                                html = '<div class="alert alert-success">' + data.success + '</div>';
+                                $('#edit-form')[0].reset();
+                                $('#user-table').DataTable().ajax.reload();
+                            }
+                            $('#notification').html(html);
+                            $('#formModal').modal('hide');
                         }
-                        if (data.success) {
-                            alert("Data telah sukses ditambahkan atau dirubah");
-                            html = '<div class="alert alert-success">' + data.success + '</div>';
-                            $('#edit-form')[0].reset();
-                            $('#user-table').DataTable().ajax.reload();
-                        }
-                        $('#form-result').html(html);
-                        $('#formModal').modal('hide');
-                    }
                     });
                 });
             });
