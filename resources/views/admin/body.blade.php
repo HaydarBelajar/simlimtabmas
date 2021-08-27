@@ -183,26 +183,83 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
-                        <li class="nav-header">Menu Utama</li>
+                        <li class="nav-header" style="font-weight: bold;">Menu Utama</li>
                         <li class="nav-item menu-open">
                             <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fa fa-home"></i>
                                 <p>
                                     Beranda
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-edit"></i>
                                 <p>
                                     Penelitian
+                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Usulan baru</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Usulan lanjutan</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Perbaikan Usulan</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>SPTB</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Laporan Kemajuan</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Laporan Akhir</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Identitas PRN</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Arsip</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Rekap Luaran</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
+                                <i class="nav-icon fa fa-users"></i>
                                 <p>
                                     Pengabdian
                                     <i class="fas fa-angle-left right"></i>
@@ -210,14 +267,14 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/layout/top-nav.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Usulan baru</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Usulan lanjutan</p>
                                     </a>
                                 </li>
@@ -225,7 +282,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-chart-pie"></i>
+                                <i class="nav-icon fas fa fa-book"></i>
                                 <p>
                                     Pelaksana Kegiatan
                                     <i class="right fas fa-angle-left"></i>
@@ -233,16 +290,28 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/charts/chartjs.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>ChartJS</p>
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Catatan Harian</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Pengembalian Dana</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Kesanggupan Pelaksanaan</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tree"></i>
+                                <i class="nav-icon fa fa-copy"></i>
                                 <p>
                                     Riwayat Usulan
                                 </p>
@@ -250,7 +319,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
+                                <i class="nav-icon fa fa-user"></i>
                                 <p>
                                     Pendaftaran Reviewer
                                     <i class="fas fa-angle-left right"></i>
@@ -258,9 +327,21 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/forms/general.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>General Elements</p>
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Penelitian (Nasional)</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Penelitian (Internal PT)</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>PPM (Nasional)</p>
                                     </a>
                                 </li>
                             </ul>
