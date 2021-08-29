@@ -36,6 +36,12 @@ Route::middleware(['auth.token'])->group(function () {
         Route::post('/update', [UserManagementController::class, 'update'])->name('update');
     });
 
+    Route::group(['prefix'=>'penelitian-usulanbaru','as'=>'penelitian-usulanbaru.'], function() {
+        Route::get('/usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'index'])->name('index');
+        Route::get('/lanjutkan-usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'lanjutkanUsulan'])->name('lanjutkan-usulan');
+        Route::get('/identitas-usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'identitasUsulan'])->name('identitas-usulan');
+    });
+
     Route::get('/', function () {
         // Uses first & second middleware...
     });

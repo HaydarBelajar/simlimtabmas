@@ -202,7 +202,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                    <a href="{{route('penelitian-usulanbaru.index')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Usulan baru</p>
                                     </a>
