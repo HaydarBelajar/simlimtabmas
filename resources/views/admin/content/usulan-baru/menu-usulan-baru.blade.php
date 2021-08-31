@@ -26,8 +26,8 @@
         <section class="content">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-block">
-                        <div class="md-card-block">
+                    <div class="card-body">
+                        <div class="md-card-body">
 
 
                             <div class="card-body">
@@ -46,28 +46,28 @@
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h5 class="card-header-text" style="color: darkred">H-Index:
+                                                    <h5 class="card-header-text float-left" style="color: darkred">H-Index:
                                                         <span id="ContentPlaceHolder1_ctl00_persyaratan_lblHindex"
                                                               style="color:DarkRed;font-weight:bold;">0</span>
                                                         &nbsp;(<span
                                                             id="ContentPlaceHolder1_ctl00_persyaratan_lblKelompokBidang"
                                                             style="color:DarkRed;font-weight:bold;">Sain-Teknologi</span>)
                                                     </h5>
-                                                    <h5 class="card-header-text f-right" style="color: darkred">Usulan
+                                                    <h5 class="card-header-text float-right" style="color: darkred">Usulan
                                                         Baru:
                                                         <span
                                                             id="ContentPlaceHolder1_ctl00_persyaratan_lblJmlUsulanBaru"
                                                             style="color:DarkRed;font-weight:bold;">2</span>
                                                     </h5>
                                                 </div>
-                                                <div class="card-block">
+                                                <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-12">
-                                                            <div class="panel panel-default">
-                                                                <div class="panel-heading bg-default txt-white">
+                                                            <div class="card">
+                                                                <div class="card-header">
                                                                     Persyaratan Umum
                                                                 </div>
-                                                                <div class="panel-body">
+                                                                <div class="card-body">
                                                                     <div
                                                                         id="ContentPlaceHolder1_ctl00_persyaratan_pnlCekSinta">
 
@@ -139,11 +139,11 @@
                             </div>
 
                             <div class="card-body">
-                                <div class="col-md-6 form-inline">
+                                <div class="col-md-6 form-inline float-left">
                                     <label class="col-form-label">Tahun Usulan:&nbsp;&nbsp;</label>
-                                    <select name="ctl00$ContentPlaceHolder1$ctl00$ddlThnUsulan"
-                                            onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ctl00$ddlThnUsulan\',\'\')', 0)"
-                                            id="ContentPlaceHolder1_ctl00_ddlThnUsulan" class="form-control"
+                                    <select name="lThnUsulan"
+                                            onchange=""
+                                            id="ThnUsulan" class="form-control"
                                             style="width:80px;">
                                         <option value="2022">2022</option>
                                         <option value="2021">2021</option>
@@ -165,9 +165,9 @@
                                 </div>
 
 
-                                <div class="col-md-6" style="text-align: right;">
+                                <div class="col-md-6 float-right" style="text-align: right;">
 
-                                    <a id="ContentPlaceHolder1_ctl00_lbPengajuanBaru" class="btn btn-success"
+                                    <a id="PengajuanBaru" class="btn btn-success"
                                        href="{{route('penelitian-usulanbaru.lanjutkan-usulan')}}">
                                         <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;Lanjutkan
                                     </a>
@@ -186,14 +186,14 @@
                             <section class="panels-wells">
                                 <div class="col-md-12">
                                     <div class="card">
-                                        <div class="card-block">
+                                        <div class="card-body">
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading bg-default txt-white">
+                                                    <div class="card">
+                                                        <div class="card-header bg-default txt-white">
                                                             Daftar Usulan Penelitian Baru
                                                         </div>
-                                                        <div class="panel-body">
+                                                        <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
 
