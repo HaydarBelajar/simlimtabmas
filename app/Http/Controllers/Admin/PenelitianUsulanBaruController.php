@@ -44,6 +44,13 @@ class PenelitianUsulanBaruController extends Controller
         ]);
     }
 
+    public function jurnalInternasional()
+    {
+        return view('admin.content.usulan-baru.artikel-jurnal-internasional')->with([
+            'detailController' => $this->controllerDetails,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

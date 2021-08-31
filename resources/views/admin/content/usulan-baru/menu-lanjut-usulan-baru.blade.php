@@ -292,7 +292,7 @@
                                                                                 <a id="ContentPlaceHolder1_ctl00_cvKetua_lvRekamJejak_lbEdit_0"
                                                                                    title="Tambah data"
                                                                                    class="btn btn-sm btn-primary waves-effect m-b-5"
-                                                                                   href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$cvKetua$lvRekamJejak$ctrl0$lbEdit','')">
+                                                                                   href="{{route('penelitian-usulanbaru.jurnal-internasional')}}">
                                                                                     Tambah Data</a>
                                                                             </td>
                                                                         </tr>

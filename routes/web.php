@@ -40,6 +40,7 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'index'])->name('index');
         Route::get('/lanjutkan-usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'lanjutkanUsulan'])->name('lanjutkan-usulan');
         Route::get('/identitas-usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'identitasUsulan'])->name('identitas-usulan');
+        Route::get('/jurnal-internasional', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'jurnalInternasional'])->name('jurnal-internasional');
     });
 
     Route::get('/', function () {

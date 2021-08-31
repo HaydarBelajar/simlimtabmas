@@ -557,9 +557,8 @@
                     </div>
                 </div>
             </div>
-    </div>
-    </section>
-    <!-- /.content -->
+        </section>
+        <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     @push('scripts')
