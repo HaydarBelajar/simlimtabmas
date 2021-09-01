@@ -51,6 +51,34 @@ class PenelitianUsulanBaruController extends Controller
         ]);
     }
 
+    public function jurnalNasional()
+    {
+        return view('admin.content.usulan-baru.artikel-jurnal-nasional')->with([
+            'detailController' => $this->controllerDetails,
+        ]);
+    }
+
+    public function artikelProsiding()
+    {
+        return view('admin.content.usulan-baru.artikel-prosiding')->with([
+            'detailController' => $this->controllerDetails,
+        ]);
+    }
+
+    public function kekayaanIntelektual()
+    {
+        return view('admin.content.usulan-baru.kekayaan-intelektual')->with([
+            'detailController' => $this->controllerDetails,
+        ]);
+    }
+
+    public function buku()
+    {
+        return view('admin.content.usulan-baru.buku')->with([
+            'detailController' => $this->controllerDetails,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

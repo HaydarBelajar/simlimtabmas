@@ -310,7 +310,7 @@
                                                                                 <a id="ContentPlaceHolder1_ctl00_cvKetua_lvRekamJejak_lbEdit_1"
                                                                                    title="Tambah data"
                                                                                    class="btn btn-sm btn-primary waves-effect m-b-5"
-                                                                                   href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$cvKetua$lvRekamJejak$ctrl1$lbEdit','')">
+                                                                                   href="{{route('penelitian-usulanbaru.jurnal-nasional')}}">
                                                                                     Tambah Data</a>
                                                                             </td>
                                                                         </tr>
@@ -327,7 +327,7 @@
                                                                                 <a id="ContentPlaceHolder1_ctl00_cvKetua_lvRekamJejak_lbEdit_2"
                                                                                    title="Tambah data"
                                                                                    class="btn btn-sm btn-primary waves-effect m-b-5"
-                                                                                   href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$cvKetua$lvRekamJejak$ctrl2$lbEdit','')">
+                                                                                   href="{{route('penelitian-usulanbaru.artikel-prosiding')}}">
                                                                                     Tambah Data</a>
                                                                             </td>
                                                                         </tr>
@@ -344,7 +344,7 @@
                                                                                 <a id="ContentPlaceHolder1_ctl00_cvKetua_lvRekamJejak_lbEdit_3"
                                                                                    title="Tambah data"
                                                                                    class="btn btn-sm btn-primary waves-effect m-b-5"
-                                                                                   href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$cvKetua$lvRekamJejak$ctrl3$lbEdit','')">
+                                                                                   href="{{route('penelitian-usulanbaru.kekayaan-intelektual')}}">
                                                                                     Tambah Data</a>
                                                                             </td>
                                                                         </tr>
@@ -361,7 +361,7 @@
                                                                                 <a id="ContentPlaceHolder1_ctl00_cvKetua_lvRekamJejak_lbEdit_4"
                                                                                    title="Tambah data"
                                                                                    class="btn btn-sm btn-primary waves-effect m-b-5"
-                                                                                   href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$cvKetua$lvRekamJejak$ctrl4$lbEdit','')">
+                                                                                   href="{{route('penelitian-usulanbaru.buku')}}">
                                                                                     Tambah Data</a>
                                                                             </td>
                                                                         </tr>

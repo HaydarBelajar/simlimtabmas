@@ -41,6 +41,10 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/lanjutkan-usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'lanjutkanUsulan'])->name('lanjutkan-usulan');
         Route::get('/identitas-usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'identitasUsulan'])->name('identitas-usulan');
         Route::get('/jurnal-internasional', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'jurnalInternasional'])->name('jurnal-internasional');
+        Route::get('/jurnal-nasional', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'jurnalNasional'])->name('jurnal-nasional');
+        Route::get('/artikel-prosiding', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'artikelProsiding'])->name('artikel-prosiding');
+        Route::get('/kekayaan-intelektual', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'kekayaanIntelektual'])->name('kekayaan-intelektual');
+        Route::get('/buku', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'buku'])->name('buku');
     });
 
     Route::get('/', function () {
