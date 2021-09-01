@@ -36,7 +36,7 @@ Route::middleware(['auth.token'])->group(function () {
         Route::post('/update', [UserManagementController::class, 'update'])->name('update');
     });
 
-    Route::group(['prefix'=>'penelitian-usulanbaru','as'=>'penelitian-usulanbaru.'], function() {
+    Route::group(['prefix'=>'penelitian-usulan-baru','as'=>'penelitian-usulan-baru.'], function() {
         Route::get('/usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'index'])->name('index');
         Route::get('/lanjutkan-usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'lanjutkanUsulan'])->name('lanjutkan-usulan');
         Route::get('/identitas-usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'identitasUsulan'])->name('identitas-usulan');
@@ -45,6 +45,14 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/artikel-prosiding', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'artikelProsiding'])->name('artikel-prosiding');
         Route::get('/kekayaan-intelektual', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'kekayaanIntelektual'])->name('kekayaan-intelektual');
         Route::get('/buku', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'buku'])->name('buku');
+    });
+
+    Route::group(['prefix'=>'penelitian-usulan-lanjutan','as'=>'penelitian-usulan-lanjutan.'], function() {
+        Route::get('/usulan-lanjutan', [\App\Http\Controllers\Admin\PenelitianUsulanLanjutanController::class, 'index'])->name('index');
+    });
+
+    Route::group(['prefix'=>'perbaikan-usulan','as'=>'perbaikan-usulan.'], function() {
+        Route::get('/perbaikan-usulan', [\App\Http\Controllers\Admin\PerbaikanUsulanController::class, 'index'])->name('index');
     });
 
     Route::get('/', function () {

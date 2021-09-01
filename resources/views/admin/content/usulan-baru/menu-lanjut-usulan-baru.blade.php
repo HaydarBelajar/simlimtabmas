@@ -52,7 +52,7 @@
                                                     <h5 class="card-header-text float-right" style="color: darkred">
                                                         Usulan Baru:
                                                         <span
-                                                            id="ContentPlaceHolder1_ctl00_cvKetua_lblJmlUsulanBaru1"
+                                                            id="ContentPlaceHolder1_ctl00_cvKetua_lblJmlusulan-baru1"
                                                             style="color:DarkRed;font-weight:bold;">2</span>
                                                     </h5>
                                                 </div>
@@ -292,7 +292,7 @@
                                                                                 <a id="ContentPlaceHolder1_ctl00_cvKetua_lvRekamJejak_lbEdit_0"
                                                                                    title="Tambah data"
                                                                                    class="btn btn-sm btn-primary waves-effect m-b-5"
-                                                                                   href="{{route('penelitian-usulanbaru.jurnal-internasional')}}">
+                                                                                   href="{{route('penelitian-usulan-baru.jurnal-internasional')}}">
                                                                                     Tambah Data</a>
                                                                             </td>
                                                                         </tr>
@@ -310,7 +310,7 @@
                                                                                 <a id="ContentPlaceHolder1_ctl00_cvKetua_lvRekamJejak_lbEdit_1"
                                                                                    title="Tambah data"
                                                                                    class="btn btn-sm btn-primary waves-effect m-b-5"
-                                                                                   href="{{route('penelitian-usulanbaru.jurnal-nasional')}}">
+                                                                                   href="{{route('penelitian-usulan-baru.jurnal-nasional')}}">
                                                                                     Tambah Data</a>
                                                                             </td>
                                                                         </tr>
@@ -327,7 +327,7 @@
                                                                                 <a id="ContentPlaceHolder1_ctl00_cvKetua_lvRekamJejak_lbEdit_2"
                                                                                    title="Tambah data"
                                                                                    class="btn btn-sm btn-primary waves-effect m-b-5"
-                                                                                   href="{{route('penelitian-usulanbaru.artikel-prosiding')}}">
+                                                                                   href="{{route('penelitian-usulan-baru.artikel-prosiding')}}">
                                                                                     Tambah Data</a>
                                                                             </td>
                                                                         </tr>
@@ -344,7 +344,7 @@
                                                                                 <a id="ContentPlaceHolder1_ctl00_cvKetua_lvRekamJejak_lbEdit_3"
                                                                                    title="Tambah data"
                                                                                    class="btn btn-sm btn-primary waves-effect m-b-5"
-                                                                                   href="{{route('penelitian-usulanbaru.kekayaan-intelektual')}}">
+                                                                                   href="{{route('penelitian-usulan-baru.kekayaan-intelektual')}}">
                                                                                     Tambah Data</a>
                                                                             </td>
                                                                         </tr>
@@ -361,7 +361,7 @@
                                                                                 <a id="ContentPlaceHolder1_ctl00_cvKetua_lvRekamJejak_lbEdit_4"
                                                                                    title="Tambah data"
                                                                                    class="btn btn-sm btn-primary waves-effect m-b-5"
-                                                                                   href="{{route('penelitian-usulanbaru.buku')}}">
+                                                                                   href="{{route('penelitian-usulan-baru.buku')}}">
                                                                                     Tambah Data</a>
                                                                             </td>
                                                                         </tr>
@@ -381,7 +381,7 @@
                                 </div>
                                 <div class="card-footer col-md-12" style="text-align: right;">
                                     <a id="ContentPlaceHolder1_ctl00_lbLanjutkanAtCVKetua" class="btn btn-success"
-                                       href="{{route('penelitian-usulanbaru.identitas-usulan')}}">
+                                       href="{{route('penelitian-usulan-baru.identitas-usulan')}}">
                                         <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;Lanjutkan
                                     </a>
                                 </div>

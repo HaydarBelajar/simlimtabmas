@@ -56,7 +56,7 @@
                                                     <h5 class="card-header-text float-right" style="color: darkred">Usulan
                                                         Baru:
                                                         <span
-                                                            id="ContentPlaceHolder1_ctl00_persyaratan_lblJmlUsulanBaru"
+                                                            id="ContentPlaceHolder1_ctl00_persyaratan_lblJmlusulan-baru"
                                                             style="color:DarkRed;font-weight:bold;">2</span>
                                                     </h5>
                                                 </div>
@@ -168,7 +168,7 @@
                                 <div class="col-md-6 float-right" style="text-align: right;">
 
                                     <a id="PengajuanBaru" class="btn btn-success"
-                                       href="{{route('penelitian-usulanbaru.lanjutkan-usulan')}}">
+                                       href="{{route('penelitian-usulan-baru.lanjutkan-usulan')}}">
                                         <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;Lanjutkan
                                     </a>
                                 </div>
@@ -221,13 +221,13 @@
                                                                                     2020 | Thn Pelaksanaan 2021</h6>
                                                                                 <b>Bidang Fokus:</b> Kesehatan -
                                                                                 <span
-                                                                                    id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lvDaftarUsulanBaru_lblPeranPersonil_0"
+                                                                                    id="ContentPlaceHolder1_ctl00_lstusulan-baru_lvDaftarusulan-baru_lblPeranPersonil_0"
                                                                                     class="label bg-info">Ketua Pengusul</span>&nbsp;
                                                                                 <span
-                                                                                    id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lvDaftarUsulanBaru_lblStsKonfirmasi_0"
+                                                                                    id="ContentPlaceHolder1_ctl00_lstusulan-baru_lvDaftarusulan-baru_lblStsKonfirmasi_0"
                                                                                     class="label bg-warning"></span><br>
                                                                                 <span
-                                                                                    id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lvDaftarUsulanBaru_lblStsApproval_0"
+                                                                                    id="ContentPlaceHolder1_ctl00_lstusulan-baru_lvDaftarusulan-baru_lblStsApproval_0"
                                                                                     style="background-color:LightGreen;">Proposal disetujui untuk diusulkan</span>
                                                                             </td>
                                                                             <td>
@@ -237,12 +237,12 @@
 
 
                                                                                 <div
-                                                                                    id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lvDaftarUsulanBaru_panelUnduhPdf_0">
+                                                                                    id="ContentPlaceHolder1_ctl00_lstusulan-baru_lvDaftarusulan-baru_panelUnduhPdf_0">
 
-                                                                                    <a id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lvDaftarUsulanBaru_lbUnduhProposalLengkap_0"
+                                                                                    <a id="ContentPlaceHolder1_ctl00_lstusulan-baru_lvDaftarusulan-baru_lbUnduhProposalLengkap_0"
                                                                                        title="Unduh Proposal Lengkap"
                                                                                        class="fa fa-file-pdf-o"
-                                                                                       href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$lstUsulanBaru$lvDaftarUsulanBaru$ctrl0$lbUnduhProposalLengkap','')"
+                                                                                       href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$lstusulan-baru$lvDaftarusulan-baru$ctrl0$lbUnduhProposalLengkap','')"
                                                                                        style="color:Red;font-size:70px;"></a>
 
 
@@ -268,13 +268,13 @@
                                                                                     2020 | Thn Pelaksanaan 2021</h6>
                                                                                 <b>Bidang Fokus:</b> Kesehatan -
                                                                                 <span
-                                                                                    id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lvDaftarUsulanBaru_lblPeranPersonil_1"
+                                                                                    id="ContentPlaceHolder1_ctl00_lstusulan-baru_lvDaftarusulan-baru_lblPeranPersonil_1"
                                                                                     class="label bg-info">Anggota Pengusul 2</span>&nbsp;
                                                                                 <span
-                                                                                    id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lvDaftarUsulanBaru_lblStsKonfirmasi_1"
+                                                                                    id="ContentPlaceHolder1_ctl00_lstusulan-baru_lvDaftarusulan-baru_lblStsKonfirmasi_1"
                                                                                     class="label bg-warning">Setuju</span><br>
                                                                                 <span
-                                                                                    id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lvDaftarUsulanBaru_lblStsApproval_1"
+                                                                                    id="ContentPlaceHolder1_ctl00_lstusulan-baru_lvDaftarusulan-baru_lblStsApproval_1"
                                                                                     style="background-color:LightGreen;">Proposal disetujui untuk diusulkan</span>
                                                                             </td>
                                                                             <td>
@@ -284,12 +284,12 @@
 
 
                                                                                 <div
-                                                                                    id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lvDaftarUsulanBaru_panelUnduhPdf_1">
+                                                                                    id="ContentPlaceHolder1_ctl00_lstusulan-baru_lvDaftarusulan-baru_panelUnduhPdf_1">
 
-                                                                                    <a id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lvDaftarUsulanBaru_lbUnduhProposalLengkap_1"
+                                                                                    <a id="ContentPlaceHolder1_ctl00_lstusulan-baru_lvDaftarusulan-baru_lbUnduhProposalLengkap_1"
                                                                                        title="Unduh Proposal Lengkap"
                                                                                        class="fa fa-file-pdf-o"
-                                                                                       href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$lstUsulanBaru$lvDaftarUsulanBaru$ctrl1$lbUnduhProposalLengkap','')"
+                                                                                       href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$lstusulan-baru$lvDaftarusulan-baru$ctrl1$lbUnduhProposalLengkap','')"
                                                                                        style="color:Red;font-size:70px;"></a>
 
 
@@ -325,18 +325,18 @@
                                         <div class="modal-body">
                                             Apakah yakin akan menghapus usulan:<br>
                                             Judul:&nbsp;<b><span
-                                                    id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lblModalJudul"></span></b><br>
+                                                    id="ContentPlaceHolder1_ctl00_lstusulan-baru_lblModalJudul"></span></b><br>
                                             Skema:&nbsp;<b>
-                                                <span id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lblModalSkema"></span></b>
+                                                <span id="ContentPlaceHolder1_ctl00_lstusulan-baru_lblModalSkema"></span></b>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger pull-right"
                                                     data-dismiss="modal">Batal
                                             </button>
                                             <a onclick="$('#modalHapus').modal('hide');"
-                                               id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lbHapus"
+                                               id="ContentPlaceHolder1_ctl00_lstusulan-baru_lbHapus"
                                                class="btn btn-success"
-                                               href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$lstUsulanBaru$lbHapus','')">Hapus</a>
+                                               href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$lstusulan-baru$lbHapus','')">Hapus</a>
                                         </div>
                                     </div>
                                 </div>
@@ -357,14 +357,14 @@
                                         <div class="modal-body">
                                             <p>Apakah Anda yakin akan membatalkan pengiriman usulan ini ?</p>
                                             <p class="text-primary"><span
-                                                    id="ContentPlaceHolder1_ctl00_lstUsulanBaru_lblJudulDibatalkan"
+                                                    id="ContentPlaceHolder1_ctl00_lstusulan-baru_lblJudulDibatalkan"
                                                     style="font-weight:bold;"></span></p>
                                         </div>
                                         <div class="modal-footer">
                                             <input type="submit"
-                                                   name="ctl00$ContentPlaceHolder1$ctl00$lstUsulanBaru$btnBatalkanUsulan"
+                                                   name="ctl00$ContentPlaceHolder1$ctl00$lstusulan-baru$btnBatalkanUsulan"
                                                    value="Batalkan"
-                                                   id="ContentPlaceHolder1_ctl00_lstUsulanBaru_btnBatalkanUsulan"
+                                                   id="ContentPlaceHolder1_ctl00_lstusulan-baru_btnBatalkanUsulan"
                                                    class="btn btn-danger">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup
                                             </button>
