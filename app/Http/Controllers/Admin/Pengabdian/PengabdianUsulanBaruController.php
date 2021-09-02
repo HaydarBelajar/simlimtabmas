@@ -14,8 +14,8 @@ class PengabdianUsulanBaruController extends Controller
     public function __construct()
     {
         $this->controllerDetails = [
-            "currentPage" => "Usulan Baru Pengabdian",
-            "pageDescription" => "Halaman Usulan Baru Pengabdian"
+            "currentPage" => "Usulan Baru pengabdian",
+            "pageDescription" => "Halaman Usulan Baru pengabdian"
         ];
     }
     /**

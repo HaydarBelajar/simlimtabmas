@@ -250,7 +250,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                    <a href="{{route('rekap-luaran.index')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Rekap Luaran</p>
                                     </a>

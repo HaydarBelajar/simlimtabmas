@@ -15,7 +15,7 @@ class PenelitianUsulanBaruController extends Controller
     {
         $this->controllerDetails = [
             "currentPage" => "Usulan Baru",
-            "pageDescription" => "Halaman Usulan Baru Penelitian"
+            "pageDescription" => "Halaman Usulan Baru penelitian"
         ];
     }
     /**

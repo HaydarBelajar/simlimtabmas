@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthTraits;
 use Illuminate\Http\Request;
 
-class SPTBController extends Controller
+class RekapLuaranController extends Controller
 {
     private $controllerDetails;
     use AuthTraits;
@@ -14,8 +14,8 @@ class SPTBController extends Controller
     public function __construct()
     {
         $this->controllerDetails = [
-            "currentPage" => "Surat Pernyataan Tanggung Jawab Belanja",
-            "pageDescription" => "Halaman Surat Pernyataan Tanggung Jawab Belanja"
+            "currentPage" => "Rekap Luaran",
+            "pageDescription" => "Halaman Rekap Luaran"
         ];
     }
     /**
@@ -25,7 +25,7 @@ class SPTBController extends Controller
      */
     public function index()
     {
-        return view('admin.content.penelitian.sptb.menu-sptb')->with([
+        return view('admin.content.penelitian.rekap-luaran.menu-rekap-luaran')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }

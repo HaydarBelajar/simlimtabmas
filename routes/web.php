@@ -74,6 +74,10 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/laporan-akhir-edit', [\App\Http\Controllers\Admin\Penelitian\LaporanAkhirController::class, 'edit'])->name('edit');
     });
 
+    Route::group(['prefix'=>'rekap-luaran','as'=>'rekap-luaran.'], function() {
+        Route::get('/rekap-luaran', [\App\Http\Controllers\Admin\Penelitian\RekapLuaranController::class, 'index'])->name('index');
+    });
+
     Route::get('/', function () {
         // Uses first & second middleware...
     });
