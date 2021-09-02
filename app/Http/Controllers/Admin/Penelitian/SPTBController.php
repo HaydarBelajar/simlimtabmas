@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Penelitian;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthTraits;
 use Illuminate\Http\Request;
 
-class PenelitianUsulanLanjutanController extends Controller
+class SPTBController extends Controller
 {
     private $controllerDetails;
     use AuthTraits;
@@ -14,8 +14,8 @@ class PenelitianUsulanLanjutanController extends Controller
     public function __construct()
     {
         $this->controllerDetails = [
-            "currentPage" => "Usulan Baru",
-            "pageDescription" => "Halaman Usulan Baru Penelitian"
+            "currentPage" => "Surat Pernyataan Tanggung Jawab Belanja",
+            "pageDescription" => "Halaman Surat Pernyataan Tanggung Jawab Belanja"
         ];
     }
     /**
@@ -25,7 +25,7 @@ class PenelitianUsulanLanjutanController extends Controller
      */
     public function index()
     {
-        return view('admin.content.usulan-lanjutan.menu-usulan-lanjutan')->with([
+        return view('admin.content.sptb.menu-sptb')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }

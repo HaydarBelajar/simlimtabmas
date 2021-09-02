@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Pengabdian;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthTraits;
 use Illuminate\Http\Request;
 
-class PenelitianUsulanBaruController extends Controller
+class PengabdianUsulanBaruController extends Controller
 {
     private $controllerDetails;
     use AuthTraits;
@@ -14,8 +14,8 @@ class PenelitianUsulanBaruController extends Controller
     public function __construct()
     {
         $this->controllerDetails = [
-            "currentPage" => "Usulan Baru",
-            "pageDescription" => "Halaman Usulan Baru Penelitian"
+            "currentPage" => "Usulan Baru Pengabdian",
+            "pageDescription" => "Halaman Usulan Baru Pengabdian"
         ];
     }
     /**
@@ -25,56 +25,56 @@ class PenelitianUsulanBaruController extends Controller
      */
     public function index()
     {
-        return view('admin.content.usulan-baru.menu-usulan-baru')->with([
+        return view('admin.content.pengabdian.usulan-baru.menu-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }
 
     public function lanjutkanUsulan()
     {
-        return view('admin.content.usulan-baru.menu-lanjut-usulan-baru')->with([
+        return view('admin.content.pengabdian.usulan-baru.menu-lanjut-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }
 
     public function identitasUsulan()
     {
-        return view('admin.content.usulan-baru.menu-identitas-usulan-baru')->with([
+        return view('admin.content.pengabdian.usulan-baru.menu-identitas-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }
 
     public function jurnalInternasional()
     {
-        return view('admin.content.usulan-baru.artikel-jurnal-internasional')->with([
+        return view('admin.content.pengabdian.usulan-baru.artikel-jurnal-internasional')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }
 
     public function jurnalNasional()
     {
-        return view('admin.content.usulan-baru.artikel-jurnal-nasional')->with([
+        return view('admin.content.pengabdian.usulan-baru.artikel-jurnal-nasional')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }
 
     public function artikelProsiding()
     {
-        return view('admin.content.usulan-baru.artikel-prosiding')->with([
+        return view('admin.content.pengabdian.usulan-baru.artikel-prosiding')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }
 
     public function kekayaanIntelektual()
     {
-        return view('admin.content.usulan-baru.kekayaan-intelektual')->with([
+        return view('admin.content.pengabdian.usulan-baru.kekayaan-intelektual')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }
 
     public function buku()
     {
-        return view('admin.content.usulan-baru.buku')->with([
+        return view('admin.content.pengabdian.usulan-baru.buku')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }

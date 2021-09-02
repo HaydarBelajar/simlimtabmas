@@ -220,19 +220,19 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                    <a href="{{route('sptb.index')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>SPTB</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                    <a href="{{route('laporan-kemajuan.index')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Laporan Kemajuan</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                    <a href="{{route('laporan-akhir.index')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Laporan Akhir</p>
                                     </a>

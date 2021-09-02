@@ -37,22 +37,41 @@ Route::middleware(['auth.token'])->group(function () {
     });
 
     Route::group(['prefix'=>'penelitian-usulan-baru','as'=>'penelitian-usulan-baru.'], function() {
-        Route::get('/usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'index'])->name('index');
-        Route::get('/lanjutkan-usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'lanjutkanUsulan'])->name('lanjutkan-usulan');
-        Route::get('/identitas-usulan-baru', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'identitasUsulan'])->name('identitas-usulan');
-        Route::get('/jurnal-internasional', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'jurnalInternasional'])->name('jurnal-internasional');
-        Route::get('/jurnal-nasional', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'jurnalNasional'])->name('jurnal-nasional');
-        Route::get('/artikel-prosiding', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'artikelProsiding'])->name('artikel-prosiding');
-        Route::get('/kekayaan-intelektual', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'kekayaanIntelektual'])->name('kekayaan-intelektual');
-        Route::get('/buku', [\App\Http\Controllers\Admin\PenelitianUsulanBaruController::class, 'buku'])->name('buku');
+        Route::get('/usulan-baru', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'index'])->name('index');
+        Route::get('/lanjutkan-usulan-baru', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'lanjutkanUsulan'])->name('lanjutkan-usulan');
+        Route::get('/identitas-usulan-baru', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'identitasUsulan'])->name('identitas-usulan');
+        Route::get('/jurnal-internasional', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'jurnalInternasional'])->name('jurnal-internasional');
+        Route::get('/jurnal-nasional', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'jurnalNasional'])->name('jurnal-nasional');
+        Route::get('/artikel-prosiding', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'artikelProsiding'])->name('artikel-prosiding');
+        Route::get('/kekayaan-intelektual', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'kekayaanIntelektual'])->name('kekayaan-intelektual');
+        Route::get('/buku', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'buku'])->name('buku');
+    });
+
+    Route::group(['prefix'=>'pengabdian','as'=>'pengabdian.'], function() {
+        Route::get('/usulan-baru', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'index'])->name('index');
+        Route::get('/lanjutkan-usulan-baru', [\App\Http\Controllers\Admin\Pengabdian\PengabdianUsulanBaruController::class, 'lanjutkanUsulan'])->name('lanjutkan-usulan');
     });
 
     Route::group(['prefix'=>'penelitian-usulan-lanjutan','as'=>'penelitian-usulan-lanjutan.'], function() {
-        Route::get('/usulan-lanjutan', [\App\Http\Controllers\Admin\PenelitianUsulanLanjutanController::class, 'index'])->name('index');
+        Route::get('/usulan-lanjutan', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanLanjutanController::class, 'index'])->name('index');
     });
 
     Route::group(['prefix'=>'perbaikan-usulan','as'=>'perbaikan-usulan.'], function() {
-        Route::get('/perbaikan-usulan', [\App\Http\Controllers\Admin\PerbaikanUsulanController::class, 'index'])->name('index');
+        Route::get('/perbaikan-usulan', [\App\Http\Controllers\Admin\Penelitian\PerbaikanUsulanController::class, 'index'])->name('index');
+    });
+
+    Route::group(['prefix'=>'sptb','as'=>'sptb.'], function() {
+        Route::get('/sptb', [\App\Http\Controllers\Admin\Penelitian\SPTBController::class, 'index'])->name('index');
+    });
+
+    Route::group(['prefix'=>'laporan-kemajuan','as'=>'laporan-kemajuan.'], function() {
+        Route::get('/laporan-kemajuan', [\App\Http\Controllers\Admin\Penelitian\LaporanKemajuanController::class, 'index'])->name('index');
+        Route::get('/laporan-kemajuan-edit', [\App\Http\Controllers\Admin\Penelitian\LaporanKemajuanController::class, 'edit'])->name('edit');
+    });
+
+    Route::group(['prefix'=>'laporan-akhir','as'=>'laporan-akhir.'], function() {
+        Route::get('/laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\LaporanAkhirController::class, 'index'])->name('index');
+        Route::get('/laporan-akhir-edit', [\App\Http\Controllers\Admin\Penelitian\LaporanAkhirController::class, 'edit'])->name('edit');
     });
 
     Route::get('/', function () {
