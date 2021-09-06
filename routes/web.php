@@ -47,6 +47,10 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/buku', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'buku'])->name('buku');
     });
 
+    Route::group(['prefix'=>'penelitian','as'=>'penelitian.'], function() {
+        Route::get('/data-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'dataPenelitian'])->name('data-penelitian');
+    });
+
     Route::group(['prefix'=>'pengabdian','as'=>'pengabdian.'], function() {
         Route::get('/usulan-baru', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'index'])->name('index');
         Route::get('/lanjutkan-usulan-baru', [\App\Http\Controllers\Admin\Pengabdian\PengabdianUsulanBaruController::class, 'lanjutkanUsulan'])->name('lanjutkan-usulan');

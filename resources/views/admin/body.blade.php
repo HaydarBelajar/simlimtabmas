@@ -202,6 +202,12 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
+                                    <a href="{{route('penelitian.data-penelitian')}}" class="nav-link">
+                                        <i class="fa fa-chevron-right nav-icon"></i>
+                                        <p>Data Penelitian</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{route('penelitian-usulan-baru.index')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Usulan baru</p>
