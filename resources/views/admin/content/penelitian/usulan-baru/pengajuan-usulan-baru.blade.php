@@ -171,7 +171,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card card-success">
+                                <div class="card card-primary">
                                     <div class="card-header">
                                         <h4 class="card-title w-100">
                                             <a class="d-block w-100 collapsed" data-toggle="collapse"
@@ -208,7 +208,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card card-success">
+                                <div class="card card-primary">
                                     <div class="card-header">
                                         <h4 class="card-title w-100">
                                             <a class="d-block w-100 collapsed" data-toggle="collapse"
@@ -241,7 +241,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card card-success">
+                                <div class="card card-primary">
                                     <div class="card-header">
                                         <h4 class="card-title w-100">
                                             <a class="d-block w-100 collapsed" data-toggle="collapse"
@@ -268,7 +268,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card card-success">
+                                <div class="card card-primary">
                                     <div class="card-header">
                                         <h4 class="card-title w-100">
                                             <a class="d-block w-100 collapsed" data-toggle="collapse"
@@ -297,6 +297,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <button type="submit" class="btn btn-success">Simpan</button>
                         </div>
                         <!-- /.card-body -->
                     </div>
