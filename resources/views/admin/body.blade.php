@@ -208,150 +208,168 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('penelitian-usulan-baru.index')}}" class="nav-link">
+                                    <a href="{{route('penelitian.data-catatan-harian')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Usulan baru</p>
+                                        <p>Catatan Harian</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('penelitian-usulan-lanjutan.index')}}" class="nav-link">
-                                        <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Usulan lanjutan</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('perbaikan-usulan.index')}}" class="nav-link">
-                                        <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Perbaikan Usulan</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('sptb.index')}}" class="nav-link">
-                                        <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>SPTB</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('laporan-kemajuan.index')}}" class="nav-link">
-                                        <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Laporan Kemajuan</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('laporan-akhir.index')}}" class="nav-link">
+                                    <a href="{{route('penelitian.data-laporan-akhir')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Laporan Akhir</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
-                                        <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Identitas PRN</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
-                                        <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Arsip</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('rekap-luaran.index')}}" class="nav-link">
-                                        <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Rekap Luaran</p>
-                                    </a>
-                                </li>
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('penelitian-usulan-baru.index')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Usulan baru</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('penelitian-usulan-lanjutan.index')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Usulan lanjutan</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('perbaikan-usulan.index')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Perbaikan Usulan</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('sptb.index')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>SPTB</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('laporan-kemajuan.index')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Laporan Kemajuan</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('laporan-akhir.index')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Laporan Akhir</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('manage-user.list')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Identitas PRN</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('manage-user.list')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Arsip</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('rekap-luaran.index')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Rekap Luaran</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-users"></i>
                                 <p>
-                                    Pengabdian
+                                    Pengabdian Masyarakat
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                    <a href="{{route('penelitian.data-penelitian')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Usulan baru</p>
+                                        <p>Data Pengabdian</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
-                                        <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Usulan lanjutan</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa fa-book"></i>
-                                <p>
-                                    Pelaksana Kegiatan
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                    <a href="{{route('penelitian.data-penelitian')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Catatan Harian</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
+                                    <a href="{{route('penelitian.data-penelitian')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Pengembalian Dana</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
-                                        <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Kesanggupan Pelaksanaan</p>
+                                        <p>Laporan Akhir</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-copy"></i>
-                                <p>
-                                    Riwayat Usulan
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-user"></i>
-                                <p>
-                                    Pendaftaran Reviewer
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
-                                        <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Penelitian (Nasional)</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
-                                        <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>Penelitian (Internal PT)</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('manage-user.list')}}" class="nav-link">
-                                        <i class="fa fa-chevron-right nav-icon"></i>
-                                        <p>PPM (Nasional)</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="#" class="nav-link">--}}
+{{--                                <i class="nav-icon fas fa fa-book"></i>--}}
+{{--                                <p>--}}
+{{--                                    Pelaksana Kegiatan--}}
+{{--                                    <i class="right fas fa-angle-left"></i>--}}
+{{--                                </p>--}}
+{{--                            </a>--}}
+{{--                            <ul class="nav nav-treeview">--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('manage-user.list')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Catatan Harian</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('manage-user.list')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Pengembalian Dana</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('manage-user.list')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Kesanggupan Pelaksanaan</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="#" class="nav-link">--}}
+{{--                                <i class="nav-icon fa fa-copy"></i>--}}
+{{--                                <p>--}}
+{{--                                    Riwayat Usulan--}}
+{{--                                </p>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="#" class="nav-link">--}}
+{{--                                <i class="nav-icon fa fa-user"></i>--}}
+{{--                                <p>--}}
+{{--                                    Pendaftaran Reviewer--}}
+{{--                                    <i class="fas fa-angle-left right"></i>--}}
+{{--                                </p>--}}
+{{--                            </a>--}}
+{{--                            <ul class="nav nav-treeview">--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('manage-user.list')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Penelitian (Nasional)</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('manage-user.list')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>Penelitian (Internal PT)</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{route('manage-user.list')}}" class="nav-link">--}}
+{{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
+{{--                                        <p>PPM (Nasional)</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
                         <li class="nav-item">
                             <a href="{{route('manage-user.list')}}" class="nav-link">
                                 <i class="nav-icon fas fa-edit"></i>

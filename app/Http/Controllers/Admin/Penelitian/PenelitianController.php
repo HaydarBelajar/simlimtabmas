@@ -25,6 +25,13 @@ class PenelitianController extends Controller
      */
     public function dataPenelitian()
     {
+        return view('admin.content.penelitian.usulan-baru.daftar-usulan-baru')->with([
+            'detailController' => $this->controllerDetails,
+        ]);
+    }
+
+    public function tambahDataPenelitian()
+    {
         return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
         ]);

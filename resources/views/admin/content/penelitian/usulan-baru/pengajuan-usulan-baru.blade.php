@@ -297,7 +297,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="submit" class="btn btn-success float-left">Simpan</button>
+                            <a href={{ route('penelitian.data-penelitian') }} type="submit" class="btn btn-danger float-right">Kembali</a>
                         </div>
                         <!-- /.card-body -->
                     </div>

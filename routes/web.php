@@ -28,6 +28,18 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
     });
 
+
+    Route::group(['prefix'=>'penelitian','as'=>'penelitian.'], function() {
+        Route::get('/tambah-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'tambahDataPenelitian'])->name('tambah-penelitian');
+        Route::get('/data-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'dataPenelitian'])->name('data-penelitian');
+
+        Route::get('/tambah-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\CatatanHarianController::class, 'tambahDataCatatanHarian'])->name('tambah-catatan-harian');
+        Route::get('/data-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\CatatanHarianController::class, 'dataCatatanHarian'])->name('data-catatan-harian');
+
+        Route::get('/tambah-laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\LaporanAkhirController::class, 'tambahLaporanAkhir'])->name('tambah-laporan-akhir');
+        Route::get('/data-laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\LaporanAkhirController::class, 'dataLaporanAkhir'])->name('data-laporan-akhir');
+    });
+
     Route::group(['prefix'=>'manage-user','as'=>'manage-user.'], function() {
         Route::get('/list', [UserManagementController::class, 'index'])->name('list');
         Route::get('/get-all', [UserManagementController::class, 'getAll'])->name('get-all');
@@ -45,10 +57,6 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/artikel-prosiding', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'artikelProsiding'])->name('artikel-prosiding');
         Route::get('/kekayaan-intelektual', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'kekayaanIntelektual'])->name('kekayaan-intelektual');
         Route::get('/buku', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'buku'])->name('buku');
-    });
-
-    Route::group(['prefix'=>'penelitian','as'=>'penelitian.'], function() {
-        Route::get('/data-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'dataPenelitian'])->name('data-penelitian');
     });
 
     Route::group(['prefix'=>'pengabdian','as'=>'pengabdian.'], function() {

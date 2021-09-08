@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthTraits;
 use Illuminate\Http\Request;
 
-class LaporanAkhirController extends Controller
+class CatatanHarianController extends Controller
 {
     private $controllerDetails;
     use AuthTraits;
@@ -14,24 +14,25 @@ class LaporanAkhirController extends Controller
     public function __construct()
     {
         $this->controllerDetails = [
-            "currentPage" => "Laporan Akhir",
-            "pageDescription" => "Halaman Laporan Akhir"
+            "currentPage" => "Catatan Harian Penelitian",
+            "pageDescription" => "Halaman Catatan Harian Penelitian"
         ];
     }
 
-    public function dataLaporanAkhir()
+    public function dataCatatanHarian()
     {
-        return view('admin.content.penelitian.laporan-akhir.daftar-laporan-akhir')->with([
+        return view('admin.content.penelitian.catatan-harian.daftar-catatan-harian')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }
 
-    public function tambahLaporanAkhir()
+    public function tambahDataCatatanHarian()
     {
-        return view('admin.content.penelitian.laporan-akhir.tambah-laporan-akhir')->with([
+        return view('admin.content.penelitian.catatan-harian.tambah-catatan-harian')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +40,7 @@ class LaporanAkhirController extends Controller
      */
     public function index()
     {
-        return view('admin.content.penelitian.laporan-akhir.menu-laporan-akhir')->with([
+        return view('admin.content.penelitian.sptb.menu-sptb')->with([
             'detailController' => $this->controllerDetails,
         ]);
     }
@@ -83,11 +84,9 @@ class LaporanAkhirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('admin.content.penelitian.laporan-akhir.menu-laporan-akhir-edit')->with([
-            'detailController' => $this->controllerDetails,
-        ]);
+        //
     }
 
     /**
