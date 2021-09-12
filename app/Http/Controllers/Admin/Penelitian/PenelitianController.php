@@ -37,6 +37,17 @@ class PenelitianController extends Controller
         ]);
     }
 
+    public function simpanDataPenelitian(Request $request)
+    {
+        $param = [
+            'tahun_id' => $request->tahun_usulan,
+            'pelaksanaan_id' => $request->tahun_pelaksanaan,
+        ];
+        $simpanData = $this->postAPI($param, 'penelitian/create-penelitian');
+        dd($simpanData);
+        return json_encode($simpanData);
+    }
+
     public function lanjutkanUsulan()
     {
         return view('admin.content.penelitian.usulan-baru.menu-lanjut-usulan-baru')->with([
