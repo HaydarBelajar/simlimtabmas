@@ -32,12 +32,18 @@ class PenelitianController extends Controller
 
     public function tambahDataPenelitian()
     {
-        $param = [];
+        $param = [
+            "filter" => [
+                "skema_tipe" => "penelitian"
+            ]
+        ];
         $getTahun = $this->postAPI($param, 'tahun/get-all');
+        $getSkema = $this->postAPI($param, 'skema/get-filter');
 
         return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
             'listTahun' => isset($getTahun['data']) ? $getTahun['data'] : [],
+            'listSkema' => isset($getSkema['data']) ? $getSkema['data'] : [],
         ]);
     }
 

@@ -74,10 +74,9 @@
                                                            class="col-sm-2 col-form-label">Skema</label>
                                                     <div class="col-sm-10">
                                                         <select class="form-control" id="skema-penelitian" required>
-                                                            <option>Penelitian Grant</option>
-                                                            <option>Penelitian Payung</option>
-                                                            <option>Penelitian Institusi</option>
-                                                            <option>Penelitian Desertasi Doktor</option>
+                                                            @foreach ($listSkema as $skema)
+                                                                <option value={{ $skema['skema_id'] }}>{{ $skema['skema_nama'] }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
