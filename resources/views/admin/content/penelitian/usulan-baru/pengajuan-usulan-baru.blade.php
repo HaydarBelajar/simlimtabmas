@@ -51,9 +51,10 @@
                                                     <label for="tahun-usulan" class="col-sm-2 col-form-label">Tahun
                                                         Usulan</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="tahun-usulan" name="tahun_usulan">
-                                                            <option value="1">2020</option>
-                                                            <option value="2">2021</option>
+                                                        <select class="form-control" id="tahun-usulan" name="tahun_usulan" required>
+                                                            @foreach ($listTahun as $tahun)
+                                                                <option value={{ $tahun['tahun_id'] }}>{{ $tahun['tahun_usulan'] }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -61,9 +62,10 @@
                                                     <label for="tahun-pelaksanaan" class="col-sm-2 col-form-label">Tahun
                                                         Pelaksanaan</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="tahun-pelaksanaan"  name="tahun_pelaksanaan">
-                                                            <option value="1">2020</option>
-                                                            <option value="2">2021</option>
+                                                        <select class="form-control" id="tahun-pelaksanaan"  name="tahun_pelaksanaan" required>
+                                                            @foreach ($listTahun as $tahun)
+                                                                <option value={{ $tahun['tahun_id'] }}>{{ $tahun['tahun_usulan'] }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -71,7 +73,7 @@
                                                     <label for="skema-penelitian"
                                                            class="col-sm-2 col-form-label">Skema</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="skema-penelitian">
+                                                        <select class="form-control" id="skema-penelitian" required>
                                                             <option>Penelitian Grant</option>
                                                             <option>Penelitian Payung</option>
                                                             <option>Penelitian Institusi</option>
@@ -83,7 +85,7 @@
                                                     <label for="durasi-kegiatan"
                                                            class="col-sm-2 col-form-label">Durasi Kegiatan</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="durasi-kegiatan">
+                                                        <select class="form-control" id="durasi-kegiatan" required>
                                                             <option>1 Bulan</option>
                                                             <option>2 Bulan</option>
                                                             <option>3 Bulan</option>
@@ -97,7 +99,7 @@
                                                     <label for="durasi-kegiatan"
                                                            class="col-sm-2 col-form-label">Usulan Tahun ke</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="durasi-kegiatan">
+                                                        <select class="form-control" id="durasi-kegiatan" required>
                                                             <option>1</option>
                                                             <option>2</option>
                                                             <option>3</option>
@@ -109,29 +111,25 @@
                                                 <div class="form-group row">
                                                     <label for="judul" class="col-sm-2 col-form-label">Judul</label>
                                                     <div class="col-sm-10">
-                                                        <textarea class="form-control" placeholder="Judul" id="judul"
-                                                                  rows="2"> </textarea>
+                                                        <textarea class="form-control" placeholder="Judul" id="judul" rows="2" required></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="abstrak" class="col-sm-2 col-form-label">Abstrak</label>
                                                     <div class="col-sm-10">
-                                                        <textarea class="form-control" placeholder="abstrak" id="abstrak"
-                                                                  rows="2"> </textarea>
+                                                        <textarea class="form-control" placeholder="abstrak" id="abstrak" rows="2" required></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="keywords" class="col-sm-2 col-form-label">Keywords</label>
                                                     <div class="col-sm-10">
-                                                        <textarea class="form-control" placeholder="keywords" id="keywords"
-                                                                  rows="2"> </textarea>
+                                                        <textarea class="form-control" placeholder="keywords" id="keywords" rows="2" required> </textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="email" class="col-sm-2 col-form-label">Alamat Email</label>
                                                     <div class="col-sm-10">
-                                                        <input type="email" class="form-control" id="email"
-                                                               placeholder="Email">
+                                                        <input type="email" class="form-control" id="email" placeholder="Email" required>
                                                     </div>
                                                 </div>
                                             </div>

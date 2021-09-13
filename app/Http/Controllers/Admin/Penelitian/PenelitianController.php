@@ -32,8 +32,12 @@ class PenelitianController extends Controller
 
     public function tambahDataPenelitian()
     {
+        $param = [];
+        $getTahun = $this->postAPI($param, 'tahun/get-all');
+
         return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
+            'listTahun' => isset($getTahun['data']) ? $getTahun['data'] : [],
         ]);
     }
 
