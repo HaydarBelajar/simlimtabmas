@@ -150,10 +150,9 @@
                                                            class="col-sm-2 col-form-label">Rumpun Ilmu</label>
                                                     <div class="col-sm-10">
                                                         <select class="form-control" id="rumpun-ilmu">
-                                                            <option>Penelitian Grant</option>
-                                                            <option>Penelitian Payung</option>
-                                                            <option>Penelitian Institusi</option>
-                                                            <option>Penelitian Desertasi Doktor</option>
+                                                            @foreach ($listRumpunIlmu as $rumpunIlmu)
+                                                                <option value={{ $rumpunIlmu['rumpun_ilmu_id'] }}>{{ $rumpunIlmu['rumpun_ilmu_nama'] }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
