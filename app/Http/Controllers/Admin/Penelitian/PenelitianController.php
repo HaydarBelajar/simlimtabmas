@@ -40,12 +40,14 @@ class PenelitianController extends Controller
         $getTahun = $this->postAPI($param, 'tahun/get-all');
         $getSkema = $this->postAPI($param, 'skema/get-filter');
         $getRumpunIlmu = $this->postAPI($param, 'rumpun-ilmu/get-filter');
+        $getSumberDana = $this->postAPI($param, 'sumber-dana/get-filter');
 
         return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
             'listTahun' => isset($getTahun['data']) ? $getTahun['data'] : [],
             'listSkema' => isset($getSkema['data']) ? $getSkema['data'] : [],
             'listRumpunIlmu' => isset($getRumpunIlmu['data']) ? $getRumpunIlmu['data'] : [],
+            'listSumberDana' => isset($getSumberDana['data']) ? $getSumberDana['data'] : [],
         ]);
     }
 

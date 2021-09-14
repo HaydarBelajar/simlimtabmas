@@ -73,7 +73,7 @@
                                                     <label for="skema-penelitian"
                                                            class="col-sm-2 col-form-label">Skema</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="skema-penelitian" required>
+                                                        <select class="form-control" id="skema-penelitian" name="skema" required>
                                                             @foreach ($listSkema as $skema)
                                                                 <option value={{ $skema['skema_id'] }}>{{ $skema['skema_nama'] }}</option>
                                                             @endforeach
@@ -84,7 +84,7 @@
                                                     <label for="durasi-kegiatan"
                                                            class="col-sm-2 col-form-label">Durasi Kegiatan</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="durasi-kegiatan" required>
+                                                        <select class="form-control" id="durasi-kegiatan" name="dutasi_kegiatan" required>
                                                             <option>1 Bulan</option>
                                                             <option>2 Bulan</option>
                                                             <option>3 Bulan</option>
@@ -95,10 +95,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="durasi-kegiatan"
+                                                    <label for="usulan-tahun-ke"
                                                            class="col-sm-2 col-form-label">Usulan Tahun ke</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="durasi-kegiatan" required>
+                                                        <select class="form-control" id="usulan-tahun-ke" name="usulan_tahun_ke" required>
                                                             <option>1</option>
                                                             <option>2</option>
                                                             <option>3</option>
@@ -110,25 +110,25 @@
                                                 <div class="form-group row">
                                                     <label for="judul" class="col-sm-2 col-form-label">Judul</label>
                                                     <div class="col-sm-10">
-                                                        <textarea class="form-control" placeholder="Judul" id="judul" rows="2" required></textarea>
+                                                        <textarea class="form-control" placeholder="Judul" id="judul" rows="2" name="judul" required></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="abstrak" class="col-sm-2 col-form-label">Abstrak</label>
                                                     <div class="col-sm-10">
-                                                        <textarea class="form-control" placeholder="abstrak" id="abstrak" rows="2" required></textarea>
+                                                        <textarea class="form-control" placeholder="abstrak" id="abstrak" rows="2" name="abstrak" required></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="keywords" class="col-sm-2 col-form-label">Keywords</label>
                                                     <div class="col-sm-10">
-                                                        <textarea class="form-control" placeholder="keywords" id="keywords" rows="2" required> </textarea>
+                                                        <textarea class="form-control" placeholder="keywords" id="keywords" rows="2" name="keywords" required> </textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="email" class="col-sm-2 col-form-label">Alamat Email</label>
                                                     <div class="col-sm-10">
-                                                        <input type="email" class="form-control" id="email" placeholder="Email" required>
+                                                        <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -149,7 +149,7 @@
                                                     <label for="rumpun-ilmu"
                                                            class="col-sm-2 col-form-label">Rumpun Ilmu</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="rumpun-ilmu">
+                                                        <select class="form-control" id="rumpun-ilmu" name="rumpun_ilmu">
                                                             @foreach ($listRumpunIlmu as $rumpunIlmu)
                                                                 <option value={{ $rumpunIlmu['rumpun_ilmu_id'] }}>{{ $rumpunIlmu['rumpun_ilmu_nama'] }}</option>
                                                             @endforeach
@@ -157,11 +157,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="bidang-fokus" class="col-sm-2 col-form-label">Bidang
-                                                        Fokus</label>
+                                                    <label for="bidang-fokus" class="col-sm-2 col-form-label">Bidang Fokus</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="bidang-fokus"
-                                                               placeholder="Bidang Fokus">
+                                                        <input type="text" class="form-control" id="bidang-fokus" name="bidang_fokus" placeholder="Bidang Fokus">
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,14 +180,10 @@
                                                     <label for="sumber-dana"
                                                            class="col-sm-2 col-form-label">Sumber Dana</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="sumber-dana">
-                                                            <option>Biaya Sendiri</option>
-                                                            <option>Biaya Instansi Sendiri</option>
-                                                            <option>Lembaga Swasta Kerjasama</option>
-                                                            <option>Lembaga Swasta Kompetisi</option>
-                                                            <option>Lembaga Pemerintah Kerjasama</option>
-                                                            <option>Lembaga Pemerintah Kompetisi</option>
-                                                            <option>Lembaga Internasional</option>
+                                                        <select class="form-control" id="sumber-dana" name="sumber_dana" required>
+                                                            @foreach ($listSumberDana as $sumberDana)
+                                                                <option value={{ $sumberDana['sumber_dana_id'] }}>{{ $sumberDana['sumber_dana_nama'] }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -197,8 +191,7 @@
                                                     <label for="jumlah-dana"
                                                            class="col-sm-2 col-form-label">Jumlah Dana</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="jumlah-dana"
-                                                               placeholder="Jumlah Dana">
+                                                        <input type="text" class="form-control" id="jumlah-dana" placeholder="Jumlah Dana" name="jumlah_dana" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,8 +200,7 @@
                                     <div class="card card-primary">
                                         <div class="card-header">
                                             <h4 class="card-title w-100">
-                                                <a class="d-block w-100 collapsed" data-toggle="collapse"
-                                                   href="#collapseFour" aria-expanded="false">
+                                                <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapseFour" aria-expanded="false">
                                                     Biaya Usulan
                                                 </a>
                                             </h4>
@@ -216,9 +208,7 @@
                                         <div id="collapseFour" class="collapse" data-parent="#accordion" style="">
                                             <div class="card-body">
                                                 <div class="form-group row">
-                                                    <label for="penandatanganan"
-                                                           class="col-sm-2 col-form-label">Mengetahui
-                                                        Penandatanganan</label>
+                                                    <label for="penandatanganan" class="col-sm-2 col-form-label">Mengetahui Penandatanganan</label>
                                                     <div class="col-sm-10">
                                                         <select class="form-control" id="penandatanganan">
                                                             <option>Danur</option>
