@@ -32,15 +32,22 @@ class PenelitianController extends Controller
 
     public function tambahDataPenelitian()
     {
-        $param = [
+        $paramSkema= [
             "filter" => [
                 "skema_tipe" => "penelitian"
             ]
         ];
-        $getTahun = $this->postAPI($param, 'tahun/get-all');
-        $getSkema = $this->postAPI($param, 'skema/get-filter');
-        $getRumpunIlmu = $this->postAPI($param, 'rumpun-ilmu/get-filter');
-        $getSumberDana = $this->postAPI($param, 'sumber-dana/get-filter');
+        $paramPengusul= [
+            "filter" => [
+                "skema_tipe" => "Pengusul"
+            ]
+        ];
+
+        $getTahun = $this->postAPI([], 'tahun/get-all');
+        $getSkema = $this->postAPI($paramSkema, 'skema/get-filter');
+        $getRumpunIlmu = $this->postAPI([], 'rumpun-ilmu/get-filter');
+        $getSumberDana = $this->postAPI([], 'sumber-dana/get-filter');
+        $getUserPengusul = $this->postAPI($paramPengusul, 'user/get-filter');
 
         return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
@@ -48,6 +55,7 @@ class PenelitianController extends Controller
             'listSkema' => isset($getSkema['data']) ? $getSkema['data'] : [],
             'listRumpunIlmu' => isset($getRumpunIlmu['data']) ? $getRumpunIlmu['data'] : [],
             'listSumberDana' => isset($getSumberDana['data']) ? $getSumberDana['data'] : [],
+            'listUserPengusul' => isset($getUserPengusul['data']) ? $getUserPengusul['data'] : [],
         ]);
     }
 

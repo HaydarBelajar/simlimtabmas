@@ -210,9 +210,10 @@
                                                 <div class="form-group row">
                                                     <label for="penandatanganan" class="col-sm-2 col-form-label">Mengetahui Penandatanganan</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="penandatanganan">
-                                                            <option>Danur</option>
-                                                            <option>Wijayanto</option>
+                                                        <select class="form-control" id="penandatanganan" name="mengetahui_penandatanganan">
+                                                            @foreach ($listUserPengusul as $userPengusul)
+                                                                <option value={{ $userPengusul['id'] }}>{{ $userPengusul['name'] }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
