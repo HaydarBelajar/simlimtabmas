@@ -281,7 +281,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-success float-left">Simpan</button>
-                                <a href={{ route('penelitian.data-penelitian') }} type="submit" class="btn btn-danger float-right">Kembali</a>
+                                <a href={{ route('penelitian.data-penelitian') }} type="button" class="btn btn-danger float-right">Kembali</a>
                             </form>
                         </div>
                         <!-- /.card-body -->
@@ -299,13 +299,13 @@
                                         <!-- <div class="alert alert-danger" role="alert">
                                           This is a danger alert—check it out!
                                         </div> -->
-                                        <form method="post" id="edit-form" class="form-horizontal">
+                                        <form method="post" id="tambah-anggota-form" class="form-horizontal">
                                             @csrf
                                             <div class="form-group">
                                                 <label>Nama Anggota</label>
                                                 <select class="form-control" id="nama-anggota" name="nama-anggota" required>
                                                     @foreach ($listUserPengusul as $userPengusul)
-                                                        <option value={{ $userPengusul['id'] }}>{{ $userPengusul['name'] }}</option>
+                                                        <option value={{ $userPengusul['id'] }} data-nama-pengusul={{ $userPengusul['name'] }} >{{ $userPengusul['name'] }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -313,7 +313,7 @@
                                                 <label>Peranan Penelitian</label>
                                                 <select class="custom-select" name="peranan-penelitian" id="peranan-penelitian">
                                                     @foreach ($listPeranan as $peranan)
-                                                        <option value="{{ $peranan['peranan_id'] }}">{{ $peranan['peranan_nama'] }}</option>
+                                                        <option value="{{ $peranan['peranan_id'] }}" data-nama-peranan={{ $peranan['peranan_nama'] }} >{{ $peranan['peranan_nama'] }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -341,47 +341,57 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
+                const anggotaPenelitian = [];
+                let lengthAnggotaPenelitian = anggotaPenelitian.length;
+
                 $('#jenis-luaran').select2();
 
+                $('#anggota-penelitian').DataTable({
+                    data: anggotaPenelitian,
+                    deferRender: true,
+                    // scrollY: 200,
+                    scrollCollapse: true,
+                    scroller: true
+                });
+
                 $(document).on('click', '#tambah-anggota', function() {
-                    console.log('asdasd')
                     $('#notification').html('');
                     $('#formTambahAnggotaModal').modal('show');
                     $('#action_button').val('Simpan');
                     $('#action').val('Simpan');
                 });
 
-                $(document).ready(function () {
-                    const courseData = {
-                        "draw": 0,
-                        "recordsTotal": 1,
-                        "recordsFiltered": 1,
-                        "data": [
-                            {
-                                "id": 1,
-                                "nama": "Prof. Jovan Ritchie",
-                                "peran": "Ketua Peneliti",
-                            }]
-                    };
-                    $('#anggota-penelitian').DataTable({
-                        processing: true,
-                        serverSide: true,
-                        ajax: json_encode(courseData),
-                        columns: [
-                            {
-                                data: 'nama',
-                            },
-                            {
-                                data: 'peran',
-                            },
-                            // {
-                            //     data: 'action',
-                            //     name: 'action',
-                            //     orderable: false
-                            // }
-                        ]
-                    });
+                $('#tambah-anggota-form').on('submit', function(event) {
+                    event.preventDefault();
+                    const namaAnggota =  $('#nama-anggota').find(":selected").text();
+                    const namaPeranan =  $('#peranan-penelitian').find(":selected").text();
+
+                    if ($('#action').val() == 'Simpan') {
+                        anggotaPenelitian.push([namaAnggota, namaPeranan, `<a type="button" data-index=${lengthAnggotaPenelitian++} class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>`]);
+                    }
+
+                    refreshDatatablesAnggotaPenelitian();
+
                 });
+
+                $(document).on('click', '.delete-anggota-penelitian', function() {
+                    const indexData =  $(this).data('index');
+                    anggotaPenelitian.splice(indexData, 1);
+
+                    refreshDatatablesAnggotaPenelitian();
+                });
+
+                function refreshDatatablesAnggotaPenelitian () {
+                    /**
+                    * Reset Datatables
+                    * $('#anggota-penelitian').DataTable().ajax.reload(); tidak bisa, ini dilakukan hanya jika pakai ajax call
+                    *
+                    **/
+                    $('#anggota-penelitian').DataTable().clear().draw();
+                    $('#anggota-penelitian').DataTable().rows.add(anggotaPenelitian); // Add new data
+                    $('#anggota-penelitian').DataTable().columns.adjust().draw(); // Redraw the DataTable
+                }
+
             });
         </script>
     @endpush
