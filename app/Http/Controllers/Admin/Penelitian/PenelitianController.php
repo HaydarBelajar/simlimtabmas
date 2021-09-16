@@ -48,6 +48,7 @@ class PenelitianController extends Controller
         $getRumpunIlmu = $this->postAPI([], 'rumpun-ilmu/get-filter');
         $getSumberDana = $this->postAPI([], 'sumber-dana/get-filter');
         $getUserPengusul = $this->postAPI($paramPengusul, 'user/get-filter');
+        $getCapaianLuaran = $this->postAPI([], 'capaian-luaran/get-all');
 
         return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
@@ -56,6 +57,7 @@ class PenelitianController extends Controller
             'listRumpunIlmu' => isset($getRumpunIlmu['data']) ? $getRumpunIlmu['data'] : [],
             'listSumberDana' => isset($getSumberDana['data']) ? $getSumberDana['data'] : [],
             'listUserPengusul' => isset($getUserPengusul['data']) ? $getUserPengusul['data'] : [],
+            'listCapaianLuaran' => isset($getCapaianLuaran['data']) ? $getCapaianLuaran['data'] : [],
         ]);
     }
 

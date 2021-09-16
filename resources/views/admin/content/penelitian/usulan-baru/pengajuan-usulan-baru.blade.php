@@ -258,24 +258,21 @@
                                         <div class="card-header">
                                             <h4 class="card-title w-100">
                                                 <a class="d-block w-100 collapsed" data-toggle="collapse"
-                                                   href="#collapseFive" aria-expanded="false">
+                                                   href="#collapseSix" aria-expanded="false">
                                                     Jenis Luaran
                                                 </a>
                                             </h4>
                                         </div>
-                                        <div id="collapseFive" class="collapse" data-parent="#accordion" style="">
+                                        <div id="collapseSix" class="collapse" data-parent="#accordion" style="">
                                             <div class="card-body">
                                                 <div class="form-group row">
                                                     <label for="jenis-luaran"
                                                            class="col-sm-2 col-form-label">Jenis Luaran</label>
                                                     <div class="col-sm-10 select2-purple">
                                                         <select class="form-control select2" id="jenis-luaran" name="jenis_luaran[]" multiple="multiple" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                                            <option>Publikasi Ilmiah</option>
-                                                            <option>Buku Ajar</option>
-                                                            <option>Pembicara pada Pertemuan Ilmiah</option>
-                                                            <option>Sebagai Pembicara Kunci</option>
-                                                            <option>Undangan Sebagai Visiting Scientist Pada Perguruan Tinggi Lain</option>
-                                                            <option>Luaran Lainnya</option>
+                                                            @foreach ($listCapaianLuaran as $capaianLuaran)
+                                                                <option value={{ $capaianLuaran['capaian_luaran_id'] }}>{{ $capaianLuaran['capaian_luaran_nama'] }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
