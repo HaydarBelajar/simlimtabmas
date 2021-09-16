@@ -302,46 +302,26 @@
                                         <form method="post" id="edit-form" class="form-horizontal">
                                             @csrf
                                             <div class="form-group">
-                                                <label class="col-form-label">Username : </label>
-                                                <input type="text" name="username" id="username" class="form-control"
-                                                       maxlength="11" required/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-form-label">Nama Lengkap : </label>
-                                                <input type="text" name="fullname" id="full-name" class="form-control"
-                                                       maxlength="35" required/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-form-label">Email : </label>
-                                                <input type="email" name="email" id="email" class="form-control" maxlength="35"
-                                                       required/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Role</label>
-                                                <select class="custom-select" name="role" id="role">
-                                                    @if (!empty($rolesOptions))
-                                                        @foreach ($rolesOptions as $role)
-                                                            <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
-                                                        @endforeach
-                                                    @endif
+                                                <label>Nama Anggota</label>
+                                                <select class="form-control" id="nama-anggota" name="nama-anggota" required>
+                                                    @foreach ($listUserPengusul as $userPengusul)
+                                                        <option value={{ $userPengusul['id'] }}>{{ $userPengusul['name'] }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-form-label">Password : </label>
-                                                <input type="password" name="password" id="password" class="form-control"
-                                                       maxlength="35" required/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-form-label">Confirm Password : </label>
-                                                <input type="password" name="confirmpassword" id="confirm-password"
-                                                       class="form-control" maxlength="35" required/>
+                                                <label>Peranan Penelitian</label>
+                                                <select class="custom-select" name="peranan-penelitian" id="peranan-penelitian">
+                                                    @foreach ($listPeranan as $peranan)
+                                                        <option value="{{ $peranan['peranan_id'] }}">{{ $peranan['peranan_nama'] }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <br/>
                                             <div class="modal-footer">
                                                 <input type="hidden" name="action" id="action" value="Simpan"/>
-                                                <input type="hidden" name="course_id" id="course-id"/>
-                                                <input type="submit" name="action_button" id="action_button"
-                                                       class="btn btn-primary" value="Add"/>
+                                                <input type="hidden" name="usulan_penelitian_id" id="usulan-penelitian-id"/>
+                                                <input type="submit" name="action_button" id="action_button" class="btn btn-primary" value="Add"/>
                                             </div>
                                         </form>
                                     </div>
