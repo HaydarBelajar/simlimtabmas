@@ -32,6 +32,8 @@
         <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.min.css') }}">
         <!-- dropzonejs -->
         <link rel="stylesheet" href="{{ asset('assets/plugins/dropzone-5.7.0/dist/min/dropzone.min.css') }}">
+        <!-- Select2 -->
+        <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet">
 

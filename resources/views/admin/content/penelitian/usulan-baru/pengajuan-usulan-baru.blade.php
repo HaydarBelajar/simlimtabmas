@@ -210,7 +210,7 @@
                                                 <div class="form-group row">
                                                     <label for="penandatanganan" class="col-sm-2 col-form-label">Mengetahui Penandatanganan</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="penandatanganan" name="mengetahui_penandatanganan">
+                                                        <select class="form-control" id="penandatanganan" name="mengetahui_penandatanganan" required>
                                                             @foreach ($listUserPengusul as $userPengusul)
                                                                 <option value={{ $userPengusul['id'] }}>{{ $userPengusul['name'] }}</option>
                                                             @endforeach
@@ -221,8 +221,7 @@
                                                     <label for="jumlah-dana"
                                                            class="col-sm-2 col-form-label">Jumlah Dana</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="jumlah-dana"
-                                                               placeholder="Jumlah Dana">
+                                                        <input type="text" class="form-control" id="jumlah-dana" placeholder="Jumlah Dana" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -240,7 +239,7 @@
                                         <div id="collapseFive" class="collapse" data-parent="#accordion" style="">
                                             <div class="card-body">
                                                 <div class="top-button-group" style="margin-bottom: 20px;">
-                                                    <button type="submit" class="btn btn-primary">Tambah Anggota</button>
+                                                    <button type="button" class="btn btn-primary" id="tambah-anggota">Tambah Anggota</button>
                                                 </div>
                                                 <table id="anggota-penelitian" class="table table-striped table-bordered"
                                                        style="width:100%">
@@ -269,8 +268,8 @@
                                                 <div class="form-group row">
                                                     <label for="jenis-luaran"
                                                            class="col-sm-2 col-form-label">Jenis Luaran</label>
-                                                    <div class="col-sm-10">
-                                                        <select class="form-control" id="jenis-luaran" name="jenis_luaran[]" multiple="multiple">
+                                                    <div class="col-sm-10 select2-purple">
+                                                        <select class="form-control select2" id="jenis-luaran" name="jenis_luaran[]" multiple="multiple" data-dropdown-css-class="select2-purple" style="width: 100%;">
                                                             <option>Publikasi Ilmiah</option>
                                                             <option>Buku Ajar</option>
                                                             <option>Pembicara pada Pertemuan Ilmiah</option>
@@ -289,6 +288,70 @@
                             </form>
                         </div>
                         <!-- /.card-body -->
+                        <!-- modal tambah anggota penelitian -->
+                        <div id="formTambahAnggotaModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Anggota Penelitian</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- <div class="alert alert-danger" role="alert">
+                                          This is a danger alert—check it out!
+                                        </div> -->
+                                        <form method="post" id="edit-form" class="form-horizontal">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label class="col-form-label">Username : </label>
+                                                <input type="text" name="username" id="username" class="form-control"
+                                                       maxlength="11" required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Nama Lengkap : </label>
+                                                <input type="text" name="fullname" id="full-name" class="form-control"
+                                                       maxlength="35" required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Email : </label>
+                                                <input type="email" name="email" id="email" class="form-control" maxlength="35"
+                                                       required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Role</label>
+                                                <select class="custom-select" name="role" id="role">
+                                                    @if (!empty($rolesOptions))
+                                                        @foreach ($rolesOptions as $role)
+                                                            <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Password : </label>
+                                                <input type="password" name="password" id="password" class="form-control"
+                                                       maxlength="35" required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Confirm Password : </label>
+                                                <input type="password" name="confirmpassword" id="confirm-password"
+                                                       class="form-control" maxlength="35" required/>
+                                            </div>
+                                            <br/>
+                                            <div class="modal-footer">
+                                                <input type="hidden" name="action" id="action" value="Simpan"/>
+                                                <input type="hidden" name="course_id" id="course-id"/>
+                                                <input type="submit" name="action_button" id="action_button"
+                                                       class="btn btn-primary" value="Add"/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.modal tambah anggota penelitian -->
                     </div>
                     <!-- /.card -->
                 </div>
@@ -302,6 +365,15 @@
         <script>
             $(document).ready(function() {
                 $('#jenis-luaran').select2();
+
+                $(document).on('click', '#tambah-anggota', function() {
+                    console.log('asdasd')
+                    $('#notification').html('');
+                    $('#formTambahAnggotaModal').modal('show');
+                    $('#action_button').val('Simpan');
+                    $('#action').val('Simpan');
+                });
+
                 $(document).ready(function () {
                     const courseData = {
                         "draw": 0,
