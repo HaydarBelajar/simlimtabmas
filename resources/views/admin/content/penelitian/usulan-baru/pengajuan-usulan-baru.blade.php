@@ -48,10 +48,9 @@
                                         <div id="collapseOne" class="collapse show" data-parent="#accordion" style="">
                                             <div class="card-body">
                                                 <div class="form-group row">
-                                                    <label for="tahun-usulan" class="col-sm-2 col-form-label">Tahun
-                                                        Usulan</label>
+                                                    <label for="tahun-usulan" class="col-sm-2 col-form-label">Tahun Usulan</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="tahun-usulan" name="tahun_usulan" required>
+                                                        <select class="form-control" id="tahun" name="tahun_id" required>
                                                             @foreach ($listTahun as $tahun)
                                                                 <option value={{ $tahun['tahun_id'] }}>{{ $tahun['tahun_usulan'] }}</option>
                                                             @endforeach
@@ -62,7 +61,7 @@
                                                     <label for="tahun-pelaksanaan" class="col-sm-2 col-form-label">Tahun
                                                         Pelaksanaan</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="tahun-pelaksanaan"  name="tahun_pelaksanaan" required>
+                                                        <select class="form-control" id="tahun-pelaksanaan"  name="tahun_pelaksanaan_id" required>
                                                             @foreach ($listTahun as $tahun)
                                                                 <option value={{ $tahun['tahun_id'] }}>{{ $tahun['tahun_usulan'] }}</option>
                                                             @endforeach
@@ -73,7 +72,7 @@
                                                     <label for="skema-penelitian"
                                                            class="col-sm-2 col-form-label">Skema</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="skema-penelitian" name="skema" required>
+                                                        <select class="form-control" id="skema-penelitian" name="skema_id" required>
                                                             @foreach ($listSkema as $skema)
                                                                 <option value={{ $skema['skema_id'] }}>{{ $skema['skema_nama'] }}</option>
                                                             @endforeach
@@ -84,7 +83,7 @@
                                                     <label for="durasi-kegiatan"
                                                            class="col-sm-2 col-form-label">Durasi Kegiatan</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="durasi-kegiatan" name="dutasi_kegiatan" required>
+                                                        <select class="form-control" id="durasi-kegiatan" name="durasi_kegiatan" required>
                                                             <option>1 Bulan</option>
                                                             <option>2 Bulan</option>
                                                             <option>3 Bulan</option>
@@ -149,7 +148,7 @@
                                                     <label for="rumpun-ilmu"
                                                            class="col-sm-2 col-form-label">Rumpun Ilmu</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="rumpun-ilmu" name="rumpun_ilmu">
+                                                        <select class="form-control" id="rumpun-ilmu" name="rumpun_ilmu_id">
                                                             @foreach ($listRumpunIlmu as $rumpunIlmu)
                                                                 <option value={{ $rumpunIlmu['rumpun_ilmu_id'] }}>{{ $rumpunIlmu['rumpun_ilmu_nama'] }}</option>
                                                             @endforeach
@@ -180,7 +179,7 @@
                                                     <label for="sumber-dana"
                                                            class="col-sm-2 col-form-label">Sumber Dana</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="sumber-dana" name="sumber_dana" required>
+                                                        <select class="form-control" id="sumber-dana" name="sumber_dana_id" required>
                                                             @foreach ($listSumberDana as $sumberDana)
                                                                 <option value={{ $sumberDana['sumber_dana_id'] }}>{{ $sumberDana['sumber_dana_nama'] }}</option>
                                                             @endforeach
@@ -191,7 +190,7 @@
                                                     <label for="jumlah-dana"
                                                            class="col-sm-2 col-form-label">Jumlah Dana</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="jumlah-dana" placeholder="Jumlah Dana" name="jumlah_dana" required>
+                                                        <input type="text" class="form-control" id="jumlah-sumber-dana" placeholder="Jumlah Dana" name="jumlah_sumber_dana" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -210,7 +209,7 @@
                                                 <div class="form-group row">
                                                     <label for="penandatanganan" class="col-sm-2 col-form-label">Mengetahui Penandatanganan</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="penandatanganan" name="mengetahui_penandatanganan" required>
+                                                        <select class="form-control" id="penandatanganan" name="mengetahui_penandatanganan_id" required>
                                                             @foreach ($listUserPengusul as $userPengusul)
                                                                 <option value={{ $userPengusul['id'] }}>{{ $userPengusul['name'] }}</option>
                                                             @endforeach
@@ -221,7 +220,7 @@
                                                     <label for="jumlah-dana"
                                                            class="col-sm-2 col-form-label">Jumlah Dana</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="jumlah-dana" placeholder="Jumlah Dana" required>
+                                                        <input type="text" class="form-control" id="jumlah-dana-penandatanganan" name="jumlah_dana_penandatanganan" placeholder="Jumlah Dana" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,6 +279,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" name="list_anggota_penelitian" id="list-anggota-penelitian"/>
                                 <button type="submit" class="btn btn-success float-left">Simpan</button>
                                 <a href={{ route('penelitian.data-penelitian') }} type="button" class="btn btn-danger float-right">Kembali</a>
                             </form>
@@ -342,6 +342,7 @@
         <script>
             $(document).ready(function() {
                 const anggotaPenelitian = [];
+                const anggotaPenelitianIds = [];
                 let lengthAnggotaPenelitian = anggotaPenelitian.length;
 
                 $('#jenis-luaran').select2();
@@ -363,11 +364,17 @@
 
                 $('#tambah-anggota-form').on('submit', function(event) {
                     event.preventDefault();
-                    const namaAnggota =  $('#nama-anggota').find(":selected").text();
-                    const namaPeranan =  $('#peranan-penelitian').find(":selected").text();
+                    const namaAnggota =  $('#nama-anggota').find(":selected");
+                    const namaPeranan =  $('#peranan-penelitian').find(":selected");
+
+                    const namaAnggotaText = namaAnggota.text();
+                    const namaPerananText = namaPeranan.text();
+
+                    const namaAnggotaId = namaAnggota.val();
 
                     if ($('#action').val() == 'Simpan') {
-                        anggotaPenelitian.push([namaAnggota, namaPeranan, `<a type="button" data-index=${lengthAnggotaPenelitian++} class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>`]);
+                        anggotaPenelitian.push([namaAnggotaText, namaPerananText, `<a type="button" data-index=${lengthAnggotaPenelitian++} class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>`]);
+                        anggotaPenelitianIds.push(namaAnggotaId);
                     }
 
                     refreshDatatablesAnggotaPenelitian();
@@ -377,11 +384,13 @@
                 $(document).on('click', '.delete-anggota-penelitian', function() {
                     const indexData =  $(this).data('index');
                     anggotaPenelitian.splice(indexData, 1);
+                    anggotaPenelitianIds.splice(indexData, 1);
 
                     refreshDatatablesAnggotaPenelitian();
                 });
 
                 function refreshDatatablesAnggotaPenelitian () {
+                    $('#list-anggota-penelitian').val(JSON.stringify(anggotaPenelitianIds));
                     /**
                     * Reset Datatables
                     * $('#anggota-penelitian').DataTable().ajax.reload(); tidak bisa, ini dilakukan hanya jika pakai ajax call

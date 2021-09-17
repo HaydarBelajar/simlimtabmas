@@ -66,11 +66,26 @@ class PenelitianController extends Controller
     public function simpanDataPenelitian(Request $request)
     {
         $param = [
-            'tahun_id' => $request->tahun_usulan,
-            'pelaksanaan_id' => $request->tahun_pelaksanaan,
+            'tahun_id' => $request->tahun_id,
+            'tahun_pelaksanaan_id' => $request->tahun_pelaksanaan_id,
+            'skema_id' => $request->skema_id,
+            'durasi_kegiatan' => $request->durasi_kegiatan,
+            'usulan_tahun_ke' => $request->usulan_tahun_ke,
+            'judul' => $request->judul,
+            'abstrak' => $request->abstrak,
+            'keywords' => $request->keywords,
+            'email' => $request->email,
+            'rumpun_ilmu_id' => $request->rumpun_ilmu_id,
+            'bidang_fokus' => $request->bidang_fokus,
+            'sumber_dana_id' => $request->sumber_dana_id,
+            'jumlah_sumber_dana' => $request->jumlah_sumber_dana,
+            'mengetahui_penandatanganan_id' => $request->mengetahui_penandatanganan_id,
+            'jumlah_dana_penandatanganan' => $request->jumlah_dana_penandatanganan,
+            'jenis_luaran' => $request->jenis_luaran,
+            'list_anggota_penelitian' => json_decode($request->list_anggota_penelitian),
         ];
+        dd($request->all(), $param);
         $simpanData = $this->postAPI($param, 'penelitian/create-penelitian');
-        dd($simpanData);
         return json_encode($simpanData);
     }
 
