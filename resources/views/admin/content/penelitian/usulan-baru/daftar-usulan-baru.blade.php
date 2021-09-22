@@ -74,6 +74,25 @@
     @push('scripts')
         <script>
             $(document).ready(function () {
+                @if(Session::has('message'))
+                console.log('asdasd', "{{ session('message') }}")
+                    toastr.options =
+                    {
+                        "closeButton" : true,
+                        "progressBar" : true
+                    }
+                    toastr.success("{{ session('message') }}");
+                @endif
+
+                @if(Session::has('error'))
+                    toastr.options =
+                    {
+                        "closeButton" : true,
+                        "progressBar" : true
+                    }
+                    toastr.error("{{ session('error') }}");
+                @endif
+
 
                 $(document).on('click', '.delete', function() {
                     user_id = $(this).attr('id');

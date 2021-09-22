@@ -46,6 +46,8 @@
 <script src="{{ asset('assets/plugins/dropzone-5.7.0/dist/min/dropzone.min.js') }}"></script>
 <!-- Select2 -->
 <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+<!-- Toastr -->
+<script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
 
 <!-- DataTables -->
 <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>

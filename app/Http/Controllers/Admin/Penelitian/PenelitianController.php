@@ -78,15 +78,20 @@ class PenelitianController extends Controller
             'rumpun_ilmu_id' => $request->rumpun_ilmu_id,
             'bidang_fokus' => $request->bidang_fokus,
             'sumber_dana_id' => $request->sumber_dana_id,
-            'jumlah_sumber_dana' => $request->jumlah_sumber_dana,
-            'mengetahui_penandatanganan_id' => $request->mengetahui_penandatanganan_id,
-            'jumlah_dana_penandatanganan' => $request->jumlah_dana_penandatanganan,
+            'jumlah_usulan_dana' => $request->jumlah_sumber_dana,
+            'user_mengetahui_id' => $request->mengetahui_penandatanganan_id,
+            'jumlah_dana_mengetahui' => $request->jumlah_dana_penandatanganan,
             'jenis_luaran' => $request->jenis_luaran,
             'list_anggota_penelitian' => json_decode($request->list_anggota_penelitian),
         ];
-        dd($request->all(), $param);
+
         $simpanData = $this->postAPI($param, 'penelitian/create-penelitian');
-        return json_encode($simpanData);
+
+        if (isset($simpanData['success'])) {
+            return redirect()->route('penelitian.data-penelitian')->with('message',$simpanData['success']);
+        } else {
+            return redirect()->route('penelitian.data-penelitian')->with('error',$simpanData['error'] ?? $simpanData['reason']);
+        }
     }
 
     public function lanjutkanUsulan()

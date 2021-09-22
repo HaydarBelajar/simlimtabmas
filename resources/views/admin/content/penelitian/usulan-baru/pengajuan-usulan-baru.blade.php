@@ -371,10 +371,11 @@
                     const namaPerananText = namaPeranan.text();
 
                     const namaAnggotaId = namaAnggota.val();
+                    const namaPerananId =  namaPeranan.val();
 
                     if ($('#action').val() == 'Simpan') {
                         anggotaPenelitian.push([namaAnggotaText, namaPerananText, `<a type="button" data-index=${lengthAnggotaPenelitian++} class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>`]);
-                        anggotaPenelitianIds.push(namaAnggotaId);
+                        anggotaPenelitianIds.push({userId: namaAnggotaId, perananId: namaPerananId});
                     }
 
                     refreshDatatablesAnggotaPenelitian();
