@@ -16,6 +16,8 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
-        "bootstrap": "^5.0.2"
+        "bootstrap": "^5.0.2",
+        "moment": "^2.29.1",
+        "moment-timezone": "^0.5.33"
     }
 }

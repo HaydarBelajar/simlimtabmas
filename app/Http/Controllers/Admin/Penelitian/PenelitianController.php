@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Penelitian;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthTraits;
 use Illuminate\Http\Request;
+use DataTables;
 
 class PenelitianController extends Controller
 {
@@ -92,6 +93,30 @@ class PenelitianController extends Controller
         } else {
             return redirect()->route('penelitian.data-penelitian')->with('error',$simpanData['error'] ?? $simpanData['reason']);
         }
+    }
+
+    public function getAll(Request $request) {
+        // Param datatables harus dikirim ke be juga
+        $dataTablesParam = $request->all();
+        $getData = $this->postAPI($dataTablesParam, 'penelitian/get-filter');
+
+        $data = $getData['data'];
+
+        for ($i=0; $i < count($data); $i++) { 
+            # code...
+            $data[$i]['status'] = 'Menunggu Konfirmasi';
+        }
+
+        $dataTables =  DataTables::of($data)
+        ->addColumn('action', function ($data) {
+            $button = '<button type="button" name="edit" id="' . $data['usulan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
+            $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
+            return $button;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+
+        return $dataTables;
     }
 
     public function lanjutkanUsulan()

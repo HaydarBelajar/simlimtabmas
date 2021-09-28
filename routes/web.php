@@ -33,6 +33,7 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/tambah-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'tambahDataPenelitian'])->name('tambah-penelitian');
         Route::post('/simpan-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'simpanDataPenelitian'])->name('simpan-penelitian');
         Route::get('/data-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'dataPenelitian'])->name('data-penelitian');
+        Route::get('/get-all', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getAll'])->name('get-all');
 
         Route::get('/tambah-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\CatatanHarianController::class, 'tambahDataCatatanHarian'])->name('tambah-catatan-harian');
         Route::get('/data-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\CatatanHarianController::class, 'dataCatatanHarian'])->name('data-catatan-harian');

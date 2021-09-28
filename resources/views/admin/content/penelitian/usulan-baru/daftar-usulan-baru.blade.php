@@ -31,14 +31,16 @@
                             <a href={{ route('penelitian.tambah-penelitian') }} type="button" class="btn btn-primary tambah-penelitian">Tambah Usulan Penelitian</a>
                         </div>
                         <span id="notification"></span>
-                        <table id="user-table" class="table table-striped table-bordered" style="width:100%">
+                        <table id="penelitian-table" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                             <tr>
+                                <th width="5%">No</th>
                                 <th width="35%">Judul Penelitian</th>
                                 <th width="15%">Status Upload Pengesahan</th>
                                 <th width="15%">Status Upload Proposal</th>
-                                <th width="15%">Status Seleksi</th>
-                                <th width="20%">Aksi</th>
+                                <th width="10%">Status Seleksi</th>
+                                <th width="10%">Tanggal Upload</th>
+                                <th width="10%">Aksi</th>
                             </tr>
                             </thead>
                         </table>
@@ -125,24 +127,54 @@
                     })
                 });
 
-                $('#user-table').DataTable({
+                $('#penelitian-table').DataTable({
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: "{{ route('manage-user.get-all') }}",
+                        url: "{{ route('penelitian.get-all') }}",
                     },
                     columns: [
                         {
-                            data: 'name',
-                            name: 'name'
+                            data: 'usulan_penelitian_id',
+                            name: 'No',
+                            render: function ( data, type, row, meta ) {
+                                return meta.row + meta.settings._iDisplayStart + 1;
+                            }
                         },
                         {
-                            data: 'email',
-                            name: 'email'
+                            data: 'judul',
+                            name: 'Judul Penelitian'
                         },
                         {
-                            data: 'roles[0].name',
-                            name: 'roles[0].name'
+                            data: 'file_upload_pengesahan',
+                            render: function ( data, type, row ) {
+                                if (data) {
+                                    return 'Sudah Terupload';
+                                }else {
+                                    return 'Belum Terupload';
+                                }
+                            }
+                        },
+                        {
+                            data: 'file_upload_proposal',
+                            render: function ( data, type, row ) {
+                                if (data) {
+                                    return 'Sudah Terupload';
+                                }else {
+                                    return 'Belum Terupload';
+                                }
+                            }
+                        },
+                        {
+                            data: 'status',
+                            name: 'Status Seleksi',
+                        },
+                        {
+                            data: 'created_at',
+                            name: 'Tanggal Upload',
+                            render: function ( data, type, row ) {
+                                return moment(data).tz('Asia/Jakarta').format('DD-MM-YYYY HH:MM');
+                            }
                         },
                         {
                             data: 'action',
