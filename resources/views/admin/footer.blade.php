@@ -43,7 +43,8 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script>
 <!-- dropzonejs -->
-<script src="{{ asset('assets/plugins/dropzone-5.7.0/dist/min/dropzone.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/plugins/dropzone-5.7.0/dist/min/dropzone.min.js') }}"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js" integrity="sha512-oQq8uth41D+gIH/NJvSJvVB85MFk1eWpMK6glnkg6I7EdMqC1XVkW7RxLheXwmFdG03qScCM7gKS/Cx3FYt7Tg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Select2 -->
 <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 <!-- Toastr -->

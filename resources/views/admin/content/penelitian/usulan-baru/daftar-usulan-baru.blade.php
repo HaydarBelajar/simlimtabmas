@@ -35,9 +35,11 @@
                             <thead>
                             <tr>
                                 <th width="5%">No</th>
-                                <th width="35%">Judul Penelitian</th>
+                                <th width="25%">Judul Penelitian</th>
                                 <th width="15%">Status Upload Pengesahan</th>
+                                <th width="10%">Pengesahan</th>
                                 <th width="15%">Status Upload Proposal</th>
+                                <th width="10%">Proposal</th>
                                 <th width="10%">Status Seleksi</th>
                                 <th width="10%">Tanggal Upload</th>
                                 <th width="10%">Aksi</th>
@@ -66,6 +68,29 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Modal Upload -->
+                <div id="modalUpload" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Upload Pengesahan</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{-- <form action="/target" class="dropzone" id="upload-file"></form> --}}
+                                <div id="upload-file"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" name="ok_delete_button" id="ok-delete-button" class="btn btn-danger">Upload</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.Modal Upload -->
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -76,6 +101,37 @@
     @push('scripts')
         <script>
             $(document).ready(function () {
+                // Dropzone Initialization
+                // $("#upload-file").dropzone({ url: "/file/post" });
+                // Dropzone('#upload-file').options.myGreatDropzone = { // camelized version of the `id`
+                //     paramName: "file-usulan", // The name that will be used to transfer the file
+                //     maxFilesize: 2, // MB
+                //     maxFile: 1, // Total file uploaded
+                //     accept: function(file, done) {
+                //         if (file.name == "justinbieber.jpg") {
+                //             done("Naha, you don't.");
+                //         } else { 
+                //             done(); 
+                //         }
+                //     },
+                //     maxfilesexceeded: function(file) {
+                //         this.removeAllFiles();
+                //         this.addFile(file);
+                //     }
+                // };
+
+                let myDropzone = new Dropzone('#upload-file', {
+                    paramName: "file", // The name that will be used to transfer the file
+                    maxFilesize: 2, // MB
+                    url: "/file/post",
+                    accept: function(file, done) {
+                        if (file.name == "justinbieber.jpg") {
+                        done("Naha, you don't.");
+                        }
+                        else { done(); }
+                    }
+                });
+
                 @if(Session::has('message'))
                 console.log('asdasd', "{{ session('message') }}")
                     toastr.options =
@@ -156,6 +212,17 @@
                             }
                         },
                         {
+                            name: 'Pengesahan',
+                            data: 'usulan_penelitian_id',
+                            className: 'text-right py-0 align-middle',
+                            render: function ( data, type, row ) {
+                                return `<div class="btn-group btn-group-sm">
+                                    <a href="#" class="btn btn-info upload-pengesahan" data-id="${data}"><i class="fas fa-file-upload"></i></a>
+                                    <a href="#" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
+                                </div>`;
+                            }
+                        },
+                        {
                             data: 'file_upload_proposal',
                             render: function ( data, type, row ) {
                                 if (data) {
@@ -163,6 +230,17 @@
                                 }else {
                                     return 'Belum Terupload';
                                 }
+                            }
+                        },
+                        {
+                            name: 'Proposal',
+                            data: 'usulan_penelitian_id',
+                            className: 'text-right py-0 align-middle',
+                            render: function ( data, type, row ) {
+                                return `<div class="btn-group btn-group-sm">
+                                    <a href="#" class="btn btn-info upload-proposal" data-id="${data}"><i class="fas fa-file-upload"></i></a>
+                                    <a href="#" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
+                                </div>`;
                             }
                         },
                         {
@@ -182,6 +260,16 @@
                             orderable: false
                         }
                     ]
+                });
+
+                $(document).on('click', '.upload-proposal, .upload-pengesahan', function() {
+                    console.log(this);
+                    $('#modalUpload').modal('show');
+                    // DropZone
+
+
+                    // $('#action_button').val('Simpan');
+                    // $('#action').val('Simpan');
                 });
             });
         </script>
