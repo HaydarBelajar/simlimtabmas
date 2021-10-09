@@ -168,6 +168,16 @@ class PenelitianController extends Controller
         ]);
     }
 
+    public function uploadPengesahan($id)
+    {
+        return 'asdasd';
+    }
+
+    public function uploadProposal($id)
+    {
+        return 'asdasd';
+    }
+
     /**
      * Show the form for creating a new resource.
      *

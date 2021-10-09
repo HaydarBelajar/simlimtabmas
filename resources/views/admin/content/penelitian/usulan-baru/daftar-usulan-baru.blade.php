@@ -80,7 +80,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                {{-- <form action="/target" class="dropzone" id="upload-file"></form> --}}
+                                {{-- <form action="#" class="dropzone" id="upload-file" data-id=""></form> --}}
                                 <div id="upload-file"></div>
                             </div>
                             <div class="modal-footer">
@@ -101,37 +101,7 @@
     @push('scripts')
         <script>
             $(document).ready(function () {
-                // Dropzone Initialization
-                // $("#upload-file").dropzone({ url: "/file/post" });
-                // Dropzone('#upload-file').options.myGreatDropzone = { // camelized version of the `id`
-                //     paramName: "file-usulan", // The name that will be used to transfer the file
-                //     maxFilesize: 2, // MB
-                //     maxFile: 1, // Total file uploaded
-                //     accept: function(file, done) {
-                //         if (file.name == "justinbieber.jpg") {
-                //             done("Naha, you don't.");
-                //         } else { 
-                //             done(); 
-                //         }
-                //     },
-                //     maxfilesexceeded: function(file) {
-                //         this.removeAllFiles();
-                //         this.addFile(file);
-                //     }
-                // };
-
-                let myDropzone = new Dropzone('#upload-file', {
-                    paramName: "file", // The name that will be used to transfer the file
-                    maxFilesize: 2, // MB
-                    url: "/file/post",
-                    accept: function(file, done) {
-                        if (file.name == "justinbieber.jpg") {
-                        done("Naha, you don't.");
-                        }
-                        else { done(); }
-                    }
-                });
-
+                let myDropzone = new Dropzone("div#upload-file", { url: "/file/post"});
                 @if(Session::has('message'))
                 console.log('asdasd', "{{ session('message') }}")
                     toastr.options =
@@ -265,8 +235,43 @@
                 $(document).on('click', '.upload-proposal, .upload-pengesahan', function() {
                     console.log(this);
                     $('#modalUpload').modal('show');
+                    let isUploadProposal = false;
+                    let isUploadPengesahan = false;
+                    let url = '';
+                    const id = $(this).data("id")
+
+                    var classList = this.classList.toString();
+                    if (classList.includes('upload-proposal')){
+                        isUploadProposal = true;
+                        isUploadPengesahan = false;
+                        url = "/penelitian/upload-proposal/" + id;
+                        $('#upload-file').attr('action', url);
+                    }
+                    if (classList.includes('upload-pengesahan')){
+                        isUploadProposal = false;
+                        isUploadPengesahan = true;
+                        url = "/penelitian/upload-pengesahan/" + id;
+                        $('#upload-file').attr('action', url);
+                    }
                     // DropZone
 
+                    // Dropzone.options.uploadFile = { // camelized version of the `id`
+                    //     paramName: "file", // The name that will be used to transfer the file
+                    //     maxFilesize: 2, // MB
+                    //     maxFile: 1,
+                    //     url,
+                    //     init: function() {
+                    //         this.on("addedfile", file => {
+                    //         console.log("A file has been added");
+                    //         });
+                    //     },
+                    //     accept: function(file, done) {
+                    //     if (file.name == "justinbieber.jpg") {
+                    //         done("Naha, you don't.");
+                    //     }
+                    //     else { done(); }
+                    //     }
+                    // };
 
                     // $('#action_button').val('Simpan');
                     // $('#action').val('Simpan');
