@@ -168,14 +168,18 @@ class PenelitianController extends Controller
         ]);
     }
 
-    public function uploadPengesahan($id)
+    public function uploadPengesahan(Request $request)
     {
         return 'asdasd';
     }
 
-    public function uploadProposal($id)
+    public function uploadProposal(Request $request)
     {
-        return 'asdasd';
+        $file = $request->file('fileToUpload');
+        $fileName = time().'.'.$file->extension();
+        $file->move(public_path('media/proposal'), $fileName);
+        dd($fileName);
+        return response()->json(['success' => $fileName]);
     }
 
     /**

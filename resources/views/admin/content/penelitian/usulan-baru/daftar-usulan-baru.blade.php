@@ -73,20 +73,23 @@
                 <div id="modalUpload" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Upload Pengesahan</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                {{-- <form action="#" class="dropzone" id="upload-file" data-id=""></form> --}}
-                                <div id="upload-file"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" name="ok_delete_button" id="ok-delete-button" class="btn btn-danger">Upload</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                            </div>
+                            <form enctype="multipart/form-data" action="" method="POST" id="upload-file">
+                                @csrf
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Upload Pengesahan</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" id="id-penelitian" name="id_penelitian">
+                                    <input type="file" name="fileToUpload" id="fileToUpload">
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" name="o_upload_button" id="ok-upload-button" class="btn btn-danger" value="Upload">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -101,7 +104,7 @@
     @push('scripts')
         <script>
             $(document).ready(function () {
-                let myDropzone = new Dropzone("div#upload-file", { url: "/file/post"});
+
                 @if(Session::has('message'))
                 console.log('asdasd', "{{ session('message') }}")
                     toastr.options =
@@ -233,7 +236,6 @@
                 });
 
                 $(document).on('click', '.upload-proposal, .upload-pengesahan', function() {
-                    console.log(this);
                     $('#modalUpload').modal('show');
                     let isUploadProposal = false;
                     let isUploadPengesahan = false;
@@ -241,16 +243,17 @@
                     const id = $(this).data("id")
 
                     var classList = this.classList.toString();
+                    $('#id-penelitian').val(id);
                     if (classList.includes('upload-proposal')){
                         isUploadProposal = true;
                         isUploadPengesahan = false;
-                        url = "/penelitian/upload-proposal/" + id;
+                        url = "/penelitian/upload-proposal";
                         $('#upload-file').attr('action', url);
                     }
                     if (classList.includes('upload-pengesahan')){
                         isUploadProposal = false;
                         isUploadPengesahan = true;
-                        url = "/penelitian/upload-pengesahan/" + id;
+                        url = "/penelitian/upload-pengesahan";
                         $('#upload-file').attr('action', url);
                     }
                     // DropZone
