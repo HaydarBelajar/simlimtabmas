@@ -191,7 +191,7 @@
                             render: function ( data, type, row ) {
                                 return `<div class="btn-group btn-group-sm">
                                     <a href="#" class="btn btn-info upload-pengesahan" data-id="${data}"><i class="fas fa-file-upload"></i></a>
-                                    <a href="#" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
+                                    <a target="_blank" href="{{ asset('media/pengesahan') }}/${row.file_upload_pengesahan}" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
                                 </div>`;
                             }
                         },
@@ -212,7 +212,7 @@
                             render: function ( data, type, row ) {
                                 return `<div class="btn-group btn-group-sm">
                                     <a href="#" class="btn btn-info upload-proposal" data-id="${data}"><i class="fas fa-file-upload"></i></a>
-                                    <a href="#" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
+                                    <a target="_blank" href="{{ asset('media/proposal') }}/${row.file_upload_proposal}" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
                                 </div>`;
                             }
                         },
