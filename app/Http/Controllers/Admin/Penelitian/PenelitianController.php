@@ -10,6 +10,7 @@ use DataTables;
 class PenelitianController extends Controller
 {
     private $controllerDetails;
+    private $controllerPenelitianDetails;
     use AuthTraits;
 
     public function __construct()
@@ -17,6 +18,11 @@ class PenelitianController extends Controller
         $this->controllerDetails = [
             "currentPage" => "Usulan Baru",
             "pageDescription" => "Halaman Usulan Baru penelitian"
+        ];
+
+        $this->controllerPenelitianDetail = [
+            "currentPage" => "Detail Penelitian",
+            "pageDescription" => "Halaman Detail Penelitian"
         ];
     }
     /**
@@ -28,6 +34,22 @@ class PenelitianController extends Controller
     {
         return view('admin.content.penelitian.usulan-baru.daftar-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
+        ]);
+    }
+
+    public function detailPenelitian($id)
+    {
+        $param = [
+            'usulan_penelitian_id' => $id,
+        ];
+
+        $getData = $this->postAPI($param, 'penelitian/get-penelitian');
+
+        $detailPenelitian = $getData['data'];
+
+        return view('admin.content.penelitian.usulan-baru.detail-usulan-baru')->with([
+            'detailController' => $this->controllerPenelitianDetail,
+            'detailPenelitian' => $detailPenelitian,
         ]);
     }
 
@@ -111,6 +133,7 @@ class PenelitianController extends Controller
         ->addColumn('action', function ($data) {
             $button = '<button type="button" name="edit" id="' . $data['usulan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
             $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
+            $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/penelitian/detail-penelitian/'.$data['usulan_penelitian_id'] . '" name="catatan_harian" id="' . $data['usulan_penelitian_id'] . '" class="secondary btn btn-secondary btn-sm" >Catatan Harian</a>';
             return $button;
         })
         ->rawColumns(['action'])

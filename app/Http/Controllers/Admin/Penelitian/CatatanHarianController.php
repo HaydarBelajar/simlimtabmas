@@ -26,6 +26,14 @@ class CatatanHarianController extends Controller
         ]);
     }
 
+    public function catatanHarian($id, Request $request)
+    {
+        dd($id, $request->all());
+        return view('admin.content.penelitian.catatan-harian.daftar-catatan-harian')->with([
+            'detailController' => $this->controllerDetails,
+        ]);
+    }
+
     public function tambahDataCatatanHarian()
     {
         return view('admin.content.penelitian.catatan-harian.tambah-catatan-harian')->with([
