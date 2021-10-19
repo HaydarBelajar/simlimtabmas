@@ -42,40 +42,35 @@
                     <!-- info row -->
                     <div class="row invoice-info">
                       <div class="col-sm-4 invoice-col">
-                        From
-                        <address>
-                          <strong>Admin, Inc.</strong><br>
-                          795 Folsom Ave, Suite 600<br>
-                          San Francisco, CA 94107<br>
-                          Phone: (804) 123-5432<br>
-                          Email: info@almasaeedstudio.com
-                        </address>
+                        <strong>Abstrak</strong>
+                        <p class="well well-sm shadow-none" style="margin-top: 10px;">
+                         {{ $detailPenelitian['abstrak'] ?? '' }}
+                        </p>
                       </div>
                       <!-- /.col -->
                       <div class="col-sm-4 invoice-col">
-                        To
-                        <address>
-                          <strong>John Doe</strong><br>
-                          795 Folsom Ave, Suite 600<br>
-                          San Francisco, CA 94107<br>
-                          Phone: (555) 539-1037<br>
-                          Email: john.doe@example.com
-                        </address>
+                        <strong>Tahun Pelaksanaan</strong>
+                        <p class="well well-sm shadow-none" style="margin-top: 10px;">
+                          {{ $detailPenelitian['tahun_pelaksanaan'] ? $detailPenelitian['tahun_pelaksanaan']['tahun_usulan'] : '' }}
+                         </p>
                       </div>
                       <!-- /.col -->
                       <div class="col-sm-4 invoice-col">
-                        <b>Invoice #007612</b><br>
-                        <br>
-                        <b>Order ID:</b> 4F3S8J<br>
-                        <b>Payment Due:</b> 2/22/2014<br>
-                        <b>Account:</b> 968-34567
+                        <strong>Jumlah Usulan Dana</strong>
+                        <p class="well well-sm shadow-none" style="margin-top: 10px;">
+                        <?php 
+                          $amount = $detailPenelitian['jumlah_usulan_dana'] ?? '0' ;
+                          $formatter = new NumberFormatter('id-ID',  NumberFormatter::CURRENCY);
+                          echo($formatter->formatCurrency($amount, 'IDR'));
+                        ?>
+                        </p>
                       </div>
                       <!-- /.col -->
                     </div>
                     <!-- /.row -->
       
                     <!-- Table row -->
-                    <div class="row">
+                    {{-- <div class="row">
                       <div class="col-12 table-responsive">
                         <table class="table table-striped">
                           <thead>
@@ -120,17 +115,13 @@
                         </table>
                       </div>
                       <!-- /.col -->
-                    </div>
+                    </div> --}}
                     <!-- /.row -->
       
                     <div class="row">
                       <!-- accepted payments column -->
                       <div class="col-6">
-                        <p class="lead">Payment Methods:</p>
-                        <img src="../../dist/img/credit/visa.png" alt="Visa">
-                        <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                        <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                        <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+                        <p class="lead">Jenis Luaran</p>
       
                         <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
                           Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem

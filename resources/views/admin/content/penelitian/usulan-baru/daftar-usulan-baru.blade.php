@@ -157,6 +157,7 @@
                 });
 
                 $('#penelitian-table').DataTable({
+                    "scrollX": true,
                     processing: true,
                     serverSide: true,
                     ajax: {

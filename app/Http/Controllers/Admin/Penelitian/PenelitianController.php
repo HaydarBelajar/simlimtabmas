@@ -37,7 +37,7 @@ class PenelitianController extends Controller
         ]);
     }
 
-    public function detailPenelitian($id)
+    public function detailPenelitian($id, Request $request)
     {
         $param = [
             'usulan_penelitian_id' => $id,
@@ -46,7 +46,7 @@ class PenelitianController extends Controller
         $getData = $this->postAPI($param, 'penelitian/get-penelitian');
 
         $detailPenelitian = $getData['data'];
-
+        dd($detailPenelitian);
         return view('admin.content.penelitian.usulan-baru.detail-usulan-baru')->with([
             'detailController' => $this->controllerPenelitianDetail,
             'detailPenelitian' => $detailPenelitian,
@@ -88,6 +88,9 @@ class PenelitianController extends Controller
 
     public function simpanDataPenelitian(Request $request)
     {
+        $userSession = $request->session()->get('kucingku');
+        $userDetail = $userSession['user'];
+
         $param = [
             'tahun_id' => $request->tahun_id,
             'tahun_pelaksanaan_id' => $request->tahun_pelaksanaan_id,
@@ -106,6 +109,7 @@ class PenelitianController extends Controller
             'jumlah_dana_mengetahui' => $request->jumlah_dana_penandatanganan,
             'jenis_luaran' => $request->jenis_luaran,
             'list_anggota_penelitian' => json_decode($request->list_anggota_penelitian),
+            'person_id' => $userDetail['id']
         ];
 
         $simpanData = $this->postAPI($param, 'penelitian/create-penelitian');
