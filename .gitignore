@@ -2,6 +2,8 @@
 /public/hot
 /public/storage
 /public/media/proposal/*
+/public/media/catatanHarian/*
+/public/media/pengesahan/*
 /storage/*.key
 /vendor
 .env

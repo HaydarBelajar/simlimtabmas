@@ -106,7 +106,6 @@
             $(document).ready(function () {
 
                 @if(Session::has('message'))
-                console.log('asdasd', "{{ session('message') }}")
                     toastr.options =
                     {
                         "closeButton" : true,

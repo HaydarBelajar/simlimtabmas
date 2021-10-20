@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthTraits;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class PenelitianController extends Controller
 {
@@ -146,6 +148,31 @@ class PenelitianController extends Controller
         return $dataTables;
     }
 
+    public function getCatatanHarianAll(Request $request) {
+        // Param datatables harus dikirim ke be juga
+        $dataTablesParam = $request->all();
+        $getData = $this->postAPI($dataTablesParam, 'penelitian/get-catatan-harian-filter');
+
+        $data = $getData['data'];
+
+        for ($i=0; $i < count($data); $i++) { 
+            # code...
+            $data[$i]['status'] = 'Menunggu Konfirmasi';
+        }
+
+        $dataTables =  DataTables::of($data)
+        ->addColumn('action', function ($data) {
+            $button = '<button type="button" name="edit" id="' . $data['usulan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
+            $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
+            $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/penelitian/detail-penelitian/'.$data['usulan_penelitian_id'] . '" name="catatan_harian" id="' . $data['usulan_penelitian_id'] . '" class="secondary btn btn-secondary btn-sm" >Catatan Harian</a>';
+            return $button;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+
+        return $dataTables;
+    }
+
     public function lanjutkanUsulan()
     {
         return view('admin.content.penelitian.usulan-baru.menu-lanjut-usulan-baru')->with([
@@ -230,6 +257,57 @@ class PenelitianController extends Controller
         $param = [
             'usulan_penelitian_id' => $request->id_penelitian,
             'file_upload_proposal' => $fileName,
+        ];
+
+        $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
+
+        if (isset($updateData['success'])) {
+            return redirect()->route('penelitian.data-penelitian')->with('message',$updateData['success']);
+        } else {
+            return redirect()->route('penelitian.data-penelitian')->with('error',$updateData['error'] ?? $updateData['reason']);
+        }
+
+        return response()->json(['success' => $fileName]);
+    }
+
+    public function tambahCatatanHarian(Request $request)
+    {
+        $file = $request->file('fileToUpload');
+        $fileName = time().'.'.$file->extension();
+        $file->move(public_path('media/catatanHarian'), $fileName);
+        if (!$file) {
+            return redirect()->route('penelitian.detail-penelitian')->with('error','Gagal Menyimpan File');
+        }
+        $param = [
+            'usulan_penelitian_id' => $request->id_penelitian,
+            'tanggal_pelaksanaan' => Carbon::parse($request->tanggal_pelaksanaan, 'Asia/Jakarta')->format('Y-m-d'),
+            'deskripsi' => $request->deskripsi,
+            'berkas' => $fileName,
+        ];
+
+        $simpanData = $this->postAPI($param, 'penelitian/create-catatan-harian-penelitian');
+
+        if (isset($simpanData['success'])) {
+            return response()->json(['success' => 'Data berhasil ditambahkan']);
+        } else {
+            return response()->json(['errors' => 'Fail to update data']);
+        }
+
+        return response()->json(['success' => $fileName]);
+    }
+
+    public function editCatatanHarian(Request $request)
+    {
+        $file = $request->file('fileToUpload');
+        $fileName = time().'.'.$file->extension();
+        $file->move(public_path('media/catatanHarian'), $fileName);
+        if (!$file) {
+            return redirect()->route('penelitian.data-penelitian')->with('error','Gagal Menyimpan File');
+        }
+
+        $param = [
+            'usulan_penelitian_id' => $request->id_penelitian,
+            'file_upload_pengesahan' => $fileName,
         ];
 
         $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
