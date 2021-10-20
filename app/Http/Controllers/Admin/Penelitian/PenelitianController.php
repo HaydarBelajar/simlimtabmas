@@ -46,7 +46,7 @@ class PenelitianController extends Controller
         $getData = $this->postAPI($param, 'penelitian/get-penelitian');
 
         $detailPenelitian = $getData['data'];
-        dd($detailPenelitian);
+
         return view('admin.content.penelitian.usulan-baru.detail-usulan-baru')->with([
             'detailController' => $this->controllerPenelitianDetail,
             'detailPenelitian' => $detailPenelitian,

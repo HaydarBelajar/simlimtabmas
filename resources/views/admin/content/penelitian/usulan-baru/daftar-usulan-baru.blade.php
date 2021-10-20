@@ -59,7 +59,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <h4 align="center" style="margin:0;">Apakah anda ingin menghapus data ini ?</h4>
+                                <h6 style="margin:0; text-align: center;">Apakah anda ingin menghapus data ini ?</h6>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" name="ok_delete_button" id="ok-delete-button" class="btn btn-danger">Ok</button>

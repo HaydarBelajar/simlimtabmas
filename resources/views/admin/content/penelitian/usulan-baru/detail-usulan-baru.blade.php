@@ -67,6 +67,29 @@
                       </div>
                       <!-- /.col -->
                     </div>
+                    <div class="row invoice-info">
+                      <div class="col-sm-4 invoice-col">
+                        <strong>Bidang Fokus</strong>
+                        <p class="well well-sm shadow-none" style="margin-top: 10px;">
+                         {{ $detailPenelitian['bidang_fokus'] ?? '' }}
+                        </p>
+                      </div>
+                      <!-- /.col -->
+                      <div class="col-sm-4 invoice-col">
+                        <strong>Sumber Dana</strong>
+                        <p class="well well-sm shadow-none" style="margin-top: 10px;">
+                          {{ $detailPenelitian['sumber_dana'] ? $detailPenelitian['sumber_dana']['sumber_dana_nama'] : '' }}
+                         </p>
+                      </div>
+                      <!-- /.col -->
+                      <div class="col-sm-4 invoice-col">
+                        <strong>Durasi Kegiatan</strong>
+                        <p class="well well-sm shadow-none" style="margin-top: 10px;">
+                          {{ $detailPenelitian['durasi_kegiatan'] ? $detailPenelitian['durasi_kegiatan'] : '' }}
+                        </p>
+                      </div>
+                      <!-- /.col -->
+                    </div>
                     <!-- /.row -->
       
                     <!-- Table row -->
@@ -121,45 +144,44 @@
                     <div class="row">
                       <!-- accepted payments column -->
                       <div class="col-6">
-                        <p class="lead">Jenis Luaran</p>
-      
-                        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                          Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                          plugg
-                          dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                        </p>
-                      </div>
-                      <!-- /.col -->
-                      <div class="col-6">
-                        <p class="lead">Amount Due 2/22/2014</p>
-      
-                        <div class="table-responsive">
+                        <strong>Anggota Penelitian</strong>      
+                        <div class="table-responsive card" style="margin-top: 10px;">
                           <table class="table">
-                            <tbody><tr>
-                              <th style="width:50%">Subtotal:</th>
-                              <td>$250.30</td>
+                            <tbody>
+                            <tr>
+                              <th>Peneliti Utama</th>
+                              <td>{{ $detailPenelitian['peneliti_utama']['name'] ?? ' - ' }}</td>
                             </tr>
                             <tr>
-                              <th>Tax (9.3%)</th>
-                              <td>$10.34</td>
+                              <th>Anggota 1</th>
+                              <td>{{ $detailPenelitian['anggota1']['name'] ?? ' - ' }}</td>
                             </tr>
                             <tr>
-                              <th>Shipping:</th>
-                              <td>$5.80</td>
+                              <th>Anggota 2</th>
+                              <td>{{ $detailPenelitian['anggota2']['name'] ?? ' - ' }}</td>
                             </tr>
                             <tr>
-                              <th>Total:</th>
-                              <td>$265.24</td>
+                              <th>Anggota 3</th>
+                              <td>{{ $detailPenelitian['anggota3']['name'] ?? ' - ' }}</td>
                             </tr>
                           </tbody></table>
                         </div>
+                      </div>
+                      <!-- /.col -->
+                      <div class="col-6">
+                        <strong>Luaran Penelitian</strong>
+                          <ul>
+                            @foreach ($detailPenelitian['capaian_luaran'] as $capaianLuaran)
+                              <li>{{ $capaianLuaran['capaian_luaran_nama'] }}</li>
+                            @endforeach
+                          </ul>
                       </div>
                       <!-- /.col -->
                     </div>
                     <!-- /.row -->
       
                     <!-- this row will not appear when printing -->
-                    <div class="row no-print">
+                    {{-- <div class="row no-print">
                       <div class="col-12">
                         <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                         <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
@@ -169,11 +191,38 @@
                           <i class="fas fa-download"></i> Generate PDF
                         </button>
                       </div>
-                    </div>
+                    </div> --}}
                   </div>
                   <!-- /.invoice -->
                 </div><!-- /.col -->
               </div><!-- /.row -->
+              <div class="row">
+                <div class="col-12">
+                  <div class="card card-default color-palette-box">
+                    <div class="card-header">
+                      <h3 class="card-title">
+                        Catatan Harian Penelitian
+                      </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="top-button-group" style="margin-bottom: 20px;">
+                            <a href={{ route('penelitian.tambah-penelitian') }} type="button" class="btn btn-primary tambah-penelitian">Tambah Catatan Harian</a>
+                        </div>
+                        <span id="notification"></span>
+                        <table id="penelitian-table" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th width="5%">No</th>
+                                <th width="25%">Tanggal Pelaksanaan</th>
+                                <th width="60%">Catatan</th>
+                                <th width="10%">Aksi</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                </div>
+              </div> <!-- /.row2 -->
             </div><!-- /.container-fluid -->
           </section>
         <!-- /.content -->
