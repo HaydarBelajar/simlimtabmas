@@ -148,23 +148,19 @@ class PenelitianController extends Controller
         return $dataTables;
     }
 
-    public function getCatatanHarianAll(Request $request) {
+    public function getCatatanHarian(Request $request, $id) {
+
         // Param datatables harus dikirim ke be juga
         $dataTablesParam = $request->all();
+        $dataTablesParam['filter'] = ['usulan_penelitian_id' => $id];
         $getData = $this->postAPI($dataTablesParam, 'penelitian/get-catatan-harian-filter');
 
         $data = $getData['data'];
 
-        for ($i=0; $i < count($data); $i++) { 
-            # code...
-            $data[$i]['status'] = 'Menunggu Konfirmasi';
-        }
-
         $dataTables =  DataTables::of($data)
         ->addColumn('action', function ($data) {
-            $button = '<button type="button" name="edit" id="' . $data['usulan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
-            $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
-            $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/penelitian/detail-penelitian/'.$data['usulan_penelitian_id'] . '" name="catatan_harian" id="' . $data['usulan_penelitian_id'] . '" class="secondary btn btn-secondary btn-sm" >Catatan Harian</a>';
+            // $button = '<button type="button" name="edit" id="' . $data['catatan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
+            $button = '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['catatan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
             return $button;
         })
         ->rawColumns(['action'])

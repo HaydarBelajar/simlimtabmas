@@ -214,7 +214,8 @@
                             <tr>
                                 <th width="5%">No</th>
                                 <th width="25%">Tanggal Pelaksanaan</th>
-                                <th width="60%">Catatan</th>
+                                <th width="50%">Catatan</th>
+                                <th width="10%">Dokumen</th>
                                 <th width="10%">Aksi</th>
                             </tr>
                             </thead>
@@ -421,71 +422,36 @@
                   processing: true,
                   serverSide: true,
                   ajax: {
-                      url: "{{ route('penelitian.get-catatan-harian-all') }}",
+                      url: "{{ route('penelitian.get-catatan-harian', $detailPenelitian['usulan_penelitian_id']) }}",
                   },
                   columns: [
                       {
-                          data: 'usulan_penelitian_id',
+                          data: 'catatan_penelitian_id',
                           name: 'No',
                           render: function ( data, type, row, meta ) {
                               return meta.row + meta.settings._iDisplayStart + 1;
                           }
                       },
                       {
-                          data: 'judul',
-                          name: 'Judul Penelitian'
-                      },
-                      {
-                          data: 'file_upload_pengesahan',
+                          data: 'tanggal_pelaksanaan',
+                          name: 'Tanggal Pelaksanaan',
                           render: function ( data, type, row ) {
-                              if (data) {
-                                  return 'Sudah Terupload';
-                              }else {
-                                  return 'Belum Terupload';
-                              }
+                              return moment(data).tz('Asia/Jakarta').format('DD-MM-YYYY');
                           }
                       },
                       {
-                          name: 'Pengesahan',
-                          data: 'usulan_penelitian_id',
+                          data: 'deskripsi',
+                          name: 'Catatan'
+                      },
+                      {
+                          name: 'Dokumen',
+                          data: 'berkas',
                           className: 'text-right py-0 align-middle',
                           render: function ( data, type, row ) {
                               return `<div class="btn-group btn-group-sm">
-                                  <a href="#" class="btn btn-info upload-pengesahan" data-id="${data}"><i class="fas fa-file-upload"></i></a>
-                                  <a target="_blank" href="{{ asset('media/pengesahan') }}/${row.file_upload_pengesahan}" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
+                                  <a target="_blank" href="{{ asset('media/catatanHarian') }}/${row.berkas}" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
                               </div>`;
-                          }
-                      },
-                      {
-                          data: 'file_upload_proposal',
-                          render: function ( data, type, row ) {
-                              if (data) {
-                                  return 'Sudah Terupload';
-                              }else {
-                                  return 'Belum Terupload';
-                              }
-                          }
-                      },
-                      {
-                          name: 'Proposal',
-                          data: 'usulan_penelitian_id',
-                          className: 'text-right py-0 align-middle',
-                          render: function ( data, type, row ) {
-                              return `<div class="btn-group btn-group-sm">
-                                  <a href="#" class="btn btn-info upload-proposal" data-id="${data}"><i class="fas fa-file-upload"></i></a>
-                                  <a target="_blank" href="{{ asset('media/proposal') }}/${row.file_upload_proposal}" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
-                              </div>`;
-                          }
-                      },
-                      {
-                          data: 'status',
-                          name: 'Status Seleksi',
-                      },
-                      {
-                          data: 'created_at',
-                          name: 'Tanggal Upload',
-                          render: function ( data, type, row ) {
-                              return moment(data).tz('Asia/Jakarta').format('DD-MM-YYYY HH:MM');
+                              // return 'asdasd';
                           }
                       },
                       {
