@@ -169,6 +169,21 @@ class PenelitianController extends Controller
         return $dataTables;
     }
 
+    public function hapusCatatanHarian($id, Request $request)
+    {
+        $param = [
+            'catatan_penelitian_id' => $id,
+        ];
+
+        $deleteData = $this->postAPI($param, 'penelitian/delete-catatan-harian');
+        
+        if (isset($deleteData['success'])) {
+            return response()->json(['success' => $deleteData['success']]);
+        } else {
+            return response()->json(['errors' => 'Data Gagal Dihapus !']);
+        }
+    }
+
     public function lanjutkanUsulan()
     {
         return view('admin.content.penelitian.usulan-baru.menu-lanjut-usulan-baru')->with([

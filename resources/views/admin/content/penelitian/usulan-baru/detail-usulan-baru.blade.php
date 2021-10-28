@@ -228,6 +228,26 @@
           </section>
         <!-- /.content -->
         <!-- Modal -->
+        <div id="confirmModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6 style="margin:0; text-align: center;">Apakah anda ingin menghapus data ini ?</h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" name="ok_delete_button" id="ok-delete-button" class="btn btn-danger">Ok</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                </div>
+            </div>
+          </div>
+        </div>
+
         <div id="form-catatan-harian-modal" class="modal fade" role="dialog">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -292,7 +312,10 @@
                 format: 'L'
               });
 
-              // Ketika Tombol Submit Diklik
+              /**
+              * Add Function
+              *
+              */
               $('#form-catatan-harian').on('submit', function(event) {
                 event.preventDefault();
                 var action_url = '';
@@ -321,7 +344,7 @@
                     if (data.success) {
                       alert("Data successfully added or edited !");
                       html = '<div class="alert alert-success">' + data.success + '</div>';
-                      $('#edit-form')[0].reset();
+                      $('#form-catatan-harian')[0].reset();
                       $('#tabel-catatan-harian').DataTable().ajax.reload();
                       $('#form-catatan-harian-modal').modal('hide');
                     }
@@ -329,6 +352,10 @@
                   }
                 });
               });
+              /**
+              * End Add Function
+              *
+              */
 
               // Ketika Tombol Edit Diklick
               $(document).on('click', '.edit', function() {
@@ -386,15 +413,20 @@
                   }
                   toastr.error("{{ session('error') }}");
               @endif
-
+              
+              /**
+              * Delete Function
+              *
+              */
               $(document).on('click', '.delete', function() {
-                  user_id = $(this).attr('id');
+                  catatanPenelitianID = $(this).attr('id');
                   $('#confirmModal').modal('show');
               });
 
               $('#ok-delete-button').click(function() {
+                console.log('catatan', catatanPenelitianID);
                   $.ajax({
-                      url: "/manage-user/delete/" + user_id,
+                      url: "/penelitian/hapus-catatan-harian/" + catatanPenelitianID,
                       method: "GET",
                       data: {
                           "_token": "{{ csrf_token() }}",
@@ -403,20 +435,25 @@
                           $('#ok-delete-button').text('Proses Menghapus...');
                       },
                       success: function(data) {
-                          setTimeout(function() {
-                              if (data.errors) {
-                                  $('#confirmModal').modal('hide');
-                                  $('#user-table').DataTable().ajax.reload();
-                                  alert(data.errors);
-                              } else {
-                                  $('#confirmModal').modal('hide');
-                                  $('#user-table').DataTable().ajax.reload();
-                                  alert('Data Sukses Terhapus');
-                              }
-                          }, 2000);
+                          var html = '';
+                          if (data.errors) {
+                            alert("Data gagal dihapus !");
+                            html = `<div class="alert alert-danger"> ${data.errors} ! </div>`;
+                          }
+                          if (data.success) {
+                            alert("Data successfully added or edited !");
+                            html = '<div class="alert alert-success">' + data.success + '</div>';
+                            $('#tabel-catatan-harian').DataTable().ajax.reload();
+                            $('#confirmModal').modal('hide');
+                          }
+                          $('#form-result').html(html);
                       }
                   })
               });
+              /**
+              * End Delete Function
+              *
+              */
 
               $('#tabel-catatan-harian').DataTable({
                   processing: true,
