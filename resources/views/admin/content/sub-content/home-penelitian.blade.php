@@ -25,8 +25,8 @@
                       <td>{{ $i+1 }}</td>
                       <td>
                         <h6>{{ $dataPenelitian[$i]['judul'] ?? '' }}</h6>
-                        <b>Tahun: </b>{{ $dataPenelitian[$i]['tahun']['tahun_usulan'] ?? '' }}
-                        <b>Peran: </b>Peneliti Utama
+                        <b>Tahun: </b>{{ $dataPenelitian[$i]['tahun']['tahun_usulan'] ?? '' }} |
+                        <b>Peran: </b>{{ $dataPenelitian[$i]['peran'] ?? '' }} |
                         <b>Sumber Dana: </b>{{ $dataPenelitian[$i]['sumber_dana']['sumber_dana_nama'] ?? '' }}<br />
                         {{-- <span class="text-primary"><b>Penelitian Dosen
                             Pemula</b></span> --}}

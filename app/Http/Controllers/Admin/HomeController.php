@@ -26,7 +26,7 @@ class HomeController extends Controller
 
         $getDataPenelitian = $this->postAPI($param, 'penelitian/get-filter');
         $dataPenelitian = isset($getDataPenelitian['data']) ? $getDataPenelitian['data'] : '';
-        
+
         return view('admin.content.home')->with([
             'dataPenelitian' => $dataPenelitian,
         ]);
