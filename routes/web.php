@@ -17,7 +17,7 @@ use App\Http\Controllers\Admin\UserManagementController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard/home');
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
@@ -100,9 +100,6 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/rekap-luaran', [\App\Http\Controllers\Admin\Penelitian\RekapLuaranController::class, 'index'])->name('index');
     });
 
-    Route::get('/', function () {
-        // Uses first & second middleware...
-    });
 
     Route::get('/user/profile', function () {
         // Uses first & second middleware...

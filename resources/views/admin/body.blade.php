@@ -185,7 +185,7 @@
                              with font-awesome or any other icon font library -->
                         <li class="nav-header" style="font-weight: bold;">Menu Utama</li>
                         <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                            <a href="{{route('dashboard.home')}}" class="nav-link active">
                                 <i class="nav-icon fa fa-home"></i>
                                 <p>
                                     Beranda
@@ -207,7 +207,7 @@
                                         <p>Data Penelitian</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{route('penelitian.data-catatan-harian')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Catatan Harian</p>
@@ -218,7 +218,7 @@
                                         <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Laporan Akhir</p>
                                     </a>
-                                </li>
+                                </li> --}}
 {{--                                <li class="nav-item">--}}
 {{--                                    <a href="{{route('penelitian-usulan-baru.index')}}" class="nav-link">--}}
 {{--                                        <i class="fa fa-chevron-right nav-icon"></i>--}}
@@ -290,7 +290,7 @@
                                         <p>Data Pengabdian</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{route('penelitian.data-penelitian')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Catatan Harian</p>
@@ -303,7 +303,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
 {{--                        <li class="nav-item">--}}
 {{--                            <a href="#" class="nav-link">--}}
 {{--                                <i class="nav-icon fas fa fa-book"></i>--}}

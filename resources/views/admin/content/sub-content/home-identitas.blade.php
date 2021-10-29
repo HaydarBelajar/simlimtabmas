@@ -34,7 +34,7 @@
               </div>
             </div>
             <div class="col-lg-5">
-              <table class="table m-0">
+              <table class="table table-striped">
                 <tbody>
                   <tr>
                     <th scope="row" width="40%">Institusi</th>
@@ -66,7 +66,7 @@
                   <tr>
                     <th scope="row">Alamat</th>
                     <td>
-                      <span id="ContentPlaceHolder1_ctl00_identitas_lblAlamat" style="color:Green;">Beji Rt 06 Rw 09
+                      <span id="" style="color:Green;">Beji Rt 06 Rw 09
                         Sidoarum Godean Sleman Yogyakarta
                       </span>
                     </td>
@@ -75,11 +75,11 @@
               </table>
             </div>
             <div class="col-lg-4">
-              <table class="table m-0">
+              <table class="table table-striped table-responsive">
                 <tbody>
                   <tr>
-                    <th scope="row" width="40%">Tempat/Tanggal Lahir</th>
-                    <td width="60%">
+                    <th scope="row">Tempat/Tanggal Lahir</th>
+                    <td>
                       <span id="ContentPlaceHolder1_ctl00_identitas_lblTempat" style="color:Green;">Cilacap</span>/
                       <span id="ContentPlaceHolder1_ctl00_identitas_lblTglLahir" style="color:Green;">27-4-1983</span>
                     </td>
@@ -108,14 +108,14 @@
                   <tr>
                     <th scope="row">Alamat Surel</th>
                     <td>
-                      <span id="ContentPlaceHolder1_ctl00_identitas_lblSurel"
+                      <span id=""
                         style="color:Green;">ennyfitriahadi@unisayogya.ac.id</span>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Website Personal</th>
                     <td>
-                      <span id="ContentPlaceHolder1_ctl00_identitas_lblWebPersonal" style="color:Green;"></span>
+                      <span id="" style="color:Green;"></span>
                     </td>
 
                   </tr>

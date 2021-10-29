@@ -220,7 +220,10 @@
                             </tr>
                             </thead>
                         </table>
-                    </div>
+                      </div>
+                      <div class="card-body">
+                        <a href={{ route('penelitian.data-penelitian') }} type="button" class="btn btn-danger float-right">Kembali</a>
+                      </div>
                 </div>
                 </div>
               </div> <!-- /.row2 -->
@@ -396,7 +399,6 @@
 
 
               @if(Session::has('message'))
-              console.log('asdasd', "{{ session('message') }}")
                   toastr.options =
                   {
                       "closeButton" : true,
@@ -424,7 +426,6 @@
               });
 
               $('#ok-delete-button').click(function() {
-                console.log('catatan', catatanPenelitianID);
                   $.ajax({
                       url: "/penelitian/hapus-catatan-harian/" + catatanPenelitianID,
                       method: "GET",
@@ -456,6 +457,7 @@
               */
 
               $('#tabel-catatan-harian').DataTable({
+                  "scrollX": true,
                   processing: true,
                   serverSide: true,
                   ajax: {

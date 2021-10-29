@@ -34,10 +34,10 @@
             <a class="nav-link active" id="identitas-tab" data-toggle="pill" href="#identitas" role="tab"
               aria-controls="identitas" aria-selected="true">Identitas</a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link" id="sinta-tab" data-toggle="pill" href="#sinta" role="tab" aria-controls="sinta"
               aria-selected="false">Sinta</a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link" id="penelitian-tab" data-toggle="pill" href="#penelitian" role="tab"
               aria-controls="penelitian" aria-selected="false">Riwayat Penelitian</a>
@@ -46,7 +46,7 @@
             <a class="nav-link" id="pengabdian-tab" data-toggle="pill" href="#pengabdian" role="tab"
               aria-controls="pengabdian" aria-selected="false">Riwayat Pengabdian</a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link" id="artikel-jurnal-tab" data-toggle="pill" href="#artikel-jurnal" role="tab"
               aria-controls="artikel-jurnal" aria-selected="false">Artikel Jurnal</a>
           </li>
@@ -69,7 +69,7 @@
           <li class="nav-item">
             <a class="nav-link" id="naskah-akademik-tab" data-toggle="pill" href="#naskah-akademik" role="tab"
               aria-controls="naskah-akademik" aria-selected="false">Naskah Akademik/ Urgensi</a>
-          </li>
+          </li> --}}
         </ul>
         <div class="tab-content" id="custom-content-below-tabContent">
           <div class="tab-pane fade show active" id="identitas" role="tabpanel" aria-labelledby="identitas-tab">

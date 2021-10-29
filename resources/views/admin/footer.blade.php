@@ -51,6 +51,8 @@
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
 <!-- Moment -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone-with-data.js"></script>
+<!-- summernote -->
+<link rel="stylesheet" href="{{ asset('assets/plugins/lazyload/jquery.lazy.min.js') }}">
 
 <!-- DataTables -->
 <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
