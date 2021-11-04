@@ -209,6 +209,13 @@
                         {
                             data: 'status',
                             name: 'Status Seleksi',
+                            render: function ( data, type, row ) {
+                                if (data == 0) {
+                                    return `Menunggu`;
+                                } else if (data == 1) {
+                                    return `Lolos`;
+                                }
+                            }
                         },
                         {
                             data: 'created_at',
