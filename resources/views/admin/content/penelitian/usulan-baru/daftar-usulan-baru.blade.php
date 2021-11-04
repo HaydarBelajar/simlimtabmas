@@ -36,10 +36,8 @@
                             <tr>
                                 <th width="5%">No</th>
                                 <th width="25%">Judul Penelitian</th>
-                                <th width="15%">Status Upload Pengesahan</th>
-                                <th width="10%">Pengesahan</th>
-                                <th width="15%">Status Upload Proposal</th>
-                                <th width="10%">Proposal</th>
+                                <th width="5%">Pengesahan</th>
+                                <th width="5%">Proposal</th>
                                 <th width="10%">Status Seleksi</th>
                                 <th width="10%">Tanggal Upload</th>
                                 <th width="10%">Aksi</th>
@@ -175,34 +173,20 @@
                             name: 'Judul Penelitian'
                         },
                         {
-                            data: 'file_upload_pengesahan',
-                            render: function ( data, type, row ) {
-                                if (data) {
-                                    return 'Sudah Terupload';
-                                }else {
-                                    return 'Belum Terupload';
-                                }
-                            }
-                        },
-                        {
                             name: 'Pengesahan',
                             data: 'usulan_penelitian_id',
                             className: 'text-right py-0 align-middle',
                             render: function ( data, type, row ) {
-                                return `<div class="btn-group btn-group-sm">
-                                    <a href="#" class="btn btn-info upload-pengesahan" data-id="${data}"><i class="fas fa-file-upload"></i></a>
-                                    <a target="_blank" href="{{ asset('media/pengesahan') }}/${row.file_upload_pengesahan}" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
-                                </div>`;
-                            }
-                        },
-                        {
-                            data: 'file_upload_proposal',
-                            render: function ( data, type, row ) {
-                                if (data) {
-                                    return 'Sudah Terupload';
-                                }else {
-                                    return 'Belum Terupload';
+                                if (row.file_upload_pengesahan) {
+                                    return `
+                                        <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/pengesahan') }}/${row.file_upload_pengesahan}" ><i class="fas fa-file-download"></i> Download</a>
+                                    `;
+                                } else {
+                                    return `
+                                        <a href="#" class="btn btn-outline-danger btn-block btn-sm" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                                    `;
                                 }
+
                             }
                         },
                         {
@@ -210,10 +194,16 @@
                             data: 'usulan_penelitian_id',
                             className: 'text-right py-0 align-middle',
                             render: function ( data, type, row ) {
-                                return `<div class="btn-group btn-group-sm">
-                                    <a href="#" class="btn btn-info upload-proposal" data-id="${data}"><i class="fas fa-file-upload"></i></a>
-                                    <a target="_blank" href="{{ asset('media/proposal') }}/${row.file_upload_proposal}" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
-                                </div>`;
+                                if (row.file_upload_proposal) {
+                                    return `
+                                    <a  class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal') }}/${row.file_upload_proposal}" ><i class="fas fa-file-download"></i> Download</a>
+                                    `;
+                                } else {
+                                    return `
+                                    <a href="#" class="btn btn-outline-danger btn-block btn-sm" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                                    `;
+                                }
+
                             }
                         },
                         {
@@ -256,28 +246,6 @@
                         url = "/penelitian/upload-pengesahan";
                         $('#upload-file').attr('action', url);
                     }
-                    // DropZone
-
-                    // Dropzone.options.uploadFile = { // camelized version of the `id`
-                    //     paramName: "file", // The name that will be used to transfer the file
-                    //     maxFilesize: 2, // MB
-                    //     maxFile: 1,
-                    //     url,
-                    //     init: function() {
-                    //         this.on("addedfile", file => {
-                    //         console.log("A file has been added");
-                    //         });
-                    //     },
-                    //     accept: function(file, done) {
-                    //     if (file.name == "justinbieber.jpg") {
-                    //         done("Naha, you don't.");
-                    //     }
-                    //     else { done(); }
-                    //     }
-                    // };
-
-                    // $('#action_button').val('Simpan');
-                    // $('#action').val('Simpan');
                 });
             });
         </script>
