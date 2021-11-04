@@ -30,7 +30,7 @@ trait AuthTraits
 
         $param = [
             'headers' => [
-                'Authorization'      => 'Bearer '.$sessionData['access_token']
+                'Authorization' => 'Bearer '.$sessionData['access_token']
             ],
             'form_params' => $data
         ];

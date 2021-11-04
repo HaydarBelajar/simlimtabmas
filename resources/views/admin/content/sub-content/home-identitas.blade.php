@@ -13,10 +13,10 @@
             <div class="col-lg-3">
               <div class="card faq-left">
                 <div class="social-profile">
-                  <img id="ContentPlaceHolder1_ctl00_identitas_imgProfile" class="img-fluid"
-                    src="{{ asset('assets/images/profile.jpg')}}" style="width:100%" />
+                  <img id="" class="img-fluid"
+                    src="{{ asset('assets/images/blank_profile.png')}}" style="width:100%" />
                   <div class="profile-hvr m-t-15">
-                    <a id="ContentPlaceHolder1_ctl00_identitas_lbEditFoto" href="#">
+                    <a id="" href="#">
                       <i class="fa fa-pencil-square-o fa-2x" style="color:white;"></i>
                     </a>
                   </div>

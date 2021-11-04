@@ -159,10 +159,12 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('assets/images/blank_profile.png') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                      @if(Session::has('kucingku'))
+                        <a href="#" class="d-block"> {{ Session::get('kucingku')['user']['name'] ?? '' }} </a>
+                      @endif
                     </div>
                 </div>
 
@@ -301,9 +303,9 @@
                                         <i class="fa fa-chevron-right nav-icon"></i>
                                         <p>Laporan Akhir</p>
                                     </a>
-                                </li>
-                            </ul>
-                        </li> --}}
+                                </li>--}}
+                            </ul> 
+                        </li>
 {{--                        <li class="nav-item">--}}
 {{--                            <a href="#" class="nav-link">--}}
 {{--                                <i class="nav-icon fas fa fa-book"></i>--}}
