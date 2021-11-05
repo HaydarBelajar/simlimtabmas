@@ -85,6 +85,16 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <label>Mapping Data Dosen</label>
+                                        <select class="form-control mapping-dosen" name="dosen_id" style="width: 100%;" required>
+                                            @if (!empty($dosenOptions))
+                                                @foreach ($dosenOptions as $dosen)
+                                                    <option value="{{ $dosen['kdperson'] }}">{{ $dosen['username'] }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-form-label">Password : </label>
                                         <input type="password" name="password" id="password" class="form-control"
                                                maxlength="35" required/>
@@ -136,6 +146,11 @@
     @push('scripts')
         <script>
             $(document).ready(function () {
+                //Initialize Select2 Elements
+                $('.mapping-dosen').select2({
+                    theme: 'bootstrap4'
+                })
+
                 $(document).on('click', '.add-user', function() {
                     $('#notification').html('');
                     $('#formModal').modal('show');
@@ -218,7 +233,6 @@
                         data: $(this).serialize(),
                         dataType: "json",
                         success: function(data) {
-                            console.log('sukses', data);
                             var html = '';
                             if (data.errors) {
                                 html = '<div class="alert alert-danger">';

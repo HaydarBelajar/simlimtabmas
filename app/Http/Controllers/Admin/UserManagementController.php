@@ -28,10 +28,12 @@ class UserManagementController extends Controller
     {
         $param = [];
         $getRoles = $this->postAPI($param, 'role/get-all');
-
+        $getDosenCascader = $this->postAPI($param, 'dosen/get-cascader');
+        
         return view('admin.content.menu-user-list')->with([
             'detailController' => $this->controllerDetails,
-            'rolesOptions' => isset($getRoles['data']) ? $getRoles['data'] : []
+            'rolesOptions' => isset($getRoles['data']) ? $getRoles['data'] : [],
+            'dosenOptions' => isset($getDosenCascader['data']) ? $getDosenCascader['data'] : []
         ]);
     }
 
@@ -53,13 +55,18 @@ class UserManagementController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->password != $request->confirmpassword) {
+            return json_encode(['error' => 'Gagal membuat user, harap periksa kembali password anda !']);
+        }
+
         $param = [
             'username' => $request->username,
             'fullname' => $request->fullname,
             'email' => $request->email,
             'role' => $request->role,
             'password' => $request->password,
-            'confirmPassword' => $request->confirmpassword
+            'confirmPassword' => $request->confirmpassword,
+            'dosen_id' => $request->dosen_id
         ];
         $getRoles = $this->postAPI($param, 'user/create');
         return json_encode($getRoles);
