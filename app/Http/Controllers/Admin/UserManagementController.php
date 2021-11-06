@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Traits\AuthTraits;
 use DataTables;
+use Illuminate\Support\Facades\Log;
 
 class UserManagementController extends Controller
 {
@@ -61,38 +62,17 @@ class UserManagementController extends Controller
 
         $param = [
             'username' => $request->username,
-            'fullname' => $request->fullname,
             'email' => $request->email,
             'role' => $request->role,
             'password' => $request->password,
             'confirmPassword' => $request->confirmpassword,
             'dosen_id' => $request->dosen_id
         ];
+
         $getRoles = $this->postAPI($param, 'user/create');
         return json_encode($getRoles);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -103,7 +83,28 @@ class UserManagementController extends Controller
      */
     public function update(Request $request)
     {
-        dd($request->all());
+        if (!empty($request->password)) {
+            if ($request->password != $request->confirmpassword) {
+                return json_encode(['error' => 'Gagal membuat user, harap periksa kembali password anda !']);
+            }
+        }
+
+        if (!isset($request->user_id) || empty($request->user_id)) {
+            return json_encode(['error' => 'Periksa ID Pengguna !']);
+        }
+
+        $param = [
+            'username' => $request->username,
+            'user_id' => $request->user_id,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => $request->password,
+            'confirmPassword' => $request->confirmpassword,
+            'dosen_id' => $request->dosen_id
+        ];
+
+        $getRoles = $this->postAPI($param, 'user/update');
+        return json_encode($getRoles);
     }
 
     /**
@@ -117,6 +118,7 @@ class UserManagementController extends Controller
         $param = [
             'user_id' => $id
         ];
+        
         $getData = $this->postAPI($param, 'user/delete');
         return $getData;
     }
@@ -138,5 +140,14 @@ class UserManagementController extends Controller
         ->make(true);
 
         return $dataTables;
+    }
+
+    public function getUser(Request $request, $id) {
+        $param = [
+            'user_id' => $id
+        ];
+        $getData = $this->postAPI($param, 'user/get-user');
+
+        return json_encode(isset($getData['data']) ? $getData['data'] : []);
     }
 }

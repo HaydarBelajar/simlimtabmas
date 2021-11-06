@@ -53,6 +53,7 @@ Route::middleware(['auth.token'])->group(function () {
     Route::group(['prefix'=>'manage-user','as'=>'manage-user.'], function() {
         Route::get('/list', [UserManagementController::class, 'index'])->name('list');
         Route::get('/get-all', [UserManagementController::class, 'getAll'])->name('get-all');
+        Route::get('/get-user/{id}', [UserManagementController::class, 'getUser'])->name('get-user');
         Route::get('/delete/{id}', [UserManagementController::class, 'destroy'])->name('delete');
         Route::post('/create', [UserManagementController::class, 'store'])->name('create');
         Route::post('/update', [UserManagementController::class, 'update'])->name('update');
