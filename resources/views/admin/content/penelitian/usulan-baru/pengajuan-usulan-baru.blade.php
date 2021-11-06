@@ -341,13 +341,13 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
-                const anggotaPenelitian = [];
-                const anggotaPenelitianIds = [];
+                let anggotaPenelitian = [];
+                let anggotaPenelitianIds = [];
                 let lengthAnggotaPenelitian = anggotaPenelitian.length;
 
                 $('#jenis-luaran').select2();
 
-                $('#anggota-penelitian').DataTable({
+                let anggotaPenelitianDatatables = $('#anggota-penelitian').DataTable({
                     data: anggotaPenelitian,
                     deferRender: true,
                     // scrollY: 200,
@@ -374,7 +374,7 @@
                     const namaPerananId =  namaPeranan.val();
 
                     if ($('#action').val() == 'Simpan') {
-                        anggotaPenelitian.push([namaAnggotaText, namaPerananText, `<a type="button" data-index=${lengthAnggotaPenelitian++} class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>`]);
+                        anggotaPenelitian.push([namaAnggotaText, namaPerananText, `<a type="button" data-index=${lengthAnggotaPenelitian++} class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>`, namaAnggotaId, namaPerananId]);
                         anggotaPenelitianIds.push({userId: namaAnggotaId, perananId: namaPerananId});
                     }
 
@@ -382,13 +382,28 @@
 
                 });
 
-                $(document).on('click', '.delete-anggota-penelitian', function() {
-                    const indexData =  $(this).data('index');
-                    anggotaPenelitian.splice(indexData, 1);
-                    anggotaPenelitianIds.splice(indexData, 1);
+                $('#anggota-penelitian tbody').on( 'click', '.delete-anggota-penelitian', function () {
+                    anggotaPenelitianDatatables
+                        .row( $(this).parents('tr') )
+                        .remove()
+                        .draw();
+                    
+                    const dataDatatables = anggotaPenelitianDatatables.data();
+                    const dataDatatablesMap = dataDatatables.map( data =>  ({
+                        userId: data[3],
+                        perananId: data[4],
+                    }))
 
-                    refreshDatatablesAnggotaPenelitian();
-                });
+                    anggotaPenelitian = dataDatatables;
+                    anggotaPenelitianIds = dataDatatablesMap;
+                } );
+                // $(document).on('click', '.delete-anggota-penelitian', function() {
+                //     const indexData =  $(this).data('index');
+                //     anggotaPenelitian.splice(indexData, 1);
+                //     anggotaPenelitianIds.splice(indexData, 1);
+
+                //     refreshDatatablesAnggotaPenelitian();
+                // });
 
                 function refreshDatatablesAnggotaPenelitian () {
                     $('#list-anggota-penelitian').val(JSON.stringify(anggotaPenelitianIds));
