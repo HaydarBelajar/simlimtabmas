@@ -143,7 +143,7 @@
       
                     <div class="row">
                       <!-- accepted payments column -->
-                      <div class="col-6">
+                      <div class="col-sm-4">
                         <strong>Anggota Penelitian</strong>      
                         <div class="table-responsive card" style="margin-top: 10px;">
                           <table class="table">
@@ -168,7 +168,7 @@
                         </div>
                       </div>
                       <!-- /.col -->
-                      <div class="col-6">
+                      <div class="col-sm-4">
                         <strong>Luaran Penelitian</strong>
                           <ul>
                             @foreach ($detailPenelitian['capaian_luaran'] as $capaianLuaran)
