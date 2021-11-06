@@ -78,7 +78,7 @@ trait AuthTraits
 
                     if ($detail['status_code'] == 401 && $detail['reason'] == "Unauthorized") {
                         Session::flush();
-                        return redirect()->route('login');
+                        return redirect('/login')->send();
                     }
 
                     return $detail;

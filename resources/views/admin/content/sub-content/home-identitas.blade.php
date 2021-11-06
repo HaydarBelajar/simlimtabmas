@@ -28,7 +28,7 @@
                     NIDN/NIDK
                   </div>
                   <h4 class="f-18 f-normal m-b-10 txt-primary">
-                    <span id="ContentPlaceHolder1_ctl00_identitas_lblNidn">0627048301</span>
+                    <span id="ContentPlaceHolder1_ctl00_identitas_lblNidn">{{ $dataMappingDosen['nidn'] ?? ' - ' }}</span>
                   </h4>
                 </div>
               </div>
@@ -43,62 +43,68 @@
                         Aisyiyah Yogyakarta</span>
                     </td>
                   </tr>
-                  <tr>
+                  {{-- <tr>
                     <th scope="row">Program Studi</th>
                     <td>
                       <span id="ContentPlaceHolder1_ctl00_identitas_lblProdi" style="color:Green;">Bidan Pendidik</span>
                     </td>
-                  </tr>
+                  </tr> --}}
                   <tr>
                     <th scope="row">Jenjang Pendidikan</th>
                     <td>
                       <span id="ContentPlaceHolder1_ctl00_identitas_lblJenjangPendidikan"
-                        style="color:Green;">S-2</span>
+                        style="color:Green;">{{ $dataMappingDosen['jenjang_pendidikan']['jenjang'] ?? ' - ' }}</span>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Jabatan Akademik</th>
                     <td>
                       <span id="ContentPlaceHolder1_ctl00_identitas_lblJabatanAkademik"
-                        style="color:Green;">Lektor</span>
+                        style="color:Green;">{{ $dataMappingDosen['jafa']['jafa'] ?? ' - ' }}</span>
                     </td>
                   </tr>
-                  <tr>
+                  {{-- <tr>
                     <th scope="row">Alamat</th>
                     <td>
                       <span id="" style="color:Green;">Beji Rt 06 Rw 09
                         Sidoarum Godean Sleman Yogyakarta
                       </span>
                     </td>
-                  </tr>
+                  </tr> --}}
                 </tbody>
               </table>
             </div>
             <div class="col-lg-4">
               <table class="table table-striped table-responsive">
                 <tbody>
-                  <tr>
+                  {{-- <tr>
                     <th scope="row">Tempat/Tanggal Lahir</th>
                     <td>
                       <span id="ContentPlaceHolder1_ctl00_identitas_lblTempat" style="color:Green;">Cilacap</span>/
                       <span id="ContentPlaceHolder1_ctl00_identitas_lblTglLahir" style="color:Green;">27-4-1983</span>
                     </td>
-                  </tr>
+                  </tr> --}}
                   <tr>
                     <th scope="row">Nomor KTP</th>
                     <td>
                       <span id="ContentPlaceHolder1_ctl00_identitas_lblNoKtp"
-                        style="color:Green;">3301216704830000</span>
+                        style="color:Green;">{{ $dataMappingDosen['noktp'] ?? ' - ' }}</span>
                     </td>
                   </tr>
                   <tr>
+                    <th scope="row">NIP</th>
+                    <td>
+                      <span id="ContentPlaceHolder1_ctl00_identitas_lblNoKtp"
+                        style="color:Green;">{{ $dataMappingDosen['nip'] ?? ' - ' }}</span>
+                    </td>
+                  </tr>
+                  {{-- <tr>
                     <th scope="row">Nomor Telepon</th>
                     <td>
                       <span id="ContentPlaceHolder1_ctl00_identitas_lblNoTelepon" style="color:Green;">-</span>
                     </td>
-
-                  </tr>
-                  <tr>
+                  </tr> --}}
+                  {{-- <tr>
                     <th scope="row">Nomor HP</th>
                     <td>
                       <span id="ContentPlaceHolder1_ctl00_identitas_lblNoHp" style="color:Green;">085643937577</span>
@@ -117,8 +123,7 @@
                     <td>
                       <span id="" style="color:Green;"></span>
                     </td>
-
-                  </tr>
+                  </tr> --}}
                 </tbody>
               </table>
             </div>
