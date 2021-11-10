@@ -135,7 +135,7 @@ class PenelitianController extends Controller
         ->addColumn('action', function ($data) {
             $button = '<button type="button" name="edit" id="' . $data['usulan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
             $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
-            $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/penelitian/detail-penelitian/'.$data['usulan_penelitian_id'] . '" name="catatan_harian" id="' . $data['usulan_penelitian_id'] . '" class="secondary btn btn-secondary btn-sm" >Catatan Harian</a>';
+            $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/penelitian/detail-penelitian/'.$data['usulan_penelitian_id'] . '" name="catatan_harian" id="' . $data['usulan_penelitian_id'] . '" class="secondary btn btn-secondary btn-sm" >Detail</a>';
             return $button;
         })
         ->rawColumns(['action'])

@@ -37,7 +37,11 @@
                           @if($detailPenelitian['status'] == 1) 
                             <span class="badge badge-success">Usulan Lolos</span>
                           @else
-                            <button type="button" id='button-loloskan-usulan' data-id='{{ $detailPenelitian["usulan_penelitian_id"] ?? '' }}' class="btn btn-danger btn-sm"><i class="fa fa-bell"></i> Loloskan Usulan</button>
+                            @if(Session::has('kucingku'))
+                              @if (in_array('Super Admin', Session::get('kucingku')['roles']) or in_array('Pengusul', Session::get('kucingku')['roles']))
+                                <button type="button" id='button-loloskan-usulan' data-id='{{ $detailPenelitian["usulan_penelitian_id"] ?? '' }}' class="btn btn-danger btn-sm"><i class="fa fa-bell"></i> Loloskan Usulan</button>
+                              @endif
+                            @endif
                           @endif
                           <div class="float-right">
                             <small>Tanggal Upload: 2/10/2014</small>
