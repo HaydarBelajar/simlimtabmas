@@ -4,6 +4,7 @@
 /public/media/proposal/*
 /public/media/catatanHarian/*
 /public/media/pengesahan/*
+/public/media/laporan-akhir/*
 /storage/*.key
 /vendor
 .env

@@ -38,7 +38,8 @@
                                 <th width="25%">Judul Penelitian</th>
                                 <th width="5%">Pengesahan</th>
                                 <th width="5%">Proposal</th>
-                                <th width="10%">Status Seleksi</th>
+                                <th width="5%">Laporan Akhir</th>
+                                <th width="5%">Status Seleksi</th>
                                 <th width="10%">Tanggal Upload</th>
                                 <th width="10%">Aksi</th>
                             </tr>
@@ -74,7 +75,7 @@
                             <form enctype="multipart/form-data" action="" method="POST" id="upload-file">
                                 @csrf
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Upload Pengesahan</h5>
+                                    <h5 class="modal-title" id="modal-upload-title">Upload</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -183,7 +184,7 @@
                                     `;
                                 } else {
                                     return `
-                                        <a href="#" class="btn btn-outline-danger btn-block btn-sm" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                                        <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-pengesahan" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
                                     `;
                                 }
 
@@ -200,7 +201,24 @@
                                     `;
                                 } else {
                                     return `
-                                    <a href="#" class="btn btn-outline-danger btn-block btn-sm" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                                    <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                                    `;
+                                }
+
+                            }
+                        },
+                        {
+                            name: 'Laporan Akhir',
+                            data: 'usulan_penelitian_id',
+                            className: 'text-right py-0 align-middle',
+                            render: function ( data, type, row ) {
+                                if (row.file_upload_laporan_akhir) {
+                                    return `
+                                    <a  class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/laporan-akhir') }}/${row.file_upload_laporan_akhir}" ><i class="fas fa-file-download"></i> Download</a>
+                                    `;
+                                } else {
+                                    return `
+                                    <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-laporan-akhir" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
                                     `;
                                 }
 
@@ -232,26 +250,38 @@
                     ]
                 });
 
-                $(document).on('click', '.upload-proposal, .upload-pengesahan', function() {
+                $(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir', function() {
                     $('#modalUpload').modal('show');
                     let isUploadProposal = false;
                     let isUploadPengesahan = false;
+                    let isUploadLaporanAkhir = false;
                     let url = '';
                     const id = $(this).data("id")
 
                     var classList = this.classList.toString();
+                    console.log('classlist', classList);
                     $('#id-penelitian').val(id);
                     if (classList.includes('upload-proposal')){
                         isUploadProposal = true;
                         isUploadPengesahan = false;
                         url = "/penelitian/upload-proposal";
                         $('#upload-file').attr('action', url);
+                        $('#modal-upload-title').html('Upload Proposal');
                     }
                     if (classList.includes('upload-pengesahan')){
                         isUploadProposal = false;
                         isUploadPengesahan = true;
                         url = "/penelitian/upload-pengesahan";
                         $('#upload-file').attr('action', url);
+                        $('#modal-upload-title').html('Upload Pengesahan');
+                    }
+                    if (classList.includes('upload-laporan-akhir')){
+                        isUploadProposal = false;
+                        isUploadPengesahan = false;
+                        isUploadLaporanAkhir = true;
+                        url = "/penelitian/upload-laporan-akhir";
+                        $('#upload-file').attr('action', url);
+                        $('#modal-upload-title').html('Upload Laporan Akhir');
                     }
                 });
             });

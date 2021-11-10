@@ -37,6 +37,7 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/get-all', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getAll'])->name('get-all');
         Route::post('/upload-pengesahan', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadPengesahan'])->name('upload-pengesahan');
         Route::post('/upload-proposal', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadProposal'])->name('upload-proposal');
+        Route::post('/upload-laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadLaporanAkhir'])->name('upload-laporan-akhir');
         Route::post('/tambah-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'tambahCatatanHarian'])->name('tambah-catatan-harian');
         Route::post('/edit-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'editCatatanHarian'])->name('edit-catatan-harian');
         Route::get('/get-catatan-harian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getCatatanHarian'])->name('get-catatan-harian');

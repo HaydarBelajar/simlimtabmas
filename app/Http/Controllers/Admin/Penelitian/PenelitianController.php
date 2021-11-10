@@ -277,6 +277,30 @@ class PenelitianController extends Controller
         return response()->json(['success' => $fileName]);
     }
 
+    public function uploadLaporanAkhir(Request $request)
+    {
+        $file = $request->file('fileToUpload');
+        $fileName = time().'.'.$file->extension();
+        $file->move(public_path('media/laporan-akhir'), $fileName);
+        if (!$file) {
+            return redirect()->route('penelitian.data-penelitian')->with('error','Gagal Menyimpan File');
+        }
+        $param = [
+            'usulan_penelitian_id' => $request->id_penelitian,
+            'file_upload_laporan_akhir' => $fileName,
+        ];
+
+        $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
+
+        if (isset($updateData['success'])) {
+            return redirect()->route('penelitian.data-penelitian')->with('message',$updateData['success']);
+        } else {
+            return redirect()->route('penelitian.data-penelitian')->with('error',$updateData['error'] ?? $updateData['reason']);
+        }
+
+        return response()->json(['success' => $fileName]);
+    }
+
     public function tambahCatatanHarian(Request $request)
     {
         $file = $request->file('fileToUpload');
