@@ -34,7 +34,14 @@
                       <div class="col-12">
                         <h4>
                           <i class="fa fa-bookmark"></i> {{ $detailPenelitian['judul'] ?? '' }}
-                          <small class="float-right">Tanggal Upload: 2/10/2014</small>
+                          @if($detailPenelitian['status'] == 1) 
+                            <span class="badge badge-success">Usulan Lolos</span>
+                          @else
+                            <button type="button" id='button-loloskan-usulan' data-id='{{ $detailPenelitian["usulan_penelitian_id"] ?? '' }}' class="btn btn-danger btn-sm"><i class="fa fa-bell"></i> Loloskan Usulan</button>
+                          @endif
+                          <div class="float-right">
+                            <small>Tanggal Upload: 2/10/2014</small>
+                          </div>
                         </h4>
                       </div>
                       <!-- /.col -->
@@ -251,6 +258,26 @@
           </div>
         </div>
 
+        <div id="confirmLolosUsulanModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6 style="margin:0; text-align: center;">Apakah anda ingin melolokskan usulan ini ?</h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" name="ok_loloskan_usulan" id="lolos-usulan-button" class="btn btn-danger">Ok</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                </div>
+            </div>
+          </div>
+        </div>
+
         <div id="form-catatan-harian-modal" class="modal fade" role="dialog">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -302,6 +329,44 @@
     @push('scripts')
         <script>
             $(document).ready(function () {
+              let catatanPenelitianID;
+              /**
+              * Loloskan Usulan Function
+              *
+              */
+              $(document).on('click', '#button-loloskan-usulan', function() {
+                catatanPenelitianID = $(this).attr('data-id');
+                $('#confirmLolosUsulanModal').modal('show');
+              });
+              
+              $('#lolos-usulan-button').click(function() {
+                  $.ajax({
+                      url: "/penelitian/update-status-penelitian/" + catatanPenelitianID,
+                      method: "GET",
+                      data: {
+                          "_token": "{{ csrf_token() }}",
+                          "status": "1",
+                      },
+                      beforeSend: function() {
+                          $('#lolos-usulan-button').text('Proses Menghapus...');
+                      },
+                      success: function(data) {
+                          if (data.errors) {
+                            alert("Terjadi error sistem, usulan gagal diloloskan !");
+                          }
+                          if (data.success) {
+                            alert("Status usulan berhasil dirubah !");
+                            $('#confirmLolosUsulanModal').modal('hide');
+                            location.reload();
+                          }
+                      }
+                  })
+              });
+
+              /**
+              * End Loloskan Usulan Function
+              *
+              */
 
               $(document).on('click', '.tambah-catatan-harian', function() {
                 $('#form-result').html('');
@@ -369,32 +434,6 @@
                 $("#edit-form :input").attr("disabled", false);
                 $('.edit-content').hide();
                 $(".edit-content :input").prop('required', false);
-
-                // $.ajax({
-                //   method: "GET",
-                //   url: "/admin/cross-interest/get/" + id,
-                //   dataType: "json",
-                //   success: function(data) {
-                //     const jadwal = data.jadwal
-                //     const jadwalSplit = jadwal.split(",")
-                //     console.log(jadwalSplit)
-                //     $('#course-code').val(data.course.kode_mapel);
-                //     $("#course-code").prop('disabled', true);
-                //     $('#class').val(data.nama_kelas);
-                //     $("#class").prop('disabled', true);
-                //     $("#teacher").val(data.pengajar);
-                //     $("#day").val(jadwalSplit[0]);
-                //     $("#time").val(jadwalSplit[1]);
-                //     $('#cross-interest-class-id').val(data.id);
-                //     $('.modal-title').text('Edit Cross Interest Class Record');
-                //     $('#action_button').val('Save');
-                //     $('#action').val('Edit');
-                //     // $('#formModal').modal('show');
-                //   },
-                //   error: function() {
-                //     alert("Error : Cannot get data");
-                //   }
-                // })
               });
 
 

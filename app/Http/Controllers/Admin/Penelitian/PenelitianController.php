@@ -180,6 +180,22 @@ class PenelitianController extends Controller
         }
     }
 
+    public function updateStatusPenelitian($id, Request $request)
+    {
+        $param = [
+            'usulan_penelitian_id' => $id,
+            'status' => $request->status,
+        ];
+
+        $update = $this->postAPI($param, 'penelitian/update-penelitian');
+        
+        if (isset($update['success'])) {
+            return response()->json(['success' => $update['success']]);
+        } else {
+            return response()->json(['errors' => 'Penelitian gagal diupdate !']);
+        }
+    }
+
     public function lanjutkanUsulan()
     {
         return view('admin.content.penelitian.usulan-baru.menu-lanjut-usulan-baru')->with([
