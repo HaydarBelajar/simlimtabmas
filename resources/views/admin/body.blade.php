@@ -164,6 +164,7 @@
                     <div class="info">
                       @if(Session::has('kucingku'))
                         <a href="#" class="d-block"> {{ Session::get('kucingku')['user']['name'] ?? '' }} </a>
+                        <input type="hidden" id="kucingku-id" value="{{ Session::get('kucingku')['user']['id'] ?? '' }}">
                       @endif
                     </div>
                 </div>

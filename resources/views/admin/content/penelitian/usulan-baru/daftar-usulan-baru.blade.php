@@ -35,13 +35,13 @@
                             <thead>
                             <tr>
                                 <th width="5%">No</th>
-                                <th width="25%">Judul Penelitian</th>
+                                <th width="20%">Judul Penelitian</th>
                                 <th width="5%">Pengesahan</th>
                                 <th width="5%">Proposal</th>
                                 <th width="5%">Laporan Akhir</th>
                                 <th width="5%">Status Seleksi</th>
                                 <th width="10%">Tanggal Upload</th>
-                                <th width="10%">Aksi</th>
+                                <th width="15%">Aksi</th>
                             </tr>
                             </thead>
                         </table>
@@ -259,7 +259,7 @@
                     const id = $(this).data("id")
 
                     var classList = this.classList.toString();
-                    console.log('classlist', classList);
+
                     $('#id-penelitian').val(id);
                     if (classList.includes('upload-proposal')){
                         isUploadProposal = true;

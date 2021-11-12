@@ -52,12 +52,12 @@
                     </div>
                     <!-- info row -->
                     <div class="row invoice-info">
-                      <div class="col-sm-4 invoice-col">
-                        <strong>Abstrak</strong>
-                        <p class="well well-sm shadow-none" style="margin-top: 10px;">
-                         {{ $detailPenelitian['abstrak'] ?? '' }}
-                        </p>
-                      </div>
+                        <div class="col-sm-4 invoice-col">
+                            <strong>Disetujui oleh : </strong>
+                            <p class="well well-sm shadow-none" style="margin-top: 10px;">
+                            {{ $detailPenelitian['user_menyetujui']['detail_dosen']['username'] ?? ' - ' }}
+                            </p>
+                        </div>
                       <!-- /.col -->
                       <div class="col-sm-4 invoice-col">
                         <strong>Tahun Pelaksanaan</strong>
@@ -103,81 +103,15 @@
                     </div>
                     <!-- /.row -->
       
-                    <!-- Table row -->
-                    {{-- <div class="row">
-                      <div class="col-12 table-responsive">
-                        <table class="table table-striped">
-                          <thead>
-                          <tr>
-                            <th>Qty</th>
-                            <th>Product</th>
-                            <th>Serial #</th>
-                            <th>Description</th>
-                            <th>Subtotal</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Call of Duty</td>
-                            <td>455-981-221</td>
-                            <td>El snort testosterone trophy driving gloves handsome</td>
-                            <td>$64.50</td>
-                          </tr>
-                          <tr>
-                            <td>1</td>
-                            <td>Need for Speed IV</td>
-                            <td>247-925-726</td>
-                            <td>Wes Anderson umami biodiesel</td>
-                            <td>$50.00</td>
-                          </tr>
-                          <tr>
-                            <td>1</td>
-                            <td>Monsters DVD</td>
-                            <td>735-845-642</td>
-                            <td>Terry Richardson helvetica tousled street art master</td>
-                            <td>$10.70</td>
-                          </tr>
-                          <tr>
-                            <td>1</td>
-                            <td>Grown Ups Blue Ray</td>
-                            <td>422-568-642</td>
-                            <td>Tousled lomo letterpress</td>
-                            <td>$25.99</td>
-                          </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <!-- /.col -->
-                    </div> --}}
-                    <!-- /.row -->
-      
                     <div class="row">
-                      <!-- accepted payments column -->
-                      <div class="col-sm-4">
-                        <strong>Anggota Penelitian</strong>      
-                        <div class="table-responsive card" style="margin-top: 10px;">
-                          <table class="table">
-                            <tbody>
-                            <tr>
-                              <th>Peneliti Utama</th>
-                              <td>{{ $detailPenelitian['peneliti_utama']['name'] ?? ' - ' }}</td>
-                            </tr>
-                            <tr>
-                              <th>Anggota 1</th>
-                              <td>{{ $detailPenelitian['anggota1']['name'] ?? ' - ' }}</td>
-                            </tr>
-                            <tr>
-                              <th>Anggota 2</th>
-                              <td>{{ $detailPenelitian['anggota2']['name'] ?? ' - ' }}</td>
-                            </tr>
-                            <tr>
-                              <th>Anggota 3</th>
-                              <td>{{ $detailPenelitian['anggota3']['name'] ?? ' - ' }}</td>
-                            </tr>
-                          </tbody></table>
+                        <!-- Anggota penelitian column -->
+                        <div class="col-sm-4">
+                            <strong>Abstrak</strong>
+                            <p class="well well-sm shadow-none" style="margin-top: 10px;">
+                                {{ $detailPenelitian['abstrak'] ?? '' }}
+                            </p>
                         </div>
-                      </div>
+
                       <!-- /.col -->
                       <div class="col-sm-4">
                         <strong>Luaran Penelitian</strong>
@@ -190,19 +124,68 @@
                       <!-- /.col -->
                     </div>
                     <!-- /.row -->
-      
-                    <!-- this row will not appear when printing -->
-                    {{-- <div class="row no-print">
-                      <div class="col-12">
-                        <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                        <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                          Payment
-                        </button>
-                        <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                          <i class="fas fa-download"></i> Generate PDF
-                        </button>
+                    <!-- row -->
+                    <div class="row">
+                        <!-- col -->
+                        <div class="col-sm-4">
+                            <strong>Anggota Penelitian</strong>      
+                            <div class="table-responsive card" style="margin-top: 10px;">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                <th>Peneliti Utama</th>
+                                <td>{{ $detailPenelitian['peneliti_utama']['name'] ?? ' - ' }}</td>
+                                </tr>
+                                <tr>
+                                <th>Anggota 1</th>
+                                <td>{{ $detailPenelitian['anggota1']['name'] ?? ' - ' }}</td>
+                                </tr>
+                                <tr>
+                                <th>Anggota 2</th>
+                                <td>{{ $detailPenelitian['anggota2']['name'] ?? ' - ' }}</td>
+                                </tr>
+                                <tr>
+                                <th>Anggota 3</th>
+                                <td>{{ $detailPenelitian['anggota3']['name'] ?? ' - ' }}</td>
+                                </tr>
+                            </tbody></table>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4">
+                            <dl>
+                              <dt>Dokumen Pengesahan</dt>
+                              <dd>
+                                @if (isset($detailPenelitian['file_upload_pengesahan']))
+                                    <a href="#" class="btn btn-outline-danger btn-sm upload-pengesahan" data-id="{{ $detailPenelitian['usulan_penelitian_id'] }}"><i class="fas fa-file-upload"></i> Reupload</a>
+                                    <a class="btn btn-outline-primary btn-sm" target="_blank" href="{{ asset('media/pengesahan') }}/{{ $detailPenelitian['file_upload_pengesahan'] }}" ><i class="fas fa-file-download"></i> Download</a>
+                                @else
+                                    <a href="#" class="btn btn-outline-danger btn-sm upload-pengesahan" data-id="{{ $detailPenelitian['usulan_penelitian_id'] }}"><i class="fas fa-file-upload"></i> Upload</a>
+                                @endif
+                              </dd>
+                              <dt>Dokumen Proposal</dt>
+                              <dd>
+                                @if (isset($detailPenelitian['file_upload_proposal']))
+                                    <a href="#" class="btn btn-outline-danger btn-sm upload-proposal" data-id="{{ $detailPenelitian['usulan_penelitian_id'] }}"><i class="fas fa-file-upload"></i> Reupload</a>
+                                    <a class="btn btn-outline-primary btn-sm" target="_blank" href="{{ asset('media/proposal') }}/{{ $detailPenelitian['file_upload_pengesahan'] }}" ><i class="fas fa-file-download"></i> Download</a>
+                                @else
+                                  <a href="#" class="btn btn-outline-danger btn-sm upload-proposal" data-id="{{ $detailPenelitian['usulan_penelitian_id'] }}"><i class="fas fa-file-upload"></i> Upload</a>
+                                @endif
+                              </dd>
+                              <dt>Dokumen Laporan Akhir</dt>
+                              <dd>
+                                @if (isset($detailPenelitian['file_upload_laporan_akhir']))
+                                    <a href="#" class="btn btn-outline-danger btn-sm upload-proposal" data-id="{{ $detailPenelitian['file_upload_laporan_akhir'] }}"><i class="fas fa-file-upload"></i> Reupload</a>
+                                    <a class="btn btn-outline-primary btn-sm" target="_blank" href="{{ asset('media/laporan-akhir') }}/{{ $detailPenelitian['file_upload_laporan_akhir'] }}" ><i class="fas fa-file-download"></i> Download</a>
+                                @else
+                                  <a href="#" class="btn btn-outline-danger btn-sm upload-proposal" data-id="{{ $detailPenelitian['file_upload_laporan_akhir'] }}"><i class="fas fa-file-upload"></i> Upload</a>
+                                @endif
+                              </dd>
+                            </dl>
+                          </div>
+                        <!-- /.col -->
                       </div>
-                    </div> --}}
+                    <!-- /.row -->
                   </div>
                   <!-- /.invoice -->
                 </div><!-- /.col -->
@@ -317,7 +300,7 @@
                   </div>
                   <br />
                   <div class="modal-footer">
-                    <input type="hidden" id="id-penelitian" name="id_penelitian">
+                    <input type="hidden" class="id-penelitian" name="id_penelitian">
                     <input type="hidden" id="id-catatan-penelitian" name="id_catatan_penelitian">
                     <input type="hidden" name="action" id="action" value="Simpan" />
                     <input type="submit" name="action_button" id="action-button" class="btn btn-primary" value="Simpan" />
@@ -327,6 +310,31 @@
             </div>
           </div>
         </div>
+        <!-- Modal Upload -->
+        <div id="modalUpload" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <form enctype="multipart/form-data" action="" method="POST" id="upload-file">
+                      @csrf
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="modal-upload-title">Upload</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <input type="hidden" class="id-penelitian" name="id_penelitian">
+                          <input type="file" name="fileToUpload" id="fileToUpload">
+                      </div>
+                      <div class="modal-footer">
+                          <input type="submit" name="o_upload_button" id="ok-upload-button" class="btn btn-danger" value="Upload">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      <!-- /.Modal Upload -->
         <!-- /.Modal -->
     </div>
     <!-- /.content-wrapper -->
@@ -334,6 +342,7 @@
         <script>
             $(document).ready(function () {
               let catatanPenelitianID;
+              let kucingkuId = $('#kucingku-id').val();
               /**
               * Loloskan Usulan Function
               *
@@ -350,6 +359,7 @@
                       data: {
                           "_token": "{{ csrf_token() }}",
                           "status": "1",
+                          "user_menyetujui_id": kucingkuId,
                       },
                       beforeSend: function() {
                           $('#lolos-usulan-button').text('Proses Menghapus...');
@@ -377,7 +387,7 @@
                 $('#form-catatan-harian-modal').modal('show');
                 $('#action-button').val('Simpan');
                 $('#action').val('Simpan');
-                $('#id-penelitian').val("{{ $detailPenelitian['usulan_penelitian_id'] ?? '' }}");
+                $('.id-penelitian').val("{{ $detailPenelitian['usulan_penelitian_id'] ?? '' }}");
               });
 
               $('#reservationdate').datetimepicker({
@@ -544,6 +554,51 @@
                   ]
               });
             });
+
+            /**
+            * Upload Dokumen
+            *
+            **/
+            $(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir', function() {
+              $('#modalUpload').modal('show');
+              let isUploadProposal = false;
+              let isUploadPengesahan = false;
+              let isUploadLaporanAkhir = false;
+              let url = '';
+              const id = $(this).data("id")
+
+              var classList = this.classList.toString();
+
+              $('.id-penelitian').val(id);
+              if (classList.includes('upload-proposal')){
+                  isUploadProposal = true;
+                  isUploadPengesahan = false;
+                  isUploadLaporanAkhir = false;
+                  url = "/penelitian/upload-proposal";
+                  $('#upload-file').attr('action', url);
+                  $('#modal-upload-title').html('Upload Proposal');
+              }
+              if (classList.includes('upload-pengesahan')){
+                  isUploadProposal = false;
+                  isUploadPengesahan = true;
+                  isUploadLaporanAkhir = false;
+                  url = "/penelitian/upload-pengesahan";
+                  $('#upload-file').attr('action', url);
+                  $('#modal-upload-title').html('Upload Pengesahan');
+              }
+              if (classList.includes('upload-laporan-akhir')){
+                  isUploadProposal = false;
+                  isUploadPengesahan = false;
+                  isUploadLaporanAkhir = true;
+                  url = "/penelitian/upload-laporan-akhir";
+                  $('#upload-file').attr('action', url);
+                  $('#modal-upload-title').html('Upload Laporan Akhir');
+              }
+            });
+            /**
+            * End Upload Dokumen
+            *
+            **/
         </script>
     @endpush
 @endsection

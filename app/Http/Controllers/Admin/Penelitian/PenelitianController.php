@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 
 class PenelitianController extends Controller
 {
@@ -184,6 +185,7 @@ class PenelitianController extends Controller
     {
         $param = [
             'usulan_penelitian_id' => $id,
+            'user_menyetujui_id' => $request->user_menyetujui_id,
             'status' => $request->status,
         ];
 
@@ -261,9 +263,9 @@ class PenelitianController extends Controller
         $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
 
         if (isset($updateData['success'])) {
-            return redirect()->route('penelitian.data-penelitian')->with('message',$updateData['success']);
+            return Redirect::back()->with('message',$updateData['success']);
         } else {
-            return redirect()->route('penelitian.data-penelitian')->with('error',$updateData['error'] ?? $updateData['reason']);
+            return Redirect::back()->with('error',$updateData['error'] ?? $updateData['reason']);
         }
 
         return response()->json(['success' => $fileName]);
@@ -285,9 +287,9 @@ class PenelitianController extends Controller
         $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
 
         if (isset($updateData['success'])) {
-            return redirect()->route('penelitian.data-penelitian')->with('message',$updateData['success']);
+            return Redirect::back()->with('message',$updateData['success']);
         } else {
-            return redirect()->route('penelitian.data-penelitian')->with('error',$updateData['error'] ?? $updateData['reason']);
+            return Redirect::back()->with('error',$updateData['error'] ?? $updateData['reason']);
         }
 
         return response()->json(['success' => $fileName]);
@@ -309,9 +311,9 @@ class PenelitianController extends Controller
         $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
 
         if (isset($updateData['success'])) {
-            return redirect()->route('penelitian.data-penelitian')->with('message',$updateData['success']);
+            return Redirect::back()->with('message',$updateData['success']);
         } else {
-            return redirect()->route('penelitian.data-penelitian')->with('error',$updateData['error'] ?? $updateData['reason']);
+            return Redirect::back()->with('error',$updateData['error'] ?? $updateData['reason']);
         }
 
         return response()->json(['success' => $fileName]);
