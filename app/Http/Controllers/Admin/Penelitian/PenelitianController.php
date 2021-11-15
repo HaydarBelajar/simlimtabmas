@@ -198,55 +198,6 @@ class PenelitianController extends Controller
         }
     }
 
-    public function lanjutkanUsulan()
-    {
-        return view('admin.content.penelitian.usulan-baru.menu-lanjut-usulan-baru')->with([
-            'detailController' => $this->controllerDetails,
-        ]);
-    }
-
-    public function identitasUsulan()
-    {
-        return view('admin.content.penelitian.usulan-baru.menu-identitas-usulan-baru')->with([
-            'detailController' => $this->controllerDetails,
-        ]);
-    }
-
-    public function jurnalInternasional()
-    {
-        return view('admin.content.penelitian.usulan-baru.artikel-jurnal-internasional')->with([
-            'detailController' => $this->controllerDetails,
-        ]);
-    }
-
-    public function jurnalNasional()
-    {
-        return view('admin.content.penelitian.usulan-baru.artikel-jurnal-nasional')->with([
-            'detailController' => $this->controllerDetails,
-        ]);
-    }
-
-    public function artikelProsiding()
-    {
-        return view('admin.content.penelitian.usulan-baru.artikel-prosiding')->with([
-            'detailController' => $this->controllerDetails,
-        ]);
-    }
-
-    public function kekayaanIntelektual()
-    {
-        return view('admin.content.penelitian.usulan-baru.kekayaan-intelektual')->with([
-            'detailController' => $this->controllerDetails,
-        ]);
-    }
-
-    public function buku()
-    {
-        return view('admin.content.penelitian.usulan-baru.buku')->with([
-            'detailController' => $this->controllerDetails,
-        ]);
-    }
-
     public function uploadPengesahan(Request $request)
     {
         $file = $request->file('fileToUpload');
@@ -368,71 +319,5 @@ class PenelitianController extends Controller
         }
 
         return response()->json(['success' => $fileName]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
