@@ -33,7 +33,7 @@ class PenelitianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function dataPenelitian()
+    public function dataPenelitian(Request $request)
     {
         return view('admin.content.penelitian.usulan-baru.daftar-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
@@ -126,8 +126,13 @@ class PenelitianController extends Controller
     }
 
     public function getAll(Request $request) {
+        $userSession = $request->session()->get('kucingku');
+        $userDetail = $userSession['user'];
+
         // Param datatables harus dikirim ke be juga
         $dataTablesParam = $request->all();
+        $dataTablesParam['filter'] = ['user_id' => $userDetail['id']];
+        
         $getData = $this->postAPI($dataTablesParam, 'penelitian/get-filter');
 
         $data = $getData['data'];
