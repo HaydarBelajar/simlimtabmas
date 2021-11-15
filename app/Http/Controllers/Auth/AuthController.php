@@ -24,16 +24,22 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        
+
         $doAuth = $this->auth($credentials);
 
-        $error = json_decode($doAuth, true);
-        if (isset($error['error'])){
+        if (isset($doAuth['status_code']) && $doAuth['status_code'] > 200){
             return back()->withErrors([
-                'email' => 'The provided credentials do not match our records.',
+                'email' => $doAuth['reason'],
             ]);
         }
 
         return redirect()->intended('dashboard/home');
+    }
+
+    public function logout(Request $request) {
+        $request->session()->flush();
+
+        return redirect()->route('login');
+
     }
 }
