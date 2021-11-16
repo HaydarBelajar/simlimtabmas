@@ -27,6 +27,11 @@ class PenelitianController extends Controller
             "currentPage" => "Detail Penelitian",
             "pageDescription" => "Halaman Detail Penelitian"
         ];
+
+        $this->controllerPenelitianEdit = [
+            "currentPage" => "Edit Penelitian",
+            "pageDescription" => "Halaman Edit Penelitian"
+        ];
     }
     /**
      * Display a listing of the resource.
@@ -89,6 +94,47 @@ class PenelitianController extends Controller
         ]);
     }
 
+    public function editDataPenelitian($id)
+    {
+        $paramPenelitian = [
+            'usulan_penelitian_id' => $id,
+        ];
+
+        $paramSkema= [
+            "filter" => [
+                "skema_tipe" => "penelitian"
+                ]
+            ];
+        $paramPengusul= [
+            "filter" => [
+                "skema_tipe" => "Pengusul"
+                ]
+            ];
+                
+        $getTahun = $this->postAPI([], 'tahun/get-all');
+        $getSkema = $this->postAPI($paramSkema, 'skema/get-filter');
+        $getRumpunIlmu = $this->postAPI([], 'rumpun-ilmu/get-filter');
+        $getSumberDana = $this->postAPI([], 'sumber-dana/get-filter');
+        $getUserPengusul = $this->postAPI($paramPengusul, 'user/get-filter');
+        $getCapaianLuaran = $this->postAPI([], 'capaian-luaran/get-all');
+        $getPeranan = $this->postAPI([], 'peranan/get-all');
+        $getData = $this->postAPI($paramPenelitian, 'penelitian/get-penelitian');
+        $detailPenelitian = $getData['data'];
+
+        return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
+            'page' => 'edit',
+            'detailController' => $this->controllerPenelitianEdit,
+            'listTahun' => isset($getTahun['data']) ? $getTahun['data'] : [],
+            'listSkema' => isset($getSkema['data']) ? $getSkema['data'] : [],
+            'listRumpunIlmu' => isset($getRumpunIlmu['data']) ? $getRumpunIlmu['data'] : [],
+            'listSumberDana' => isset($getSumberDana['data']) ? $getSumberDana['data'] : [],
+            'listUserPengusul' => isset($getUserPengusul['data']) ? $getUserPengusul['data'] : [],
+            'listCapaianLuaran' => isset($getCapaianLuaran['data']) ? $getCapaianLuaran['data'] : [],
+            'listPeranan' => isset($getPeranan['data']) ? $getPeranan['data'] : [],
+            'detailPenelitian' => isset($getData['data']) ? $getData['data'] : [],
+        ]);
+    }
+
     public function simpanDataPenelitian(Request $request)
     {
         $userSession = $request->session()->get('kucingku');
@@ -139,7 +185,7 @@ class PenelitianController extends Controller
         
         $dataTables =  DataTables::of($data)
         ->addColumn('action', function ($data) {
-            $button = '<button type="button" name="edit" id="' . $data['usulan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
+            $button = '<a type="button" href="/penelitian/edit-penelitian/'.$data['usulan_penelitian_id'] .'" name="edit" id="' . $data['usulan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</a>';
             $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
             $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/penelitian/detail-penelitian/'.$data['usulan_penelitian_id'] . '" name="catatan_harian" id="' . $data['usulan_penelitian_id'] . '" class="secondary btn btn-secondary btn-sm" >Detail</a>';
             return $button;
