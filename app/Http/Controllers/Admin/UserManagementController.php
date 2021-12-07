@@ -66,7 +66,8 @@ class UserManagementController extends Controller
             'role' => $request->role,
             'password' => $request->password,
             'confirmPassword' => $request->confirmpassword,
-            'dosen_id' => $request->dosen_id
+            'dosen_id' => $request->dosen_id,
+            'isCivitasUnisa' => $request->civitasUnisa
         ];
 
         $getRoles = $this->postAPI($param, 'user/create');
