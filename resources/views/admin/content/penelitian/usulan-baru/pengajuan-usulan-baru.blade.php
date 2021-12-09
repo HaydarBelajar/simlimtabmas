@@ -279,6 +279,7 @@
                                                 <tr>
                                                     <th width="20%">Nama</th>
                                                     <th width="20%">Peran</th>
+                                                    <th width="20%">Fakultas</th>
                                                     <th width="20%">Aksi</th>
                                                 </tr>
                                                 </thead>
@@ -347,6 +348,15 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="form-group">
+                                                <label>Fakultas</label>
+                                                <select class="custom-select" name="fakultas-penelitian-anggota" id="fakultas-penelitian-anggota">
+                                                    @foreach ($listFakultas as $fakultas)
+                                                        <option  data-nama-fakultas={{ $fakultas['namafakultas'] }} value={{ $fakultas['kdfakultas'] }}>{{ $fakultas['namafakultas'] }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                             <br/>
                                             <div class="modal-footer">
                                                 <input type="hidden" name="action" id="action" value="Simpan"/>
@@ -396,16 +406,19 @@
                     event.preventDefault();
                     const namaAnggota =  $('#nama-anggota').find(":selected");
                     const namaPeranan =  $('#peranan-penelitian').find(":selected");
+                    const namaFakultas =  $('#fakultas-penelitian-anggota').find(":selected");
 
                     const namaAnggotaText = namaAnggota.text();
                     const namaPerananText = namaPeranan.text();
+                    const namaFakultasText = namaFakultas.text();
 
                     const namaAnggotaId = namaAnggota.val();
                     const namaPerananId =  namaPeranan.val();
+                    const namaFakultasId =  namaFakultas.val();
 
                     if ($('#action').val() == 'Simpan') {
-                        anggotaPenelitian.push([namaAnggotaText, namaPerananText, `<a type="button" data-index=${lengthAnggotaPenelitian++} class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>`, namaAnggotaId, namaPerananId]);
-                        anggotaPenelitianIds.push({userId: namaAnggotaId, perananId: namaPerananId});
+                        anggotaPenelitian.push([namaAnggotaText, namaPerananText, namaFakultasText, `<a type="button" data-index=${lengthAnggotaPenelitian++} class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>`, namaAnggotaId, namaPerananId]);
+                        anggotaPenelitianIds.push({userId: namaAnggotaId, perananId: namaPerananId, fakultasId: namaFakultasId});
                     }
 
                     refreshDatatablesAnggotaPenelitian();
@@ -422,6 +435,7 @@
                     const dataDatatablesMap = dataDatatables.map( data =>  ({
                         userId: data[3],
                         perananId: data[4],
+                        fakultasId: data[5],
                     }))
 
                     anggotaPenelitian = dataDatatables;
