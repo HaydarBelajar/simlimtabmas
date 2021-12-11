@@ -36,6 +36,7 @@
                             <tr>
                                 <th width="5%">No</th>
                                 <th width="20%">Judul Penelitian</th>
+                                <th width="10%">Fakultas</th>
                                 <th width="5%">Pengesahan</th>
                                 <th width="5%">Proposal</th>
                                 <th width="5%">Laporan Akhir</th>
@@ -172,6 +173,18 @@
                         {
                             data: 'judul',
                             name: 'Judul Penelitian'
+                        },
+                        {
+                            data: 'fakultas_penelitian',
+                            name: 'Fakultas',
+                            render: function ( data, type, row ) {
+                                if (data) {
+                                    return data.namafakultas;
+                                } else {
+                                    return '-';
+                                }
+
+                            }
                         },
                         {
                             name: 'Pengesahan',

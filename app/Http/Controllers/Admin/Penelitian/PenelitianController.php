@@ -160,6 +160,7 @@ class PenelitianController extends Controller
             'jumlah_dana_mengetahui' => $request->jumlah_dana_penandatanganan,
             'jenis_luaran' => $request->jenis_luaran,
             'list_anggota_penelitian' => json_decode($request->list_anggota_penelitian),
+            'fakultas_id' => $request->fakultas_id,
             'person_id' => $userDetail['id'],
             'status' => 0
         ];
@@ -184,7 +185,7 @@ class PenelitianController extends Controller
         $getData = $this->postAPI($dataTablesParam, 'penelitian/get-filter');
 
         $data = $getData['data'];
-        
+
         $dataTables =  DataTables::of($data)
         ->addColumn('action', function ($data) {
             $button = '<a type="button" href="/penelitian/edit-penelitian/'.$data['usulan_penelitian_id'] .'" name="edit" id="' . $data['usulan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</a>';
