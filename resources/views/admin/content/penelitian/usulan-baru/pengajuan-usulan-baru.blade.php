@@ -33,7 +33,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <!-- we are adding the accordion ID so Bootstrap's collapse plugin detects it -->
-                            <form action="{{ $isEdit == true ? route('penelitian.simpan-penelitian') : route('penelitian.update-penelitian') }}" method="POST">
+                            <form action="{{ $page == "edit" ? route('penelitian.update-penelitian') : route('penelitian.simpan-penelitian') }}" method="POST">
                                 @csrf
                                 <input type="hidden" value="{{ (isset($page) && $page == 'edit') ? 'edit' : 'tambah' }}">
                                     <div class="card card-primary">
@@ -310,10 +310,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                <input type="hidden" name="list_anggota_penelitian" id="list-anggota-penelitian"/>
+                                <input type="hidden" name="list_anggota_penelitian" id="list-anggota-penelitian" value="{{ isset($anggotaPenelitianIds) ? json_encode($anggotaPenelitianIds) : '[]' }}"/>
                                 <input type="hidden" name="anggotaPenelitian" id="anggota-penelitian-list" value="{{ isset($anggotaPenelitian) ? json_encode($anggotaPenelitian) : '[]' }}"/>
-                                <input type="hidden" name="anggotaPenelitianIds" id="anggota-penelitian-ids" value="{{ isset($anggotaPenelitianIds) ? json_encode($anggotaPenelitianIds) : '[]' }}"/>
-                                <input type="hidden" name="usulan_penelitian_id" id="usulan-penelitian-id"/>
+                                <input type="hidden" name="usulan_penelitian_id" id="usulan-penelitian-id" value="{{ isset($detailPenelitian['usulan_penelitian_id']) ? $detailPenelitian['usulan_penelitian_id'] : '' }}"/>
                                 <button type="submit" class="btn btn-success float-left">Simpan</button>
                                 <a href={{ route('penelitian.data-penelitian') }} type="button" class="btn btn-danger float-right">Kembali</a>
                             </form>
@@ -384,7 +383,7 @@
         <script>
             $(document).ready(function() {
                 let anggotaPenelitian = $('#anggota-penelitian-list').val() ? JSON.parse($('#anggota-penelitian-list').val()) : [];
-                let anggotaPenelitianIds = $('#anggota-penelitian-ids').val() ? JSON.parse($('#anggota-penelitian-ids').val()) : [];
+                let anggotaPenelitianIds = $('#list-anggota-penelitian').val() ? JSON.parse($('#list-anggota-penelitian').val()) : [];
                 let lengthAnggotaPenelitian = anggotaPenelitian.length;
 
                 $('#jenis-luaran').select2();
@@ -409,7 +408,7 @@
                     const namaAnggota =  $('#nama-anggota').find(":selected");
                     const namaPeranan =  $('#peranan-penelitian').find(":selected");
                     const namaFakultas =  $('#fakultas-penelitian-anggota').find(":selected");
-
+                    console.log('namaFakultas', namaFakultas.val())
                     const namaAnggotaText = namaAnggota.text();
                     const namaPerananText = namaPeranan.text();
                     const namaFakultasText = namaFakultas.text();
@@ -419,7 +418,7 @@
                     const namaFakultasId =  namaFakultas.val();
 
                     if ($('#action').val() == 'Simpan') {
-                        anggotaPenelitian.push([namaAnggotaText, namaPerananText, namaFakultasText, `<a type="button" data-index=${lengthAnggotaPenelitian++} class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>`, namaAnggotaId, namaPerananId]);
+                        anggotaPenelitian.push([namaAnggotaText, namaPerananText, namaFakultasText, `<a type="button" data-index=${lengthAnggotaPenelitian++} class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>`, namaAnggotaId, namaPerananId, namaFakultasId]);
                         anggotaPenelitianIds.push({userId: namaAnggotaId, perananId: namaPerananId, fakultasId: namaFakultasId});
                     }
 
@@ -435,13 +434,15 @@
                     
                     const dataDatatables = anggotaPenelitianDatatables.data();
                     const dataDatatablesMap = dataDatatables.map( data =>  ({
-                        userId: data[3],
-                        perananId: data[4],
-                        fakultasId: data[5],
+                        userId: data[4],
+                        perananId: data[5],
+                        fakultasId: data[6],
                     }))
 
                     anggotaPenelitian = dataDatatables;
                     anggotaPenelitianIds = dataDatatablesMap;
+
+                    refreshDatatablesAnggotaPenelitian();
                 } );
                 // $(document).on('click', '.delete-anggota-penelitian', function() {
                 //     const indexData =  $(this).data('index');

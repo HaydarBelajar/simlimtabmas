@@ -125,9 +125,10 @@ class PenelitianController extends Controller
         $detailPenelitian = isset($getData['data']) ? $getData['data'] : [];
         $anggotaPenelitian = [];
         $anggotaPenelitianIds = [];
+
         // Membentuk array anggota
         if (isset($detailPenelitian['peneliti_utama'])){
-            array_push($anggotaPenelitian,[$detailPenelitian['peneliti_utama']['name'], 'Ketua Peneliti', $detailPenelitian['fakultas_peneliti_utama']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['peneliti_utama']['id'], 1]);
+            array_push($anggotaPenelitian,[$detailPenelitian['peneliti_utama']['name'], 'Ketua Peneliti', $detailPenelitian['fakultas_peneliti_utama']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['peneliti_utama']['id'], 1, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
             array_push($anggotaPenelitianIds,[
                 "userId" => $detailPenelitian['peneliti_utama']['id'], 
                 "perananId" => 1, 
@@ -135,7 +136,7 @@ class PenelitianController extends Controller
             ]);
         }
         if (isset($detailPenelitian['anggota1'])){
-            array_push($anggotaPenelitian,[$detailPenelitian['anggota1']['name'], 'Anggota Peneliti 1', $detailPenelitian['fakultas_anggota1']['namafakultas'], '<a type="button" data-index=2 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota1']['id'], 2]);
+            array_push($anggotaPenelitian,[$detailPenelitian['anggota1']['name'], 'Anggota Peneliti 1', $detailPenelitian['fakultas_anggota1']['namafakultas'], '<a type="button" data-index=2 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota1']['id'], 2, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
             array_push($anggotaPenelitianIds,[
                 "userId" => $detailPenelitian['anggota1']['id'], 
                 "perananId" => 2, 
@@ -143,7 +144,7 @@ class PenelitianController extends Controller
             ]);
         }
         if (isset($detailPenelitian['anggota2'])){
-            array_push($anggotaPenelitian,[$detailPenelitian['anggota2']['name'], 'Anggota Peneliti 2', $detailPenelitian['fakultas_anggota2']['namafakultas'], '<a type="button" data-index=3 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota2']['id'], 3]);
+            array_push($anggotaPenelitian,[$detailPenelitian['anggota2']['name'], 'Anggota Peneliti 2', $detailPenelitian['fakultas_anggota2']['namafakultas'], '<a type="button" data-index=3 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota2']['id'], 3, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
             array_push($anggotaPenelitianIds,[
                 "userId" => $detailPenelitian['anggota2']['id'], 
                 "perananId" => 3,
@@ -151,7 +152,7 @@ class PenelitianController extends Controller
             ]);
         }
         if (isset($detailPenelitian['anggota3'])){
-            array_push($anggotaPenelitian,[$detailPenelitian['anggota3']['name'], 'Anggota Peneliti 3', $detailPenelitian['fakultas_anggota3']['namafakultas'], '<a type="button" data-index=4 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota3']['id'], 4]);
+            array_push($anggotaPenelitian,[$detailPenelitian['anggota3']['name'], 'Anggota Peneliti 3', $detailPenelitian['fakultas_anggota3']['namafakultas'], '<a type="button" data-index=4 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota3']['id'], 4, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
             array_push($anggotaPenelitianIds,[
                 "userId" => $detailPenelitian['anggota3']['id'], 
                 "perananId" => 4,
@@ -173,7 +174,6 @@ class PenelitianController extends Controller
             'listFakultas' => isset($getFakultas['data']) ? $getFakultas['data'] : [],
             'anggotaPenelitian' => $anggotaPenelitian,
             'anggotaPenelitianIds' => $anggotaPenelitianIds,
-            'isEdit' => true,
         ]);
     }
 
