@@ -33,6 +33,7 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/tambah-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'tambahDataPenelitian'])->name('tambah-penelitian');
         Route::get('/edit-penelitian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'editDataPenelitian'])->name('edit-penelitian');
         Route::post('/simpan-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'simpanDataPenelitian'])->name('simpan-penelitian');
+        Route::post('/update-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'updateDataPenelitian'])->name('update-penelitian');
         Route::get('/data-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'dataPenelitian'])->name('data-penelitian');
         Route::get('/detail-penelitian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'detailPenelitian'])->name('detail-penelitian');
         Route::get('/update-status-penelitian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'updateStatusPenelitian'])->name('update-status-penelitian');

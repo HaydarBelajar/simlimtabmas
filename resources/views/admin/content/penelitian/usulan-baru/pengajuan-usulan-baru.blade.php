@@ -33,7 +33,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <!-- we are adding the accordion ID so Bootstrap's collapse plugin detects it -->
-                            <form action="{{route('penelitian.simpan-penelitian')}}" method="POST">
+                            <form action="{{ $isEdit == true ? route('penelitian.simpan-penelitian') : route('penelitian.update-penelitian') }}" method="POST">
                                 @csrf
                                 <input type="hidden" value="{{ (isset($page) && $page == 'edit') ? 'edit' : 'tambah' }}">
                                     <div class="card card-primary">
@@ -311,6 +311,9 @@
                                         </div>
                                     </div>
                                 <input type="hidden" name="list_anggota_penelitian" id="list-anggota-penelitian"/>
+                                <input type="hidden" name="anggotaPenelitian" id="anggota-penelitian-list" value="{{ isset($anggotaPenelitian) ? json_encode($anggotaPenelitian) : '[]' }}"/>
+                                <input type="hidden" name="anggotaPenelitianIds" id="anggota-penelitian-ids" value="{{ isset($anggotaPenelitianIds) ? json_encode($anggotaPenelitianIds) : '[]' }}"/>
+                                <input type="hidden" name="usulan_penelitian_id" id="usulan-penelitian-id"/>
                                 <button type="submit" class="btn btn-success float-left">Simpan</button>
                                 <a href={{ route('penelitian.data-penelitian') }} type="button" class="btn btn-danger float-right">Kembali</a>
                             </form>
@@ -360,7 +363,6 @@
                                             <br/>
                                             <div class="modal-footer">
                                                 <input type="hidden" name="action" id="action" value="Simpan"/>
-                                                <input type="hidden" name="usulan_penelitian_id" id="usulan-penelitian-id"/>
                                                 <input type="submit" name="action_button" id="action_button" class="btn btn-primary" value="Add"/>
                                             </div>
                                         </form>
@@ -381,8 +383,8 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
-                let anggotaPenelitian = [];
-                let anggotaPenelitianIds = [];
+                let anggotaPenelitian = $('#anggota-penelitian-list').val() ? JSON.parse($('#anggota-penelitian-list').val()) : [];
+                let anggotaPenelitianIds = $('#anggota-penelitian-ids').val() ? JSON.parse($('#anggota-penelitian-ids').val()) : [];
                 let lengthAnggotaPenelitian = anggotaPenelitian.length;
 
                 $('#jenis-luaran').select2();
