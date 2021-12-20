@@ -14,6 +14,7 @@ class PenelitianController extends Controller
 {
     private $controllerDetails;
     private $controllerPenelitianDetails;
+    private $controllerReviewer;
     use AuthTraits;
 
     public function __construct()
@@ -28,9 +29,9 @@ class PenelitianController extends Controller
             "pageDescription" => "Halaman Detail Penelitian"
         ];
 
-        $this->controllerPenelitianEdit = [
-            "currentPage" => "Edit Penelitian",
-            "pageDescription" => "Halaman Edit Penelitian"
+        $this->controllerReviewer = [
+            "currentPage" => "Reviewer",
+            "pageDescription" => "Halaman Daftar Reviewer"
         ];
     }
     /**
@@ -451,5 +452,28 @@ class PenelitianController extends Controller
         }
 
         return response()->json(['success' => $fileName]);
+    }
+
+    public function reviewer(Request $request) {
+
+        $param= [
+            "filter" => [
+                "role" => "Reviewer"
+            ]
+        ];
+
+        $getReviewer = $this->postAPI($param, 'reviewer/get-filter');
+        dd($getReviewer);
+        return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
+            'detailController' => $this->controllerDetails,
+            'listTahun' => isset($getTahun['data']) ? $getTahun['data'] : [],
+            'listSkema' => isset($getSkema['data']) ? $getSkema['data'] : [],
+            'listRumpunIlmu' => isset($getRumpunIlmu['data']) ? $getRumpunIlmu['data'] : [],
+            'listSumberDana' => isset($getSumberDana['data']) ? $getSumberDana['data'] : [],
+            'listUserPengusul' => isset($getUserPengusul['data']) ? $getUserPengusul['data'] : [],
+            'listCapaianLuaran' => isset($getCapaianLuaran['data']) ? $getCapaianLuaran['data'] : [],
+            'listPeranan' => isset($getPeranan['data']) ? $getPeranan['data'] : [],
+            'listFakultas' => isset($getFakultas['data']) ? $getFakultas['data'] : [],
+        ]);
     }
 }

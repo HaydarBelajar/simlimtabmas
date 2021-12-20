@@ -210,6 +210,12 @@
                                         <p>Data Penelitian</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                  <a href="{{route('penelitian.reviewer')}}" class="nav-link">
+                                      <i class="fa fa-chevron-right nav-icon"></i>
+                                      <p>Reviewer Penelitian</p>
+                                  </a>
+                              </li>
                                 {{-- <li class="nav-item">
                                     <a href="{{route('penelitian.data-catatan-harian')}}" class="nav-link">
                                         <i class="fa fa-chevron-right nav-icon"></i>
