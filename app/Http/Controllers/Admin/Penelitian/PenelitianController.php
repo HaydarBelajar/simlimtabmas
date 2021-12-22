@@ -456,24 +456,31 @@ class PenelitianController extends Controller
 
     public function reviewer(Request $request) {
 
-        $param= [
-            "filter" => [
-                "role" => "Reviewer"
-            ]
-        ];
-
-        $getReviewer = $this->postAPI($param, 'reviewer/get-filter');
-        dd($getReviewer);
-        return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
-            'detailController' => $this->controllerDetails,
-            'listTahun' => isset($getTahun['data']) ? $getTahun['data'] : [],
-            'listSkema' => isset($getSkema['data']) ? $getSkema['data'] : [],
-            'listRumpunIlmu' => isset($getRumpunIlmu['data']) ? $getRumpunIlmu['data'] : [],
-            'listSumberDana' => isset($getSumberDana['data']) ? $getSumberDana['data'] : [],
-            'listUserPengusul' => isset($getUserPengusul['data']) ? $getUserPengusul['data'] : [],
-            'listCapaianLuaran' => isset($getCapaianLuaran['data']) ? $getCapaianLuaran['data'] : [],
-            'listPeranan' => isset($getPeranan['data']) ? $getPeranan['data'] : [],
-            'listFakultas' => isset($getFakultas['data']) ? $getFakultas['data'] : [],
+        return view('admin.content.penelitian.reviewer.reviewer')->with([
+            'detailController' => $this->controllerReviewer,
         ]);
+    }
+
+    public function reviewerGetAll(Request $request) {
+        $userSession = $request->session()->get('kucingku');
+        $userDetail = $userSession['user'];
+
+        // Param datatables harus dikirim ke be juga
+        $dataTablesParam = $request->all();
+        $dataTablesParam['filter'] = [];
+        
+        $getData = $this->postAPI($dataTablesParam, 'reviewer/get-filter');
+
+        $data = $getData['data'];
+
+        $dataTables =  DataTables::of($data)
+        ->addColumn('action', function ($data) {
+            $button = '<a target="_blank" type="button" href="/reviewer/detail/'.$data['id'] .'" name="detail" id="' . $data['id'] . '" class="detail btn btn-primary btn-sm">Detail</a>';
+            return $button;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+
+        return $dataTables;
     }
 }

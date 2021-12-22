@@ -54,6 +54,7 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/data-laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\LaporanAkhirController::class, 'dataLaporanAkhir'])->name('data-laporan-akhir');
         
         Route::get('/reviewer', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'reviewer'])->name('reviewer');
+        Route::get('/reviewer-get-all', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'reviewerGetAll'])->name('reviewer-get-all');
     });
 
     Route::group(['prefix'=>'manage-user','as'=>'manage-user.'], function() {
