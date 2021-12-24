@@ -515,4 +515,20 @@ class PenelitianController extends Controller
             'reviewerDetail' => isset($getReviewerDetail['data']) ? $getReviewerDetail['data'] : []
         ]);
     }
+
+    public function getPenelitianCascader($tahunUsulan, $tahunPelaksanaan) {
+        $param = [
+            'filter' => [
+                'tahun_usulan_id' => $tahunUsulan,
+                'tahun_pelaksanaan_id' => $tahunPelaksanaan
+            ]
+        ];
+        
+        $getPenelitianData = $this->postAPI($param, 'penelitian/get-filter');
+        
+        if (isset($getPenelitianData['data'])) {
+            return json_encode($getPenelitianData['data']);
+        }
+        return;
+    }
 }
