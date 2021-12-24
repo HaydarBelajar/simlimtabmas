@@ -516,19 +516,46 @@ class PenelitianController extends Controller
         ]);
     }
 
-    public function getPenelitianCascader($tahunUsulan, $tahunPelaksanaan) {
+    public function getPenelitianCascader($tahunUsulan, $tahunPelaksanaan, $fakultas) {
         $param = [
             'filter' => [
                 'tahun_usulan_id' => $tahunUsulan,
-                'tahun_pelaksanaan_id' => $tahunPelaksanaan
+                'tahun_pelaksanaan_id' => $tahunPelaksanaan,
+                'fakultas_id' => $fakultas,
+                'is'
             ]
         ];
         
         $getPenelitianData = $this->postAPI($param, 'penelitian/get-filter');
         
         if (isset($getPenelitianData['data'])) {
-            return json_encode($getPenelitianData['data']);
+            return response()->json(['data' => $getPenelitianData['data'], 'success' => 'success']);
         }
-        return;
+
+        return response()->json(['errors' => 'gagal mendapatkan data']);
+    }
+
+    public function createPenugasanReviewer(Request $request)
+    {
+        $daftarMapping = [];
+        if (count($request['daftar_penelitian']) > 0) {
+            foreach ($request['daftar_penelitian'] as $data) {
+                array_push($daftarMapping, [
+                    'user_id' => $request->reviewer_id,
+                    'usulan_penelitian_id' => $data,
+                ]);
+            }
+        } else {
+            return redirect()->back()->with('error','Gagal Menyimpan Data');
+        }
+        $param['multiple_data'] = $daftarMapping;
+
+        $simpanData = $this->postAPI($param, 'reviewer/create-reviewer');
+
+        if (isset($simpanData['success'])) {
+            return redirect()->route('penelitian.reviewer-detail', $request->reviewer_id)->with('message',$simpanData['success']);
+        } else {
+            return redirect()->route('penelitian.reviewer-detail', $request->reviewer_id)->with('error',$simpanData['error'] ?? $simpanData['reason']);
+        }
     }
 }

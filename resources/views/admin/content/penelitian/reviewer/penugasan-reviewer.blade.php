@@ -33,7 +33,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <!-- we are adding the accordion ID so Bootstrap's collapse plugin detects it -->
-                            <form action="{{ $page == "edit" ? route('penelitian.update-penugasan-reviewer', $reviewerDetail['id']) : route('penelitian.penugasan-reviewer', $reviewerDetail['id']) }}" method="POST">
+                            <form action="{{ $page == "edit" ? route('penelitian.update-penugasan-reviewer', $reviewerDetail['id']) : route('penelitian.create-penugasan-reviewer', $reviewerDetail['id']) }}" method="POST">
                                 @csrf
                                 <input type="hidden" value="{{ (isset($page) && $page == 'edit') ? 'edit' : 'tambah' }}">
                                     <div class="card card-primary">
@@ -49,7 +49,7 @@
                                             <div class="form-group row">
                                                 <label for="tahun-usulan" class="col-sm-2 col-form-label">Tahun Usulan</label>
                                                 <div class="col-sm-10">
-                                                    <select class="form-control" id="tahun" name="tahun_id" required>
+                                                    <select class="form-control" id="tahun-usulan" name="tahun_usulan_id" required>
                                                         @foreach ($listTahun as $tahun)
                                                             <option {{ isset($detailPenelitian['tahun_id']) && ($detailPenelitian['tahun_id'] == $tahun['tahun_id']) ? 'selected' : '' }} 
                                                                 value={{ $tahun['tahun_id'] }}>{{ $tahun['tahun_usulan'] }}
@@ -88,10 +88,6 @@
                                                         class="col-sm-2 col-form-label">Daftar Penelitian</label>
                                                 <div class="col-sm-10 select2-purple">
                                                     <select class="form-control select2" id="daftar-penelitian" name="daftar_penelitian[]" multiple="multiple" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                                        {{-- @foreach ($listCapaianLuaran as $capaianLuaran)
-                                                            <option {{ isset($detailPenelitian['jenis_luaran']) && (in_array($capaianLuaran['capaian_luaran_id'], json_decode($detailPenelitian['jenis_luaran'], true))) ? 'selected' : '' }}
-                                                                value={{ $capaianLuaran['capaian_luaran_id'] }}>{{ $capaianLuaran['capaian_luaran_nama'] }}</option>
-                                                        @endforeach --}}
                                                     </select>
                                                 </div>
                                             </div>
@@ -99,7 +95,7 @@
                                     </div>
                                 <input type="hidden" name="reviewer_id" id="reviewer-id" value="{{ isset($reviewerDetail['id']) ? $reviewerDetail['id'] : '' }}"/>
                                 <button type="submit" class="btn btn-success float-left">Simpan</button>
-                                <a href={{ route('penelitian.data-penelitian') }} type="button" class="btn btn-danger float-right">Kembali</a>
+                                <a href={{ route('penelitian.reviewer-detail', isset($reviewerDetail['id']) ? $reviewerDetail['id'] : '') }} type="button" class="btn btn-danger float-right">Kembali</a>
                             </form>
                         </div>
                         <!-- /.card-body -->
@@ -118,32 +114,38 @@
 
                 $('#daftar-penelitian').select2();
 
+                $('#fakultas-penelitian').change(function () {
 
-                $('#anggota-penelitian tbody').on( 'click', '.delete-anggota-penelitian', function () {
-                    anggotaPenelitianDatatables
-                        .row( $(this).parents('tr') )
-                        .remove()
-                        .draw();
+                    const tahunUsulan =  $('#tahun-usulan').find(":selected");
+                    const tahunPelaksanaan =  $('#tahun-pelaksanaan').find(":selected");
+                    const fakultas =  $('#fakultas-penelitian').find(":selected");
+
+                    const tahunUsulanId = tahunUsulan.val();
+                    const tahunPelaksanaanId =  tahunPelaksanaan.val();
+                    const fakultasId =  fakultas.val();
                     
-                    const dataDatatables = anggotaPenelitianDatatables.data();
-                    const dataDatatablesMap = dataDatatables.map( data =>  ({
-                        userId: data[4],
-                        perananId: data[5],
-                        fakultasId: data[6],
-                    }))
+                    let getPenelitianCascader = `/penelitian/get-penelitian-cascader/${tahunUsulanId}/${tahunPelaksanaanId}/${fakultasId}`;
 
-                    anggotaPenelitian = dataDatatables;
-                    anggotaPenelitianIds = dataDatatablesMap;
+                    $.ajax({
+                      url: getPenelitianCascader,
+                      method: "GET",
+                      success: function(data) {
+                          if (data.errors) {
+                            alert("Terjadi error sistem, usulan gagal diloloskan !");
+                          }
+                          if (data.success) {
+                            data.data.map( a => {
+                                let id = a.usulan_penelitian_id;
+                                let text = `${a.bidang_fokus} | ${a.judul}`;
 
-                    refreshDatatablesAnggotaPenelitian();
-                } );
-                // $(document).on('click', '.delete-anggota-penelitian', function() {
-                //     const indexData =  $(this).data('index');
-                //     anggotaPenelitian.splice(indexData, 1);
-                //     anggotaPenelitianIds.splice(indexData, 1);
+                                var newOption = new Option(text, id, false, false);
+                                $('#daftar-penelitian').append(newOption).trigger('change');
+                            })
+                          }
+                      }
+                  })
 
-                //     refreshDatatablesAnggotaPenelitian();
-                // });
+                });
             });
         </script>
     @endpush

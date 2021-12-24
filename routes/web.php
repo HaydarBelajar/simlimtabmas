@@ -38,7 +38,7 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/detail-penelitian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'detailPenelitian'])->name('detail-penelitian');
         Route::get('/update-status-penelitian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'updateStatusPenelitian'])->name('update-status-penelitian');
         Route::get('/get-all', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getAll'])->name('get-all');
-        Route::get('/get-penelitian-cascader/{tahunUsulan}/{tahunPelaksanaan}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getPenelitianCascader'])->name('get-penelitian-cascader');
+        Route::get('/get-penelitian-cascader/{tahunUsulan}/{tahunPelaksanaan}/{fakultas}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getPenelitianCascader'])->name('get-penelitian-cascader');
         Route::post('/upload-pengesahan', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadPengesahan'])->name('upload-pengesahan');
         Route::post('/upload-proposal', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadProposal'])->name('upload-proposal');
         Route::post('/upload-laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadLaporanAkhir'])->name('upload-laporan-akhir');
@@ -58,6 +58,7 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/reviewer-get-all', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'reviewerGetAll'])->name('reviewer-get-all');
         Route::get('/reviewer-detail/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'reviewerDetail'])->name('reviewer-detail');
         Route::get('/penugasan-reviewer/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'penugasanReviewer'])->name('penugasan-reviewer');
+        Route::post('/create-penugasan-reviewer/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'createPenugasanReviewer'])->name('create-penugasan-reviewer');
     });
 
     Route::group(['prefix'=>'manage-user','as'=>'manage-user.'], function() {
