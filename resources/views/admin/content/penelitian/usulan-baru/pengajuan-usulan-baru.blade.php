@@ -59,8 +59,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="tahun-pelaksanaan" class="col-sm-2 col-form-label">Tahun
-                                                    Pelaksanaan</label>
+                                                <label for="tahun-pelaksanaan" class="col-sm-2 col-form-label">Tahun Pelaksanaan</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-control" id="tahun-pelaksanaan"  name="tahun_pelaksanaan_id" required>
                                                         @foreach ($listTahun as $tahun)

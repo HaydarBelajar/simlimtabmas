@@ -85,6 +85,7 @@ class PenelitianController extends Controller
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
 
         return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
+            'page' => 'tambah',
             'detailController' => $this->controllerDetails,
             'listTahun' => isset($getTahun['data']) ? $getTahun['data'] : [],
             'listSkema' => isset($getSkema['data']) ? $getSkema['data'] : [],
@@ -475,12 +476,43 @@ class PenelitianController extends Controller
 
         $dataTables =  DataTables::of($data)
         ->addColumn('action', function ($data) {
-            $button = '<a target="_blank" type="button" href="/reviewer/detail/'.$data['id'] .'" name="detail" id="' . $data['id'] . '" class="detail btn btn-primary btn-sm">Detail</a>';
+            $button = '<a target="_blank" type="button" href="/penelitian/reviewer-detail/'.$data['id'] .'" name="detail" id="' . $data['id'] . '" class="detail btn btn-primary btn-sm">Detail</a>';
             return $button;
         })
         ->rawColumns(['action'])
         ->make(true);
 
         return $dataTables;
+    }
+
+    public function reviewerDetail($id)
+    {
+        $param = [
+            'user_id' => $id
+        ];
+        $getData = $this->postAPI($param, 'user/get-user');
+        
+        return view('admin.content.penelitian.reviewer.detail-reviewer')->with([
+            'detailController' => $this->controllerReviewer,
+            'reviewerData' => isset($getData['data']) ? $getData['data'] : []
+        ]);
+    }
+
+    public function penugasanReviewer($id)
+    {
+        $param = [
+            'user_id' => $id
+        ];
+        $getReviewerDetail = $this->postAPI($param, 'user/get-user');
+        $getTahun = $this->postAPI([], 'tahun/get-all');
+        $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
+
+        return view('admin.content.penelitian.reviewer.penugasan-reviewer')->with([
+            'detailController' => $this->controllerReviewer,
+            'page' => 'tambah',
+            'listTahun' => isset($getTahun['data']) ? $getTahun['data'] : [],
+            'listFakultas' => isset($getFakultas['data']) ? $getFakultas['data'] : [],
+            'reviewerDetail' => isset($getReviewerDetail['data']) ? $getReviewerDetail['data'] : []
+        ]);
     }
 }
