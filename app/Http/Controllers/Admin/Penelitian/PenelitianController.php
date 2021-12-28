@@ -502,22 +502,22 @@ class PenelitianController extends Controller
         ]);
     }
 
-    public function reviewerPenelitianGetFilterDatatables(Request $request)
+    public function getPenelitianByReviewerDatatables($userId, Request $request)
     {
+        Log::debug('asdasdasdd');
         $userSession = $request->session()->get('kucingku');
         $userDetail = $userSession['user'];
 
         // Param datatables harus dikirim ke be juga
         $dataTablesParam = $request->all();
-        $dataTablesParam['filter'] = ['user_id' => $userDetail['id']];
+        $dataTablesParam['filter'] = ['user_id' => $userId];
 
-        $getData = $this->postAPI($dataTablesParam, 'reviewer/get-filter');
+        $getData = $this->postAPI($dataTablesParam, 'penelitian/get-penelitian-by-reviewer');
 
         $data = $getData['data'];
-
         $dataTables =  DataTables::of($data)
             ->addColumn('action', function ($data) {
-                $button = '<a target="_blank" type="button" href="/penelitian/delete-reviewer-penelitian/' . $data['id'] . '" name="delete" id="' . $data['id'] . '" class="detail btn btn-danger btn-sm">Hapus</a>';
+                $button = '<a target="_blank" type="button" href="/penelitian/delete-reviewer-penelitian/' . $data['usulan_penelitian_id'] . '" name="delete" id="' . $data['usulan_penelitian_id'] . '" class="detail btn btn-danger btn-sm">Hapus</a>';
                 return $button;
             })
             ->rawColumns(['action'])
