@@ -24,12 +24,12 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth.token'])->group(function () {
-    Route::group(['prefix'=>'dashboard','as'=>'dashboard.'], function() {
+    Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
     });
 
 
-    Route::group(['prefix'=>'penelitian','as'=>'penelitian.'], function() {
+    Route::group(['prefix' => 'penelitian', 'as' => 'penelitian.'], function () {
         Route::get('/tambah-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'tambahDataPenelitian'])->name('tambah-penelitian');
         Route::get('/edit-penelitian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'editDataPenelitian'])->name('edit-penelitian');
         Route::post('/simpan-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'simpanDataPenelitian'])->name('simpan-penelitian');
@@ -53,15 +53,15 @@ Route::middleware(['auth.token'])->group(function () {
 
         Route::get('/tambah-laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\LaporanAkhirController::class, 'tambahLaporanAkhir'])->name('tambah-laporan-akhir');
         Route::get('/data-laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\LaporanAkhirController::class, 'dataLaporanAkhir'])->name('data-laporan-akhir');
-        
+
         Route::get('/reviewer', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'reviewer'])->name('reviewer');
-        Route::get('/reviewer-get-all', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'reviewerGetAll'])->name('reviewer-get-all');
+        Route::get('/get-user-reviewer-filter-datatables', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getUserReviewerFilterDatatables'])->name('get-user-reviewer-filter-datatables');
         Route::get('/reviewer-detail/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'reviewerDetail'])->name('reviewer-detail');
         Route::get('/penugasan-reviewer/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'penugasanReviewer'])->name('penugasan-reviewer');
         Route::post('/create-penugasan-reviewer/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'createPenugasanReviewer'])->name('create-penugasan-reviewer');
     });
 
-    Route::group(['prefix'=>'manage-user','as'=>'manage-user.'], function() {
+    Route::group(['prefix' => 'manage-user', 'as' => 'manage-user.'], function () {
         Route::get('/list', [UserManagementController::class, 'index'])->name('list');
         Route::get('/get-all', [UserManagementController::class, 'getAll'])->name('get-all');
         Route::get('/get-user/{id}', [UserManagementController::class, 'getUser'])->name('get-user');
@@ -70,7 +70,7 @@ Route::middleware(['auth.token'])->group(function () {
         Route::post('/update', [UserManagementController::class, 'update'])->name('update');
     });
 
-    Route::group(['prefix'=>'penelitian-usulan-baru','as'=>'penelitian-usulan-baru.'], function() {
+    Route::group(['prefix' => 'penelitian-usulan-baru', 'as' => 'penelitian-usulan-baru.'], function () {
         Route::get('/usulan-baru', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'index'])->name('index');
         Route::get('/lanjutkan-usulan-baru', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'lanjutkanUsulan'])->name('lanjutkan-usulan');
         Route::get('/identitas-usulan-baru', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'identitasUsulan'])->name('identitas-usulan');
@@ -81,34 +81,34 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/buku', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'buku'])->name('buku');
     });
 
-    Route::group(['prefix'=>'pengabdian','as'=>'pengabdian.'], function() {
+    Route::group(['prefix' => 'pengabdian', 'as' => 'pengabdian.'], function () {
         Route::get('/usulan-baru', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'index'])->name('index');
         Route::get('/lanjutkan-usulan-baru', [\App\Http\Controllers\Admin\Pengabdian\PengabdianUsulanBaruController::class, 'lanjutkanUsulan'])->name('lanjutkan-usulan');
     });
 
-    Route::group(['prefix'=>'penelitian-usulan-lanjutan','as'=>'penelitian-usulan-lanjutan.'], function() {
+    Route::group(['prefix' => 'penelitian-usulan-lanjutan', 'as' => 'penelitian-usulan-lanjutan.'], function () {
         Route::get('/usulan-lanjutan', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanLanjutanController::class, 'index'])->name('index');
     });
 
-    Route::group(['prefix'=>'perbaikan-usulan','as'=>'perbaikan-usulan.'], function() {
+    Route::group(['prefix' => 'perbaikan-usulan', 'as' => 'perbaikan-usulan.'], function () {
         Route::get('/perbaikan-usulan', [\App\Http\Controllers\Admin\Penelitian\PerbaikanUsulanController::class, 'index'])->name('index');
     });
 
-    Route::group(['prefix'=>'sptb','as'=>'sptb.'], function() {
+    Route::group(['prefix' => 'sptb', 'as' => 'sptb.'], function () {
         Route::get('/sptb', [\App\Http\Controllers\Admin\Penelitian\SPTBController::class, 'index'])->name('index');
     });
 
-    Route::group(['prefix'=>'laporan-kemajuan','as'=>'laporan-kemajuan.'], function() {
+    Route::group(['prefix' => 'laporan-kemajuan', 'as' => 'laporan-kemajuan.'], function () {
         Route::get('/laporan-kemajuan', [\App\Http\Controllers\Admin\Penelitian\LaporanKemajuanController::class, 'index'])->name('index');
         Route::get('/laporan-kemajuan-edit', [\App\Http\Controllers\Admin\Penelitian\LaporanKemajuanController::class, 'edit'])->name('edit');
     });
 
-    Route::group(['prefix'=>'laporan-akhir','as'=>'laporan-akhir.'], function() {
+    Route::group(['prefix' => 'laporan-akhir', 'as' => 'laporan-akhir.'], function () {
         Route::get('/laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\LaporanAkhirController::class, 'index'])->name('index');
         Route::get('/laporan-akhir-edit', [\App\Http\Controllers\Admin\Penelitian\LaporanAkhirController::class, 'edit'])->name('edit');
     });
 
-    Route::group(['prefix'=>'rekap-luaran','as'=>'rekap-luaran.'], function() {
+    Route::group(['prefix' => 'rekap-luaran', 'as' => 'rekap-luaran.'], function () {
         Route::get('/rekap-luaran', [\App\Http\Controllers\Admin\Penelitian\RekapLuaranController::class, 'index'])->name('index');
     });
 

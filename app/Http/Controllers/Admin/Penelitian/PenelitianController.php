@@ -64,12 +64,12 @@ class PenelitianController extends Controller
 
     public function tambahDataPenelitian()
     {
-        $paramSkema= [
+        $paramSkema = [
             "filter" => [
                 "skema_tipe" => "penelitian"
             ]
         ];
-        $paramPengusul= [
+        $paramPengusul = [
             "filter" => [
                 "skema_tipe" => "Pengusul"
             ]
@@ -103,18 +103,18 @@ class PenelitianController extends Controller
         $paramPenelitian = [
             'usulan_penelitian_id' => $id,
         ];
-        
-        $paramSkema= [
+
+        $paramSkema = [
             "filter" => [
                 "skema_tipe" => "penelitian"
             ]
         ];
-        $paramPengusul= [
+        $paramPengusul = [
             "filter" => [
                 "skema_tipe" => "Pengusul"
             ]
         ];
-                
+
         $getTahun = $this->postAPI([], 'tahun/get-all');
         $getSkema = $this->postAPI($paramSkema, 'skema/get-filter');
         $getRumpunIlmu = $this->postAPI([], 'rumpun-ilmu/get-filter');
@@ -129,34 +129,34 @@ class PenelitianController extends Controller
         $anggotaPenelitianIds = [];
 
         // Membentuk array anggota
-        if (isset($detailPenelitian['peneliti_utama'])){
-            array_push($anggotaPenelitian,[$detailPenelitian['peneliti_utama']['name'], 'Ketua Peneliti', $detailPenelitian['fakultas_peneliti_utama']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['peneliti_utama']['id'], 1, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
-            array_push($anggotaPenelitianIds,[
-                "userId" => $detailPenelitian['peneliti_utama']['id'], 
-                "perananId" => 1, 
+        if (isset($detailPenelitian['peneliti_utama'])) {
+            array_push($anggotaPenelitian, [$detailPenelitian['peneliti_utama']['name'], 'Ketua Peneliti', $detailPenelitian['fakultas_peneliti_utama']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['peneliti_utama']['id'], 1, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
+            array_push($anggotaPenelitianIds, [
+                "userId" => $detailPenelitian['peneliti_utama']['id'],
+                "perananId" => 1,
                 "fakultasId" =>  $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']
             ]);
         }
-        if (isset($detailPenelitian['anggota1'])){
-            array_push($anggotaPenelitian,[$detailPenelitian['anggota1']['name'], 'Anggota Peneliti 1', $detailPenelitian['fakultas_anggota1']['namafakultas'], '<a type="button" data-index=2 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota1']['id'], 2, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
-            array_push($anggotaPenelitianIds,[
-                "userId" => $detailPenelitian['anggota1']['id'], 
-                "perananId" => 2, 
+        if (isset($detailPenelitian['anggota1'])) {
+            array_push($anggotaPenelitian, [$detailPenelitian['anggota1']['name'], 'Anggota Peneliti 1', $detailPenelitian['fakultas_anggota1']['namafakultas'], '<a type="button" data-index=2 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota1']['id'], 2, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
+            array_push($anggotaPenelitianIds, [
+                "userId" => $detailPenelitian['anggota1']['id'],
+                "perananId" => 2,
                 "fakultasId" =>  $detailPenelitian['fakultas_anggota1']['kdfakultas']
             ]);
         }
-        if (isset($detailPenelitian['anggota2'])){
-            array_push($anggotaPenelitian,[$detailPenelitian['anggota2']['name'], 'Anggota Peneliti 2', $detailPenelitian['fakultas_anggota2']['namafakultas'], '<a type="button" data-index=3 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota2']['id'], 3, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
-            array_push($anggotaPenelitianIds,[
-                "userId" => $detailPenelitian['anggota2']['id'], 
+        if (isset($detailPenelitian['anggota2'])) {
+            array_push($anggotaPenelitian, [$detailPenelitian['anggota2']['name'], 'Anggota Peneliti 2', $detailPenelitian['fakultas_anggota2']['namafakultas'], '<a type="button" data-index=3 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota2']['id'], 3, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
+            array_push($anggotaPenelitianIds, [
+                "userId" => $detailPenelitian['anggota2']['id'],
                 "perananId" => 3,
                 "fakultasId" =>  $detailPenelitian['fakultas_anggota2']['kdfakultas']
             ]);
         }
-        if (isset($detailPenelitian['anggota3'])){
-            array_push($anggotaPenelitian,[$detailPenelitian['anggota3']['name'], 'Anggota Peneliti 3', $detailPenelitian['fakultas_anggota3']['namafakultas'], '<a type="button" data-index=4 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota3']['id'], 4, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
-            array_push($anggotaPenelitianIds,[
-                "userId" => $detailPenelitian['anggota3']['id'], 
+        if (isset($detailPenelitian['anggota3'])) {
+            array_push($anggotaPenelitian, [$detailPenelitian['anggota3']['name'], 'Anggota Peneliti 3', $detailPenelitian['fakultas_anggota3']['namafakultas'], '<a type="button" data-index=4 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota3']['id'], 4, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
+            array_push($anggotaPenelitianIds, [
+                "userId" => $detailPenelitian['anggota3']['id'],
                 "perananId" => 4,
                 "fakultasId" =>  $detailPenelitian['fakultas_anggota3']['kdfakultas']
             ]);
@@ -210,9 +210,9 @@ class PenelitianController extends Controller
         $simpanData = $this->postAPI($param, 'penelitian/create-penelitian');
 
         if (isset($simpanData['success'])) {
-            return redirect()->route('penelitian.data-penelitian')->with('message',$simpanData['success']);
+            return redirect()->route('penelitian.data-penelitian')->with('message', $simpanData['success']);
         } else {
-            return redirect()->route('penelitian.data-penelitian')->with('error',$simpanData['error'] ?? $simpanData['reason']);
+            return redirect()->route('penelitian.data-penelitian')->with('error', $simpanData['error'] ?? $simpanData['reason']);
         }
     }
 
@@ -248,38 +248,40 @@ class PenelitianController extends Controller
         $simpanData = $this->postAPI($param, 'penelitian/update-penelitian');
 
         if (isset($simpanData['success'])) {
-            return redirect()->route('penelitian.data-penelitian')->with('message',$simpanData['success']);
+            return redirect()->route('penelitian.data-penelitian')->with('message', $simpanData['success']);
         } else {
-            return redirect()->route('penelitian.data-penelitian')->with('error',$simpanData['error'] ?? $simpanData['reason']);
+            return redirect()->route('penelitian.data-penelitian')->with('error', $simpanData['error'] ?? $simpanData['reason']);
         }
     }
 
-    public function getAll(Request $request) {
+    public function getAll(Request $request)
+    {
         $userSession = $request->session()->get('kucingku');
         $userDetail = $userSession['user'];
 
         // Param datatables harus dikirim ke be juga
         $dataTablesParam = $request->all();
         $dataTablesParam['filter'] = ['user_id' => $userDetail['id']];
-        
+
         $getData = $this->postAPI($dataTablesParam, 'penelitian/get-filter');
 
         $data = $getData['data'];
 
         $dataTables =  DataTables::of($data)
-        ->addColumn('action', function ($data) {
-            $button = '<a target="_blank" type="button" href="/penelitian/edit-penelitian/'.$data['usulan_penelitian_id'] .'" name="edit" id="' . $data['usulan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</a>';
-            $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
-            $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/penelitian/detail-penelitian/'.$data['usulan_penelitian_id'] . '" name="catatan_harian" id="' . $data['usulan_penelitian_id'] . '" class="secondary btn btn-secondary btn-sm" >Detail</a>';
-            return $button;
-        })
-        ->rawColumns(['action'])
-        ->make(true);
+            ->addColumn('action', function ($data) {
+                $button = '<a target="_blank" type="button" href="/penelitian/edit-penelitian/' . $data['usulan_penelitian_id'] . '" name="edit" id="' . $data['usulan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</a>';
+                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
+                $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/penelitian/detail-penelitian/' . $data['usulan_penelitian_id'] . '" name="catatan_harian" id="' . $data['usulan_penelitian_id'] . '" class="secondary btn btn-secondary btn-sm" >Detail</a>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
 
         return $dataTables;
     }
 
-    public function getCatatanHarian(Request $request, $id) {
+    public function getCatatanHarian(Request $request, $id)
+    {
 
         // Param datatables harus dikirim ke be juga
         $dataTablesParam = $request->all();
@@ -289,13 +291,13 @@ class PenelitianController extends Controller
         $data = $getData['data'];
 
         $dataTables =  DataTables::of($data)
-        ->addColumn('action', function ($data) {
-            // $button = '<button type="button" name="edit" id="' . $data['catatan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
-            $button = '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['catatan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
-            return $button;
-        })
-        ->rawColumns(['action'])
-        ->make(true);
+            ->addColumn('action', function ($data) {
+                // $button = '<button type="button" name="edit" id="' . $data['catatan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
+                $button = '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['catatan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
 
         return $dataTables;
     }
@@ -307,7 +309,7 @@ class PenelitianController extends Controller
         ];
 
         $deleteData = $this->postAPI($param, 'penelitian/delete-catatan-harian');
-        
+
         if (isset($deleteData['success'])) {
             return response()->json(['success' => $deleteData['success']]);
         } else {
@@ -324,7 +326,7 @@ class PenelitianController extends Controller
         ];
 
         $update = $this->postAPI($param, 'penelitian/update-penelitian');
-        
+
         if (isset($update['success'])) {
             return response()->json(['success' => $update['success']]);
         } else {
@@ -335,10 +337,10 @@ class PenelitianController extends Controller
     public function uploadPengesahan(Request $request)
     {
         $file = $request->file('fileToUpload');
-        $fileName = time().'.'.$file->extension();
+        $fileName = time() . '.' . $file->extension();
         $file->move(public_path('media/pengesahan'), $fileName);
         if (!$file) {
-            return redirect()->route('penelitian.data-penelitian')->with('error','Gagal Menyimpan File');
+            return redirect()->route('penelitian.data-penelitian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
             'usulan_penelitian_id' => $request->id_penelitian,
@@ -348,9 +350,9 @@ class PenelitianController extends Controller
         $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
 
         if (isset($updateData['success'])) {
-            return Redirect::back()->with('message',$updateData['success']);
+            return Redirect::back()->with('message', $updateData['success']);
         } else {
-            return Redirect::back()->with('error',$updateData['error'] ?? $updateData['reason']);
+            return Redirect::back()->with('error', $updateData['error'] ?? $updateData['reason']);
         }
 
         return response()->json(['success' => $fileName]);
@@ -359,10 +361,10 @@ class PenelitianController extends Controller
     public function uploadProposal(Request $request)
     {
         $file = $request->file('fileToUpload');
-        $fileName = time().'.'.$file->extension();
+        $fileName = time() . '.' . $file->extension();
         $file->move(public_path('media/proposal'), $fileName);
         if (!$file) {
-            return redirect()->route('penelitian.data-penelitian')->with('error','Gagal Menyimpan File');
+            return redirect()->route('penelitian.data-penelitian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
             'usulan_penelitian_id' => $request->id_penelitian,
@@ -372,9 +374,9 @@ class PenelitianController extends Controller
         $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
 
         if (isset($updateData['success'])) {
-            return Redirect::back()->with('message',$updateData['success']);
+            return Redirect::back()->with('message', $updateData['success']);
         } else {
-            return Redirect::back()->with('error',$updateData['error'] ?? $updateData['reason']);
+            return Redirect::back()->with('error', $updateData['error'] ?? $updateData['reason']);
         }
 
         return response()->json(['success' => $fileName]);
@@ -383,10 +385,10 @@ class PenelitianController extends Controller
     public function uploadLaporanAkhir(Request $request)
     {
         $file = $request->file('fileToUpload');
-        $fileName = time().'.'.$file->extension();
+        $fileName = time() . '.' . $file->extension();
         $file->move(public_path('media/laporan-akhir'), $fileName);
         if (!$file) {
-            return redirect()->route('penelitian.data-penelitian')->with('error','Gagal Menyimpan File');
+            return redirect()->route('penelitian.data-penelitian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
             'usulan_penelitian_id' => $request->id_penelitian,
@@ -396,9 +398,9 @@ class PenelitianController extends Controller
         $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
 
         if (isset($updateData['success'])) {
-            return Redirect::back()->with('message',$updateData['success']);
+            return Redirect::back()->with('message', $updateData['success']);
         } else {
-            return Redirect::back()->with('error',$updateData['error'] ?? $updateData['reason']);
+            return Redirect::back()->with('error', $updateData['error'] ?? $updateData['reason']);
         }
 
         return response()->json(['success' => $fileName]);
@@ -407,10 +409,10 @@ class PenelitianController extends Controller
     public function tambahCatatanHarian(Request $request)
     {
         $file = $request->file('fileToUpload');
-        $fileName = time().'.'.$file->extension();
+        $fileName = time() . '.' . $file->extension();
         $file->move(public_path('media/catatanHarian'), $fileName);
         if (!$file) {
-            return redirect()->route('penelitian.detail-penelitian')->with('error','Gagal Menyimpan File');
+            return redirect()->route('penelitian.detail-penelitian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
             'usulan_penelitian_id' => $request->id_penelitian,
@@ -433,10 +435,10 @@ class PenelitianController extends Controller
     public function editCatatanHarian(Request $request)
     {
         $file = $request->file('fileToUpload');
-        $fileName = time().'.'.$file->extension();
+        $fileName = time() . '.' . $file->extension();
         $file->move(public_path('media/catatanHarian'), $fileName);
         if (!$file) {
-            return redirect()->route('penelitian.data-penelitian')->with('error','Gagal Menyimpan File');
+            return redirect()->route('penelitian.data-penelitian')->with('error', 'Gagal Menyimpan File');
         }
 
         $param = [
@@ -447,40 +449,42 @@ class PenelitianController extends Controller
         $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
 
         if (isset($updateData['success'])) {
-            return redirect()->route('penelitian.data-penelitian')->with('message',$updateData['success']);
+            return redirect()->route('penelitian.data-penelitian')->with('message', $updateData['success']);
         } else {
-            return redirect()->route('penelitian.data-penelitian')->with('error',$updateData['error'] ?? $updateData['reason']);
+            return redirect()->route('penelitian.data-penelitian')->with('error', $updateData['error'] ?? $updateData['reason']);
         }
 
         return response()->json(['success' => $fileName]);
     }
 
-    public function reviewer(Request $request) {
+    public function reviewer(Request $request)
+    {
 
         return view('admin.content.penelitian.reviewer.reviewer')->with([
             'detailController' => $this->controllerReviewer,
         ]);
     }
 
-    public function reviewerGetAll(Request $request) {
+    public function getUserReviewerFilterDatatables(Request $request)
+    {
         $userSession = $request->session()->get('kucingku');
         $userDetail = $userSession['user'];
 
         // Param datatables harus dikirim ke be juga
         $dataTablesParam = $request->all();
-        $dataTablesParam['filter'] = [];
-        
-        $getData = $this->postAPI($dataTablesParam, 'reviewer/get-filter');
+        $dataTablesParam['filter'] = ['role' => 'Reviewer'];
+
+        $getData = $this->postAPI($dataTablesParam, 'user/get-filter');
 
         $data = $getData['data'];
 
         $dataTables =  DataTables::of($data)
-        ->addColumn('action', function ($data) {
-            $button = '<a target="_blank" type="button" href="/penelitian/reviewer-detail/'.$data['id'] .'" name="detail" id="' . $data['id'] . '" class="detail btn btn-primary btn-sm">Detail</a>';
-            return $button;
-        })
-        ->rawColumns(['action'])
-        ->make(true);
+            ->addColumn('action', function ($data) {
+                $button = '<a target="_blank" type="button" href="/penelitian/reviewer-detail/' . $data['id'] . '" name="detail" id="' . $data['id'] . '" class="detail btn btn-primary btn-sm">Detail</a>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
 
         return $dataTables;
     }
@@ -491,11 +495,35 @@ class PenelitianController extends Controller
             'user_id' => $id
         ];
         $getData = $this->postAPI($param, 'user/get-user');
-        
+
         return view('admin.content.penelitian.reviewer.detail-reviewer')->with([
             'detailController' => $this->controllerReviewer,
             'reviewerData' => isset($getData['data']) ? $getData['data'] : []
         ]);
+    }
+
+    public function reviewerPenelitianGetFilterDatatables(Request $request)
+    {
+        $userSession = $request->session()->get('kucingku');
+        $userDetail = $userSession['user'];
+
+        // Param datatables harus dikirim ke be juga
+        $dataTablesParam = $request->all();
+        $dataTablesParam['filter'] = ['user_id' => $userDetail['id']];
+
+        $getData = $this->postAPI($dataTablesParam, 'reviewer/get-filter');
+
+        $data = $getData['data'];
+
+        $dataTables =  DataTables::of($data)
+            ->addColumn('action', function ($data) {
+                $button = '<a target="_blank" type="button" href="/penelitian/delete-reviewer-penelitian/' . $data['id'] . '" name="delete" id="' . $data['id'] . '" class="detail btn btn-danger btn-sm">Hapus</a>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+
+        return $dataTables;
     }
 
     public function penugasanReviewer($id)
@@ -516,7 +544,8 @@ class PenelitianController extends Controller
         ]);
     }
 
-    public function getPenelitianCascader($tahunUsulan, $tahunPelaksanaan, $fakultas) {
+    public function getPenelitianCascader($tahunUsulan, $tahunPelaksanaan, $fakultas)
+    {
         $param = [
             'filter' => [
                 'tahun_usulan_id' => $tahunUsulan,
@@ -525,9 +554,9 @@ class PenelitianController extends Controller
                 'is'
             ]
         ];
-        
+
         $getPenelitianData = $this->postAPI($param, 'penelitian/get-filter');
-        
+
         if (isset($getPenelitianData['data'])) {
             return response()->json(['data' => $getPenelitianData['data'], 'success' => 'success']);
         }
@@ -546,16 +575,16 @@ class PenelitianController extends Controller
                 ]);
             }
         } else {
-            return redirect()->back()->with('error','Gagal Menyimpan Data');
+            return redirect()->back()->with('error', 'Gagal Menyimpan Data');
         }
         $param['multiple_data'] = $daftarMapping;
 
         $simpanData = $this->postAPI($param, 'reviewer/create-reviewer');
 
         if (isset($simpanData['success'])) {
-            return redirect()->route('penelitian.reviewer-detail', $request->reviewer_id)->with('message',$simpanData['success']);
+            return redirect()->route('penelitian.reviewer-detail', $request->reviewer_id)->with('message', $simpanData['success']);
         } else {
-            return redirect()->route('penelitian.reviewer-detail', $request->reviewer_id)->with('error',$simpanData['error'] ?? $simpanData['reason']);
+            return redirect()->route('penelitian.reviewer-detail', $request->reviewer_id)->with('error', $simpanData['error'] ?? $simpanData['reason']);
         }
     }
 }
