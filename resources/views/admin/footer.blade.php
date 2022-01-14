@@ -42,9 +42,6 @@
 <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script>
-<!-- dropzonejs -->
-{{-- <script src="{{ asset('assets/plugins/dropzone-5.7.0/dist/min/dropzone.min.js') }}"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js" integrity="sha512-oQq8uth41D+gIH/NJvSJvVB85MFk1eWpMK6glnkg6I7EdMqC1XVkW7RxLheXwmFdG03qScCM7gKS/Cx3FYt7Tg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Select2 -->
 <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 <!-- Toastr -->
@@ -55,8 +52,11 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/lazyload/jquery.lazy.min.js') }}">
 
 <!-- DataTables -->
-<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="//cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript"
+  src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.3/b-2.1.1/b-colvis-2.1.1/b-html5-2.1.1/b-print-2.1.1/datatables.min.js">
+</script>
 
 
 <!-- App scripts -->

@@ -107,7 +107,9 @@
 @push('scripts')
 <script>
     $(document).ready(function () {
-
+                /**
+                * Section untuk menampilkan pesan response dari back end
+                */
                 @if(Session::has('message'))
                     toastr.options =
                     {
@@ -125,8 +127,14 @@
                     }
                     toastr.error("{{ session('error') }}");
                 @endif
-
-
+                
+                /**
+                * End Section untuk menampilkan pesan response dari back end
+                */
+                
+                /**
+                * Section untuk melakukan delete jika tombol delete di setiap row table di klick
+                */ 
                 $(document).on('click', '.delete', function() {
                     user_id = $(this).attr('id');
                     $('#confirmModal').modal('show');
@@ -158,7 +166,19 @@
                     })
                 });
 
+                /**
+                * End Section untuk melakukan delete jika tombol delete di setiap row table di klick
+                */
+
+                /**
+                * Section untuk menampilkan data dalam bentuk datatables
+                */
+
                 $('#penelitian-table').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'excel', 'pdf'
+                    ],
                     "scrollX": true,
                     processing: true,
                     serverSide: true,
@@ -265,6 +285,10 @@
                         }
                     ]
                 });
+
+                /**
+                * End Section untuk menampilkan data dalam bentuk datatables
+                */
 
                 $(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir', function() {
                     $('#modalUpload').modal('show');
