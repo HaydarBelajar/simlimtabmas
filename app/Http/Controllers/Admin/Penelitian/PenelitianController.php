@@ -410,6 +410,30 @@ class PenelitianController extends Controller
         return response()->json(['success' => $fileName]);
     }
 
+    public function uploadProposalRevisi(Request $request)
+    {
+        $file = $request->file('fileToUpload');
+        $fileName = time() . '.' . $file->extension();
+        $file->move(public_path('media/proposal-revisi'), $fileName);
+        if (!$file) {
+            return redirect()->route('penelitian.data-penelitian')->with('error', 'Gagal Menyimpan File');
+        }
+        $param = [
+            'usulan_penelitian_id' => $request->id_penelitian,
+            'file_upload_proposal_revisi' => $fileName,
+        ];
+
+        $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
+
+        if (isset($updateData['success'])) {
+            return Redirect::back()->with('message', $updateData['success']);
+        } else {
+            return Redirect::back()->with('error', $updateData['error'] ?? $updateData['reason']);
+        }
+
+        return response()->json(['success' => $fileName]);
+    }
+
     public function tambahCatatanHarian(Request $request)
     {
         $file = $request->file('fileToUpload');

@@ -40,6 +40,7 @@
                                 <th width="10%">Fakultas</th>
                                 <th width="5%">Pengesahan</th>
                                 <th width="5%">Proposal</th>
+                                <th width="5%">Proposal Revisi</th>
                                 <th width="5%">Laporan Akhir</th>
                                 <th width="5%">Status Seleksi</th>
                                 <th width="10%">Tanggal Upload</th>
@@ -244,6 +245,23 @@
                             }
                         },
                         {
+                            name: 'Proposal Revisi',
+                            data: 'usulan_penelitian_id',
+                            className: 'text-right py-0 align-middle',
+                            render: function ( data, type, row ) {
+                                if (row.file_upload_proposal_revisi) {
+                                    return `
+                                        <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal-revisi') }}/${row.file_upload_proposal_revisi}" ><i class="fas fa-file-download"></i> Download</a>
+                                    `;
+                                } else {
+                                    return `
+                                        <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal-revisi" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                                    `;
+                                }
+
+                            }
+                        },
+                        {
                             name: 'Laporan Akhir',
                             data: 'usulan_penelitian_id',
                             className: 'text-right py-0 align-middle',
@@ -290,10 +308,11 @@
                 * End Section untuk menampilkan data dalam bentuk datatables
                 */
 
-                $(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir', function() {
+                $(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir, .upload-proposal-revisi', function() {
                     $('#modalUpload').modal('show');
                     let isUploadProposal = false;
                     let isUploadPengesahan = false;
+                    let isUploadLaporanRevisi = false;
                     let isUploadLaporanAkhir = false;
                     let url = '';
                     const id = $(this).data("id")
@@ -322,6 +341,15 @@
                         url = "/penelitian/upload-laporan-akhir";
                         $('#upload-file').attr('action', url);
                         $('#modal-upload-title').html('Upload Laporan Akhir');
+                    }
+                    if (classList.includes('upload-proposal-revisi')){
+                        isUploadProposal = false;
+                        isUploadPengesahan = false;
+                        isUploadProposalRevisi = true;
+                        isUploadLaporanAkhir = false;
+                        url = "/penelitian/upload-proposal-revisi";
+                        $('#upload-file').attr('action', url);
+                        $('#modal-upload-title').html('Upload Proposal Revisi');
                     }
                 });
             });

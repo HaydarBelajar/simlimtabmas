@@ -42,6 +42,7 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/get-penelitian-cascader/{tahunUsulan}/{tahunPelaksanaan}/{fakultas}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getPenelitianCascader'])->name('get-penelitian-cascader');
         Route::post('/upload-pengesahan', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadPengesahan'])->name('upload-pengesahan');
         Route::post('/upload-proposal', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadProposal'])->name('upload-proposal');
+        Route::post('/upload-proposal-revisi', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadProposalRevisi'])->name('upload-proposal-revisi');
         Route::post('/upload-laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadLaporanAkhir'])->name('upload-laporan-akhir');
         Route::post('/tambah-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'tambahCatatanHarian'])->name('tambah-catatan-harian');
         Route::post('/edit-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'editCatatanHarian'])->name('edit-catatan-harian');
