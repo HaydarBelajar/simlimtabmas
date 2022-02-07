@@ -30,7 +30,7 @@ class UserManagementController extends Controller
         $param = [];
         $getRoles = $this->postAPI($param, 'role/get-all');
         $getDosenCascader = $this->postAPI($param, 'dosen/get-cascader');
-        
+
         return view('admin.content.menu-user-list')->with([
             'detailController' => $this->controllerDetails,
             'rolesOptions' => isset($getRoles['data']) ? $getRoles['data'] : [],
@@ -45,7 +45,6 @@ class UserManagementController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -66,7 +65,8 @@ class UserManagementController extends Controller
             'role' => $request->role,
             'password' => $request->password,
             'confirmPassword' => $request->confirmpassword,
-            'dosen_id' => $request->dosen_id
+            'dosen_id' => $request->dosen_id,
+            'isCivitasUnisa' => $request->civitasUnisa
         ];
 
         $getRoles = $this->postAPI($param, 'user/create');
@@ -118,12 +118,13 @@ class UserManagementController extends Controller
         $param = [
             'user_id' => $id
         ];
-        
+
         $getData = $this->postAPI($param, 'user/delete');
         return $getData;
     }
 
-    public function getAll(Request $request) {
+    public function getAll(Request $request)
+    {
         // Param datatables harus dikirim ke be juga
         $dataTablesParam = $request->all();
         $getData = $this->postAPI($dataTablesParam, 'user/get-all');
@@ -131,18 +132,19 @@ class UserManagementController extends Controller
         $data = $getData['data'];
 
         $dataTables =  DataTables::of($data)
-        ->addColumn('action', function ($data) {
-            $button = '<button type="button" name="edit" id="' . $data['id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
-            $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['id'] . '" class="delete btn btn-danger btn-sm" ' . ($data['id'] == 1 ? "disabled" : "") . '>Delete</button>';
-            return $button;
-        })
-        ->rawColumns(['action'])
-        ->make(true);
+            ->addColumn('action', function ($data) {
+                $button = '<button type="button" name="edit" id="' . $data['id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
+                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['id'] . '" class="delete btn btn-danger btn-sm" ' . ($data['id'] == 1 ? "disabled" : "") . '>Delete</button>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
 
         return $dataTables;
     }
 
-    public function getUser(Request $request, $id) {
+    public function getUser(Request $request, $id)
+    {
         $param = [
             'user_id' => $id
         ];

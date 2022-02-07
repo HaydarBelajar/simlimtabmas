@@ -81,6 +81,12 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="isCivitasUnisa" name="civitasUnisa">
+                                            <label class="form-check-label" >Civitas UNISA</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Mapping Data Dosen</label>
                                         <select class="form-control mapping-dosen" name="dosen_id" style="width: 100%;" id="dosen" required>
                                             @if (!empty($dosenOptions))
@@ -90,15 +96,17 @@
                                             @endif
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Password : </label>
-                                        <input type="password" name="password" id="password" class="form-control"
-                                               maxlength="35" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Confirm Password : </label>
-                                        <input type="password" name="confirmpassword" id="confirm-password"
-                                               class="form-control" maxlength="35" required/>
+                                    <div class='form-password'>
+                                        <div class="form-group">
+                                            <label class="col-form-label">Password : </label>
+                                            <input type="password" name="password" id="password" class="form-control"
+                                                maxlength="35" required/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-form-label">Confirm Password : </label>
+                                            <input type="password" name="confirmpassword" id="confirm-password"
+                                                class="form-control" maxlength="35" required/>
+                                        </div>
                                     </div>
                                     <br/>
                                     <div class="modal-footer">
@@ -148,6 +156,12 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" class="isCivitasUnisa" name="civitasUnisa">
+                                            <label class="form-check-label" >Civitas UNISA</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Mapping Data Dosen</label>
                                         <select class="form-control mapping-dosen" name="dosen_id" style="width: 100%;" id="dosen-edit" required>
                                             @if (!empty($dosenOptions))
@@ -157,15 +171,17 @@
                                             @endif
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Password : </label>
-                                        <input type="password" name="password" id="password-edit" class="form-control"
-                                               maxlength="35"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Confirm Password : </label>
-                                        <input type="password" name="confirmpassword" id="confirm-password-edit"
-                                               class="form-control" maxlength="35"/>
+                                    <div class='form-password'>
+                                        <div class="form-group">
+                                            <label class="col-form-label">Password : </label>
+                                            <input type="password" name="password" id="password-edit" class="form-control"
+                                                maxlength="35"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-form-label">Confirm Password : </label>
+                                            <input type="password" name="confirmpassword" id="confirm-password-edit"
+                                                class="form-control" maxlength="35"/>
+                                        </div>
                                     </div>
                                     <br/>
                                     <div class="modal-footer">
@@ -190,7 +206,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <h4 align="center" style="margin:0;">Apakah anda ingin menghapus data ini ?</h4>
+                                <h4 style="text-align: center" style="margin:0;">Apakah anda ingin menghapus data ini ?</h4>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" name="ok_delete_button" id="ok-delete-button" class="btn btn-danger">Ok</button>
@@ -209,6 +225,25 @@
     @push('scripts')
         <script>
             $(document).ready(function () {
+                /**
+                * Form Trigger
+                */
+                $('input[type="checkbox"]').click(function(){
+                    if ($('#isCivitasUnisa').is(":checked")) {
+                        $('.form-password').hide();
+                        $("#password").attr('required', false);
+                        $("#confirm-password").attr('required', false);
+                    } else {
+                        $('.form-password').show();
+                        $("#password").attr('required', true);
+                        $("#confirm-password").attr('required', true);
+                    }
+                })
+
+                /**
+                * End Form Trigger
+                */
+
                 /**
                 * Komponent dan Datatables
                 */
@@ -269,7 +304,7 @@
                     var action_url = '';
 
                     action_url = "{{ route('manage-user.create') }}";
-
+                    
                     $.ajax({
                         url: action_url,
                         method: "POST",

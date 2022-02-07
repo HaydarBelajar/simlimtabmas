@@ -28,23 +28,17 @@
             <div class="card card-default color-palette-box">
                 <div class="card-body">
                     <div class="top-button-group" style="margin-bottom: 20px;">
-                        <a href={{ route('penelitian.tambah-penelitian') }} type="button" class="btn btn-primary tambah-penelitian {{ in_array('Reviewer',
-                            Session::get('kucingku')['roles']) ? 'disabled' : '' }}">Tambah Usulan Penelitian</a>
+                        {{-- <a href={{ route('penelitian.tambah-penelitian') }} type="button"
+                            class="btn btn-primary tambah-penelitian">Tambah Usulan Penelitian</a> --}}
                     </div>
                     <span id="notification"></span>
-                    <table id="penelitian-table" class="table table-striped table-bordered" style="width:100%">
+                    <table id="reviewer-table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th width="5%">No</th>
-                                <th width="20%">Judul Penelitian</th>
-                                <th width="10%">Fakultas</th>
-                                <th width="5%">Pengesahan</th>
-                                <th width="5%">Proposal</th>
-                                <th width="5%">Proposal Revisi</th>
-                                <th width="5%">Laporan Akhir</th>
-                                <th width="5%">Status Seleksi</th>
-                                <th width="10%">Tanggal Upload</th>
-                                <th width="15%">Aksi</th>
+                                <th width="35%">Nama Reviewer</th>
+                                <th width="35%">Email</th>
+                                <th width="25%">Aksi</th>
                             </tr>
                         </thead>
                     </table>
@@ -85,7 +79,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <input type="hidden" id="id-penelitian" name="id_penelitian">
+                                <input type="hidden" id="id-reviewer" name="id_reviewer">
                                 <input type="file" name="fileToUpload" id="fileToUpload">
                             </div>
                             <div class="modal-footer">
@@ -108,9 +102,7 @@
 @push('scripts')
 <script>
     $(document).ready(function () {
-                /**
-                * Section untuk menampilkan pesan response dari back end
-                */
+
                 @if(Session::has('message'))
                     toastr.options =
                     {
@@ -128,14 +120,8 @@
                     }
                     toastr.error("{{ session('error') }}");
                 @endif
-                
-                /**
-                * End Section untuk menampilkan pesan response dari back end
-                */
-                
-                /**
-                * Section untuk melakukan delete jika tombol delete di setiap row table di klick
-                */ 
+
+
                 $(document).on('click', '.delete', function() {
                     user_id = $(this).attr('id');
                     $('#confirmModal').modal('show');
@@ -167,134 +153,28 @@
                     })
                 });
 
-                /**
-                * End Section untuk melakukan delete jika tombol delete di setiap row table di klick
-                */
-
-                /**
-                * Section untuk menampilkan data dalam bentuk datatables
-                */
-
-                $('#penelitian-table').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [
-                        'excel', 'pdf'
-                    ],
+                $('#reviewer-table').DataTable({
                     "scrollX": true,
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: "{{ route('penelitian.get-all') }}",
+                        url: "{{ route('penelitian.get-user-reviewer-filter-datatables') }}",
                     },
                     columns: [
                         {
-                            data: 'usulan_penelitian_id',
+                            data: 'id',
                             name: 'No',
                             render: function ( data, type, row, meta ) {
                                 return meta.row + meta.settings._iDisplayStart + 1;
                             }
                         },
                         {
-                            data: 'judul',
-                            name: 'Judul Penelitian'
+                            data: 'name',
+                            name: 'Nama Reviewer'
                         },
                         {
-                            data: 'fakultas_penelitian',
-                            name: 'Fakultas',
-                            render: function ( data, type, row ) {
-                                if (data) {
-                                    return data.namafakultas;
-                                } else {
-                                    return '-';
-                                }
-
-                            }
-                        },
-                        {
-                            name: 'Pengesahan',
-                            data: 'usulan_penelitian_id',
-                            className: 'text-right py-0 align-middle',
-                            render: function ( data, type, row ) {
-                                if (row.file_upload_pengesahan) {
-                                    return `
-                                        <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/pengesahan') }}/${row.file_upload_pengesahan}" ><i class="fas fa-file-download"></i> Download</a>
-                                    `;
-                                } else {
-                                    return `
-                                        <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-pengesahan" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
-                                    `;
-                                }
-
-                            }
-                        },
-                        {
-                            name: 'Proposal',
-                            data: 'usulan_penelitian_id',
-                            className: 'text-right py-0 align-middle',
-                            render: function ( data, type, row ) {
-                                if (row.file_upload_proposal) {
-                                    return `
-                                    <a  class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal') }}/${row.file_upload_proposal}" ><i class="fas fa-file-download"></i> Download</a>
-                                    `;
-                                } else {
-                                    return `
-                                    <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
-                                    `;
-                                }
-
-                            }
-                        },
-                        {
-                            name: 'Proposal Revisi',
-                            data: 'usulan_penelitian_id',
-                            className: 'text-right py-0 align-middle',
-                            render: function ( data, type, row ) {
-                                if (row.file_upload_proposal_revisi) {
-                                    return `
-                                        <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal-revisi') }}/${row.file_upload_proposal_revisi}" ><i class="fas fa-file-download"></i> Download</a>
-                                    `;
-                                } else {
-                                    return `
-                                        <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal-revisi" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
-                                    `;
-                                }
-
-                            }
-                        },
-                        {
-                            name: 'Laporan Akhir',
-                            data: 'usulan_penelitian_id',
-                            className: 'text-right py-0 align-middle',
-                            render: function ( data, type, row ) {
-                                if (row.file_upload_laporan_akhir) {
-                                    return `
-                                    <a  class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/laporan-akhir') }}/${row.file_upload_laporan_akhir}" ><i class="fas fa-file-download"></i> Download</a>
-                                    `;
-                                } else {
-                                    return `
-                                    <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-laporan-akhir" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
-                                    `;
-                                }
-
-                            }
-                        },
-                        {
-                            data: 'status',
-                            name: 'Status Seleksi',
-                            render: function ( data, type, row ) {
-                                if (data == 0) {
-                                    return `Menunggu`;
-                                } else if (data == 1) {
-                                    return `Lolos`;
-                                }
-                            }
-                        },
-                        {
-                            data: 'created_at',
-                            name: 'Tanggal Upload',
-                            render: function ( data, type, row ) {
-                                return moment(data).tz('Asia/Jakarta').format('DD-MM-YYYY HH:MM');
-                            }
+                            data: 'email',
+                            name: 'Email',
                         },
                         {
                             data: 'action',
@@ -304,15 +184,10 @@
                     ]
                 });
 
-                /**
-                * End Section untuk menampilkan data dalam bentuk datatables
-                */
-
-                $(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir, .upload-proposal-revisi', function() {
+                $(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir', function() {
                     $('#modalUpload').modal('show');
                     let isUploadProposal = false;
                     let isUploadPengesahan = false;
-                    let isUploadLaporanRevisi = false;
                     let isUploadLaporanAkhir = false;
                     let url = '';
                     const id = $(this).data("id")
@@ -341,15 +216,6 @@
                         url = "/penelitian/upload-laporan-akhir";
                         $('#upload-file').attr('action', url);
                         $('#modal-upload-title').html('Upload Laporan Akhir');
-                    }
-                    if (classList.includes('upload-proposal-revisi')){
-                        isUploadProposal = false;
-                        isUploadPengesahan = false;
-                        isUploadProposalRevisi = true;
-                        isUploadLaporanAkhir = false;
-                        url = "/penelitian/upload-proposal-revisi";
-                        $('#upload-file').attr('action', url);
-                        $('#modal-upload-title').html('Upload Proposal Revisi');
                     }
                 });
             });
