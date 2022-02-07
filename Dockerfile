@@ -39,7 +39,7 @@ RUN touch /usr/local/etc/php/conf.d/uploads.ini \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Setting working directory. All the path will be relative to WORKDIR
-WORKDIR /usr/src/simlitabmas-api
+WORKDIR /usr/src/simlitabmas-ui
 
 # Installing project files
 COPY ./ ./
@@ -47,8 +47,8 @@ RUN composer install
 RUN php artisan cache:clear && php artisan config:clear
 
 # info php
-RUN touch /usr/src/accounting/public/info.php \
-    && echo "<?php" >> /usr/src/accounting/public/info.php \
-    && echo "phpinfo();" >> /usr/src/accounting/public/info.php
+RUN touch /usr/src/simlitabmas-ui/public/info.php \
+    && echo "<?php" >> /usr/src/simlitabmas-ui/public/info.php \
+    && echo "phpinfo();" >> /usr/src/simlitabmas-ui/public/info.php
 
 CMD php artisan serve --host=0.0.0.0 --port=9000
