@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Simlitabmas | UNISA</title>
 
-    <link rel="shortcut icon" href="{{ asset('assets/images/ristekBrin.ico') }}" type="image/x-icon" />
-    <link rel="icon" href="Images/icon/ristekBrin.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/cropped-logo-unisa-crop.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('assets/images/cropped-logo-unisa-crop.ico') }}" type="image/x-icon" />
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
