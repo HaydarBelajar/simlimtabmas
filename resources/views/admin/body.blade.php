@@ -17,7 +17,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="{{ route('dashboard.home') }}" class="nav-link">{{ env('APP_NAME') }}</a>
+          {{-- <a href="{{ route('dashboard.home') }}" class="nav-link">Home</a> --}}
         </li>
         {{-- <li class="nav-item d-none d-sm-inline-block">
           <a href="index3.html" class="nav-link">Home</a>
@@ -160,13 +160,17 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link" style="padding: 0 !important">
-        <img src="{{ asset('assets/images/logo.png') }}" alt="SIMLITABMAS Logo" class="img-fluid able-logo">
+      <a href="index3.html" class="brand-link">
+        {{-- <img src="{{ asset('assets/images/logo.png') }}" alt="SIMLITABMAS Logo" class="img-fluid able-logo"> --}}
         {{-- <span class="brand-text font-weight-light"> - Unisa</span> --}}
+        <img src="{{ asset('assets/images/cropped-logo-unisa-crop.png') }}" alt="SMA Negeri 1 Grobogan Logo"
+          class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">{{ env('APP_NAME') }}</span>
       </a>
 
       <!-- Sidebar -->
-      <div class="sidebar">
+      <div
+        class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
