@@ -26,6 +26,11 @@ RUN apt-get update && apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo pdo_pgsql pgsql
 
+# Install intl
+RUN apt-get install -y libicu-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl
+
 # Add php config
 RUN touch /usr/local/etc/php/conf.d/uploads.ini \
     && echo "upload_max_filesize = 64M;" >> /usr/local/etc/php/conf.d/uploads.ini \
