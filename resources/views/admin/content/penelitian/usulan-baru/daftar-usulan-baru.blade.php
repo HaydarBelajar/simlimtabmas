@@ -188,7 +188,7 @@
                     },
                     columns: [
                         {
-                            data: 'usulan_penelitian_id',
+                            data: 'usulan_id',
                             name: 'No',
                             render: function ( data, type, row, meta ) {
                                 return meta.row + meta.settings._iDisplayStart + 1;
@@ -212,7 +212,7 @@
                         },
                         {
                             name: 'Pengesahan',
-                            data: 'usulan_penelitian_id',
+                            data: 'usulan_id',
                             className: 'text-right py-0 align-middle',
                             render: function ( data, type, row ) {
                                 if (row.file_upload_pengesahan) {
@@ -229,7 +229,7 @@
                         },
                         {
                             name: 'Proposal',
-                            data: 'usulan_penelitian_id',
+                            data: 'usulan_id',
                             className: 'text-right py-0 align-middle',
                             render: function ( data, type, row ) {
                                 if (row.file_upload_proposal) {
@@ -246,7 +246,7 @@
                         },
                         {
                             name: 'Proposal Revisi',
-                            data: 'usulan_penelitian_id',
+                            data: 'usulan_id',
                             className: 'text-right py-0 align-middle',
                             render: function ( data, type, row ) {
                                 if (row.file_upload_proposal_revisi) {
@@ -263,7 +263,7 @@
                         },
                         {
                             name: 'Laporan Akhir',
-                            data: 'usulan_penelitian_id',
+                            data: 'usulan_id',
                             className: 'text-right py-0 align-middle',
                             render: function ( data, type, row ) {
                                 if (row.file_upload_laporan_akhir) {

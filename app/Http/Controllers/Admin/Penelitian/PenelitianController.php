@@ -30,6 +30,11 @@ class PenelitianController extends Controller
             "pageDescription" => "Halaman Detail Penelitian"
         ];
 
+        $this->controllerPenelitianEdit = [
+            "currentPage" => "Edit Penelitian",
+            "pageDescription" => "Halaman Edit Penelitian"
+        ];
+
         $this->controllerReviewer = [
             "currentPage" => "Reviewer",
             "pageDescription" => "Halaman Daftar Reviewer"
@@ -272,10 +277,10 @@ class PenelitianController extends Controller
             ->addColumn('action', function ($data) {
                 $button = '';
                 if (!in_array('Reviewer', request()->session()->get('kucingku')['roles'])) {
-                    $button .= '<a target="_blank" type="button" href="/penelitian/edit-penelitian/' . $data['usulan_penelitian_id'] . '" name="edit" id="' . $data['usulan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</a>';
-                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
+                    $button .= '<a target="_blank" type="button" href="/penelitian/edit-penelitian/' . $data['usulan_id'] . '" name="edit" id="' . $data['usulan_id'] . '" class="edit btn btn-primary btn-sm">Edit</a>';
+                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
                 }
-                $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/penelitian/detail-penelitian/' . $data['usulan_penelitian_id'] . '" name="catatan_harian" id="' . $data['usulan_penelitian_id'] . '" class="secondary btn btn-secondary btn-sm" >Detail</a>';
+                $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/penelitian/detail-penelitian/' . $data['usulan_id'] . '" name="catatan_harian" id="' . $data['usulan_id'] . '" class="secondary btn btn-secondary btn-sm" >Detail</a>';
                 return $button;
             })
             ->rawColumns(['action'])
