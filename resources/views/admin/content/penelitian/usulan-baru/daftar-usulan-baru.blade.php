@@ -182,19 +182,19 @@
             return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
                 '<tr>'+
                     '<td>Ketua</td>'+
-                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang === 1 ).detail_pengusul.name+'</td>'+
+                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang == 1 ).detail_pengusul.name +'</td>'+
                 '</tr>'+
                 '<tr>'+
                     '<td>Anggota 1</td>'+
-                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang === 2 ).detail_pengusul.name+'</td>'+
+                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang == 2 ).detail_pengusul.name +'</td>'+
                 '</tr>'+
                 '<tr>'+
                     '<td>Anggota 2</td>'+
-                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang === 3 ).detail_pengusul.name+'</td>'+
+                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang == 3 ).detail_pengusul.name +'</td>'+
                 '</tr>'+
                 '<tr>'+
                     '<td>Anggota 3</td>'+
-                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang === 4 ).detail_pengusul.name+'</td>'+
+                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang == 4 ).detail_pengusul.name +'</td>'+
                 '</tr>'+
             '</table>';
         }
@@ -369,10 +369,12 @@
             }
             else {
                 // Open this row
-                row.child( detailedRow(row.data()) ).show();
-                tr.addClass('shown');
+                if (row.data().wewenang_usulan.length > 0){
+                    row.child( detailedRow(row.data()) ).show();
+                    tr.addClass('shown');
+                }
             }
-        } );
+        });
 
         /**
         * End Section untuk menampilkan data dalam bentuk datatables
