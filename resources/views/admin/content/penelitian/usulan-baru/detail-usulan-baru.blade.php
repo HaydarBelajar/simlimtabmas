@@ -384,266 +384,266 @@
 @push('scripts')
 <script>
 	$(document).ready(function () {
-              let catatanPenelitianID;
-              let kucingkuId = $('#kucingku-id').val();
-              /**
-              * Loloskan Usulan Function
-              *
-              */
-              $(document).on('click', '#button-loloskan-usulan', function() {
-                catatanPenelitianID = $(this).attr('data-id');
-                $('#confirmLolosUsulanModal').modal('show');
-              });
+		let catatanPenelitianID;
+		let kucingkuId = $('#kucingku-id').val();
+		/**
+		* Loloskan Usulan Function
+		*
+		*/
+		$(document).on('click', '#button-loloskan-usulan', function() {
+			catatanPenelitianID = $(this).attr('data-id');
+			$('#confirmLolosUsulanModal').modal('show');
+		});
 
-              $('#lolos-usulan-button').click(function() {
-                  $.ajax({
-                      url: "/penelitian/update-status-penelitian/" + catatanPenelitianID,
-                      method: "GET",
-                      data: {
-                          "_token": "{{ csrf_token() }}",
-                          "status": "1",
-                          "user_menyetujui_id": kucingkuId,
-                      },
-                      beforeSend: function() {
-                          $('#lolos-usulan-button').text('Proses Meloloskan Usulan...');
-                      },
-                      success: function(data) {
-                          if (data.errors) {
-                            alert(data.errors);
-							$('#confirmLolosUsulanModal').modal('hide');
-							$('#lolos-usulan-button').text('Ok');
-                          }
-                          if (data.success) {
-                            alert(data.success);
-                            $('#confirmLolosUsulanModal').modal('hide');
-                            location.reload();
-                          }
-                      }
-                  })
-              });
+		$('#lolos-usulan-button').click(function() {
+			$.ajax({
+				url: "/penelitian/update-status-penelitian/" + catatanPenelitianID,
+				method: "GET",
+				data: {
+					"_token": "{{ csrf_token() }}",
+					"status": "1",
+					"user_menyetujui_id": kucingkuId,
+				},
+				beforeSend: function() {
+					$('#lolos-usulan-button').text('Proses Meloloskan Usulan...');
+				},
+				success: function(data) {
+					if (data.errors) {
+					alert(data.errors);
+					$('#confirmLolosUsulanModal').modal('hide');
+					$('#lolos-usulan-button').text('Ok');
+					}
+					if (data.success) {
+					alert(data.success);
+					$('#confirmLolosUsulanModal').modal('hide');
+					location.reload();
+					}
+				}
+			})
+		});
 
-              /**
-              * End Loloskan Usulan Function
-              *
-              */
+		/**
+		* End Loloskan Usulan Function
+		*
+		*/
 
-              $(document).on('click', '.tambah-catatan-harian', function() {
-                $('#form-result').html('');
-                $('#form-catatan-harian-modal').modal('show');
-                $('#action-button').val('Simpan');
-                $('#action').val('Simpan');
-                $('.id-penelitian').val("{{ $detailPenelitian['usulan_penelitian_id'] ?? '' }}");
-              });
+		$(document).on('click', '.tambah-catatan-harian', function() {
+			$('#form-result').html('');
+			$('#form-catatan-harian-modal').modal('show');
+			$('#action-button').val('Simpan');
+			$('#action').val('Simpan');
+			$('.id-penelitian').val("{{ $detailPenelitian['usulan_penelitian_id'] ?? '' }}");
+		});
 
-              $('#reservationdate').datetimepicker({
-                format: 'L'
-              });
+		$('#reservationdate').datetimepicker({
+		format: 'L'
+		});
 
-              /**
-              * Add Function
-              *
-              */
-              $('#form-catatan-harian').on('submit', function(event) {
-                event.preventDefault();
-                var action_url = '';
+		/**
+		* Add Function
+		*
+		*/
+		$('#form-catatan-harian').on('submit', function(event) {
+			event.preventDefault();
+			var action_url = '';
 
-                if ($('#action').val() == 'Simpan') {
-                  action_url = "{{ route('penelitian.tambah-catatan-harian') }}";
-                }
+			if ($('#action').val() == 'Simpan') {
+				action_url = "{{ route('penelitian.tambah-catatan-harian') }}";
+			}
 
-                if ($('#action').val() == 'Edit') {
-                  action_url = "{{ route('penelitian.edit-catatan-harian') }}";
-                }
+			if ($('#action').val() == 'Edit') {
+				action_url = "{{ route('penelitian.edit-catatan-harian') }}";
+			}
 
-                $.ajax({
-                  url: action_url,
-                  method: "POST",
-                  data: new FormData(this),
-                  processData: false,
-                  contentType: false,
-                  dataType: "json",
-                  success: function(data) {
-                    var html = '';
-                    if (data.errors) {
-                      alert("Data gagal ditambahkan atau dirubah !");
-                      html = `<div class="alert alert-danger"> ${data.errors} </div>`;
-                    }
-                    if (data.success) {
-                      alert("Data successfully added or edited !");
-                      html = '<div class="alert alert-success">' + data.success + '</div>';
-                      $('#form-catatan-harian')[0].reset();
-                      $('#tabel-catatan-harian').DataTable().ajax.reload();
-                      $('#form-catatan-harian-modal').modal('hide');
-                    }
-                    $('#form-result').html(html);
-                  }
-                });
-              });
-              /**
-              * End Add Function
-              *
-              */
+			$.ajax({
+				url: action_url,
+				method: "POST",
+				data: new FormData(this),
+				processData: false,
+				contentType: false,
+				dataType: "json",
+				success: function(data) {
+				var html = '';
+				if (data.errors) {
+					alert("Data gagal ditambahkan atau dirubah !");
+					html = `<div class="alert alert-danger"> ${data.errors} </div>`;
+				}
+				if (data.success) {
+					alert("Data successfully added or edited !");
+					html = '<div class="alert alert-success">' + data.success + '</div>';
+					$('#form-catatan-harian')[0].reset();
+					$('#tabel-catatan-harian').DataTable().ajax.reload();
+					$('#form-catatan-harian-modal').modal('hide');
+				}
+				$('#form-result').html(html);
+				}
+			});
+		});
+		/**
+		* End Add Function
+		*
+		*/
 
-              // Ketika Tombol Edit Diklick
-              $(document).on('click', '.edit', function() {
-                var id = $(this).attr('id');
+		// Ketika Tombol Edit Diklick
+		$(document).on('click', '.edit', function() {
+		var id = $(this).attr('id');
 
-                $('#form-result').html('');
-                $('#form-catatan-harian-modal').modal('show');
-                $("#edit-form :input").attr("disabled", false);
-                $('.edit-content').hide();
-                $(".edit-content :input").prop('required', false);
-              });
+		$('#form-result').html('');
+		$('#form-catatan-harian-modal').modal('show');
+		$("#edit-form :input").attr("disabled", false);
+		$('.edit-content').hide();
+		$(".edit-content :input").prop('required', false);
+		});
 
 
-              @if(Session::has('message'))
-                  toastr.options =
-                  {
-                      "closeButton" : true,
-                      "progressBar" : true
-                  }
-                  toastr.success("{{ session('message') }}");
-              @endif
+		@if(Session::has('message'))
+			toastr.options =
+			{
+				"closeButton" : true,
+				"progressBar" : true
+			}
+			toastr.success("{{ session('message') }}");
+		@endif
 
-              @if(Session::has('error'))
-                  toastr.options =
-                  {
-                      "closeButton" : true,
-                      "progressBar" : true
-                  }
-                  toastr.error("{{ session('error') }}");
-              @endif
-              
-              /**
-              * Delete Function
-              *
-              */
-              $(document).on('click', '.delete', function() {
-                  catatanPenelitianID = $(this).attr('id');
-                  $('#confirmModal').modal('show');
-              });
+		@if(Session::has('error'))
+			toastr.options =
+			{
+				"closeButton" : true,
+				"progressBar" : true
+			}
+			toastr.error("{{ session('error') }}");
+		@endif
+		
+		/**
+		* Delete Function
+		*
+		*/
+		$(document).on('click', '.delete', function() {
+			catatanPenelitianID = $(this).attr('id');
+			$('#confirmModal').modal('show');
+		});
 
-              $('#ok-delete-button').click(function() {
-                  $.ajax({
-                      url: "/penelitian/hapus-catatan-harian/" + catatanPenelitianID,
-                      method: "GET",
-                      data: {
-                          "_token": "{{ csrf_token() }}",
-                      },
-                      beforeSend: function() {
-                          $('#ok-delete-button').text('Proses Menghapus...');
-                      },
-                      success: function(data) {
-                          var html = '';
-                          if (data.errors) {
-                            alert("Data gagal dihapus !");
-                            html = `<div class="alert alert-danger"> ${data.errors} ! </div>`;
-                          }
-                          if (data.success) {
-                            alert("Data successfully added or edited !");
-                            html = '<div class="alert alert-success">' + data.success + '</div>';
-                            $('#tabel-catatan-harian').DataTable().ajax.reload();
-                            $('#confirmModal').modal('hide');
-                          }
-                          $('#form-result').html(html);
-                      }
-                  })
-              });
-              /**
-              * End Delete Function
-              *
-              */
+		$('#ok-delete-button').click(function() {
+			$.ajax({
+				url: "/penelitian/hapus-catatan-harian/" + catatanPenelitianID,
+				method: "GET",
+				data: {
+					"_token": "{{ csrf_token() }}",
+				},
+				beforeSend: function() {
+					$('#ok-delete-button').text('Proses Menghapus...');
+				},
+				success: function(data) {
+					var html = '';
+					if (data.errors) {
+					alert("Data gagal dihapus !");
+					html = `<div class="alert alert-danger"> ${data.errors} ! </div>`;
+					}
+					if (data.success) {
+					alert("Data successfully added or edited !");
+					html = '<div class="alert alert-success">' + data.success + '</div>';
+					$('#tabel-catatan-harian').DataTable().ajax.reload();
+					$('#confirmModal').modal('hide');
+					}
+					$('#form-result').html(html);
+				}
+			})
+		});
+		/**
+		* End Delete Function
+		*
+		*/
 
-              $('#tabel-catatan-harian').DataTable({
-                  "scrollX": true,
-                  processing: true,
-                  serverSide: true,
-                  ajax: {
-                      url: "{{ route('penelitian.get-catatan-harian', $detailPenelitian['usulan_penelitian_id']) }}",
-                  },
-                  columns: [
-                      {
-                          data: 'catatan_penelitian_id',
-                          name: 'No',
-                          render: function ( data, type, row, meta ) {
-                              return meta.row + meta.settings._iDisplayStart + 1;
-                          }
-                      },
-                      {
-                          data: 'tanggal_pelaksanaan',
-                          name: 'Tanggal Pelaksanaan',
-                          render: function ( data, type, row ) {
-                              return moment(data).tz('Asia/Jakarta').format('DD-MM-YYYY');
-                          }
-                      },
-                      {
-                          data: 'deskripsi',
-                          name: 'Catatan'
-                      },
-                      {
-                          name: 'Dokumen',
-                          data: 'berkas',
-                          className: 'text-right py-0 align-middle',
-                          render: function ( data, type, row ) {
-                              return `<div class="btn-group btn-group-sm">
-                                  <a target="_blank" href="{{ asset('media/catatanHarian') }}/${row.berkas}" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
-                              </div>`;
-                              // return 'asdasd';
-                          }
-                      },
-                      {
-                          data: 'action',
-                          name: 'action',
-                          orderable: false
-                      }
-                  ]
-              });
-            });
+		$('#tabel-catatan-harian').DataTable({
+			"scrollX": true,
+			processing: true,
+			serverSide: true,
+			ajax: {
+				url: "{{ route('penelitian.get-catatan-harian', $detailPenelitian['usulan_penelitian_id']) }}",
+			},
+			columns: [
+				{
+					data: 'catatan_penelitian_id',
+					name: 'No',
+					render: function ( data, type, row, meta ) {
+						return meta.row + meta.settings._iDisplayStart + 1;
+					}
+				},
+				{
+					data: 'tanggal_pelaksanaan',
+					name: 'Tanggal Pelaksanaan',
+					render: function ( data, type, row ) {
+						return moment(data).tz('Asia/Jakarta').format('DD-MM-YYYY');
+					}
+				},
+				{
+					data: 'deskripsi',
+					name: 'Catatan'
+				},
+				{
+					name: 'Dokumen',
+					data: 'berkas',
+					className: 'text-right py-0 align-middle',
+					render: function ( data, type, row ) {
+						return `<div class="btn-group btn-group-sm">
+							<a target="_blank" href="{{ asset('media/catatanHarian') }}/${row.berkas}" class="btn btn-danger"><i class="fas fa-file-download"></i></a>
+						</div>`;
+						// return 'asdasd';
+					}
+				},
+				{
+					data: 'action',
+					name: 'action',
+					orderable: false
+				}
+			]
+		});
+	});
 
-            /**
-            * Upload Dokumen
-            *
-            **/
-            $(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir', function() {
-              $('#modalUpload').modal('show');
-              let isUploadProposal = false;
-              let isUploadPengesahan = false;
-              let isUploadLaporanAkhir = false;
-              let url = '';
-              const id = $(this).data("id")
+	/**
+	* Upload Dokumen
+	*
+	**/
+	$(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir', function() {
+		$('#modalUpload').modal('show');
+		let isUploadProposal = false;
+		let isUploadPengesahan = false;
+		let isUploadLaporanAkhir = false;
+		let url = '';
+		const id = $(this).data("id")
 
-              var classList = this.classList.toString();
+		var classList = this.classList.toString();
 
-              $('.id-penelitian').val(id);
-              if (classList.includes('upload-proposal')){
-                  isUploadProposal = true;
-                  isUploadPengesahan = false;
-                  isUploadLaporanAkhir = false;
-                  url = "/penelitian/upload-proposal";
-                  $('#upload-file').attr('action', url);
-                  $('#modal-upload-title').html('Upload Proposal');
-              }
-              if (classList.includes('upload-pengesahan')){
-                  isUploadProposal = false;
-                  isUploadPengesahan = true;
-                  isUploadLaporanAkhir = false;
-                  url = "/penelitian/upload-pengesahan";
-                  $('#upload-file').attr('action', url);
-                  $('#modal-upload-title').html('Upload Pengesahan');
-              }
-              if (classList.includes('upload-laporan-akhir')){
-                  isUploadProposal = false;
-                  isUploadPengesahan = false;
-                  isUploadLaporanAkhir = true;
-                  url = "/penelitian/upload-laporan-akhir";
-                  $('#upload-file').attr('action', url);
-                  $('#modal-upload-title').html('Upload Laporan Akhir');
-              }
-            });
-            /**
-            * End Upload Dokumen
-            *
-            **/
+		$('.id-penelitian').val(id);
+		if (classList.includes('upload-proposal')){
+			isUploadProposal = true;
+			isUploadPengesahan = false;
+			isUploadLaporanAkhir = false;
+			url = "/penelitian/upload-proposal";
+			$('#upload-file').attr('action', url);
+			$('#modal-upload-title').html('Upload Proposal');
+		}
+		if (classList.includes('upload-pengesahan')){
+			isUploadProposal = false;
+			isUploadPengesahan = true;
+			isUploadLaporanAkhir = false;
+			url = "/penelitian/upload-pengesahan";
+			$('#upload-file').attr('action', url);
+			$('#modal-upload-title').html('Upload Pengesahan');
+		}
+		if (classList.includes('upload-laporan-akhir')){
+			isUploadProposal = false;
+			isUploadPengesahan = false;
+			isUploadLaporanAkhir = true;
+			url = "/penelitian/upload-laporan-akhir";
+			$('#upload-file').attr('action', url);
+			$('#modal-upload-title').html('Upload Laporan Akhir');
+		}
+	});
+	/**
+	* End Upload Dokumen
+	*
+	**/
 </script>
 @endpush
 @endsection
