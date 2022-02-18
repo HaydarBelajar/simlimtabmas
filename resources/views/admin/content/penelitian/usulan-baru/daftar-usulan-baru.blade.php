@@ -38,6 +38,8 @@
                                 <th width="5%"></th>
                                 <th width="5%">No</th>
                                 <th width="20%">Judul Penelitian</th>
+                                <th width="5%">Tahun Usulan</th>
+                                <th width="5%">Tahun Pelaksanaan</th>
                                 <th width="10%">Fakultas</th>
                                 <th width="10%">Peran</th>
                                 <th width="5%">Pengesahan</th>
@@ -227,6 +229,14 @@
                 {
                     data: 'judul',
                     name: 'Judul Penelitian'
+                },
+                {
+                    data: 'tahun.tahun',
+                    name: 'Tahun Usulan'
+                },
+                {
+                    data: 'tahun_pelaksanaan.tahun',
+                    name: 'Tahun Pelaksanaan'
                 },
                 {
                     data: 'fakultas_penelitian',
