@@ -129,42 +129,50 @@ class PenelitianController extends Controller
         $getCapaianLuaran = $this->postAPI([], 'capaian-luaran/get-all');
         $getPeranan = $this->postAPI([], 'peranan/get-all');
         $getData = $this->postAPI($paramPenelitian, 'penelitian/get-penelitian');
+
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
         $detailPenelitian = isset($getData['data']) ? $getData['data'] : [];
+        $wewenangUsulan = isset($getData['data']['wewenangUsulan']) ? $getData['data']['wewenangUsulan'] : [];
         $anggotaPenelitian = [];
         $anggotaPenelitianIds = [];
-
+        $indexKetua = array_search('1', array_column($wewenangUsulan, 'wewenang'));
+        $indexAnggota1 = array_search('2', array_column($wewenangUsulan, 'wewenang'));
+        $indexAnggota2 = array_search('3', array_column($wewenangUsulan, 'wewenang'));
+        $indexAnggota3 = array_search('4', array_column($wewenangUsulan, 'wewenang'));
+        // dd($indexKetua, $indexAnggota1, $indexAnggota2, $indexAnggota3);
         // Membentuk array anggota
-        if (isset($detailPenelitian['peneliti_utama'])) {
-            array_push($anggotaPenelitian, [$detailPenelitian['peneliti_utama']['name'], 'Ketua Peneliti', $detailPenelitian['fakultas_peneliti_utama']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['peneliti_utama']['id'], 1, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
+        if ($indexKetua !== FALSE) {
+            array_push($anggotaPenelitian, [$wewenangUsulan[$indexKetua]['detail_pengusul']['name'], 'Ketua Peneliti', $wewenangUsulan[$indexKetua]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexKetua]['user_id'], 1, $wewenangUsulan[$indexKetua]['fakultas_id']]);
             array_push($anggotaPenelitianIds, [
-                "userId" => $detailPenelitian['peneliti_utama']['id'],
+                "userId" => $wewenangUsulan[$indexKetua]['user_id'],
                 "perananId" => 1,
-                "fakultasId" =>  $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']
+                "fakultasId" =>  $wewenangUsulan[$indexKetua]['fakultas_id']
             ]);
         }
-        if (isset($detailPenelitian['anggota1'])) {
-            array_push($anggotaPenelitian, [$detailPenelitian['anggota1']['name'], 'Anggota Peneliti 1', $detailPenelitian['fakultas_anggota1']['namafakultas'], '<a type="button" data-index=2 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota1']['id'], 2, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
+
+        if ($indexAnggota1 !== FALSE) {
+            array_push($anggotaPenelitian, [$wewenangUsulan[$indexAnggota1]['detail_pengusul']['name'], 'Anggota Peneliti 1', $wewenangUsulan[$indexAnggota1]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexAnggota1]['user_id'], 2, $wewenangUsulan[$indexAnggota1]['fakultas_id']]);
             array_push($anggotaPenelitianIds, [
-                "userId" => $detailPenelitian['anggota1']['id'],
+                "userId" => $wewenangUsulan[$indexAnggota1]['user_id'],
                 "perananId" => 2,
-                "fakultasId" =>  $detailPenelitian['fakultas_anggota1']['kdfakultas']
+                "fakultasId" =>  $wewenangUsulan[$indexAnggota1]['fakultas_id']
             ]);
         }
-        if (isset($detailPenelitian['anggota2'])) {
-            array_push($anggotaPenelitian, [$detailPenelitian['anggota2']['name'], 'Anggota Peneliti 2', $detailPenelitian['fakultas_anggota2']['namafakultas'], '<a type="button" data-index=3 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota2']['id'], 3, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
+        if ($indexAnggota2 !== FALSE) {
+            array_push($anggotaPenelitian, [$wewenangUsulan[$indexAnggota2]['detail_pengusul']['name'], 'Anggota Peneliti 2', $wewenangUsulan[$indexAnggota2]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexAnggota2]['user_id'], 3, $wewenangUsulan[$indexAnggota2]['fakultas_id']]);
             array_push($anggotaPenelitianIds, [
-                "userId" => $detailPenelitian['anggota2']['id'],
+                "userId" => $wewenangUsulan[$indexAnggota2]['user_id'],
                 "perananId" => 3,
-                "fakultasId" =>  $detailPenelitian['fakultas_anggota2']['kdfakultas']
+                "fakultasId" =>  $wewenangUsulan[$indexAnggota2]['fakultas_id']
             ]);
         }
-        if (isset($detailPenelitian['anggota3'])) {
-            array_push($anggotaPenelitian, [$detailPenelitian['anggota3']['name'], 'Anggota Peneliti 3', $detailPenelitian['fakultas_anggota3']['namafakultas'], '<a type="button" data-index=4 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $detailPenelitian['anggota3']['id'], 4, $detailPenelitian['fakultas_peneliti_utama']['kdfakultas']]);
+        if ($indexAnggota3 !== FALSE) {
+            dd('asdasdas');
+            array_push($anggotaPenelitian, [$wewenangUsulan[$indexAnggota3]['detail_pengusul']['name'], 'Anggota Peneliti 3', $wewenangUsulan[$indexAnggota3]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexAnggota3]['user_id'], 4, $wewenangUsulan[$indexAnggota3]['fakultas_id']]);
             array_push($anggotaPenelitianIds, [
-                "userId" => $detailPenelitian['anggota3']['id'],
+                "userId" => $wewenangUsulan[$indexAnggota3]['user_id'],
                 "perananId" => 4,
-                "fakultasId" =>  $detailPenelitian['fakultas_anggota3']['kdfakultas']
+                "fakultasId" =>  $wewenangUsulan[$indexAnggota3]['fakultas_id']
             ]);
         }
 
@@ -228,7 +236,7 @@ class PenelitianController extends Controller
         $userDetail = $userSession['user'];
 
         $param = [
-            'usulan_penelitian_id' => $request->usulan_penelitian_id,
+            'usulan_id' => $request->usulan_id,
             'tahun_id' => $request->tahun_id,
             'tahun_pelaksanaan_id' => $request->tahun_pelaksanaan_id,
             'skema_id' => $request->skema_id,
