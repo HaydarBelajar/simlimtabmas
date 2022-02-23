@@ -308,9 +308,15 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{route('penelitian.data-penelitian')}}" class="nav-link">
+                  <a href="{{route('pengabdian.data-pengabdian')}}" class="nav-link">
                     <i class="fa fa-chevron-right nav-icon"></i>
                     <p>Data Pengabdian</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('pengabdian.reviewer')}}" class="nav-link">
+                    <i class="fa fa-chevron-right nav-icon"></i>
+                    <p>Reviewer Pengabdian</p>
                   </a>
                 </li>
                 {{-- <li class="nav-item">

@@ -63,6 +63,41 @@ Route::middleware(['auth.token'])->group(function () {
         Route::post('/create-penugasan-reviewer/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'createPenugasanReviewer'])->name('create-penugasan-reviewer');
     });
 
+
+    Route::group(['prefix' => 'pengabdian', 'as' => 'pengabdian.'], function () {
+        Route::get('/tambah-pengabdian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'tambahDataPengabdian'])->name('tambah-pengabdian');
+        Route::get('/edit-pengabdian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'editDataPengabdian'])->name('edit-pengabdian');
+        Route::post('/simpan-pengabdian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'simpanDataPengabdian'])->name('simpan-pengabdian');
+        Route::post('/update-pengabdian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'updateDataPengabdian'])->name('update-pengabdian');
+        Route::get('/data-pengabdian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'dataPengabdian'])->name('data-pengabdian');
+        Route::get('/detail-pengabdian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'detailPengabdian'])->name('detail-pengabdian');
+        Route::get('/update-status-pengabdian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'updateStatusPengabdian'])->name('update-status-pengabdian');
+        Route::get('/get-all', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'getAll'])->name('get-all');
+        Route::get('/get-pengabdian-by-reviwer-datatables/{userId}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'getPengabdianByReviewerDatatables'])->name('get-pengabdian-by-reviwer-datatables');
+        Route::get('/get-pengabdian-cascader/{tahunUsulan}/{tahunPelaksanaan}/{fakultas}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'getPengabdianCascader'])->name('get-pengabdian-cascader');
+        Route::post('/upload-pengesahan', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'uploadPengesahan'])->name('upload-pengesahan');
+        Route::post('/upload-proposal', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'uploadProposal'])->name('upload-proposal');
+        Route::post('/upload-proposal-revisi', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'uploadProposalRevisi'])->name('upload-proposal-revisi');
+        Route::post('/upload-laporan-akhir', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'uploadLaporanAkhir'])->name('upload-laporan-akhir');
+        Route::post('/tambah-catatan-harian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'tambahCatatanHarian'])->name('tambah-catatan-harian');
+        Route::post('/edit-catatan-harian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'editCatatanHarian'])->name('edit-catatan-harian');
+        Route::get('/get-catatan-harian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'getCatatanHarian'])->name('get-catatan-harian');
+        Route::get('/hapus-catatan-harian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'hapusCatatanHarian'])->name('hapus-catatan-harian');
+
+        Route::get('/catatan-harian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'catatanHarian'])->name('catatan-harian');
+        Route::get('/tambah-catatan-harian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'tambahDataCatatanHarian'])->name('tambah-catatan-harian');
+        Route::get('/data-catatan-harian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'dataCatatanHarian'])->name('data-catatan-harian');
+
+        Route::get('/tambah-laporan-akhir', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'tambahLaporanAkhir'])->name('tambah-laporan-akhir');
+        Route::get('/data-laporan-akhir', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'dataLaporanAkhir'])->name('data-laporan-akhir');
+
+        Route::get('/reviewer', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'reviewer'])->name('reviewer');
+        Route::get('/get-user-reviewer-filter-datatables', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'getUserReviewerFilterDatatables'])->name('get-user-reviewer-filter-datatables');
+        Route::get('/reviewer-detail/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'reviewerDetail'])->name('reviewer-detail');
+        Route::get('/penugasan-reviewer/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'penugasanReviewer'])->name('penugasan-reviewer');
+        Route::post('/create-penugasan-reviewer/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'createPenugasanReviewer'])->name('create-penugasan-reviewer');
+    });
+
     Route::group(['prefix' => 'manage-user', 'as' => 'manage-user.'], function () {
         Route::get('/list', [UserManagementController::class, 'index'])->name('list');
         Route::get('/get-all', [UserManagementController::class, 'getAll'])->name('get-all');
@@ -81,11 +116,6 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/artikel-prosiding', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'artikelProsiding'])->name('artikel-prosiding');
         Route::get('/kekayaan-intelektual', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'kekayaanIntelektual'])->name('kekayaan-intelektual');
         Route::get('/buku', [\App\Http\Controllers\Admin\Penelitian\PenelitianUsulanBaruController::class, 'buku'])->name('buku');
-    });
-
-    Route::group(['prefix' => 'pengabdian', 'as' => 'pengabdian.'], function () {
-        Route::get('/usulan-baru', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'index'])->name('index');
-        Route::get('/lanjutkan-usulan-baru', [\App\Http\Controllers\Admin\Pengabdian\PengabdianUsulanBaruController::class, 'lanjutkanUsulan'])->name('lanjutkan-usulan');
     });
 
     Route::group(['prefix' => 'penelitian-usulan-lanjutan', 'as' => 'penelitian-usulan-lanjutan.'], function () {
