@@ -272,10 +272,13 @@ class PengabdianController extends Controller
     {
         $userSession = $request->session()->get('kucingku');
         $userDetail = $userSession['user'];
-        Log::debug($userDetail);
+
         // Param datatables harus dikirim ke be juga
         $dataTablesParam = $request->all();
-        $dataTablesParam['filter'] = ['user_id' => $userDetail['id']];
+        $dataTablesParam['filter'] = [
+            'user_id' => $userDetail['id'],
+            'jenis_usulan' => 2
+        ];
 
         $getData = $this->postAPI($dataTablesParam, 'pengabdian/get-filter');
 

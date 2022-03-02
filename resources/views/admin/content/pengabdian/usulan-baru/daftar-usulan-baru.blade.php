@@ -28,11 +28,11 @@
             <div class="card card-default color-palette-box">
                 <div class="card-body">
                     <div class="top-button-group" style="margin-bottom: 20px;">
-                        <a href={{ route('penelitian.tambah-penelitian') }} type="button" class="btn btn-primary tambah-penelitian {{ in_array('Reviewer',
-                            Session::get('kucingku')['roles']) ? 'disabled' : '' }}">Tambah Usulan Penelitian</a>
+                        <a href={{ route('pengabdian.tambah-pengabdian') }} type="button" class="btn btn-primary tambah-pengabdian {{ in_array('Reviewer',
+                            Session::get('kucingku')['roles']) ? 'disabled' : '' }}">Tambah Usulan Pengabdian</a>
                     </div>
                     <span id="notification"></span>
-                    <table id="penelitian-table" class="table table-striped table-bordered" style="width:100%">
+                    <table id="pengabdian-table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th width="5%"></th>
@@ -89,7 +89,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <input type="hidden" id="id-penelitian" name="id_penelitian">
+                                <input type="hidden" id="id-pengabdian" name="id_pengabdian">
                                 <input type="file" name="fileToUpload" id="fileToUpload">
                             </div>
                             <div class="modal-footer">
@@ -201,7 +201,7 @@
             '</table>';
         }
 
-        let tabelPenelitian = $('#penelitian-table').DataTable({
+        let tabelPenelitian = $('#pengabdian-table').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 'excel', 'pdf'
@@ -210,7 +210,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('penelitian.get-all') }}",
+                url: "{{ route('pengabdian.get-all') }}",
             },
             columns: [
                 {
@@ -239,7 +239,7 @@
                     name: 'Tahun Pelaksanaan'
                 },
                 {
-                    data: 'fakultas_penelitian',
+                    data: 'fakultas_pengabdian',
                     name: 'Fakultas',
                     render: function ( data, type, row ) {
                         if (data) {
@@ -368,7 +368,7 @@
             ]
         });
 
-        $('#penelitian-table tbody').on('click', 'td.dt-control', function () {
+        $('#pengabdian-table tbody').on('click', 'td.dt-control', function () {
             var tr = $(this).closest('tr');
             var row = tabelPenelitian.row( tr );
     
@@ -401,18 +401,18 @@
 
             var classList = this.classList.toString();
 
-            $('#id-penelitian').val(id);
+            $('#id-pengabdian').val(id);
             if (classList.includes('upload-proposal')){
                 isUploadProposal = true;
                 isUploadPengesahan = false;
-                url = "/penelitian/upload-proposal";
+                url = "/pengabdian/upload-proposal";
                 $('#upload-file').attr('action', url);
                 $('#modal-upload-title').html('Upload Proposal');
             }
             if (classList.includes('upload-pengesahan')){
                 isUploadProposal = false;
                 isUploadPengesahan = true;
-                url = "/penelitian/upload-pengesahan";
+                url = "/pengabdian/upload-pengesahan";
                 $('#upload-file').attr('action', url);
                 $('#modal-upload-title').html('Upload Pengesahan');
             }
@@ -420,7 +420,7 @@
                 isUploadProposal = false;
                 isUploadPengesahan = false;
                 isUploadLaporanAkhir = true;
-                url = "/penelitian/upload-laporan-akhir";
+                url = "/pengabdian/upload-laporan-akhir";
                 $('#upload-file').attr('action', url);
                 $('#modal-upload-title').html('Upload Laporan Akhir');
             }
@@ -429,7 +429,7 @@
                 isUploadPengesahan = false;
                 isUploadProposalRevisi = true;
                 isUploadLaporanAkhir = false;
-                url = "/penelitian/upload-proposal-revisi";
+                url = "/pengabdian/upload-proposal-revisi";
                 $('#upload-file').attr('action', url);
                 $('#modal-upload-title').html('Upload Proposal Revisi');
             }
