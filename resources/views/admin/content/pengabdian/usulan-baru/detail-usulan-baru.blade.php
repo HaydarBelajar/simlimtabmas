@@ -33,8 +33,8 @@
 						<div class="row">
 							<div class="col-12">
 								<h4>
-									<i class="fa fa-bookmark"></i> {{ $detailPenelitian['judul'] ?? '' }}
-									@if($detailPenelitian['status'] == 1)
+									<i class="fa fa-bookmark"></i> {{ $detailPengabdian['judul'] ?? '' }}
+									@if($detailPengabdian['status'] == 1)
 									<span class="badge badge-success">Usulan Lolos</span>
 									@else
 									@if(Session::has('kucingku'))
@@ -42,7 +42,7 @@
 									in_array('Reviewer',
 									Session::get('kucingku')['roles']))
 									<button type="button" id='button-loloskan-usulan'
-										data-id='{{ $detailPenelitian["usulan_penelitian_id"] ?? '' }}'
+										data-id='{{ $detailPengabdian["usulan_id"] ?? '' }}'
 										class="btn btn-danger btn-sm"><i class="fa fa-bell"></i> Loloskan
 										Usulan</button>
 									@endif
@@ -60,15 +60,15 @@
 							<div class="col-sm-4 invoice-col">
 								<strong>Disetujui oleh : </strong>
 								<p class="well well-sm shadow-none" style="margin-top: 10px;">
-									{{ $detailPenelitian['user_menyetujui']['detail_dosen']['username'] ?? ' - ' }}
+									{{ $detailPengabdian['user_menyetujui']['detail_dosen']['username'] ?? ' - ' }}
 								</p>
 							</div>
 							<!-- /.col -->
 							<div class="col-sm-4 invoice-col">
 								<strong>Tahun Pelaksanaan</strong>
 								<p class="well well-sm shadow-none" style="margin-top: 10px;">
-									{{ $detailPenelitian['tahun_pelaksanaan'] ?
-									$detailPenelitian['tahun_pelaksanaan']['tahun_usulan'] :
+									{{ $detailPengabdian['tahun_pelaksanaan'] ?
+									$detailPengabdian['tahun_pelaksanaan']['tahun'] :
 									'' }}
 								</p>
 							</div>
@@ -77,7 +77,7 @@
 								<strong>Jumlah Usulan Dana</strong>
 								<p class="well well-sm shadow-none" style="margin-top: 10px;">
 									<?php 
-                          $amount = $detailPenelitian['jumlah_usulan_dana'] ?? '0' ;
+                          $amount = $detailPengabdian['jumlah_usulan_dana'] ?? '0' ;
                           $formatter = new NumberFormatter('id-ID',  NumberFormatter::CURRENCY);
                           echo($formatter->formatCurrency($amount, 'IDR'));
                         ?>
@@ -89,22 +89,22 @@
 							<div class="col-sm-4 invoice-col">
 								<strong>Bidang Fokus</strong>
 								<p class="well well-sm shadow-none" style="margin-top: 10px;">
-									{{ $detailPenelitian['bidang_fokus'] ?? '' }}
+									{{ $detailPengabdian['bidang_fokus'] ?? '' }}
 								</p>
 							</div>
 							<!-- /.col -->
 							<div class="col-sm-4 invoice-col">
 								<strong>Sumber Dana</strong>
 								<p class="well well-sm shadow-none" style="margin-top: 10px;">
-									{{ $detailPenelitian['sumber_dana'] ?
-									$detailPenelitian['sumber_dana']['sumber_dana_nama'] : '' }}
+									{{ $detailPengabdian['sumber_dana'] ?
+									$detailPengabdian['sumber_dana']['sumber_dana_nama'] : '' }}
 								</p>
 							</div>
 							<!-- /.col -->
 							<div class="col-sm-4 invoice-col">
 								<strong>Durasi Kegiatan</strong>
 								<p class="well well-sm shadow-none" style="margin-top: 10px;">
-									{{ $detailPenelitian['durasi_kegiatan'] ? $detailPenelitian['durasi_kegiatan'] : ''
+									{{ $detailPengabdian['durasi_kegiatan'] ? $detailPengabdian['durasi_kegiatan'] : ''
 									}}
 								</p>
 							</div>
@@ -117,7 +117,7 @@
 							<div class="col-sm-4">
 								<strong>Abstrak</strong>
 								<p class="well well-sm shadow-none" style="margin-top: 10px;">
-									{{ $detailPenelitian['abstrak'] ?? '' }}
+									{{ $detailPengabdian['abstrak'] ?? '' }}
 								</p>
 							</div>
 
@@ -125,7 +125,7 @@
 							<div class="col-sm-4">
 								<strong>Luaran Penelitian</strong>
 								<ul>
-									@foreach ($detailPenelitian['capaian_luaran'] as $capaianLuaran)
+									@foreach ($detailPengabdian['capaian_luaran'] as $capaianLuaran)
 									<li>{{ $capaianLuaran['capaian_luaran_nama'] }}</li>
 									@endforeach
 								</ul>
@@ -143,19 +143,19 @@
 										<tbody>
 											<tr>
 												<th>Peneliti Utama</th>
-												<td>{{ $detailPenelitian['peneliti_utama']['name'] ?? ' - ' }}</td>
+												<td>{{ $detailPengabdian['peneliti_utama']['name'] ?? ' - ' }}</td>
 											</tr>
 											<tr>
 												<th>Anggota 1</th>
-												<td>{{ $detailPenelitian['anggota1']['name'] ?? ' - ' }}</td>
+												<td>{{ $detailPengabdian['anggota1']['name'] ?? ' - ' }}</td>
 											</tr>
 											<tr>
 												<th>Anggota 2</th>
-												<td>{{ $detailPenelitian['anggota2']['name'] ?? ' - ' }}</td>
+												<td>{{ $detailPengabdian['anggota2']['name'] ?? ' - ' }}</td>
 											</tr>
 											<tr>
 												<th>Anggota 3</th>
-												<td>{{ $detailPenelitian['anggota3']['name'] ?? ' - ' }}</td>
+												<td>{{ $detailPengabdian['anggota3']['name'] ?? ' - ' }}</td>
 											</tr>
 										</tbody>
 									</table>
@@ -166,51 +166,51 @@
 								<dl>
 									<dt>Dokumen Pengesahan</dt>
 									<dd>
-										@if (isset($detailPenelitian['file_upload_pengesahan']))
+										@if (isset($detailPengabdian['file_upload_pengesahan']))
 										<a href="#" class="btn btn-outline-danger btn-sm upload-pengesahan"
-											data-id="{{ $detailPenelitian['usulan_penelitian_id'] }}"><i
+											data-id="{{ $detailPengabdian['usulan_id'] }}"><i
 												class="fas fa-file-upload"></i>
 											Reupload</a>
 										<a class="btn btn-outline-primary btn-sm" target="_blank"
-											href="{{ asset('media/pengesahan') }}/{{ $detailPenelitian['file_upload_pengesahan'] }}"><i
+											href="{{ asset('media/pengesahan') }}/{{ $detailPengabdian['file_upload_pengesahan'] }}"><i
 												class="fas fa-file-download"></i> Download</a>
 										@else
 										<a href="#" class="btn btn-outline-danger btn-sm upload-pengesahan"
-											data-id="{{ $detailPenelitian['usulan_penelitian_id'] }}"><i
+											data-id="{{ $detailPengabdian['usulan_id'] }}"><i
 												class="fas fa-file-upload"></i>
 											Upload</a>
 										@endif
 									</dd>
 									<dt>Dokumen Proposal</dt>
 									<dd>
-										@if (isset($detailPenelitian['file_upload_proposal']))
+										@if (isset($detailPengabdian['file_upload_proposal']))
 										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
-											data-id="{{ $detailPenelitian['usulan_penelitian_id'] }}"><i
+											data-id="{{ $detailPengabdian['usulan_id'] }}"><i
 												class="fas fa-file-upload"></i>
 											Reupload</a>
 										<a class="btn btn-outline-primary btn-sm" target="_blank"
-											href="{{ asset('media/proposal') }}/{{ $detailPenelitian['file_upload_pengesahan'] }}"><i
+											href="{{ asset('media/proposal') }}/{{ $detailPengabdian['file_upload_pengesahan'] }}"><i
 												class="fas fa-file-download"></i> Download</a>
 										@else
 										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
-											data-id="{{ $detailPenelitian['usulan_penelitian_id'] }}"><i
+											data-id="{{ $detailPengabdian['usulan_id'] }}"><i
 												class="fas fa-file-upload"></i>
 											Upload</a>
 										@endif
 									</dd>
 									<dt>Dokumen Laporan Akhir</dt>
 									<dd>
-										@if (isset($detailPenelitian['file_upload_laporan_akhir']))
+										@if (isset($detailPengabdian['file_upload_laporan_akhir']))
 										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
-											data-id="{{ $detailPenelitian['file_upload_laporan_akhir'] }}"><i
+											data-id="{{ $detailPengabdian['file_upload_laporan_akhir'] }}"><i
 												class="fas fa-file-upload"></i>
 											Reupload</a>
 										<a class="btn btn-outline-primary btn-sm" target="_blank"
-											href="{{ asset('media/laporan-akhir') }}/{{ $detailPenelitian['file_upload_laporan_akhir'] }}"><i
+											href="{{ asset('media/laporan-akhir') }}/{{ $detailPengabdian['file_upload_laporan_akhir'] }}"><i
 												class="fas fa-file-download"></i> Download</a>
 										@else
 										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
-											data-id="{{ $detailPenelitian['file_upload_laporan_akhir'] }}"><i
+											data-id="{{ $detailPengabdian['file_upload_laporan_akhir'] }}"><i
 												class="fas fa-file-upload"></i>
 											Upload</a>
 										@endif
@@ -432,7 +432,7 @@
 			$('#form-catatan-harian-modal').modal('show');
 			$('#action-button').val('Simpan');
 			$('#action').val('Simpan');
-			$('.id-penelitian').val("{{ $detailPenelitian['usulan_penelitian_id'] ?? '' }}");
+			$('.id-penelitian').val("{{ $detailPengabdian['usulan_id'] ?? '' }}");
 		});
 
 		$('#reservationdate').datetimepicker({
@@ -559,7 +559,7 @@
 			processing: true,
 			serverSide: true,
 			ajax: {
-				url: "{{ route('penelitian.get-catatan-harian', $detailPenelitian['usulan_penelitian_id']) }}",
+				url: "{{ route('penelitian.get-catatan-harian', $detailPengabdian['usulan_id']) }}",
 			},
 			columns: [
 				{

@@ -181,23 +181,27 @@
         */
 
         function detailedRow ( d ) {
+            const wewenang1 = d.wewenang_usulan.find( ({wewenang}) => wewenang == 1 ) !== undefined ? d.wewenang_usulan.find( ({wewenang}) => wewenang == 1 ).detail_pengusul.name : ' - ';
+            const wewenang2 = d.wewenang_usulan.find( ({wewenang}) => wewenang == 2 ) !== undefined ? d.wewenang_usulan.find( ({wewenang}) => wewenang == 2 ).detail_pengusul.name : ' - ';
+            const wewenang3 = d.wewenang_usulan.find( ({wewenang}) => wewenang == 3 ) !== undefined ? d.wewenang_usulan.find( ({wewenang}) => wewenang == 3 ).detail_pengusul.name : ' - ';
+            const wewenang4 = d.wewenang_usulan.find( ({wewenang}) => wewenang == 4 ) !== undefined ? d.wewenang_usulan.find( ({wewenang}) => wewenang == 4 ).detail_pengusul.name : ' - ';
             // `d` is the original data object for the row
             return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
                 '<tr>'+
                     '<td>Ketua</td>'+
-                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang == 1 ).detail_pengusul.name +'</td>'+
+                    '<td>'+ wewenang1 +'</td>'+
                 '</tr>'+
                 '<tr>'+
                     '<td>Anggota 1</td>'+
-                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang == 2 ).detail_pengusul.name +'</td>'+
+                    '<td>'+ wewenang2 +'</td>'+
                 '</tr>'+
                 '<tr>'+
                     '<td>Anggota 2</td>'+
-                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang == 3 ).detail_pengusul.name +'</td>'+
+                    '<td>'+ wewenang3 +'</td>'+
                 '</tr>'+
                 '<tr>'+
                     '<td>Anggota 3</td>'+
-                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang == 4 ).detail_pengusul.name +'</td>'+
+                    '<td>'+ wewenang4 +'</td>'+
                 '</tr>'+
             '</table>';
         }

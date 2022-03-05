@@ -354,6 +354,8 @@
                                 value="{{ isset($anggotaPenelitian) ? json_encode($anggotaPenelitian) : '[]' }}" />
                             <input type="hidden" name="usulan_id" id="usulan-penelitian-id"
                                 value="{{ isset($detailPenelitian['usulan_id']) ? $detailPenelitian['usulan_id'] : '' }}" />
+                            <input type="hidden" name="jenis_usulan" id="jenis-usulan"
+                                value="{{ isset($detailPenelitian['jenis_usulan']) ? $detailPenelitian['jenis_usulan'] : 1 }}" />
                             <button type="submit" class="btn btn-success float-left">Simpan</button>
                             <a href={{ route('penelitian.data-penelitian') }} type="button"
                                 class="btn btn-danger float-right">Kembali</a>

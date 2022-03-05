@@ -55,7 +55,7 @@ class PengabdianController extends Controller
     public function detailPengabdian($id, Request $request)
     {
         $param = [
-            'usulan_pengabdian_id' => $id,
+            'usulan_id' => $id,
         ];
 
         $getData = $this->postAPI($param, 'pengabdian/get-pengabdian');
@@ -107,7 +107,7 @@ class PengabdianController extends Controller
     public function editDataPengabdian($id)
     {
         $paramPengabdian = [
-            'usulan_pengabdian_id' => $id,
+            'usulan_id' => $id,
         ];
 
         $paramSkema = [
@@ -129,17 +129,20 @@ class PengabdianController extends Controller
         $getCapaianLuaran = $this->postAPI([], 'capaian-luaran/get-all');
         $getPeranan = $this->postAPI([], 'peranan/get-all');
         $getData = $this->postAPI($paramPengabdian, 'pengabdian/get-pengabdian');
+        if (isset($getData['status_code']) && $getData['status_code'] == 500) {
+            abort(500);
+        }
 
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
         $detailPengabdian = isset($getData['data']) ? $getData['data'] : [];
-        $wewenangUsulan = isset($getData['data']['wewenangUsulan']) ? $getData['data']['wewenangUsulan'] : [];
+        $wewenangUsulan = isset($getData['data']['wewenang_usulan']) ? $getData['data']['wewenang_usulan'] : [];
         $anggotaPengabdian = [];
         $anggotaPengabdianIds = [];
         $indexKetua = array_search('1', array_column($wewenangUsulan, 'wewenang'));
         $indexAnggota1 = array_search('2', array_column($wewenangUsulan, 'wewenang'));
         $indexAnggota2 = array_search('3', array_column($wewenangUsulan, 'wewenang'));
         $indexAnggota3 = array_search('4', array_column($wewenangUsulan, 'wewenang'));
-        // dd($indexKetua, $indexAnggota1, $indexAnggota2, $indexAnggota3);
+
         // Membentuk array anggota
         if ($indexKetua !== FALSE) {
             array_push($anggotaPengabdian, [$wewenangUsulan[$indexKetua]['detail_pengusul']['name'], 'Ketua Peneliti', $wewenangUsulan[$indexKetua]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-pengabdian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexKetua]['user_id'], 1, $wewenangUsulan[$indexKetua]['fakultas_id']]);
@@ -167,7 +170,6 @@ class PengabdianController extends Controller
             ]);
         }
         if ($indexAnggota3 !== FALSE) {
-            dd('asdasdas');
             array_push($anggotaPengabdian, [$wewenangUsulan[$indexAnggota3]['detail_pengusul']['name'], 'Anggota Peneliti 3', $wewenangUsulan[$indexAnggota3]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-pengabdian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexAnggota3]['user_id'], 4, $wewenangUsulan[$indexAnggota3]['fakultas_id']]);
             array_push($anggotaPengabdianIds, [
                 "userId" => $wewenangUsulan[$indexAnggota3]['user_id'],
@@ -307,7 +309,7 @@ class PengabdianController extends Controller
 
         // Param datatables harus dikirim ke be juga
         $dataTablesParam = $request->all();
-        $dataTablesParam['filter'] = ['usulan_pengabdian_id' => $id];
+        $dataTablesParam['filter'] = ['usulan_id' => $id];
         $getData = $this->postAPI($dataTablesParam, 'pengabdian/get-catatan-harian-filter');
 
         $data = $getData['data'];
@@ -342,7 +344,7 @@ class PengabdianController extends Controller
     public function updateStatusPengabdian($id, Request $request)
     {
         $param = [
-            'usulan_pengabdian_id' => $id,
+            'usulan_id' => $id,
             'user_menyetujui_id' => $request->user_menyetujui_id,
             'status' => $request->status,
         ];
@@ -365,7 +367,7 @@ class PengabdianController extends Controller
             return redirect()->route('pengabdian.data-pengabdian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
-            'usulan_pengabdian_id' => $request->id_pengabdian,
+            'usulan_id' => $request->id_pengabdian,
             'file_upload_pengesahan' => $fileName,
         ];
 
@@ -389,7 +391,7 @@ class PengabdianController extends Controller
             return redirect()->route('pengabdian.data-pengabdian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
-            'usulan_pengabdian_id' => $request->id_pengabdian,
+            'usulan_id' => $request->id_pengabdian,
             'file_upload_proposal' => $fileName,
         ];
 
@@ -413,7 +415,7 @@ class PengabdianController extends Controller
             return redirect()->route('pengabdian.data-pengabdian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
-            'usulan_pengabdian_id' => $request->id_pengabdian,
+            'usulan_id' => $request->id_pengabdian,
             'file_upload_laporan_akhir' => $fileName,
         ];
 
@@ -437,7 +439,7 @@ class PengabdianController extends Controller
             return redirect()->route('pengabdian.data-pengabdian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
-            'usulan_pengabdian_id' => $request->id_pengabdian,
+            'usulan_id' => $request->id_pengabdian,
             'file_upload_proposal_revisi' => $fileName,
         ];
 
@@ -461,7 +463,7 @@ class PengabdianController extends Controller
             return redirect()->route('pengabdian.detail-pengabdian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
-            'usulan_pengabdian_id' => $request->id_pengabdian,
+            'usulan_id' => $request->id_pengabdian,
             'tanggal_pelaksanaan' => Carbon::parse($request->tanggal_pelaksanaan, 'Asia/Jakarta')->format('Y-m-d'),
             'deskripsi' => $request->deskripsi,
             'berkas' => $fileName,
@@ -488,7 +490,7 @@ class PengabdianController extends Controller
         }
 
         $param = [
-            'usulan_pengabdian_id' => $request->id_pengabdian,
+            'usulan_id' => $request->id_pengabdian,
             'file_upload_pengesahan' => $fileName,
         ];
 
@@ -563,7 +565,7 @@ class PengabdianController extends Controller
         $data = $getData['data'];
         $dataTables =  DataTables::of($data)
             ->addColumn('action', function ($data) {
-                $button = '<a target="_blank" type="button" href="/pengabdian/delete-reviewer-pengabdian/' . $data['usulan_pengabdian_id'] . '" name="delete" id="' . $data['usulan_pengabdian_id'] . '" class="detail btn btn-danger btn-sm">Hapus</a>';
+                $button = '<a target="_blank" type="button" href="/pengabdian/delete-reviewer-pengabdian/' . $data['usulan_id'] . '" name="delete" id="' . $data['usulan_id'] . '" class="detail btn btn-danger btn-sm">Hapus</a>';
                 return $button;
             })
             ->rawColumns(['action'])
@@ -617,7 +619,7 @@ class PengabdianController extends Controller
             foreach ($request['daftar_pengabdian'] as $data) {
                 array_push($daftarMapping, [
                     'user_id' => $request->reviewer_id,
-                    'usulan_pengabdian_id' => $data,
+                    'usulan_id' => $data,
                 ]);
             }
         } else {

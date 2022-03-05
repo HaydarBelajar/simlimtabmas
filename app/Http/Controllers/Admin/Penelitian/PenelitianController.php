@@ -134,7 +134,7 @@ class PenelitianController extends Controller
 
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
         $detailPenelitian = isset($getData['data']) ? $getData['data'] : [];
-        $wewenangUsulan = isset($getData['data']['wewenangUsulan']) ? $getData['data']['wewenangUsulan'] : [];
+        $wewenangUsulan = isset($getData['data']['wewenang_usulan']) ? $getData['data']['wewenang_usulan'] : [];
         $anggotaPenelitian = [];
         $anggotaPenelitianIds = [];
         $indexKetua = array_search('1', array_column($wewenangUsulan, 'wewenang'));

@@ -52,8 +52,8 @@
                                         <div class="col-sm-10">
                                             <select class="form-control" id="tahun" name="tahun_id" required>
                                                 @foreach ($listTahun as $tahun)
-                                                <option {{ isset($detailPenelitian['tahun_id']) &&
-                                                    ($detailPenelitian['tahun_id']==$tahun['tahun_id']) ? 'selected'
+                                                <option {{ isset($detailPengabdian['tahun_id']) &&
+                                                    ($detailPengabdian['tahun_id']==$tahun['tahun_id']) ? 'selected'
                                                     : '' }} value={{ $tahun['tahun_id'] }}>{{ $tahun['tahun'] }}
                                                 </option>
                                                 @endforeach
@@ -67,8 +67,8 @@
                                             <select class="form-control" id="tahun-pelaksanaan"
                                                 name="tahun_pelaksanaan_id" required>
                                                 @foreach ($listTahun as $tahun)
-                                                <option {{ isset($detailPenelitian['tahun_pelaksanaan_id']) &&
-                                                    ($detailPenelitian['tahun_pelaksanaan_id']==$tahun['tahun_id'])
+                                                <option {{ isset($detailPengabdian['tahun_pelaksanaan_id']) &&
+                                                    ($detailPengabdian['tahun_pelaksanaan_id']==$tahun['tahun_id'])
                                                     ? 'selected' : '' }} value={{ $tahun['tahun_id'] }}>{{
                                                     $tahun['tahun'] }}
                                                 </option>
@@ -83,8 +83,8 @@
                                             <select class="form-control" id="fakultas-pengabdian" name="fakultas_id"
                                                 required>
                                                 @foreach ($listFakultas as $fakultas)
-                                                <option {{ isset($detailPenelitian['fakultas_id']) &&
-                                                    ($detailPenelitian['fakultas_id']==$fakultas['kdfakultas'])
+                                                <option {{ isset($detailPengabdian['fakultas_id']) &&
+                                                    ($detailPengabdian['fakultas_id']==$fakultas['kdfakultas'])
                                                     ? 'selected' : '' }} value={{ $fakultas['kdfakultas'] }}>{{
                                                     $fakultas['namafakultas'] }}
                                                 </option>
@@ -97,8 +97,8 @@
                                         <div class="col-sm-10">
                                             <select class="form-control" id="skema-pengabdian" name="skema_id" required>
                                                 @foreach ($listSkema as $skema)
-                                                <option {{ isset($detailPenelitian['skema_id']) &&
-                                                    ($detailPenelitian['skema_id']==$skema['skema_id']) ? 'selected'
+                                                <option {{ isset($detailPengabdian['skema_id']) &&
+                                                    ($detailPengabdian['skema_id']==$skema['skema_id']) ? 'selected'
                                                     : '' }} value={{ $skema['skema_id'] }}>{{ $skema['skema_nama'] }}
                                                 </option>
                                                 @endforeach
@@ -111,23 +111,23 @@
                                         <div class="col-sm-10">
                                             <select class="form-control" id="durasi-kegiatan" name="durasi_kegiatan"
                                                 required>
-                                                <option {{ isset($detailPenelitian['durasi_kegiatan']) &&
-                                                    ($detailPenelitian['durasi_kegiatan']=='1 Bulan' ) ? 'selected' : ''
+                                                <option {{ isset($detailPengabdian['durasi_kegiatan']) &&
+                                                    ($detailPengabdian['durasi_kegiatan']=='1 Bulan' ) ? 'selected' : ''
                                                     }}>1 Bulan</option>
-                                                <option {{ isset($detailPenelitian['durasi_kegiatan']) &&
-                                                    ($detailPenelitian['durasi_kegiatan']=='2 Bulan' ) ? 'selected' : ''
+                                                <option {{ isset($detailPengabdian['durasi_kegiatan']) &&
+                                                    ($detailPengabdian['durasi_kegiatan']=='2 Bulan' ) ? 'selected' : ''
                                                     }}>2 Bulan</option>
-                                                <option {{ isset($detailPenelitian['durasi_kegiatan']) &&
-                                                    ($detailPenelitian['durasi_kegiatan']=='3 Bulan' ) ? 'selected' : ''
+                                                <option {{ isset($detailPengabdian['durasi_kegiatan']) &&
+                                                    ($detailPengabdian['durasi_kegiatan']=='3 Bulan' ) ? 'selected' : ''
                                                     }}>3 Bulan</option>
-                                                <option {{ isset($detailPenelitian['durasi_kegiatan']) &&
-                                                    ($detailPenelitian['durasi_kegiatan']=='4 Bulan' ) ? 'selected' : ''
+                                                <option {{ isset($detailPengabdian['durasi_kegiatan']) &&
+                                                    ($detailPengabdian['durasi_kegiatan']=='4 Bulan' ) ? 'selected' : ''
                                                     }}>4 Bulan</option>
-                                                <option {{ isset($detailPenelitian['durasi_kegiatan']) &&
-                                                    ($detailPenelitian['durasi_kegiatan']=='5 Bulan' ) ? 'selected' : ''
+                                                <option {{ isset($detailPengabdian['durasi_kegiatan']) &&
+                                                    ($detailPengabdian['durasi_kegiatan']=='5 Bulan' ) ? 'selected' : ''
                                                     }}>5 Bulan</option>
-                                                <option {{ isset($detailPenelitian['durasi_kegiatan']) &&
-                                                    ($detailPenelitian['durasi_kegiatan']=='6 Bulan' ) ? 'selected' : ''
+                                                <option {{ isset($detailPengabdian['durasi_kegiatan']) &&
+                                                    ($detailPengabdian['durasi_kegiatan']=='6 Bulan' ) ? 'selected' : ''
                                                     }}>6 Bulan</option>
                                             </select>
                                         </div>
@@ -138,20 +138,20 @@
                                         <div class="col-sm-10">
                                             <select class="form-control" id="usulan-tahun-ke" name="usulan_tahun_ke"
                                                 required>
-                                                <option {{ isset($detailPenelitian['usulan_tahun_ke']) &&
-                                                    ($detailPenelitian['usulan_tahun_ke']=='1' ) ? 'selected' : '' }}>1
+                                                <option {{ isset($detailPengabdian['usulan_tahun_ke']) &&
+                                                    ($detailPengabdian['usulan_tahun_ke']=='1' ) ? 'selected' : '' }}>1
                                                 </option>
-                                                <option {{ isset($detailPenelitian['usulan_tahun_ke']) &&
-                                                    ($detailPenelitian['usulan_tahun_ke']=='2' ) ? 'selected' : '' }}>2
+                                                <option {{ isset($detailPengabdian['usulan_tahun_ke']) &&
+                                                    ($detailPengabdian['usulan_tahun_ke']=='2' ) ? 'selected' : '' }}>2
                                                 </option>
-                                                <option {{ isset($detailPenelitian['usulan_tahun_ke']) &&
-                                                    ($detailPenelitian['usulan_tahun_ke']=='3' ) ? 'selected' : '' }}>3
+                                                <option {{ isset($detailPengabdian['usulan_tahun_ke']) &&
+                                                    ($detailPengabdian['usulan_tahun_ke']=='3' ) ? 'selected' : '' }}>3
                                                 </option>
-                                                <option {{ isset($detailPenelitian['usulan_tahun_ke']) &&
-                                                    ($detailPenelitian['usulan_tahun_ke']=='4' ) ? 'selected' : '' }}>4
+                                                <option {{ isset($detailPengabdian['usulan_tahun_ke']) &&
+                                                    ($detailPengabdian['usulan_tahun_ke']=='4' ) ? 'selected' : '' }}>4
                                                 </option>
-                                                <option {{ isset($detailPenelitian['usulan_tahun_ke']) &&
-                                                    ($detailPenelitian['usulan_tahun_ke']=='5' ) ? 'selected' : '' }}>5
+                                                <option {{ isset($detailPengabdian['usulan_tahun_ke']) &&
+                                                    ($detailPengabdian['usulan_tahun_ke']=='5' ) ? 'selected' : '' }}>5
                                                 </option>
                                             </select>
                                         </div>
@@ -161,14 +161,14 @@
                                         <div class="col-sm-10">
                                             <textarea class="form-control" placeholder="Judul" id="judul" rows="2"
                                                 name="judul"
-                                                required>{{ isset($detailPenelitian['judul']) ? $detailPenelitian['judul'] : '' }}</textarea>
+                                                required>{{ isset($detailPengabdian['judul']) ? $detailPengabdian['judul'] : '' }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="abstrak" class="col-sm-2 col-form-label">Abstrak</label>
                                         <div class="col-sm-10">
                                             <textarea class="form-control" placeholder="abstrak" id="abstrak" rows="2"
-                                                name="abstrak" required>{{ isset($detailPenelitian['abstrak']) ? $detailPenelitian['abstrak'] : '' }}
+                                                name="abstrak" required>{{ isset($detailPengabdian['abstrak']) ? $detailPengabdian['abstrak'] : '' }}
                                                     </textarea>
                                         </div>
                                     </div>
@@ -177,7 +177,7 @@
                                         <div class="col-sm-10">
                                             <textarea class="form-control" placeholder="keywords" id="keywords" rows="2"
                                                 name="keywords"
-                                                required>{{ isset($detailPenelitian['keywords']) ? $detailPenelitian['keywords'] : '' }}</textarea>
+                                                required>{{ isset($detailPengabdian['keywords']) ? $detailPengabdian['keywords'] : '' }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -185,7 +185,7 @@
                                         <div class="col-sm-10">
                                             <input type="email" class="form-control" id="email" placeholder="Email"
                                                 name="email"
-                                                value="{{ isset($detailPenelitian['email']) ? $detailPenelitian['email'] : '' }}"
+                                                value="{{ isset($detailPengabdian['email']) ? $detailPengabdian['email'] : '' }}"
                                                 required>
                                         </div>
                                     </div>
@@ -206,8 +206,8 @@
                                         <div class="col-sm-10">
                                             <select class="form-control" id="rumpun-ilmu" name="rumpun_ilmu_id">
                                                 @foreach ($listRumpunIlmu as $rumpunIlmu)
-                                                <option {{ isset($detailPenelitian['rumpun_ilmu_id']) &&
-                                                    ($detailPenelitian['rumpun_ilmu_id']==$rumpunIlmu['rumpun_ilmu_id']
+                                                <option {{ isset($detailPengabdian['rumpun_ilmu_id']) &&
+                                                    ($detailPengabdian['rumpun_ilmu_id']==$rumpunIlmu['rumpun_ilmu_id']
                                                     ) ? 'selected' : '' }} value={{ $rumpunIlmu['rumpun_ilmu_id'] }}>{{
                                                     $rumpunIlmu['rumpun_ilmu_nama'] }}</option>
                                                 @endforeach
@@ -219,7 +219,7 @@
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="bidang-fokus"
                                                 name="bidang_fokus" placeholder="Bidang Fokus"
-                                                value="{{ isset($detailPenelitian['bidang_fokus']) ? $detailPenelitian['bidang_fokus'] : '' }}">
+                                                value="{{ isset($detailPengabdian['bidang_fokus']) ? $detailPengabdian['bidang_fokus'] : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -240,8 +240,8 @@
                                             <select class="form-control" id="sumber-dana" name="sumber_dana_id"
                                                 required>
                                                 @foreach ($listSumberDana as $sumberDana)
-                                                <option {{ isset($detailPenelitian['sumber_dana_id']) &&
-                                                    ($detailPenelitian['sumber_dana_id']==$sumberDana['sumber_dana_id']
+                                                <option {{ isset($detailPengabdian['sumber_dana_id']) &&
+                                                    ($detailPengabdian['sumber_dana_id']==$sumberDana['sumber_dana_id']
                                                     ) ? 'selected' : '' }} value={{ $sumberDana['sumber_dana_id'] }}>{{
                                                     $sumberDana['sumber_dana_nama'] }}</option>
                                                 @endforeach
@@ -253,7 +253,7 @@
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="jumlah-sumber-dana"
                                                 placeholder="Jumlah Dana" name="jumlah_sumber_dana" required
-                                                value="{{ isset($detailPenelitian['jumlah_usulan_dana']) ? $detailPenelitian['jumlah_usulan_dana'] : '' }}">
+                                                value="{{ isset($detailPengabdian['jumlah_usulan_dana']) ? $detailPengabdian['jumlah_usulan_dana'] : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -275,8 +275,8 @@
                                             <select class="form-control" id="penandatanganan"
                                                 name="mengetahui_penandatanganan_id" required>
                                                 @foreach ($listUserPengusul as $userPengusul)
-                                                <option {{ isset($detailPenelitian['user_mengetahui_id']) &&
-                                                    ($detailPenelitian['user_mengetahui_id']==$userPengusul['id'] )
+                                                <option {{ isset($detailPengabdian['user_mengetahui_id']) &&
+                                                    ($detailPengabdian['user_mengetahui_id']==$userPengusul['id'] )
                                                     ? 'selected' : '' }} value={{ $userPengusul['id'] }}>{{
                                                     $userPengusul['name'] }}</option>
                                                 @endforeach
@@ -337,9 +337,9 @@
                                                 multiple="multiple" data-dropdown-css-class="select2-purple"
                                                 style="width: 100%;">
                                                 @foreach ($listCapaianLuaran as $capaianLuaran)
-                                                <option {{ isset($detailPenelitian['jenis_luaran']) &&
+                                                <option {{ isset($detailPengabdian['jenis_luaran']) &&
                                                     (in_array($capaianLuaran['capaian_luaran_id'],
-                                                    json_decode($detailPenelitian['jenis_luaran'], true))) ? 'selected'
+                                                    json_decode($detailPengabdian['jenis_luaran'], true))) ? 'selected'
                                                     : '' }} value={{ $capaianLuaran['capaian_luaran_id'] }}>{{
                                                     $capaianLuaran['capaian_luaran_nama'] }}</option>
                                                 @endforeach
@@ -349,13 +349,13 @@
                                 </div>
                             </div>
                             <input type="hidden" name="list_anggota_pengabdian" id="list-anggota-pengabdian"
-                                value="{{ isset($anggotaPenelitianIds) ? json_encode($anggotaPenelitianIds) : '[]' }}" />
-                            <input type="hidden" name="anggotaPenelitian" id="anggota-pengabdian-list"
-                                value="{{ isset($anggotaPenelitian) ? json_encode($anggotaPenelitian) : '[]' }}" />
+                                value="{{ isset($anggotaPengabdianIds) ? json_encode($anggotaPengabdianIds) : '[]' }}" />
+                            <input type="hidden" name="anggotaPengabdian" id="anggota-pengabdian-list"
+                                value="{{ isset($anggotaPengabdian) ? json_encode($anggotaPengabdian) : '[]' }}" />
                             <input type="hidden" name="usulan_id" id="usulan-pengabdian-id"
-                                value="{{ isset($detailPenelitian['usulan_id']) ? $detailPenelitian['usulan_id'] : '' }}" />
+                                value="{{ isset($detailPengabdian['usulan_id']) ? $detailPengabdian['usulan_id'] : '' }}" />
                             <input type="hidden" name="jenis_usulan" id="jenis-usulan"
-                                value="{{ isset($detailPenelitian['jenis_usulan']) ? $detailPenelitian['jenis_usulan'] : '' }}" />
+                                value="{{ isset($detailPengabdian['jenis_usulan']) ? $detailPengabdian['jenis_usulan'] : 2 }}" />
                             <button type="submit" class="btn btn-success float-left">Simpan</button>
                             <a href={{ route('pengabdian.data-pengabdian') }} type="button"
                                 class="btn btn-danger float-right">Kembali</a>
