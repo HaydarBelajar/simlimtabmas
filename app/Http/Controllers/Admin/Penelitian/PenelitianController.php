@@ -55,13 +55,12 @@ class PenelitianController extends Controller
     public function detailPenelitian($id, Request $request)
     {
         $param = [
-            'usulan_penelitian_id' => $id,
+            'usulan_id' => $id,
         ];
 
         $getData = $this->postAPI($param, 'penelitian/get-penelitian');
 
         $detailPenelitian = $getData['data'];
-
         return view('admin.content.penelitian.usulan-baru.detail-usulan-baru')->with([
             'detailController' => $this->controllerPenelitianDetail,
             'detailPenelitian' => $detailPenelitian,
@@ -107,7 +106,7 @@ class PenelitianController extends Controller
     public function editDataPenelitian($id)
     {
         $paramPenelitian = [
-            'usulan_penelitian_id' => $id,
+            'usulan_id' => $id,
         ];
 
         $paramSkema = [
@@ -120,6 +119,10 @@ class PenelitianController extends Controller
                 "skema_tipe" => "Pengusul"
             ]
         ];
+        $getData = $this->postAPI($paramPenelitian, 'penelitian/get-penelitian');
+        if (isset($getData['status_code']) && $getData['status_code'] == 500) {
+            abort(500);
+        }
 
         $getTahun = $this->postAPI([], 'tahun/get-all');
         $getSkema = $this->postAPI($paramSkema, 'skema/get-filter');
@@ -128,7 +131,6 @@ class PenelitianController extends Controller
         $getUserPengusul = $this->postAPI($paramPengusul, 'user/get-filter');
         $getCapaianLuaran = $this->postAPI([], 'capaian-luaran/get-all');
         $getPeranan = $this->postAPI([], 'peranan/get-all');
-        $getData = $this->postAPI($paramPenelitian, 'penelitian/get-penelitian');
 
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
         $detailPenelitian = isset($getData['data']) ? $getData['data'] : [];
@@ -139,7 +141,7 @@ class PenelitianController extends Controller
         $indexAnggota1 = array_search('2', array_column($wewenangUsulan, 'wewenang'));
         $indexAnggota2 = array_search('3', array_column($wewenangUsulan, 'wewenang'));
         $indexAnggota3 = array_search('4', array_column($wewenangUsulan, 'wewenang'));
-        // dd($indexKetua, $indexAnggota1, $indexAnggota2, $indexAnggota3);
+        // dd($getData, $indexKetua, $indexAnggota1, $indexAnggota2, $indexAnggota3);
         // Membentuk array anggota
         if ($indexKetua !== FALSE) {
             array_push($anggotaPenelitian, [$wewenangUsulan[$indexKetua]['detail_pengusul']['name'], 'Ketua Peneliti', $wewenangUsulan[$indexKetua]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexKetua]['user_id'], 1, $wewenangUsulan[$indexKetua]['fakultas_id']]);
@@ -167,7 +169,6 @@ class PenelitianController extends Controller
             ]);
         }
         if ($indexAnggota3 !== FALSE) {
-            dd('asdasdas');
             array_push($anggotaPenelitian, [$wewenangUsulan[$indexAnggota3]['detail_pengusul']['name'], 'Anggota Peneliti 3', $wewenangUsulan[$indexAnggota3]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-penelitian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexAnggota3]['user_id'], 4, $wewenangUsulan[$indexAnggota3]['fakultas_id']]);
             array_push($anggotaPenelitianIds, [
                 "userId" => $wewenangUsulan[$indexAnggota3]['user_id'],
@@ -218,7 +219,8 @@ class PenelitianController extends Controller
             'list_anggota_penelitian' => json_decode($request->list_anggota_penelitian),
             'fakultas_id' => $request->fakultas_id,
             'person_id' => $userDetail['id'],
-            'status' => 0
+            'status' => 0,
+            'jenis_usulan' => $request->jenis_usulan
         ];
 
         $simpanData = $this->postAPI($param, 'penelitian/create-penelitian');
@@ -256,7 +258,8 @@ class PenelitianController extends Controller
             'list_anggota_penelitian' => json_decode($request->list_anggota_penelitian),
             'fakultas_id' => $request->fakultas_id,
             'person_id' => $userDetail['id'],
-            'status' => 0
+            'status' => 0,
+            'jenis_usulan' => $request->jenis_usulan
         ];
 
         $simpanData = $this->postAPI($param, 'penelitian/update-penelitian');
@@ -277,9 +280,9 @@ class PenelitianController extends Controller
         $dataTablesParam = $request->all();
         $dataTablesParam['filter'] = [
             'user_id' => $userDetail['id'],
-            'jenis_usulan' => 2
+            'jenis_usulan' => 1
         ];
-
+        Log::debug($dataTablesParam);
         $getData = $this->postAPI($dataTablesParam, 'penelitian/get-filter');
 
         $data = $getData['data'];
@@ -305,15 +308,15 @@ class PenelitianController extends Controller
 
         // Param datatables harus dikirim ke be juga
         $dataTablesParam = $request->all();
-        $dataTablesParam['filter'] = ['usulan_penelitian_id' => $id];
+        $dataTablesParam['filter'] = ['usulan_id' => $id];
         $getData = $this->postAPI($dataTablesParam, 'penelitian/get-catatan-harian-filter');
 
         $data = $getData['data'];
 
         $dataTables =  DataTables::of($data)
             ->addColumn('action', function ($data) {
-                // $button = '<button type="button" name="edit" id="' . $data['catatan_penelitian_id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
-                $button = '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['catatan_penelitian_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
+                // $button = '<button type="button" name="edit" id="' . $data['catatan_id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
+                $button = '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['catatan_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
                 return $button;
             })
             ->rawColumns(['action'])
@@ -325,7 +328,7 @@ class PenelitianController extends Controller
     public function hapusCatatanHarian($id, Request $request)
     {
         $param = [
-            'catatan_penelitian_id' => $id,
+            'catatan_id' => $id,
         ];
 
         $deleteData = $this->postAPI($param, 'penelitian/delete-catatan-harian');
@@ -340,7 +343,7 @@ class PenelitianController extends Controller
     public function updateStatusPenelitian($id, Request $request)
     {
         $param = [
-            'usulan_penelitian_id' => $id,
+            'usulan_id' => $id,
             'user_menyetujui_id' => $request->user_menyetujui_id,
             'status' => $request->status,
         ];
@@ -363,7 +366,7 @@ class PenelitianController extends Controller
             return redirect()->route('penelitian.data-penelitian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
-            'usulan_penelitian_id' => $request->id_penelitian,
+            'usulan_id' => $request->id_penelitian,
             'file_upload_pengesahan' => $fileName,
         ];
 
@@ -387,7 +390,7 @@ class PenelitianController extends Controller
             return redirect()->route('penelitian.data-penelitian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
-            'usulan_penelitian_id' => $request->id_penelitian,
+            'usulan_id' => $request->id_penelitian,
             'file_upload_proposal' => $fileName,
         ];
 
@@ -411,7 +414,7 @@ class PenelitianController extends Controller
             return redirect()->route('penelitian.data-penelitian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
-            'usulan_penelitian_id' => $request->id_penelitian,
+            'usulan_id' => $request->id_penelitian,
             'file_upload_laporan_akhir' => $fileName,
         ];
 
@@ -435,7 +438,7 @@ class PenelitianController extends Controller
             return redirect()->route('penelitian.data-penelitian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
-            'usulan_penelitian_id' => $request->id_penelitian,
+            'usulan_id' => $request->id_penelitian,
             'file_upload_proposal_revisi' => $fileName,
         ];
 
@@ -459,7 +462,7 @@ class PenelitianController extends Controller
             return redirect()->route('penelitian.detail-penelitian')->with('error', 'Gagal Menyimpan File');
         }
         $param = [
-            'usulan_penelitian_id' => $request->id_penelitian,
+            'usulan_id' => $request->id_penelitian,
             'tanggal_pelaksanaan' => Carbon::parse($request->tanggal_pelaksanaan, 'Asia/Jakarta')->format('Y-m-d'),
             'deskripsi' => $request->deskripsi,
             'berkas' => $fileName,
@@ -486,7 +489,7 @@ class PenelitianController extends Controller
         }
 
         $param = [
-            'usulan_penelitian_id' => $request->id_penelitian,
+            'usulan_id' => $request->id_penelitian,
             'file_upload_pengesahan' => $fileName,
         ];
 
@@ -561,7 +564,7 @@ class PenelitianController extends Controller
         $data = $getData['data'];
         $dataTables =  DataTables::of($data)
             ->addColumn('action', function ($data) {
-                $button = '<a target="_blank" type="button" href="/penelitian/delete-reviewer-penelitian/' . $data['usulan_penelitian_id'] . '" name="delete" id="' . $data['usulan_penelitian_id'] . '" class="detail btn btn-danger btn-sm">Hapus</a>';
+                $button = '<a target="_blank" type="button" href="/penelitian/delete-reviewer-penelitian/' . $data['usulan_id'] . '" name="delete" id="' . $data['usulan_id'] . '" class="detail btn btn-danger btn-sm">Hapus</a>';
                 return $button;
             })
             ->rawColumns(['action'])
@@ -615,7 +618,7 @@ class PenelitianController extends Controller
             foreach ($request['daftar_penelitian'] as $data) {
                 array_push($daftarMapping, [
                     'user_id' => $request->reviewer_id,
-                    'usulan_penelitian_id' => $data,
+                    'usulan_id' => $data,
                 ]);
             }
         } else {

@@ -218,7 +218,8 @@ class PengabdianController extends Controller
             'list_anggota_pengabdian' => json_decode($request->list_anggota_pengabdian),
             'fakultas_id' => $request->fakultas_id,
             'person_id' => $userDetail['id'],
-            'status' => 0
+            'status' => 0,
+            'jenis_usulan' => $request->jenis_usulan
         ];
 
         $simpanData = $this->postAPI($param, 'pengabdian/create-pengabdian');
@@ -256,7 +257,8 @@ class PengabdianController extends Controller
             'list_anggota_pengabdian' => json_decode($request->list_anggota_pengabdian),
             'fakultas_id' => $request->fakultas_id,
             'person_id' => $userDetail['id'],
-            'status' => 0
+            'status' => 0,
+            'jenis_usulan' => $request->jenis_usulan
         ];
 
         $simpanData = $this->postAPI($param, 'pengabdian/update-pengabdian');

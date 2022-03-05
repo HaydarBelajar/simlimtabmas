@@ -41,6 +41,7 @@
                                 <th width="5%">Tahun Usulan</th>
                                 <th width="5%">Tahun Pelaksanaan</th>
                                 <th width="10%">Fakultas</th>
+                                <th width="10%">Skema</th>
                                 <th width="10%">Peran</th>
                                 <th width="5%">Pengesahan</th>
                                 <th width="5%">Proposal</th>
@@ -180,23 +181,27 @@
         */
 
         function detailedRow ( d ) {
+            const wewenang1 = d.wewenang_usulan.find( ({wewenang}) => wewenang == 1 ) !== undefined ? d.wewenang_usulan.find( ({wewenang}) => wewenang == 1 ).detail_pengusul.name : ' - ';
+            const wewenang2 = d.wewenang_usulan.find( ({wewenang}) => wewenang == 2 ) !== undefined ? d.wewenang_usulan.find( ({wewenang}) => wewenang == 2 ).detail_pengusul.name : ' - ';
+            const wewenang3 = d.wewenang_usulan.find( ({wewenang}) => wewenang == 3 ) !== undefined ? d.wewenang_usulan.find( ({wewenang}) => wewenang == 3 ).detail_pengusul.name : ' - ';
+            const wewenang4 = d.wewenang_usulan.find( ({wewenang}) => wewenang == 4 ) !== undefined ? d.wewenang_usulan.find( ({wewenang}) => wewenang == 4 ).detail_pengusul.name : ' - ';
             // `d` is the original data object for the row
             return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
                 '<tr>'+
                     '<td>Ketua</td>'+
-                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang == 1 ).detail_pengusul.name +'</td>'+
+                    '<td>'+ wewenang1 +'</td>'+
                 '</tr>'+
                 '<tr>'+
                     '<td>Anggota 1</td>'+
-                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang == 2 ).detail_pengusul.name +'</td>'+
+                    '<td>'+ wewenang2 +'</td>'+
                 '</tr>'+
                 '<tr>'+
                     '<td>Anggota 2</td>'+
-                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang == 3 ).detail_pengusul.name +'</td>'+
+                    '<td>'+ wewenang3 +'</td>'+
                 '</tr>'+
                 '<tr>'+
                     '<td>Anggota 3</td>'+
-                    '<td>'+d.wewenang_usulan.find( ({wewenang}) => wewenang == 4 ).detail_pengusul.name +'</td>'+
+                    '<td>'+ wewenang4 +'</td>'+
                 '</tr>'+
             '</table>';
         }
@@ -239,11 +244,23 @@
                     name: 'Tahun Pelaksanaan'
                 },
                 {
-                    data: 'fakultas_penelitian',
+                    data: 'fakultas',
                     name: 'Fakultas',
                     render: function ( data, type, row ) {
                         if (data) {
                             return data.namafakultas;
+                        } else {
+                            return '-';
+                        }
+
+                    }
+                },
+                {
+                    data: 'skema',
+                    name: 'Skema',
+                    render: function ( data, type, row ) {
+                        if (data) {
+                            return data.skema_nama;
                         } else {
                             return '-';
                         }

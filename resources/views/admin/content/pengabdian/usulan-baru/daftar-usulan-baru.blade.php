@@ -41,6 +41,7 @@
                                 <th width="5%">Tahun Usulan</th>
                                 <th width="5%">Tahun Pelaksanaan</th>
                                 <th width="10%">Fakultas</th>
+                                <th width="10%">Skema</th>
                                 <th width="10%">Peran</th>
                                 <th width="5%">Pengesahan</th>
                                 <th width="5%">Proposal</th>
@@ -239,11 +240,23 @@
                     name: 'Tahun Pelaksanaan'
                 },
                 {
-                    data: 'fakultas_pengabdian',
+                    data: 'fakultas',
                     name: 'Fakultas',
                     render: function ( data, type, row ) {
                         if (data) {
                             return data.namafakultas;
+                        } else {
+                            return '-';
+                        }
+
+                    }
+                },
+                {
+                    data: 'skema',
+                    name: 'Skema',
+                    render: function ( data, type, row ) {
+                        if (data) {
+                            return data.skema_nama;
                         } else {
                             return '-';
                         }

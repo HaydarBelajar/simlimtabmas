@@ -42,7 +42,7 @@
 									in_array('Reviewer',
 									Session::get('kucingku')['roles']))
 									<button type="button" id='button-loloskan-usulan'
-										data-id='{{ $detailPenelitian["usulan_penelitian_id"] ?? '' }}'
+										data-id='{{ $detailPenelitian["usulan_id"] ?? '' }}'
 										class="btn btn-danger btn-sm"><i class="fa fa-bell"></i> Loloskan
 										Usulan</button>
 									@endif
@@ -68,7 +68,7 @@
 								<strong>Tahun Pelaksanaan</strong>
 								<p class="well well-sm shadow-none" style="margin-top: 10px;">
 									{{ $detailPenelitian['tahun_pelaksanaan'] ?
-									$detailPenelitian['tahun_pelaksanaan']['tahun_usulan'] :
+									$detailPenelitian['tahun_pelaksanaan']['tahun'] :
 									'' }}
 								</p>
 							</div>
@@ -168,7 +168,7 @@
 									<dd>
 										@if (isset($detailPenelitian['file_upload_pengesahan']))
 										<a href="#" class="btn btn-outline-danger btn-sm upload-pengesahan"
-											data-id="{{ $detailPenelitian['usulan_penelitian_id'] }}"><i
+											data-id="{{ $detailPenelitian['usulan_id'] }}"><i
 												class="fas fa-file-upload"></i>
 											Reupload</a>
 										<a class="btn btn-outline-primary btn-sm" target="_blank"
@@ -176,7 +176,7 @@
 												class="fas fa-file-download"></i> Download</a>
 										@else
 										<a href="#" class="btn btn-outline-danger btn-sm upload-pengesahan"
-											data-id="{{ $detailPenelitian['usulan_penelitian_id'] }}"><i
+											data-id="{{ $detailPenelitian['usulan_id'] }}"><i
 												class="fas fa-file-upload"></i>
 											Upload</a>
 										@endif
@@ -185,7 +185,7 @@
 									<dd>
 										@if (isset($detailPenelitian['file_upload_proposal']))
 										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
-											data-id="{{ $detailPenelitian['usulan_penelitian_id'] }}"><i
+											data-id="{{ $detailPenelitian['usulan_id'] }}"><i
 												class="fas fa-file-upload"></i>
 											Reupload</a>
 										<a class="btn btn-outline-primary btn-sm" target="_blank"
@@ -193,7 +193,7 @@
 												class="fas fa-file-download"></i> Download</a>
 										@else
 										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
-											data-id="{{ $detailPenelitian['usulan_penelitian_id'] }}"><i
+											data-id="{{ $detailPenelitian['usulan_id'] }}"><i
 												class="fas fa-file-upload"></i>
 											Upload</a>
 										@endif
@@ -432,7 +432,7 @@
 			$('#form-catatan-harian-modal').modal('show');
 			$('#action-button').val('Simpan');
 			$('#action').val('Simpan');
-			$('.id-penelitian').val("{{ $detailPenelitian['usulan_penelitian_id'] ?? '' }}");
+			$('.id-penelitian').val("{{ $detailPenelitian['usulan_id'] ?? '' }}");
 		});
 
 		$('#reservationdate').datetimepicker({
@@ -559,11 +559,11 @@
 			processing: true,
 			serverSide: true,
 			ajax: {
-				url: "{{ route('penelitian.get-catatan-harian', $detailPenelitian['usulan_penelitian_id']) }}",
+				url: "{{ route('penelitian.get-catatan-harian', $detailPenelitian['usulan_id']) }}",
 			},
 			columns: [
 				{
-					data: 'catatan_penelitian_id',
+					data: 'catatan_id',
 					name: 'No',
 					render: function ( data, type, row, meta ) {
 						return meta.row + meta.settings._iDisplayStart + 1;
