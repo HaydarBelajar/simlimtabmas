@@ -161,7 +161,7 @@
                     name: 'Tahun Usulan',
                     render: function ( data, type, row ) {
                         if (data) {
-                            return data.tahun_usulan;
+                            return data.tahun;
                         } else {
                             return '-';
                         }
@@ -173,7 +173,7 @@
                     name: 'Tahun Pelaksanaan',
                     render: function ( data, type, row ) {
                         if (data) {
-                            return data.tahun_usulan;
+                            return data.tahun;
                         } else {
                             return '-';
                         }
