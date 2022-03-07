@@ -61,7 +61,7 @@
                                     href="{{ route('penelitian.penugasan-reviewer', $reviewerData['id'] ?? '') }}"
                                     class="btn btn-primary tambah-catatan-harian"
                                     style="text-decoration: none; color: #FFFFFF;">Tambah
-                                    Penelitian</a>
+                                    Reviewer Penelitian</a>
                             </div>
                             <span id="notification"></span>
                             <table id="tabel-detail-reviewer" class="table table-striped table-bordered"

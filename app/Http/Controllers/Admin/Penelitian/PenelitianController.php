@@ -39,6 +39,11 @@ class PenelitianController extends Controller
             "currentPage" => "Reviewer",
             "pageDescription" => "Halaman Daftar Reviewer"
         ];
+
+        $this->controllerTambahUsulanReviewer = [
+            "currentPage" => "Reviewer",
+            "pageDescription" => "Halaman Tambah Usulan Reviewer"
+        ];
     }
     /**
      * Display a listing of the resource.
@@ -583,7 +588,7 @@ class PenelitianController extends Controller
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
 
         return view('admin.content.penelitian.reviewer.penugasan-reviewer')->with([
-            'detailController' => $this->controllerReviewer,
+            'detailController' => $this->controllerTambahUsulanReviewer,
             'page' => 'tambah',
             'listTahun' => isset($getTahun['data']) ? $getTahun['data'] : [],
             'listFakultas' => isset($getFakultas['data']) ? $getFakultas['data'] : [],
