@@ -556,7 +556,6 @@ class PenelitianController extends Controller
 
     public function getPenelitianByReviewerDatatables($userId, Request $request)
     {
-        Log::debug('asdasdasdd');
         $userSession = $request->session()->get('kucingku');
         $userDetail = $userSession['user'];
 

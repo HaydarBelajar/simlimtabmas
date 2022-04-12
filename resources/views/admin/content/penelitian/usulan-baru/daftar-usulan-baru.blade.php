@@ -273,17 +273,19 @@
                     render: function ( data, type, row ) {
                         if (data.length){
                             let peran = data.find( ({user_id}) => user_id == $('#kucingku-id').val() );
-                            if (peran.wewenang == 1) {
-                                return 'Ketua';
-                            } 
-                            if (peran.wewenang == 2) {
-                                return 'Anggota 1';
-                            }
-                            if (peran.wewenang == 3) {
-                                return 'Anggota 2';
-                            }
-                            if (peran.wewenang == 4) {
-                                return 'Anggota 3';
+                            if (peran != undefined ){
+                                if (peran.wewenang == 1) {
+                                    return 'Ketua';
+                                } 
+                                if (peran.wewenang == 2) {
+                                    return 'Anggota 1';
+                                }
+                                if (peran.wewenang == 3) {
+                                    return 'Anggota 2';
+                                }
+                                if (peran.wewenang == 4) {
+                                    return 'Anggota 3';
+                                }
                             }
                         }
                         return '-';
