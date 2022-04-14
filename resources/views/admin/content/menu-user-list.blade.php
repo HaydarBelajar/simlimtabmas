@@ -91,7 +91,10 @@
                                         id="dosen" required>
                                         @if (!empty($dosenOptions))
                                         @foreach ($dosenOptions as $dosen)
-                                        <option value="{{ $dosen['kdperson'] }}">{{ $dosen['username'] }}</option>
+                                        @if (!empty($dosen['detail_person']))
+                                        <option value="{{ $dosen['kdperson'] }}">{{
+                                            $dosen['detail_person']['namalengkap'] }}</option>
+                                        @endif
                                         @endforeach
                                         @endif
                                     </select>
