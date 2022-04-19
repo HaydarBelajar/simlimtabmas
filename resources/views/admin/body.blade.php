@@ -333,6 +333,30 @@
                 </li>--}}
               </ul>
             </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-users"></i>
+                <p>
+                  Sister Data
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('sister.daftar-penelitian')}}" class="nav-link">
+                    <i class="fa fa-chevron-right nav-icon"></i>
+                    <p>Data Penelitian</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('sister.daftar-pengabdian')}}" class="nav-link">
+                    <i class="fa fa-chevron-right nav-icon"></i>
+                    <p>Data Pengabdian</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
             {{-- <li class="nav-item">--}}
               {{-- <a href="#" class="nav-link">--}}
                 {{-- <i class="nav-icon fas fa fa-book"></i>--}}

@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\Penelitian\PenelitianController;
+use App\Http\Controllers\Admin\SisterData\PenelitianSisterController;
+use App\Http\Controllers\Admin\SisterData\PengabdianSisterController;
 use App\Http\Controllers\Admin\UserManagementController;
 
 /*
@@ -105,6 +108,13 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/delete/{id}', [UserManagementController::class, 'destroy'])->name('delete');
         Route::post('/create', [UserManagementController::class, 'store'])->name('create');
         Route::post('/update', [UserManagementController::class, 'update'])->name('update');
+    });
+
+    Route::group(['prefix' => 'sister', 'as' => 'sister.'], function () {
+        Route::get('/daftar-penelitian', [PenelitianSisterController::class, 'index'])->name('daftar-penelitian');
+        Route::post('/daftar-penelitian-filter', [PenelitianSisterController::class, 'filter'])->name('daftar-penelitian-filter');
+
+        Route::get('/daftar-pengabdian', [PengabdianSisterController::class, 'index'])->name('daftar-pengabdian');
     });
 
     Route::group(['prefix' => 'penelitian-usulan-baru', 'as' => 'penelitian-usulan-baru.'], function () {
