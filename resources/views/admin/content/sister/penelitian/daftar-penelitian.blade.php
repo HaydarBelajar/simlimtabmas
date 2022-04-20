@@ -31,6 +31,7 @@
                         Untuk mencari data semua dosen, cukup <b>kosongkan datanya</b> kemudian klik <b>Cari</b>.
                     </div>
                     <form method="POST" action="{{ route('sister.daftar-penelitian-filter') }}">
+                        @csrf
                         <div class="form-group row">
                             <label for="namaPegawai" class="col-sm-2 col-form-label">Nama</label>
                             <div class="col-sm-10">

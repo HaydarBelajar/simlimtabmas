@@ -32,6 +32,7 @@ class PenelitianSisterController extends Controller
 
     public function filter(Request $request)
     {
-        dd('asdasd');
+        return redirect()->route('sister.daftar-penelitian');
+        // return redirect()->route('sister.daftar-penelitian', $request->reviewer_id)->with('message', $simpanData['success']);
     }
 }
