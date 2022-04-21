@@ -71,7 +71,8 @@
                     <div class="list-group">
                         @if (session()->get('dataSdm'))
                         @foreach (session()->get('dataSdm') as $sdm)
-                        <a href="#" class="list-group-item list-group-item-action">
+                        <a href="#" class="list-group-item list-group-item-action daftar-penelitian"
+                            data-id="{{$sdm['id_sdm']}}" data-nama="{{$sdm['nama_sdm']}}">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{$sdm['nama_sdm']}}</h5>
                                 <small>{{$sdm['jenis_sdm']}}</small>
@@ -94,6 +95,39 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
+        <!-- Modal Daftar Penelitian -->
+        <div id="modalDaftarPenelitian" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg" style="max-width: 80% !important;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-penelitian-title">List Penelitian</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="daftar-penelitian-table" class="table table-striped table-bordered"
+                            style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th width="5%">No</th>
+                                    <th width="20%">Judul Penelitian</th>
+                                    <th width="5%">Waktu Klaim BKD</th>
+                                    <th width="5%">Tanggal</th>
+                                    <th width="5%">Jenis Publikasi</th>
+                                    <th width="10%">Kategori Kegiatan</th>
+                                    <th width="10%">Asal Data</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.Modal Upload -->
     </section>
     <!-- /.content -->
 </div>
@@ -101,6 +135,13 @@
 @push('scripts')
 <script>
     $(document).ready(function () {
+        $(document).on('click', '.daftar-penelitian', function() {
+            $('#modalDaftarPenelitian').modal('show');
+            const id = $(this).data("id")
+            const nama = $(this).data("nama")
+
+            $('#modal-penelitian-title').html(`Daftar Penelitian, ${nama}`);
+        });
     });
 </script>
 @endpush
