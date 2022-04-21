@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\SisterData;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthTraits;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Input\Input;
 
 class PenelitianSisterController extends Controller
 {
@@ -32,7 +33,20 @@ class PenelitianSisterController extends Controller
 
     public function filter(Request $request)
     {
-        return redirect()->route('sister.daftar-penelitian');
+        $param = [
+            'nama' => $request->nama,
+            'nidn' => $request->nidn,
+            'nip' => $request->nip
+        ];
+
+        $getData = $this->postAPI($param, 'sister/sdm/get-filter');
+
+        $dataSdm = $getData['data'];
+
+        return redirect()->route('sister.daftar-penelitian')->withInput($request->input())->with([
+            'detailController' => $this->controllerDetails,
+            'dataSdm' => $dataSdm
+        ]);
         // return redirect()->route('sister.daftar-penelitian', $request->reviewer_id)->with('message', $simpanData['success']);
     }
 }
