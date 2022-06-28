@@ -85,7 +85,7 @@
                                         <label class="form-check-label">Civitas UNISA</label>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group form-mapping-dosen">
                                     <label>Mapping Data Dosen</label>
                                     <select class="form-control mapping-dosen" name="dosen_id" style="width: 100%;"
                                         id="dosen" required>
@@ -231,6 +231,7 @@
 @push('scripts')
 <script>
     $(document).ready(function () {
+        $('.form-mapping-dosen').hide();
                 /**
                 * Form Trigger
                 */
@@ -239,10 +240,13 @@
                         $('.form-password').hide();
                         $("#password").attr('required', false);
                         $("#confirm-password").attr('required', false);
+                        $('.form-mapping-dosen').hide();
                     } else {
                         $('.form-password').show();
                         $("#password").attr('required', true);
                         $("#confirm-password").attr('required', true);
+                        $('#dosen-edit').attr('required', true);
+                        $('.form-mapping-dosen').show();
                     }
                 })
 
