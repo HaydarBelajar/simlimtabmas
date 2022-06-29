@@ -81,7 +81,7 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
-            <li class="nav-header" style="font-weight: bold;">Menu Utama</li>
+            {{-- <li class="nav-header" style="font-weight: bold;">Menu Utama</li>
             <li class="nav-item menu-open">
               <a href="{{route('dashboard.home')}}" class="nav-link active">
                 <i class="nav-icon fa fa-home"></i>
@@ -169,6 +169,89 @@
               </a>
             </li>
             @endif
+            <li class="nav-item">
+              <a href="{{route('logout')}}" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                  Log Out
+                </p>
+              </a>
+            </li> --}}
+            @foreach (config('menu.dashboard.sidebar') as $menuSidebar)
+            @if (!isset($menuSidebar['link']) && empty($menuSidebar['link']) && in_array($menuSidebar['permission']??'', $user['permission_array']))
+                <li class="nav-header">{{ $menuSidebar['title'] }}</li>
+            @else
+                @php
+                    $submenu_class = '';
+                    foreach ($menuSidebar['submenu']??[] as $getSubmenu) {
+                        if (isset($getSubmenu['link']) && ( route($getSubmenu['link']) == url()->current()) ) {
+                            $submenu_class = 'menu-open';
+                        }
+                    }
+                @endphp
+
+
+                <li class="nav-item {{ $submenu_class }}">
+                    @php
+                        $menu = false;
+                    @endphp
+                    @if (is_array($menuSidebar['permission']))
+                        @foreach ($menuSidebar['permission'] as $permission)
+                            {{-- Ignore aja, belum dipakai --}}
+                            @if ($permission != 'list master data' && (in_array($permission, $user['permission_array'])))
+                                @if (in_array('list master data',$menuSidebar['permission']) && in_array('list master data', $user['permission_array']))
+                                         @php
+                                        $menu = true;
+                                        continue;
+                                    @endphp
+                                @endif
+                    
+                            @endif
+                        @endforeach
+                    @else
+                        @if (in_array($menuSidebar['permission']??'', $user['permission_array']))
+                            @php
+                                $menu = true;
+                            @endphp
+                        @endif
+                    @endif
+                    @if ($menu)
+                        <a href="{{ isset($menuSidebar['link']) && !empty($menuSidebar['link']) ? route($menuSidebar['link']) : '#' }}" class="nav-link {{ url()->current() == (isset($menuSidebar['link']) && !empty($menuSidebar['link']) ? route($menuSidebar['link']) : '#' ) ? 'active' : '' }}">
+                            <i class="nav-icon {{ $menuSidebar['icon']??'' }}"></i>
+                            <p>{{ $menuSidebar['title'] }}
+                              {{-- Belum digunakan --}}
+                                @if (isset($labelCount['name']) && $labelCount['name'] == (isset( $menuSidebar['id']) ?  $menuSidebar['id'] : '') )
+                                    {{-- <span class="badge badge-warning right"
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="Jumlah Pending">{{ $labelCount['notif'] }}</span> --}}
+                                @endif
+                            </p>
+                            @if(isset($menuSidebar['submenu']))
+                            <i class="fas fa-angle-left right"></i>
+                            @endif
+                        </a>
+                        @if (isset( $menuSidebar['submenu']) &&  !empty($menuSidebar['submenu']))
+                            <ul class="nav nav-treeview">
+                                @foreach ($menuSidebar['submenu'] as $submenu)
+                                @if (in_array($submenu['permission']??'', $user['permission_array']))
+
+                                <li class="nav-item">
+                                    <a href="{{ isset($submenu['link']) && !empty($submenu['link']) ? route($submenu['link']) : '#' }}" class="nav-link {{ url()->current() == (isset($submenu['link']) && !empty($submenu['link']) ? route($submenu['link']) : '#' ) ? 'active' : '' }}">
+                                    <i class=" nav-icon {{ $submenu['icon'] }}"></i>
+                                    <p>{{ $submenu['title'] }}</p>
+                                    </a>
+                                </li>
+                                @endif
+
+                                @endforeach
+                            </ul>
+                        @endif
+                    @endif
+                </li>
+                
+            @endif
+        @endforeach
             <li class="nav-item">
               <a href="{{route('logout')}}" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>

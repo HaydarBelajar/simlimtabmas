@@ -28,7 +28,7 @@ class HomeController extends Controller
         $dataPenelitian = isset($getDataPenelitian['data']) ? $getDataPenelitian['data'] : [];
         return view('admin.content.home')->with([
             'dataPenelitian' => $dataPenelitian,
-            'dataMappingDosen' => $userSession['dosenDetail']['detail_dosen'],
+            'dataMappingDosen' => $userSession['user']['detail_dosen']  ,
         ]);
 
     }

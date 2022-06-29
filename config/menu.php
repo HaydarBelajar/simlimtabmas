@@ -4,7 +4,7 @@ return [
     'role'  => [
         'super_admin'   => env('ROLE_SUPER_ADMIN', 1),
     ],
-    'menu'  => [
+    'dashboard'  => [
         'sidebar'       => [
             [
                 'title'     => 'Menu',
@@ -65,7 +65,7 @@ return [
             [
                 'id'        => 'menu-user',
                 'link'      => 'manage-user.list',
-                'title'     => 'Manahemen Pengguna',
+                'title'     => 'Manajemen Pengguna',
                 'icon'      => 'nav-icon fa fa-users',
                 'permission'  => 'list user',
                 'submenu'   => [
