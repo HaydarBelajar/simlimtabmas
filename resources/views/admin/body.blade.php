@@ -196,16 +196,25 @@
                         $menu = false;
                     @endphp
                     @if (is_array($menuSidebar['permission']))
+                    @php
+                    @endphp
                         @foreach ($menuSidebar['permission'] as $permission)
                             {{-- Ignore aja, belum dipakai --}}
-                            @if ($permission != 'list master data' && (in_array($permission, $user['permission_array'])))
+                            {{-- @if ($permission != 'list master data' && (in_array($permission, $user['permission_array'])))
                                 @if (in_array('list master data',$menuSidebar['permission']) && in_array('list master data', $user['permission_array']))
                                          @php
                                         $menu = true;
                                         continue;
                                     @endphp
                                 @endif
-                    
+                            @endif --}}
+                            @if ($permission != 'users management' && (in_array($permission, $user['permission_array'])))
+                                @if (in_array('users management',$menuSidebar['permission']) && in_array('users management', $user['permission_array']))
+                                         @php
+                                        $menu = true;
+                                        continue;
+                                    @endphp
+                                @endif
                             @endif
                         @endforeach
                     @else
