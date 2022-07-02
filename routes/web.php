@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\Penelitian\PenelitianController;
-use App\Http\Controllers\Admin\RolesPermissions\RolesPermissionsController;
+use App\Http\Controllers\Admin\RolesPermissions\RolesController;
 use App\Http\Controllers\Admin\SisterData\PenelitianSisterController;
 use App\Http\Controllers\Admin\SisterData\PengabdianSisterController;
 use App\Http\Controllers\Admin\UserManagementController;
@@ -31,8 +30,11 @@ Route::middleware(['auth.token'])->group(function () {
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
     });
-    
-    Route::resource('roles-permissions', RolesPermissionsController::class);
+
+    Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {
+        Route::get('/get-all', [\App\Http\Controllers\Admin\RolesPermissions\RolesController::class, 'getAll'])->name('get-all');
+    });
+    Route::resource('roles', RolesController::class);
 
     Route::group(['prefix' => 'penelitian', 'as' => 'penelitian.'], function () {
         Route::get('/tambah-penelitian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'tambahDataPenelitian'])->name('tambah-penelitian');

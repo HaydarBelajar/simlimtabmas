@@ -3,18 +3,29 @@
 namespace App\Http\Controllers\Admin\RolesPermissions;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AuthTraits;
 use Illuminate\Http\Request;
 
-class RolesPermissionsController extends Controller
+class PermissionsController extends Controller
 {
+    private $controllerDetails;
+    use AuthTraits;
+
+    public function __construct()
+    {
+        $this->controllerDetails = [
+            "currentPage" => "Manajemen Permissions",
+            "pageDescription" => "Halaman Manajemen Permissions"
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-
     }
 
     /**
@@ -81,5 +92,25 @@ class RolesPermissionsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAll(Request $request)
+    {
+        // Param datatables harus dikirim ke be juga
+        $dataTablesParam = $request->all();
+        $getData = $this->postAPI($dataTablesParam, 'user/get-all');
+
+        $data = $getData['data'];
+
+        $dataTables =  DataTables::of($data)
+            ->addColumn('action', function ($data) {
+                $button = '<button type="button" name="edit" id="' . $data['id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
+                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['id'] . '" class="delete btn btn-danger btn-sm" ' . ($data['id'] == 1 ? "disabled" : "") . '>Delete</button>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+
+        return $dataTables;
     }
 }

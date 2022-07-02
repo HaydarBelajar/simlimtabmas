@@ -67,7 +67,7 @@ return [
                 'link'      => 'manage-user.list',
                 'title'     => 'Manajemen Pengguna',
                 'icon'      => 'nav-icon fa fa-users',
-                'permission'  => ['users management', 'list user','list roles and permissions'],
+                'permission'  => ['users management', 'list user', 'list roles and permissions'],
                 'submenu'   => [
                     [
                         'id'        => 'data-user',
@@ -78,7 +78,7 @@ return [
                     ],
                     [
                         'id'        => 'data-roles-and-permission',
-                        'link'      => 'roles-permissions.index',
+                        'link'      => 'roles.index',
                         'title'     => 'Roles and Permissions',
                         'icon'      => 'far fa-circle',
                         'permission'  => 'list roles and permissions',
