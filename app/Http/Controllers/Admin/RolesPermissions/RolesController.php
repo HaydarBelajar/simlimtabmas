@@ -62,7 +62,20 @@ class RolesController extends Controller
      */
     public function show($id)
     {
-        //
+        $getRolesData = $this->postAPI([
+            'role_id' => $id,
+        ], 'roles/get');
+
+        $getPermissionsData = $this->postAPI([
+            'groupBy' => 'module',
+        ], 'permissions/get-filter');
+
+        return view('admin.content.roles.edit')->with([
+            'page' => 'edit',
+            'detailController' => $this->controllerDetails,
+            'roleData' => isset($getRolesData['data']) ? $getRolesData['data'] : [],
+            'permissionData' => isset($getPermissionsData['data']) ? $getPermissionsData['data'] : [],
+        ]);
     }
 
     /**
@@ -85,7 +98,17 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $simpanData = $this->postAPI([
+            'role_id' => $id,
+            'permission' => $request->permission,
+            'name' => $request->name,
+        ], 'roles/update');
+        
+        if (isset($simpanData['success'])) {
+            return redirect()->route('roles.index')->with('message', $simpanData['success']);
+        } else {
+            return redirect()->route('roles.index')->with('error', $simpanData['error'] ?? $simpanData['reason']);
+        }
     }
 
     /**
@@ -103,13 +126,13 @@ class RolesController extends Controller
     {
         // Param datatables harus dikirim ke be juga
         $dataTablesParam = $request->all();
-        $getData = $this->postAPI($dataTablesParam, 'roles/get-all');
+        $getData = $this->postAPI($dataTablesParam, 'roles/get-filter');
 
         $data = $getData['data'] ?? [];
 
         $dataTables =  DataTables::of($data)
             ->addColumn('action', function ($data) {
-                $button = '<button type="button" name="edit" id="' . $data['id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
+                $button = '<a href="' . route('roles.show', ['role' => $data['id']]) . '" type="button" name="view" id="' . $data['id'] . '" class="view btn btn-primary btn-sm">View</a>';
                 // $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['id'] . '" class="delete btn btn-danger btn-sm" ' . ($data['id'] == 1 ? "disabled" : "") . '>Delete</button>';
                 return $button;
             })

@@ -31,9 +31,7 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
     });
 
-    Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {
-        Route::get('/get-all', [\App\Http\Controllers\Admin\RolesPermissions\RolesController::class, 'getAll'])->name('get-all');
-    });
+    Route::get('roles/get-all', [\App\Http\Controllers\Admin\RolesPermissions\RolesController::class, 'getAll'])->name('roles.get-all');
     Route::resource('roles', RolesController::class);
 
     Route::group(['prefix' => 'penelitian', 'as' => 'penelitian.'], function () {

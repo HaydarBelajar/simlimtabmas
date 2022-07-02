@@ -138,7 +138,31 @@
 <script>
     $(document).ready(function () {
 
-                
+        /**
+        * Section untuk menampilkan pesan response dari back end
+        */
+        @if(Session::has('message'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
+
+        @if(Session::has('error'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+        
+        /**
+        * End Section untuk menampilkan pesan response dari back end
+        */
+     
         $('#roles-table').DataTable({
             processing: true,
             serverSide: true,
