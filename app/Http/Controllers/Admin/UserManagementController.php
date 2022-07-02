@@ -28,7 +28,8 @@ class UserManagementController extends Controller
     public function index(Request $request)
     {
         $param = [];
-        $getRoles = $this->postAPI($param, 'role/get-all');
+        $getRoles = $this->postAPI($param, 'roles/get-filter');
+
         $getDosenCascader = $this->postAPI($param, 'dosen/get-cascader');
 
         return view('admin.content.menu-user-list')->with([
