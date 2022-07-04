@@ -33,7 +33,7 @@ return [
                     [
                         'id'        => 'data-review-penelitian',
                         'link'      => 'penelitian.reviewer',
-                        'title'     => 'Data Penelitian',
+                        'title'     => 'Data Reviewer',
                         'icon'      => 'far fa-circle',
                         'permission'  => 'list reviewer penelitian',
                     ],
@@ -56,7 +56,7 @@ return [
                     [
                         'id'        => 'data-review-pengabdian',
                         'link'      => 'pengabdian.reviewer',
-                        'title'     => 'Data Pengabdian',
+                        'title'     => 'Data Reviewer',
                         'icon'      => 'far fa-circle',
                         'permission'  => 'list reviewer pengabdian',
                     ],

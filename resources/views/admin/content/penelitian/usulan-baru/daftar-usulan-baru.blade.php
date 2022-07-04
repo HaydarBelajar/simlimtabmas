@@ -28,9 +28,10 @@
             <div class="card card-default color-palette-box">
                 <div class="card-body">
                     <div class="top-button-group" style="margin-bottom: 20px;">
-                        <a href={{ route('penelitian.tambah-penelitian') }} type="button" class="btn btn-primary tambah-penelitian {{ in_array('Reviewer',
-                            Session::get('kucingku')['roles']) ? 'disabled' : '' }}">Tambah Usulan Penelitian</a>
-                    </div>
+                        @if (in_array('create penelitian',$user['permission_array']))
+                        <a href={{ route('penelitian.tambah-penelitian') }} type="button" class="btn btn-primary tambah-penelitian">Tambah Usulan Penelitian</a>
+                        @endif
+                        </div>
                     <span id="notification"></span>
                     <table id="penelitian-table" class="table table-striped table-bordered" style="width:100%">
                         <thead>

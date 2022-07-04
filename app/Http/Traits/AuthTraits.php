@@ -70,7 +70,7 @@ trait AuthTraits
                     return $body;
                 } catch (ClientException  $e) {
                     $response = $e->getResponse();
-
+                    
                     $detail = [
                         "status_code" => $response->getStatusCode(),
                         "reason" => $response->getReasonPhrase(),
@@ -85,7 +85,7 @@ trait AuthTraits
                 } catch (ServerException | HttpException $e) {
                     $response = $e->getResponse();
                     $message = json_decode($response->getBody()->getContents());
-
+                    
                     $detail = [
                         "status_code" => $response->getStatusCode(),
                         "reason" =>  $message->error,
