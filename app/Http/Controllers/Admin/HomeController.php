@@ -18,6 +18,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $userSession = $request->session()->get('kucingku');
+
         $userDetail = $userSession['user'];
 
         $param = [
@@ -25,6 +26,7 @@ class HomeController extends Controller
         ];
 
         $getDataPenelitian = $this->postAPI($param, 'penelitian/get-filter');
+
         $dataPenelitian = isset($getDataPenelitian['data']) ? $getDataPenelitian['data'] : [];
         return view('admin.content.home')->with([
             'dataPenelitian' => $dataPenelitian,

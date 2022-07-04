@@ -103,8 +103,8 @@ class UserManagementController extends Controller
             'confirmPassword' => $request->confirmpassword,
             'dosen_id' => $request->dosen_id
         ];
-
         $getRoles = $this->postAPI($param, 'user/update');
+
         return json_encode($getRoles);
     }
 

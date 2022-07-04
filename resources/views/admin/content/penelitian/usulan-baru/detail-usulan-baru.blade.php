@@ -175,10 +175,12 @@
 											href="{{ asset('media/pengesahan') }}/{{ $detailPenelitian['file_upload_pengesahan'] }}"><i
 												class="fas fa-file-download"></i> Download</a>
 										@else
-										<a href="#" class="btn btn-outline-danger btn-sm upload-pengesahan"
-											data-id="{{ $detailPenelitian['usulan_id'] }}"><i
-												class="fas fa-file-upload"></i>
-											Upload</a>
+											@if (in_array('edit penelitian',$user['permission_array']))
+											<a href="#" class="btn btn-outline-danger btn-sm upload-pengesahan"
+												data-id="{{ $detailPenelitian['usulan_id'] }}"><i
+													class="fas fa-file-upload"></i>
+												Upload</a>
+											@endif
 										@endif
 									</dd>
 									<dt>Dokumen Proposal</dt>
@@ -192,10 +194,12 @@
 											href="{{ asset('media/proposal') }}/{{ $detailPenelitian['file_upload_pengesahan'] }}"><i
 												class="fas fa-file-download"></i> Download</a>
 										@else
-										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
-											data-id="{{ $detailPenelitian['usulan_id'] }}"><i
-												class="fas fa-file-upload"></i>
-											Upload</a>
+											@if (in_array('edit penelitian',$user['permission_array']))
+											<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
+												data-id="{{ $detailPenelitian['usulan_id'] }}"><i
+													class="fas fa-file-upload"></i>
+												Upload</a>
+											@endif
 										@endif
 									</dd>
 									<dt>Dokumen Laporan Akhir</dt>
@@ -209,10 +213,12 @@
 											href="{{ asset('media/laporan-akhir') }}/{{ $detailPenelitian['file_upload_laporan_akhir'] }}"><i
 												class="fas fa-file-download"></i> Download</a>
 										@else
-										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
-											data-id="{{ $detailPenelitian['file_upload_laporan_akhir'] }}"><i
-												class="fas fa-file-upload"></i>
-											Upload</a>
+											@if (in_array('edit penelitian',$user['permission_array']))
+											<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
+												data-id="{{ $detailPenelitian['file_upload_laporan_akhir'] }}"><i
+													class="fas fa-file-upload"></i>
+												Upload</a>
+											@endif
 										@endif
 									</dd>
 								</dl>
@@ -411,14 +417,14 @@
 				},
 				success: function(data) {
 					if (data.errors) {
-					alert(data.errors);
-					$('#confirmLolosUsulanModal').modal('hide');
-					$('#lolos-usulan-button').text('Ok');
+						alert(data.errors);
+						$('#confirmLolosUsulanModal').modal('hide');
+						$('#lolos-usulan-button').text('Ok');
 					}
 					if (data.success) {
-					alert(data.success);
-					$('#confirmLolosUsulanModal').modal('hide');
-					location.reload();
+						alert(data.success);
+						$('#confirmLolosUsulanModal').modal('hide');
+						location.reload();
 					}
 				}
 			})

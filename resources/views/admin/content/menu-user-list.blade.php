@@ -80,15 +80,15 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="isCivitasUnisa"
+                                        <input class="form-check-input isCivitasUnisa" type="checkbox" id="isCivitasUnisa"
                                             name="civitasUnisa">
                                         <label class="form-check-label">Civitas UNISA</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-mapping-dosen">
                                     <label>Mapping Data Dosen</label>
-                                    <select class="form-control mapping-dosen" name="dosen_id" style="width: 100%;"
-                                        id="dosen" required>
+                                    <select class="form-control mapping-dosen dosen_id" name="dosen_id" style="width: 100%;"
+                                        id="dosen">
                                         @if (!empty($dosenOptions))
                                         @foreach ($dosenOptions as $dosen)
                                         @if (!empty($dosen['detail_person']))
@@ -160,15 +160,15 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" class="isCivitasUnisa"
+                                        <input class="form-check-input isCivitasUnisa" type="checkbox" id="isCivitasUnisa"
                                             name="civitasUnisa">
                                         <label class="form-check-label">Civitas UNISA</label>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group form-mapping-dosen">
                                     <label>Mapping Data Dosen</label>
-                                    <select class="form-control mapping-dosen" name="dosen_id" style="width: 100%;"
-                                        id="dosen-edit" required>
+                                    <select class="form-control dosen_id" name="dosen_id" style="width: 100%;"
+                                        id="dosen-edit">
                                         @if (!empty($dosenOptions))
                                         @foreach ($dosenOptions as $dosen)
                                         <option value="{{ $dosen['kdperson'] }}">{{ $dosen['username'] }}</option>
@@ -232,23 +232,26 @@
 <script>
     $(document).ready(function () {
         $('.form-mapping-dosen').hide();
-                /**
-                * Form Trigger
-                */
-                $('input[type="checkbox"]').click(function(){
-                    if ($('#isCivitasUnisa').is(":checked")) {
-                        $('.form-password').hide();
-                        $("#password").attr('required', false);
-                        $("#confirm-password").attr('required', false);
-                        $('.form-mapping-dosen').hide();
-                    } else {
-                        $('.form-password').show();
-                        $("#password").attr('required', true);
-                        $("#confirm-password").attr('required', true);
-                        $('#dosen-edit').attr('required', true);
-                        $('.form-mapping-dosen').show();
-                    }
-                })
+        /**
+        * Form Trigger
+        */
+        $('input[type="checkbox"]').click(function(){
+            if ($('.isCivitasUnisa').is(":checked")) {
+                console.log('checked');
+                $('.form-password').hide();
+                $(".password").attr('required', false);
+                $(".confirm-password").attr('required', false);
+                $('.form-mapping-dosen').show();
+                $('.dosen_id').attr('required', true);
+            } else {
+                $('.form-password').show();
+                $(".password").attr('required', true);
+                $(".confirm-password").attr('required', true);
+                $('.dosen-edit').attr('required', true);
+                $('.form-mapping-dosen').hide();
+                $('.dosen_id').attr('required', false);
+            }
+        })
 
                 /**
                 * End Form Trigger
@@ -361,10 +364,11 @@
                         url: "/manage-user/get-user/" + id,
                         dataType: "json",
                         success: function(data) {
+                            console.log(data);
                             $('#addModal').modal('hide');
                             $('#username-edit').val(data.name);
                             $('#email-edit').val(data.email);
-                            $('#role-edit').val(data.roles ? data.roles[0]['id'] : '');
+                            $('#role-edit').val(data.roles[0] ?? '');
                             $('#dosen-edit').val(data.dosen_id);
                             $('#user-id').val(id);
                             $('#editModal').modal('show');
@@ -378,7 +382,7 @@
                 $('#edit-user-form').on('submit', function(event) {
                     event.preventDefault();
                     var action_url = '';
-
+                    console.log('submit', $(this).serialize());
                     action_url = "{{ route('manage-user.update') }}";
 
                     $.ajax({
@@ -387,7 +391,6 @@
                         data: $(this).serialize(),
                         dataType: "json",
                         success: function(data) {
-                            console.log('asdasd', data);
 
                             var html = '';
                             if (data.error) {

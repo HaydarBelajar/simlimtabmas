@@ -40,7 +40,8 @@ trait AuthTraits
 
     public function connectAPI($method, $param, $type, $endPoint)
     {
-        $client = new Client();
+        $client = new Client(['headers' => ['Accept' => 'application/json']]);
+
         if ($method == 'POST') {
             if ($type == 'auth') {
                 try {
@@ -70,7 +71,7 @@ trait AuthTraits
                     return $body;
                 } catch (ClientException  $e) {
                     $response = $e->getResponse();
-                    
+
                     $detail = [
                         "status_code" => $response->getStatusCode(),
                         "reason" => $response->getReasonPhrase(),
@@ -84,12 +85,14 @@ trait AuthTraits
                     return $detail;
                 } catch (ServerException | HttpException $e) {
                     $response = $e->getResponse();
-                    $message = json_decode($response->getBody()->getContents());
                     
+                    $message = json_decode($response->getBody()->getContents());
+
                     $detail = [
                         "status_code" => $response->getStatusCode(),
-                        "reason" =>  $message->error,
+                        "reason" =>  $message->error ?? 'error',
                     ];
+
                     return $detail;
                 }
             }
