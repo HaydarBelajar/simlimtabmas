@@ -188,16 +188,15 @@
                     data: 'peneliti_utama',
                     name: 'Ketua Peneliti',
                     render: function ( data, type, row ) {
-                        if (data) {
-                            return data.name;
-                        } else {
-                            return '-';
+                        if (data.length){
+                            let ketuaPeneliti = data.filter(p => p.wewenang == "1");
+                            return ketuaPeneliti[0].detail_pengusul.name ?? '-';
                         }
-
+                        return '-';
                     }
                 },
                 {
-                    data: 'fakultas_penelitian',
+                    data: 'fakultas',
                     name: 'Fakultas',
                     render: function ( data, type, row ) {
                         if (data) {

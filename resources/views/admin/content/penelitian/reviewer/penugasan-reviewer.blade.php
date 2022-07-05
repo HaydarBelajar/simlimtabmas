@@ -84,6 +84,7 @@
                                         <div class="col-sm-10">
                                             <select class="form-control" id="fakultas-penelitian" name="fakultas_id"
                                                 required>
+                                                <option selected disabled>Pilih Fakultas</option>
                                                 @foreach ($listFakultas as $fakultas)
                                                 <option {{ isset($detailPenelitian['fakultas_id']) &&
                                                     ($detailPenelitian['fakultas_id']==$fakultas['kdfakultas'])
@@ -100,7 +101,7 @@
                                         <div class="col-sm-10 select2-purple">
                                             <select class="form-control select2" id="daftar-penelitian"
                                                 name="daftar_penelitian[]" multiple="multiple"
-                                                data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                                data-dropdown-css-class="select2-purple" style="width: 100%;" required>
                                             </select>
                                         </div>
                                     </div>
@@ -150,13 +151,14 @@
                             alert("Terjadi error sistem, usulan gagal diloloskan !");
                           }
                           if (data.success) {
-                            data.data.map( a => {
-                                let id = a.usulan_penelitian_id;
+                            let optionData = data.data.map( a => {
+                                let id = a.usulan_id;
                                 let text = `${a.bidang_fokus} | ${a.judul}`;
 
-                                var newOption = new Option(text, id, false, false);
-                                $('#daftar-penelitian').append(newOption).trigger('change');
+                                var newOption = $('<option></option>').attr("value", id).text(text);
+                                return newOption;
                             })
+                            $('#daftar-penelitian').empty().append(optionData).trigger('change');
                           }
                       }
                   })

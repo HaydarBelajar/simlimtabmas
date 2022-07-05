@@ -15,7 +15,7 @@ class PenelitianController extends Controller
 {
     private $controllerDetails;
     private $controllerPenelitianDetails;
-    private $controllerReviewer;
+    private $controllerReviewerPenelitian;
     use AuthTraits;
 
     public function __construct()
@@ -35,9 +35,9 @@ class PenelitianController extends Controller
             "pageDescription" => "Halaman Edit Penelitian"
         ];
 
-        $this->controllerReviewer = [
+        $this->controllerReviewerPenelitian = [
             "currentPage" => "Reviewer",
-            "pageDescription" => "Halaman Daftar Reviewer"
+            "pageDescription" => "Halaman Daftar Reviewer Penelitian"
         ];
 
         $this->controllerTambahUsulanReviewer = [
@@ -515,7 +515,7 @@ class PenelitianController extends Controller
     {
 
         return view('admin.content.penelitian.reviewer.reviewer')->with([
-            'detailController' => $this->controllerReviewer,
+            'detailController' => $this->controllerReviewerPenelitian,
         ]);
     }
 
@@ -534,7 +534,10 @@ class PenelitianController extends Controller
 
         $dataTables =  DataTables::of($data)
             ->addColumn('action', function ($data) {
-                $button = '<a target="_blank" type="button" href="/penelitian/reviewer-detail/' . $data['id'] . '" name="detail" id="' . $data['id'] . '" class="detail btn btn-primary btn-sm">Detail</a>';
+                $button = '';
+                if (in_array('edit reviewer pengabdian', Session::get('kucingku')['user']['permission_array'])) {
+                    $button .= '<a target="_blank" type="button" href="/penelitian/reviewer-detail/' . $data['id'] . '" name="detail" id="' . $data['id'] . '" class="detail btn btn-primary btn-sm">Detail</a>';
+                }
                 return $button;
             })
             ->rawColumns(['action'])
@@ -551,7 +554,7 @@ class PenelitianController extends Controller
         $getData = $this->postAPI($param, 'user/get-user');
 
         return view('admin.content.penelitian.reviewer.detail-reviewer')->with([
-            'detailController' => $this->controllerReviewer,
+            'detailController' => $this->controllerReviewerPenelitian,
             'reviewerData' => isset($getData['data']) ? $getData['data'] : []
         ]);
     }
@@ -570,8 +573,11 @@ class PenelitianController extends Controller
         $data = $getData['data'];
         $dataTables =  DataTables::of($data)
             ->addColumn('action', function ($data) {
-                $button = '<a target="_blank" type="button" href="/penelitian/delete-reviewer-penelitian/' . $data['usulan_id'] . '" name="delete" id="' . $data['usulan_id'] . '" class="detail btn btn-danger btn-sm">Hapus</a>';
-                return $button;
+                $button = '';
+                if (in_array('delete reviewer pengabdian', Session::get('kucingku')['user']['permission_array'])) {
+                    $button .= '<a target="_blank" type="button" href="/penelitian/delete-reviewer-penelitian/' . $data['usulan_id'] . '" name="delete" id="' . $data['usulan_id'] . '" class="detail btn btn-danger btn-sm">Hapus</a>';
+                    return $button;
+                }
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -633,7 +639,7 @@ class PenelitianController extends Controller
         $param['multiple_data'] = $daftarMapping;
 
         $simpanData = $this->postAPI($param, 'reviewer/create-reviewer');
-
+        Log::debug($simpanData);
         if (isset($simpanData['success'])) {
             return redirect()->route('penelitian.reviewer-detail', $request->reviewer_id)->with('message', $simpanData['success']);
         } else {

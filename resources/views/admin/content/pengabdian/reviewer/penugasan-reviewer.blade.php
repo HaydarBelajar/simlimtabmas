@@ -95,10 +95,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="daftar-penelitian" class="col-sm-2 col-form-label">Daftar
+                                        <label for="daftar-pengabdian" class="col-sm-2 col-form-label">Daftar
                                             Penelitian</label>
                                         <div class="col-sm-10 select2-purple">
-                                            <select class="form-control select2" id="daftar-penelitian"
+                                            <select class="form-control select2" id="daftar-pengabdian"
                                                 name="daftar_penelitian[]" multiple="multiple"
                                                 data-dropdown-css-class="select2-purple" style="width: 100%;">
                                             </select>
@@ -128,7 +128,7 @@
 <script>
     $(document).ready(function() {
 
-                $('#daftar-penelitian').select2();
+                $('#daftar-pengabdian').select2();
 
                 $('#fakultas-penelitian').change(function () {
 
@@ -150,13 +150,15 @@
                             alert("Terjadi error sistem, usulan gagal diloloskan !");
                           }
                           if (data.success) {
-                            data.data.map( a => {
-                                let id = a.usulan_penelitian_id;
+                            let optionData = data.data.map( a => {
+                                let id = a.usulan_id;
                                 let text = `${a.bidang_fokus} | ${a.judul}`;
 
-                                var newOption = new Option(text, id, false, false);
-                                $('#daftar-penelitian').append(newOption).trigger('change');
+                                var newOption = $('<option></option>').attr("value", id).text(text);
+                                return newOption;
                             })
+                            $('#daftar-pengabdian').empty().append(optionData).trigger('change');
+
                           }
                       }
                   })
