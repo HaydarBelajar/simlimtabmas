@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Redirect;
+use Session;
 
 class PengabdianController extends Controller
 {
@@ -296,8 +296,10 @@ class PengabdianController extends Controller
         $dataTables =  DataTables::of($data)
             ->addColumn('action', function ($data) {
                 $button = '';
-                if (!in_array('Reviewer', request()->session()->get('kucingku')['roles'])) {
+                if (in_array('edit penelitian', Session::get('kucingku')['user']['permission_array'])) {
                     $button .= '<a target="_blank" type="button" href="/pengabdian/edit-pengabdian/' . $data['usulan_id'] . '" name="edit" id="' . $data['usulan_id'] . '" class="edit btn btn-primary btn-sm">Edit</a>';
+                }
+                if (in_array('delete penelitian', Session::get('kucingku')['user']['permission_array'])) {
                     $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
                 }
                 $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/pengabdian/detail-pengabdian/' . $data['usulan_id'] . '" name="catatan_harian" id="' . $data['usulan_id'] . '" class="secondary btn btn-secondary btn-sm" >Detail</a>';

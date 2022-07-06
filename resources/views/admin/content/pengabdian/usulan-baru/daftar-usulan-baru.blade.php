@@ -28,8 +28,9 @@
             <div class="card card-default color-palette-box">
                 <div class="card-body">
                     <div class="top-button-group" style="margin-bottom: 20px;">
-                        <a href={{ route('pengabdian.tambah-pengabdian') }} type="button" class="btn btn-primary tambah-pengabdian {{ in_array('Reviewer',
-                            Session::get('kucingku')['roles']) ? 'disabled' : '' }}">Tambah Usulan Pengabdian</a>
+                        @if (in_array('create penelitian',$user['permission_array']))
+                        <a href={{ route('pengabdian.tambah-pengabdian') }} type="button" class="btn btn-primary tambah-pengabdian">Tambah Usulan Pengabdian</a>
+                        @endif
                     </div>
                     <span id="notification"></span>
                     <table id="pengabdian-table" class="table table-striped table-bordered" style="width:100%">
