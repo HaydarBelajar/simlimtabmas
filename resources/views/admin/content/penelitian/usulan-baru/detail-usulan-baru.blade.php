@@ -38,9 +38,7 @@
 									<span class="badge badge-success">Usulan Lolos</span>
 									@else
 									@if(Session::has('kucingku'))
-									@if (in_array('Super Admin', Session::get('kucingku')['roles']) or
-									in_array('Reviewer',
-									Session::get('kucingku')['roles']))
+									@if (in_array('do review penelitian', $user['permission_array']))
 									<button type="button" id='button-loloskan-usulan'
 										data-id='{{ $detailPenelitian["usulan_id"] ?? '' }}'
 										class="btn btn-danger btn-sm"><i class="fa fa-bell"></i> Loloskan
