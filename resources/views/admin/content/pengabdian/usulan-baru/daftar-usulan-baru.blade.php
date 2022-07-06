@@ -28,7 +28,7 @@
             <div class="card card-default color-palette-box">
                 <div class="card-body">
                     <div class="top-button-group" style="margin-bottom: 20px;">
-                        @if (in_array('create penelitian',$user['permission_array']))
+                        @if (in_array('create pengabdian',$user['permission_array']))
                         <a href={{ route('pengabdian.tambah-pengabdian') }} type="button" class="btn btn-primary tambah-pengabdian">Tambah Usulan Pengabdian</a>
                         @endif
                     </div>

@@ -356,7 +356,9 @@
                                 value="{{ isset($detailPenelitian['usulan_id']) ? $detailPenelitian['usulan_id'] : '' }}" />
                             <input type="hidden" name="jenis_usulan" id="jenis-usulan"
                                 value="{{ isset($detailPenelitian['jenis_usulan']) ? $detailPenelitian['jenis_usulan'] : 1 }}" />
+                            @if (in_array('create penelitian',$user['permission_array']))
                             <button type="submit" class="btn btn-success float-left">Simpan</button>
+                            @endif
                             <a href={{ route('penelitian.data-penelitian') }} type="button"
                                 class="btn btn-danger float-right">Kembali</a>
                         </form>
@@ -410,9 +412,11 @@
                                         </div>
                                         <br />
                                         <div class="modal-footer">
+                                            @if (in_array('create penelitian',$user['permission_array']))
                                             <input type="hidden" name="action" id="action" value="Simpan" />
                                             <input type="submit" name="action_button" id="action_button"
                                                 class="btn btn-primary" value="Add" />
+                                            @endif
                                         </div>
                                     </form>
                                 </div>

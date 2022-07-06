@@ -356,7 +356,9 @@
                                 value="{{ isset($detailPengabdian['usulan_id']) ? $detailPengabdian['usulan_id'] : '' }}" />
                             <input type="hidden" name="jenis_usulan" id="jenis-usulan"
                                 value="{{ isset($detailPengabdian['jenis_usulan']) ? $detailPengabdian['jenis_usulan'] : 2 }}" />
+                            @if (in_array('create pengabdian',$user['permission_array']))
                             <button type="submit" class="btn btn-success float-left">Simpan</button>
+                            @endif
                             <a href={{ route('pengabdian.data-pengabdian') }} type="button"
                                 class="btn btn-danger float-right">Kembali</a>
                         </form>
@@ -410,9 +412,11 @@
                                         </div>
                                         <br />
                                         <div class="modal-footer">
+                                            @if (in_array('create pengabdian',$user['permission_array']))
                                             <input type="hidden" name="action" id="action" value="Simpan" />
                                             <input type="submit" name="action_button" id="action_button"
                                                 class="btn btn-primary" value="Add" />
+                                            @endif
                                         </div>
                                     </form>
                                 </div>
