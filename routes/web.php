@@ -24,6 +24,7 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth.token'])->group(function () {
@@ -54,13 +55,6 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/get-catatan-harian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getCatatanHarian'])->name('get-catatan-harian');
         Route::get('/hapus-catatan-harian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'hapusCatatanHarian'])->name('hapus-catatan-harian');
 
-        Route::get('/catatan-harian/{id}', [\App\Http\Controllers\Admin\Penelitian\CatatanHarianController::class, 'catatanHarian'])->name('catatan-harian');
-        Route::get('/tambah-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\CatatanHarianController::class, 'tambahDataCatatanHarian'])->name('tambah-catatan-harian');
-        Route::get('/data-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\CatatanHarianController::class, 'dataCatatanHarian'])->name('data-catatan-harian');
-
-        Route::get('/tambah-laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\LaporanAkhirController::class, 'tambahLaporanAkhir'])->name('tambah-laporan-akhir');
-        Route::get('/data-laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\LaporanAkhirController::class, 'dataLaporanAkhir'])->name('data-laporan-akhir');
-
         Route::get('/reviewer', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'reviewer'])->name('reviewer');
         Route::get('/get-user-reviewer-filter-datatables', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getUserReviewerFilterDatatables'])->name('get-user-reviewer-filter-datatables');
         Route::get('/reviewer-detail/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'reviewerDetail'])->name('reviewer-detail');
@@ -88,10 +82,6 @@ Route::middleware(['auth.token'])->group(function () {
         Route::post('/edit-catatan-harian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'editCatatanHarian'])->name('edit-catatan-harian');
         Route::get('/get-catatan-harian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'getCatatanHarian'])->name('get-catatan-harian');
         Route::get('/hapus-catatan-harian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'hapusCatatanHarian'])->name('hapus-catatan-harian');
-
-        Route::get('/catatan-harian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'catatanHarian'])->name('catatan-harian');
-        Route::get('/tambah-catatan-harian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'tambahDataCatatanHarian'])->name('tambah-catatan-harian');
-        Route::get('/data-catatan-harian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'dataCatatanHarian'])->name('data-catatan-harian');
 
         Route::get('/tambah-laporan-akhir', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'tambahLaporanAkhir'])->name('tambah-laporan-akhir');
         Route::get('/data-laporan-akhir', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'dataLaporanAkhir'])->name('data-laporan-akhir');

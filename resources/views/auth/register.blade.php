@@ -5,7 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">
+                    <img src="{{ asset('assets/images/logo-unisa-01-300x300.png') }}" alt="SMA Negeri 1 Grobogan Logo"
+                        class="brand-image img-circle elevation-3"
+                        style="display: block; margin-left: auto; margin-right: auto;">
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -66,6 +70,11 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                                @if (Route::has('login'))
+                                    <a class="btn btn-link" href="{{ route('login') }}">
+                                        Login
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </form>
