@@ -45,6 +45,11 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        return view('auth.register');
+        $param = [];
+        $getRoles = $this->getPubAPI($param, 'roles/get-filter');
+
+        return view('auth.register')->with([
+            'rolesOptions' => isset($getRoles['data']) ? $getRoles['data'] : [],
+        ]);
     }
 }
