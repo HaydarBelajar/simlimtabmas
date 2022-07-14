@@ -12,6 +12,7 @@
                 </div>
 
                 <div class="card-body">
+                    @include('admin.partials.notifications')
                     <form method="POST" action="{{ route('authenticate') }}">
                         @csrf
 

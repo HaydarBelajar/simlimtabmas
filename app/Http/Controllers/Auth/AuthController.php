@@ -52,4 +52,51 @@ class AuthController extends Controller
             'rolesOptions' => isset($getRoles['data']) ? $getRoles['data'] : [],
         ]);
     }
+
+    public function store(Request $request)
+    {
+        if ($request->password != $request->confirmpassword) {
+            return json_encode(['error' => 'Gagal membuat user, harap periksa kembali password anda !']);
+        }
+
+        $param = [
+            'username' => $request->username,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => $request->password,
+            'confirmPassword' => $request->confirmpassword,
+            'dosen_id' => $request->dosen_id,
+            'isCivitasUnisa' => $request->civitasUnisa,
+            'nidn' => $request->nidn,
+            'nim' => $request->nim,
+        ];
+
+        $getRoles = $this->postAPI($param, 'user/create');
+        return json_encode($getRoles);
+    }
+
+    public function storev2(Request $request)
+    {
+        if ($request->password != $request->confirmpassword) {
+            return json_encode(['error' => 'Gagal membuat user, harap periksa kembali password anda !']);
+        }
+        
+        $param = [
+            'username' => $request->username,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => $request->password,
+            'confirmPassword' => $request->confirmpassword,
+            'dosen_id' => $request->dosen_id,
+            'isCivitasUnisa' => $request->civitasUnisa,
+            'nidn' => $request->nidn,
+            'nim' => $request->nim,
+        ];
+
+        $userCreate = $this->postPubAPI($param, 'user/create');
+        if (isset($userCreate['success'])) {
+            return redirect()->route('login')->with('success', $userCreate['success']);
+        }
+        return back()->withErrors($userCreate['error'] ?? 'error')->withInput();
+    }
 }

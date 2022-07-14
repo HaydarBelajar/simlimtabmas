@@ -38,6 +38,15 @@ trait AuthTraits
         return $this->connectAPI('POST', $param, 'data', $endPoint);
     }
 
+    public function postPubAPI($data, $endPoint)
+    {
+        $param = [
+            'form_params' => $data
+        ];
+
+        return $this->connectAPI('POST', $param, 'data', $endPoint, 'public');
+    }
+
     public function getPubAPI($data, $endPoint)
     {
         $param = [];
@@ -74,11 +83,9 @@ trait AuthTraits
                 try {
                     $res = $client->request('POST', $apiURL.$endPoint, $param);
                     $body = json_decode($res->getBody(), true);
-                    
                     return $body;
                 } catch (ClientException  $e) {
                     $response = $e->getResponse();
-
                     $detail = [
                         "status_code" => $response->getStatusCode(),
                         "reason" => $response->getReasonPhrase(),
@@ -92,7 +99,7 @@ trait AuthTraits
                     return $detail;
                 } catch (ServerException | HttpException $e) {
                     $response = $e->getResponse();
-                    
+
                     $message = json_decode($response->getBody()->getContents());
 
                     $detail = [

@@ -7,38 +7,45 @@
             <div class="card">
                 <div class="card-header">
                     <img src="{{ asset('assets/images/logo-unisa-01-300x300.png') }}" alt="SMA Negeri 1 Grobogan Logo"
-                        class="brand-image img-circle elevation-3"
-                        style="display: block; margin-left: auto; margin-right: auto;">
+                    class="brand-image img-circle elevation-3"
+                    style="display: block; margin-left: auto; margin-right: auto;">
                 </div>
-
+                
+                @include('admin.partials.notifications')
                 <div class="card-body">
-                    <form method="post" id="add-user-form" class="form-horizontal" action="{{ route('register') }}">
+                    <form method="post" id="add-user-form" class="form-horizontal" action="{{ route('do-register') }}">
                         @csrf
                         <div class="form-group">
                             <label class="col-form-label">Username : </label>
-                            <input type="text" name="username" id="username" class="form-control" required />
+                            <input type="text" name="username" id="username" value="{{ old('username') }}" class="form-control" required />
                         </div>
                         <div class="form-group">
                             <label class="col-form-label">Email : </label>
-                            <input type="email" name="email" id="email" class="form-control" required />
+                            <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control" required />
                         </div>
                         <div class="form-group">
                             <label>Role</label>
-                            <select class="custom-select" name="role" id="role">
+                            <select class="custom-select" name="role" id="role-select" required>
                                 @if (!empty($rolesOptions))
+                                <option disabled selected>Pilih role</option>
                                 @foreach ($rolesOptions as $role)
-                                <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
+                                @if ($role['id'] != 1 || $role['name'] != "Super Admin")
+                                <option 
+                                    value="{{ $role['id'] }}"
+                                    @if(old('role') == $role['id']) selected @endif
+                                >{{ $role['name'] }}</option>
+                                @endif
                                 @endforeach
                                 @endif
                             </select>
                         </div>
                         <div class="form-group" id="form-nim">
                             <label class="col-form-label">NIM : </label>
-                            <input type="text" name="nim" id="nim" class="form-control" required />
+                            <input type="text" name="nim" id="nim" value="{{ old('nim') }}" class="form-control" />
                         </div>
                         <div class="form-group" id=form-nidn>
                             <label class="col-form-label">NIDN : </label>
-                            <input type="text" name="nidn" id="nidn" class="form-control" required />
+                            <input type="text" name="nidn" id="nidn" value="{{ old('nidn') }}" class="form-control" />
                         </div>
                         {{-- <div class="form-group">
                             <div class="form-check">
@@ -89,4 +96,29 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<!-- jQuery -->
+<script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $('#form-nim').hide();
+        $('#form-nidn').hide();
+        /**
+        * Form Trigger
+        */
+        $('#role-select').click(function(){
+            let selectedText = ($('#role-select').find(":selected").text()).toLowerCase();
+            
+            if (selectedText == 'mahasiswa') {
+                $('#form-nidn').hide();
+                $('#form-nim').show();
+            } else {
+                $('#form-nidn').show();
+                $('#form-nim').hide();
+            }
+        })
+    })
+</script>
+@endpush
 @endsection
+
