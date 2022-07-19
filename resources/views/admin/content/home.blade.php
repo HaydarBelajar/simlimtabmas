@@ -39,13 +39,21 @@
               aria-selected="false">Sinta</a>
           </li> --}}
           <li class="nav-item">
+            <a class="nav-link" id="penelitian-sister-tab" data-toggle="pill" href="#penelitian-sister" role="tab"
+              aria-controls="penelitian" aria-selected="false">Riwayat Penelitian Sister</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pengabdian-sister-tab" data-toggle="pill" href="#pengabdian-sister" role="tab"
+              aria-controls="pengabdian" aria-selected="false">Riwayat Pengabdian Sister</a>
+          </li>
+          {{-- <li class="nav-item">
             <a class="nav-link" id="penelitian-tab" data-toggle="pill" href="#penelitian" role="tab"
-              aria-controls="penelitian" aria-selected="false">Riwayat Penelitian</a>
+              aria-controls="penelitian" aria-selected="false">Riwayat Penelitian Sister</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="pengabdian-tab" data-toggle="pill" href="#pengabdian" role="tab"
-              aria-controls="pengabdian" aria-selected="false">Riwayat Pengabdian</a>
-          </li>
+              aria-controls="pengabdian" aria-selected="false">Riwayat Pengabdian Sister</a>
+          </li> --}}
           {{-- <li class="nav-item">
             <a class="nav-link" id="artikel-jurnal-tab" data-toggle="pill" href="#artikel-jurnal" role="tab"
               aria-controls="artikel-jurnal" aria-selected="false">Artikel Jurnal</a>
@@ -78,11 +86,11 @@
           <div class="tab-pane fade" id="sinta" role="tabpanel" aria-labelledby="sinta-tab">
             @include('admin.content.sub-content.home-sinta')
           </div>
-          <div class="tab-pane fade" id="penelitian" role="tabpanel" aria-labelledby="penelitian-tab">
-            @include('admin.content.sub-content.home-penelitian')
+          <div class="tab-pane fade" id="penelitian-sister" role="tabpanel" aria-labelledby="penelitian-sister-tab">
+            @include('admin.content.sub-content.home-penelitian-sister')
           </div>
-          <div class="tab-pane fade" id="pengabdian" role="tabpanel" aria-labelledby="pengabdian-tab">
-            @include('admin.content.sub-content.home-pengabdian')
+          <div class="tab-pane fade" id="pengabdian-sister" role="tabpanel" aria-labelledby="pengabdian-sister-tab">
+            @include('admin.content.sub-content.home-pengabdian-sister')
           </div>
           <div class="tab-pane fade" id="artikel-jurnal" role="tabpanel" aria-labelledby="artikel-jurnal-tab">
             @include('admin.content.sub-content.home-artikel-jurnal')

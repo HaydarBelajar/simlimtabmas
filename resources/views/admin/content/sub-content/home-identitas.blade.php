@@ -28,7 +28,7 @@
                     NIDN/NIDK
                   </div>
                   <h4 class="f-18 f-normal m-b-10 txt-primary">
-                    <span id="ContentPlaceHolder1_ctl00_identitas_lblNidn">{{ $dataMappingDosen['nidn'] ?? ' - ' }}</span>
+                    <span id="ContentPlaceHolder1_ctl00_identitas_lblNidn">{{Session::get('kucingku')['user']['nidn'] ?? '-' }}</span>
                   </h4>
                 </div>
               </div>
@@ -37,10 +37,15 @@
               <table class="table table-striped">
                 <tbody>
                   <tr>
+                    <th scope="row" width="40%">Nama</th>
+                    <td width="60%">
+                      <span id="ContentPlaceHolder1_ctl00_identitas_lblInstitusi" style="color:Green;"> {{Session::get('kucingku')['sister_data'][0]['sdm']['nama_sdm'] ?? Session::get('kucingku')['user']['name']}} </span>
+                    </td>
+                  </tr>
+                  <tr>
                     <th scope="row" width="40%">Institusi</th>
                     <td width="60%">
-                      <span id="ContentPlaceHolder1_ctl00_identitas_lblInstitusi" style="color:Green;">Universitas
-                        Aisyiyah Yogyakarta</span>
+                      <span id="ContentPlaceHolder1_ctl00_identitas_lblInstitusi" style="color:Green;">-</span>
                     </td>
                   </tr>
                   {{-- <tr>
@@ -92,10 +97,10 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">NIP</th>
+                    <th scope="row">NIDN</th>
                     <td>
                       <span id="ContentPlaceHolder1_ctl00_identitas_lblNoKtp"
-                        style="color:Green;">{{ $dataMappingDosen['nip'] ?? ' - ' }}</span>
+                        style="color:Green;">{{Session::get('kucingku')['user']['nidn'] ?? '-' }}</span>
                     </td>
                   </tr>
                   {{-- <tr>
