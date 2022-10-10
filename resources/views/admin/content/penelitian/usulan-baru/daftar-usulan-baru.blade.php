@@ -44,7 +44,7 @@
                                 <th width="5%">Tahun Pelaksanaan</th>
                                 <th width="10%">Fakultas</th>
                                 <th width="10%">Skema</th>
-                                <th width="10%">Peran</th>
+                                <th width="10%">Ketua</th>
                                 <th width="5%">Pengesahan</th>
                                 <th width="5%">Proposal</th>
                                 <th width="5%">Proposal Revisi</th>
@@ -271,24 +271,11 @@
                 },
                 {
                     data: 'wewenang_usulan',
-                    name: 'Peran',
+                    name: 'Ketua',
                     render: function ( data, type, row ) {
                         if (data.length){
-                            let peran = data.find( ({user_id}) => user_id == $('#kucingku-id').val() );
-                            if (peran != undefined ){
-                                if (peran.wewenang == 1) {
-                                    return 'Ketua';
-                                } 
-                                if (peran.wewenang == 2) {
-                                    return 'Anggota 1';
-                                }
-                                if (peran.wewenang == 3) {
-                                    return 'Anggota 2';
-                                }
-                                if (peran.wewenang == 4) {
-                                    return 'Anggota 3';
-                                }
-                            }
+                            const ketua = data.find( ({wewenang}) => wewenang == 1 ) !== undefined ? data.find( ({wewenang}) => wewenang == 1 ).detail_pengusul.name : ' - ';
+                            return ketua;
                         }
                         return '-';
                     }
