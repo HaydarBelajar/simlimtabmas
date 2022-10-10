@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $param = [
+            $param = [
             'filter' => [
                 'user_id' => $this->session['user']['id'],
             ]

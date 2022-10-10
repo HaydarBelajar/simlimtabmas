@@ -26,7 +26,7 @@ return [
                     [
                         'id'        => 'data-penelitian',
                         'link'      => 'penelitian.data-penelitian',
-                        'title'     => 'Data Penelitian',
+                        'title'     => 'Usulan Penelitian',
                         'icon'      => 'far fa-circle',
                         'permission'  => 'list penelitian',
                     ],

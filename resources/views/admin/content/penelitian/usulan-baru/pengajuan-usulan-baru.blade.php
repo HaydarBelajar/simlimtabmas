@@ -95,11 +95,11 @@
                                     <div class="form-group row">
                                         <label for="skema-penelitian" class="col-sm-2 col-form-label">Skema</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control" id="skema-penelitian" name="skema_id" required>
+                                            <select class="form-control" id="skema-penelitian" name="skema_id" required>    
                                                 @foreach ($listSkema as $skema)
                                                 <option {{ isset($detailPenelitian['skema_id']) &&
                                                     ($detailPenelitian['skema_id']==$skema['skema_id']) ? 'selected'
-                                                    : '' }} value={{ $skema['skema_id'] }}>{{ $skema['skema_nama'] }}
+                                                    : '' }} value={{ $skema['skema_id'] }}>{{ $skema['skema_nama'] }} | Maks Biaya : Rp{{ number_format($skema['maks_biaya'] ?? '0') }}
                                                 </option>
                                                 @endforeach
                                             </select>
@@ -234,7 +234,7 @@
                                     </h4>
                                 </div>
                                 <div class="card-body">
-                                    <div class="form-group row">
+                                    {{-- <div class="form-group row">
                                         <label for="sumber-dana" class="col-sm-2 col-form-label">Sumber Dana</label>
                                         <div class="col-sm-10">
                                             <select class="form-control" id="sumber-dana" name="sumber_dana_id"
@@ -247,7 +247,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group row">
                                         <label for="jumlah-dana" class="col-sm-2 col-form-label">Jumlah Dana</label>
                                         <div class="col-sm-10">

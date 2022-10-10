@@ -28,6 +28,7 @@
             <div class="card card-default color-palette-box">
                 <div class="card-body">
                     <div class="top-button-group" style="margin-bottom: 20px;">
+                        <p>Penelitian ditutup tanggal .....</p>
                         @if (in_array('create penelitian',$user['permission_array']))
                         <a href={{ route('penelitian.tambah-penelitian') }} type="button" class="btn btn-primary tambah-penelitian">Tambah Usulan Penelitian</a>
                         @endif

@@ -262,6 +262,75 @@
 					</div>
 				</div>
 			</div> <!-- /.row2 -->
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-default color-palette-box">
+						<div class="card-header">
+							<h3 class="card-title">
+								Monev Penelitian
+							</h3>
+						</div>
+						<div class="card-body">
+							<div class="top-button-group" style="margin-bottom: 20px;">
+								{{-- <button type="button" class="btn btn-primary tambah-catatan-harian">Tambah Catatan
+									Monev</button> --}}
+							</div>
+							<span id="notification"></span>
+							<table id="tabel-catatan-harian" class="table table-striped table-bordered"
+								style="width:100%">
+								<thead>
+									<tr>
+										<th width="5%">No</th>
+										<th width="50%">Monev</th>
+										<th width="25%">Tanggal Upload</th>
+										<th width="10%">Template</th>
+										<th width="10%">Upload</th>
+										<th width="10%">Aksi</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td width="5%">1</th>
+										<td width="50%">Monev 70%</th>
+										<td width="25%">-</th>
+										<td width="10%">-</th>
+										<td width="10%">-</th>
+										<td width="10%">-</th>
+									</tr>
+									<tr>
+										<td width="5%">2</th>
+										<td width="50%">Monev 100% (Laporan Akhir)</th>
+										<td width="25%">-</th>
+										<td width="10%">-</th>
+										<td width="10%">-</th>
+										<td width="10%">-</th>
+									</tr>
+									<tr>
+										<td width="5%">3</th>
+										<td width="50%">Kepuasan Mitra</th>
+										<td width="25%">-</th>
+										<td width="10%">-</th>
+										<td width="10%">-</th>
+										<td width="10%">-</th>
+									</tr>
+									<tr>
+										<td width="5%">3</th>
+										<td width="50%">Monev Luaran</th>
+										<td width="25%">-</th>
+										<td width="10%">-</th>
+										<td width="10%">-</th>
+										<td width="10%">-</th>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="card-body">
+							<a href={{ route('penelitian.data-penelitian') }} type="button"
+								class="btn btn-danger float-right">Kembali</a>
+						</div>
+					</div>
+				</div>
+			</div> <!-- /.row2 -->
 		</div><!-- /.container-fluid -->
 	</section>
 	<!-- /.content -->
