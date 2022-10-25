@@ -294,7 +294,7 @@ class PenelitianController extends Controller
 
         $dataTables =  DataTables::of($data)
             ->addColumn('action', function ($data) {
-                $button = '';
+                $button = '<div class="btn-group">';
                 if (in_array('edit penelitian', Session::get('kucingku')['user']['permission_array'])) {
                     $button .= '<a target="_blank" type="button" href="/penelitian/edit-penelitian/' . $data['usulan_id'] . '" name="edit" id="' . $data['usulan_id'] . '" class="edit btn btn-primary btn-sm">Edit</a>';
                 }
@@ -302,6 +302,7 @@ class PenelitianController extends Controller
                     $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
                 }
                 $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/penelitian/detail-penelitian/' . $data['usulan_id'] . '" name="catatan_harian" id="' . $data['usulan_id'] . '" class="secondary btn btn-secondary btn-sm" >Detail</a>';
+                $button .= '</div>';
                 return $button;
             })
             ->rawColumns(['action'])
@@ -322,8 +323,10 @@ class PenelitianController extends Controller
 
         $dataTables =  DataTables::of($data)
             ->addColumn('action', function ($data) {
+                $button = '<div class="btn-group">';
                 // $button = '<button type="button" name="edit" id="' . $data['catatan_id'] . '" class="edit btn btn-primary btn-sm">Edit</button>';
                 $button = '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['catatan_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
+                $button .= '</div>';
                 return $button;
             })
             ->rawColumns(['action'])

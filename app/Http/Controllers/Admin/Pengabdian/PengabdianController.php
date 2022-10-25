@@ -295,7 +295,7 @@ class PengabdianController extends Controller
 
         $dataTables =  DataTables::of($data)
             ->addColumn('action', function ($data) {
-                $button = '';
+                $button = '<div class="btn-group">';
                 if (in_array('edit pengabdian', Session::get('kucingku')['user']['permission_array'])) {
                     $button .= '<a target="_blank" type="button" href="/pengabdian/edit-pengabdian/' . $data['usulan_id'] . '" name="edit" id="' . $data['usulan_id'] . '" class="edit btn btn-primary btn-sm">Edit</a>';
                 }
@@ -303,6 +303,7 @@ class PengabdianController extends Controller
                     $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="' . $data['usulan_id'] . '" class="delete btn btn-danger btn-sm" >Delete</button>';
                 }
                 $button .= '&nbsp;&nbsp;&nbsp;<a type="button" href="/pengabdian/detail-pengabdian/' . $data['usulan_id'] . '" name="catatan_harian" id="' . $data['usulan_id'] . '" class="secondary btn btn-secondary btn-sm" >Detail</a>';
+                $button .= '</div>';
                 return $button;
             })
             ->rawColumns(['action'])
