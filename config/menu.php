@@ -84,6 +84,22 @@ return [
                         'permission'  => 'list roles and permissions',
                     ],
                 ]
+            ],
+            [
+                'id'        => 'menu-setting',
+                'link'      => 'setting.deadline.index',
+                'title'     => 'Konfigurasi Sistem',
+                'icon'      => 'nav-icon fa fa-cogs',
+                'permission'  => 'deadline setting',
+                'submenu'   => [
+                    [
+                        'id'        => 'deadline-setting',
+                        'link'      => 'setting.deadline.index',
+                        'title'     => 'Deadline',
+                        'icon'      => 'far fa-circle',
+                        'permission'  => 'deadline setting',
+                    ],
+                ]
             ]
         ],
     ],

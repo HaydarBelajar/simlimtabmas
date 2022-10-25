@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RolesPermissions\RolesController;
+use App\Http\Controllers\Admin\Setting\SettingDeadlineController;
 use App\Http\Controllers\Admin\SisterData\PenelitianSisterController;
 use App\Http\Controllers\Admin\SisterData\PengabdianSisterController;
 use App\Http\Controllers\Admin\UserManagementController;
@@ -108,6 +109,11 @@ Route::middleware(['auth.token'])->group(function () {
         Route::post('/daftar-penelitian-filter', [PenelitianSisterController::class, 'filter'])->name('daftar-penelitian-filter');
 
         Route::get('/daftar-pengabdian', [PengabdianSisterController::class, 'index'])->name('daftar-pengabdian');
+    });
+
+    Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
+        Route::get('/deadline', [SettingDeadlineController::class, 'index'])->name('deadline.index');
+        Route::post('/deadline', [SettingDeadlineController::class, 'store'])->name('deadline.store');
     });
 
     Route::get('/user/profile', function () {

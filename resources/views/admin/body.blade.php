@@ -179,7 +179,7 @@
             </li> --}}
             @foreach (config('menu.dashboard.sidebar') as $menuSidebar)
             @if (!isset($menuSidebar['link']) && empty($menuSidebar['link']) && in_array($menuSidebar['permission']??'', $user['permission_array']))
-                <li class="nav-header">{{ $menuSidebar['title'] }}</li>
+              <li class="nav-header">{{ $menuSidebar['title'] }}</li>
             @else
                 @php
                     $submenu_class = '';
