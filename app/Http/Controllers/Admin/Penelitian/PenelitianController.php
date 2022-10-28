@@ -446,6 +446,54 @@ class PenelitianController extends Controller
         return response()->json(['success' => $fileName]);
     }
 
+    public function uploadLaporan70(Request $request)
+    {
+        $file = $request->file('fileToUpload');
+        $fileName = time() . '.' . $file->extension();
+        $file->move(public_path('media/laporan-70'), $fileName);
+        if (!$file) {
+            return redirect()->route('penelitian.data-penelitian')->with('error', 'Gagal Menyimpan File');
+        }
+        $param = [
+            'usulan_id' => $request->id_penelitian,
+            'file_upload_laporan_70' => $fileName,
+        ];
+
+        $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
+
+        if (isset($updateData['success'])) {
+            return Redirect::back()->with('message', $updateData['success']);
+        } else {
+            return Redirect::back()->with('error', $updateData['error'] ?? $updateData['reason']);
+        }
+
+        return response()->json(['success' => $fileName]);
+    }
+
+    public function uploadKepuasanMitra(Request $request)
+    {
+        $file = $request->file('fileToUpload');
+        $fileName = time() . '.' . $file->extension();
+        $file->move(public_path('media/kepuasan-mitra'), $fileName);
+        if (!$file) {
+            return redirect()->route('penelitian.data-penelitian')->with('error', 'Gagal Menyimpan File');
+        }
+        $param = [
+            'usulan_id' => $request->id_penelitian,
+            'file_upload_kepuasan_mitra' => $fileName,
+        ];
+
+        $updateData = $this->postAPI($param, 'penelitian/update-penelitian');
+
+        if (isset($updateData['success'])) {
+            return Redirect::back()->with('message', $updateData['success']);
+        } else {
+            return Redirect::back()->with('error', $updateData['error'] ?? $updateData['reason']);
+        }
+
+        return response()->json(['success' => $fileName]);
+    }
+
     public function uploadProposalRevisi(Request $request)
     {
         $file = $request->file('fileToUpload');

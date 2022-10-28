@@ -183,6 +183,9 @@
 									</dd>
 									<dt>Dokumen Proposal</dt>
 									<dd>
+										<a class="btn btn-outline-success btn-sm" target="_blank"
+											href="https://docs.google.com/document/d/1YJ2VXFFOMTkhkNnGOeHN4OaejuNnZG48/edit"><i
+												class="fas fa-file-download"></i> Download Template</a>
 										@if (isset($detailPenelitian['file_upload_proposal']))
 										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
 											data-id="{{ $detailPenelitian['usulan_id'] }}"><i
@@ -200,25 +203,9 @@
 											@endif
 										@endif
 									</dd>
-									<dt>Dokumen Laporan Akhir</dt>
+									{{-- <dt>Dokumen Laporan Akhir</dt>
 									<dd>
-										@if (isset($detailPenelitian['file_upload_laporan_akhir']))
-										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
-											data-id="{{ $detailPenelitian['file_upload_laporan_akhir'] }}"><i
-												class="fas fa-file-upload"></i>
-											Reupload</a>
-										<a class="btn btn-outline-primary btn-sm" target="_blank"
-											href="{{ asset('media/laporan-akhir') }}/{{ $detailPenelitian['file_upload_laporan_akhir'] }}"><i
-												class="fas fa-file-download"></i> Download</a>
-										@else
-											@if (in_array('edit penelitian',$user['permission_array']))
-											<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
-												data-id="{{ $detailPenelitian['file_upload_laporan_akhir'] }}"><i
-													class="fas fa-file-upload"></i>
-												Upload</a>
-											@endif
-										@endif
-									</dd>
+									</dd> --}}
 								</dl>
 							</div>
 							<!-- /.col -->
@@ -282,45 +269,110 @@
 									<tr>
 										<th width="5%">No</th>
 										<th width="50%">Monev</th>
-										<th width="25%">Tanggal Upload</th>
+										{{-- <th width="25%">Tanggal Upload</th> --}}
 										<th width="10%">Template</th>
 										<th width="10%">Upload</th>
-										<th width="10%">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td width="5%">1</th>
 										<td width="50%">Monev 70%</th>
-										<td width="25%">-</th>
-										<td width="10%">-</th>
-										<td width="10%">-</th>
-										<td width="10%">-</th>
+										{{-- <td width="25%">-</th> --}}
+										<td width="10%">
+											<a class="btn btn-outline-success btn-sm" target="_blank"
+													href="https://docs.google.com/document/d/11QIMtvBjaVLmdq3vIw1BErw702DswCnh/edit?rtpof=true"><i
+														class="fas fa-file-download"></i> Download Template</a>
+										</th>
+										<td width="10%">
+											<div class="btn-group">
+												@if (isset($detailPenelitian['file_upload_laporan_70']))
+												<a href="#" class="btn btn-outline-danger btn-sm upload-laporan-70"
+													data-id="{{ $detailPenelitian['usulan_id'] }}"><i
+														class="fas fa-file-upload"></i>
+													Reupload</a>
+												<a class="btn btn-outline-primary btn-sm" target="_blank"
+													href="{{ asset('media/laporan-70') }}/{{ $detailPenelitian['file_upload_laporan_70'] }}"><i
+														class="fas fa-file-download"></i> Download</a>
+												@else
+													@if (in_array('edit penelitian',$user['permission_array']))
+													<a href="#" class="btn btn-outline-danger btn-sm upload-laporan-70"
+														data-id="{{ $detailPenelitian['usulan_id'] }}"><i
+															class="fas fa-file-upload"></i>
+														Upload</a>
+													@endif
+												@endif
+											</div>
+										</th>
 									</tr>
 									<tr>
 										<td width="5%">2</th>
 										<td width="50%">Monev 100% (Laporan Akhir)</th>
-										<td width="25%">-</th>
-										<td width="10%">-</th>
-										<td width="10%">-</th>
-										<td width="10%">-</th>
+										{{-- <td width="25%">-</th> --}}
+										<td width="10%">
+											<a class="btn btn-outline-success btn-sm" target="_blank"
+													href="https://docs.google.com/document/d/11QIMtvBjaVLmdq3vIw1BErw702DswCnh/edit?rtpof=true"><i
+														class="fas fa-file-download"></i> Download Template</a>
+										</th>
+										<td width="10%">
+											<div class="btn-group">
+												@if (isset($detailPenelitian['file_upload_laporan_akhir']))
+												<a href="#" class="btn btn-outline-danger btn-sm upload-laporan-akhir"
+													data-id="{{ $detailPenelitian['usulan_id'] }}"><i
+														class="fas fa-file-upload"></i>
+													Reupload</a>
+												<a class="btn btn-outline-primary btn-sm" target="_blank"
+													href="{{ asset('media/laporan-akhir') }}/{{ $detailPenelitian['file_upload_laporan_akhir'] }}"><i
+														class="fas fa-file-download"></i> Download</a>
+												@else
+													@if (in_array('edit penelitian',$user['permission_array']))
+													<a href="#" class="btn btn-outline-danger btn-sm upload-laporan-akhir"
+														data-id="{{ $detailPenelitian['usulan_id'] }}"><i
+															class="fas fa-file-upload"></i>
+														Upload</a>
+													@endif
+												@endif
+											</div>
+										</th>
 									</tr>
 									<tr>
 										<td width="5%">3</th>
 										<td width="50%">Kepuasan Mitra</th>
-										<td width="25%">-</th>
-										<td width="10%">-</th>
-										<td width="10%">-</th>
-										<td width="10%">-</th>
+										<td width="25%">
+											<a class="btn btn-outline-success btn-sm" target="_blank"
+													href="https://docs.google.com/spreadsheets/d/1fRYWzwzxodOB1UCq3OuzAwMb_cCNN-2u/edit#gid=1392405133"><i
+														class="fas fa-file-download"></i> Download Template</a>
+										</th>
+										<td width="10%">
+											<div class="btn-group">
+												@if (isset($detailPenelitian['file_upload_kepuasan_mitra']))
+												<a href="#" class="btn btn-outline-danger btn-sm upload-kepuasan-mitra"
+													data-id="{{ $detailPenelitian['usulan_id'] }}"><i
+														class="fas fa-file-upload"></i>
+													Reupload</a>
+												<a class="btn btn-outline-primary btn-sm" target="_blank"
+													href="{{ asset('media/kepuasan-mitra') }}/{{ $detailPenelitian['file_upload_kepuasan_mitra'] }}"><i
+														class="fas fa-file-download"></i> Download</a>
+												@else
+													@if (in_array('edit penelitian',$user['permission_array']))
+													<a href="#" class="btn btn-outline-danger btn-sm upload-kepuasan-mitra"
+														data-id="{{ $detailPenelitian['usulan_id'] }}"><i
+															class="fas fa-file-upload"></i>
+														Upload</a>
+													@endif
+												@endif
+											</div>
+										</th>
 									</tr>
-									<tr>
+									{{-- <tr>
 										<td width="5%">3</th>
 										<td width="50%">Monev Luaran</th>
 										<td width="25%">-</th>
-										<td width="10%">-</th>
-										<td width="10%">-</th>
-										<td width="10%">-</th>
-									</tr>
+										<td width="10%">
+											<div class="btn-group">
+											</div>
+										</th>
+									</tr> --}}
 								</tbody>
 							</table>
 						</div>
@@ -441,7 +493,7 @@
 					</div>
 					<div class="modal-body">
 						<input type="hidden" class="id-penelitian" name="id_penelitian">
-						<input type="file" name="fileToUpload" id="fileToUpload">
+						<input type="file" name="fileToUpload" id="fileToUpload" required>
 					</div>
 					<div class="modal-footer">
 						<input type="submit" name="o_upload_button" id="ok-upload-button" class="btn btn-danger"
@@ -679,11 +731,13 @@
 	* Upload Dokumen
 	*
 	**/
-	$(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir', function() {
+	$(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir, .upload-laporan-70, .upload-kepuasan-mitra', function() {
 		$('#modalUpload').modal('show');
 		let isUploadProposal = false;
 		let isUploadPengesahan = false;
 		let isUploadLaporanAkhir = false;
+		let isUploadLaporan70 = false;
+		let kepuasanMitra = false;
 		let url = '';
 		const id = $(this).data("id")
 
@@ -694,6 +748,8 @@
 			isUploadProposal = true;
 			isUploadPengesahan = false;
 			isUploadLaporanAkhir = false;
+			isUploadLaporan70 = false;
+			kepuasanMitra = false;
 			url = "/penelitian/upload-proposal";
 			$('#upload-file').attr('action', url);
 			$('#modal-upload-title').html('Upload Proposal');
@@ -702,6 +758,8 @@
 			isUploadProposal = false;
 			isUploadPengesahan = true;
 			isUploadLaporanAkhir = false;
+			isUploadLaporan70 = false;
+			kepuasanMitra = false;
 			url = "/penelitian/upload-pengesahan";
 			$('#upload-file').attr('action', url);
 			$('#modal-upload-title').html('Upload Pengesahan');
@@ -710,9 +768,31 @@
 			isUploadProposal = false;
 			isUploadPengesahan = false;
 			isUploadLaporanAkhir = true;
+			isUploadLaporan70 = false;
+			kepuasanMitra = false;
 			url = "/penelitian/upload-laporan-akhir";
 			$('#upload-file').attr('action', url);
 			$('#modal-upload-title').html('Upload Laporan Akhir');
+		}
+		if (classList.includes('upload-laporan-70')){
+			isUploadProposal = false;
+			isUploadPengesahan = false;
+			isUploadLaporanAkhir = false;
+			isUploadLaporan70 = true;
+			kepuasanMitra = false;
+			url = "/penelitian/upload-laporan-70";
+			$('#upload-file').attr('action', url);
+			$('#modal-upload-title').html('Upload Laporan Kemujuan 70%');
+		}
+		if (classList.includes('upload-kepuasan-mitra')){
+			isUploadProposal = false;
+			isUploadPengesahan = false;
+			isUploadLaporanAkhir = false;
+			isUploadLaporan70 = true;
+			kepuasanMitra = false;
+			url = "/penelitian/upload-kepuasan-mitra";
+			$('#upload-file').attr('action', url);
+			$('#modal-upload-title').html('Upload Laporan Kepuasan Mitra');
 		}
 	});
 	/**

@@ -52,8 +52,15 @@ class PengabdianController extends Controller
      */
     public function dataPengabdian(Request $request)
     {
+        $param = [
+            'name' => 'batas pengajuan',
+        ];
+
+        $getData = $this->postAPI($param, 'setting/get-filter');
+
         return view('admin.content.pengabdian.usulan-baru.daftar-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
+            'setting' => $getData['data'][0] ?? [],
         ]);
     }
 
@@ -425,6 +432,54 @@ class PengabdianController extends Controller
         $param = [
             'usulan_id' => $request->id_pengabdian,
             'file_upload_laporan_akhir' => $fileName,
+        ];
+
+        $updateData = $this->postAPI($param, 'pengabdian/update-pengabdian');
+
+        if (isset($updateData['success'])) {
+            return Redirect::back()->with('message', $updateData['success']);
+        } else {
+            return Redirect::back()->with('error', $updateData['error'] ?? $updateData['reason']);
+        }
+
+        return response()->json(['success' => $fileName]);
+    }
+
+    public function uploadLaporan70(Request $request)
+    {
+        $file = $request->file('fileToUpload');
+        $fileName = time() . '.' . $file->extension();
+        $file->move(public_path('media/laporan-70'), $fileName);
+        if (!$file) {
+            return redirect()->route('pengabdian.data-pengabdian')->with('error', 'Gagal Menyimpan File');
+        }
+        $param = [
+            'usulan_id' => $request->id_pengabdian,
+            'file_upload_laporan_70' => $fileName,
+        ];
+
+        $updateData = $this->postAPI($param, 'pengabdian/update-pengabdian');
+
+        if (isset($updateData['success'])) {
+            return Redirect::back()->with('message', $updateData['success']);
+        } else {
+            return Redirect::back()->with('error', $updateData['error'] ?? $updateData['reason']);
+        }
+
+        return response()->json(['success' => $fileName]);
+    }
+
+    public function uploadKepuasanMitra(Request $request)
+    {
+        $file = $request->file('fileToUpload');
+        $fileName = time() . '.' . $file->extension();
+        $file->move(public_path('media/kepuasan-mitra'), $fileName);
+        if (!$file) {
+            return redirect()->route('pengabdian.data-pengabdian')->with('error', 'Gagal Menyimpan File');
+        }
+        $param = [
+            'usulan_id' => $request->id_pengabdian,
+            'file_upload_kepuasan_mitra' => $fileName,
         ];
 
         $updateData = $this->postAPI($param, 'pengabdian/update-pengabdian');

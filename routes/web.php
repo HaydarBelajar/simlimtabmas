@@ -52,6 +52,8 @@ Route::middleware(['auth.token'])->group(function () {
         Route::post('/upload-proposal', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadProposal'])->name('upload-proposal');
         Route::post('/upload-proposal-revisi', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadProposalRevisi'])->name('upload-proposal-revisi');
         Route::post('/upload-laporan-akhir', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadLaporanAkhir'])->name('upload-laporan-akhir');
+        Route::post('/upload-laporan-70', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadLaporan70'])->name('upload-laporan-70');
+        Route::post('/upload-kepuasan-mitra', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'uploadKepuasanMitra'])->name('upload-kepuasan-mitra');
         Route::post('/tambah-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'tambahCatatanHarian'])->name('tambah-catatan-harian');
         Route::post('/edit-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'editCatatanHarian'])->name('edit-catatan-harian');
         Route::get('/get-catatan-harian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getCatatanHarian'])->name('get-catatan-harian');
@@ -80,6 +82,8 @@ Route::middleware(['auth.token'])->group(function () {
         Route::post('/upload-proposal', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'uploadProposal'])->name('upload-proposal');
         Route::post('/upload-proposal-revisi', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'uploadProposalRevisi'])->name('upload-proposal-revisi');
         Route::post('/upload-laporan-akhir', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'uploadLaporanAkhir'])->name('upload-laporan-akhir');
+        Route::post('/upload-laporan-70', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'uploadLaporan70'])->name('upload-laporan-70');
+        Route::post('/upload-kepuasan-mitra', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'uploadKepuasanMitra'])->name('upload-kepuasan-mitra');
         Route::post('/tambah-catatan-harian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'tambahCatatanHarian'])->name('tambah-catatan-harian');
         Route::post('/edit-catatan-harian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'editCatatanHarian'])->name('edit-catatan-harian');
         Route::get('/get-catatan-harian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'getCatatanHarian'])->name('get-catatan-harian');
