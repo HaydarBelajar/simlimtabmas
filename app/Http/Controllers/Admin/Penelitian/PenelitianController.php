@@ -52,8 +52,15 @@ class PenelitianController extends Controller
      */
     public function dataPenelitian(Request $request)
     {
+        $param = [
+            'name' => 'batas pengajuan',
+        ];
+
+        $getData = $this->postAPI($param, 'setting/get-filter');
+
         return view('admin.content.penelitian.usulan-baru.daftar-usulan-baru')->with([
             'detailController' => $this->controllerDetails,
+            'setting' => $getData['data'][0] ?? [],
         ]);
     }
 

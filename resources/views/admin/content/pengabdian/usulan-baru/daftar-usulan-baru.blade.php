@@ -28,6 +28,9 @@
             <div class="card card-default color-palette-box">
                 <div class="card-body">
                     <div class="top-button-group" style="margin-bottom: 20px;">
+                        <div class="alert alert-danger" role="alert">
+                            Usulan ditutup tanggal {{\Carbon\Carbon::parse($setting['date_value'] ?? '', 'Asia/Jakarta')->format('d-m-Y H:i')}}
+                        </div>
                         @if (in_array('create pengabdian',$user['permission_array']))
                         <a href={{ route('pengabdian.tambah-pengabdian') }} type="button" class="btn btn-primary tambah-pengabdian">Tambah Usulan Pengabdian</a>
                         @endif
