@@ -46,6 +46,10 @@
             <a class="nav-link" id="pengabdian-sister-tab" data-toggle="pill" href="#pengabdian-sister" role="tab"
               aria-controls="pengabdian" aria-selected="false">Riwayat Pengabdian Sister</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" id="download-template-tab" data-toggle="pill" href="#download-template" role="tab"
+              aria-controls="download-template" aria-selected="false">Download Template</a>
+          </li>
           {{-- <li class="nav-item">
             <a class="nav-link" id="penelitian-tab" data-toggle="pill" href="#penelitian" role="tab"
               aria-controls="penelitian" aria-selected="false">Riwayat Penelitian Sister</a>
@@ -91,6 +95,9 @@
           </div>
           <div class="tab-pane fade" id="pengabdian-sister" role="tabpanel" aria-labelledby="pengabdian-sister-tab">
             @include('admin.content.sub-content.home-pengabdian-sister')
+          </div>
+          <div class="tab-pane fade" id="download-template" role="tabpanel" aria-labelledby="download-template-tab">
+            @include('admin.content.sub-content.home-download-template')
           </div>
           <div class="tab-pane fade" id="artikel-jurnal" role="tabpanel" aria-labelledby="artikel-jurnal-tab">
             @include('admin.content.sub-content.home-artikel-jurnal')

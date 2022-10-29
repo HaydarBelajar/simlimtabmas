@@ -37,7 +37,7 @@
                                         data-target="#reservationdatetime" 
                                         name="batas_pengajuan" 
                                         id="batas_pengajuan"
-                                        value="{{ old('batas_pengajuan', \Carbon\Carbon::parse($data['date_value'],  'Asia/Jakarta', 'Y-m-d H:m:s')->format('d-m-Y H:m:s')) }}"
+                                        value="{{ old('batas_pengajuan', \Carbon\Carbon::parse($data['date_value'] ?? '',  'Asia/Jakarta', 'Y-m-d H:m:s')->format('d-m-Y H:m:s')) }}"
                                         >
                                     <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>

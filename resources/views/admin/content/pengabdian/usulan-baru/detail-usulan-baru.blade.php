@@ -162,7 +162,7 @@
 							<!-- /.col -->
 							<div class="col-sm-4">
 								<dl>
-									<dt>Dokumen Pengesahan</dt>
+									{{-- <dt>Dokumen Pengesahan</dt>
 									<dd>
 										@if (isset($detailPengabdian['file_upload_pengesahan']))
 										<a href="#" class="btn btn-outline-danger btn-sm upload-pengesahan"
@@ -178,12 +178,12 @@
 												class="fas fa-file-upload"></i>
 											Upload</a>
 										@endif
-									</dd>
+									</dd> --}}
 									<dt>Dokumen Proposal</dt>
 									<dd>
-										<a class="btn btn-outline-success btn-sm" target="_blank"
+										{{-- <a class="btn btn-outline-success btn-sm" target="_blank"
 											href="https://docs.google.com/document/d/1YJ2VXFFOMTkhkNnGOeHN4OaejuNnZG48/edit"><i
-												class="fas fa-file-download"></i> Download Template</a>
+												class="fas fa-file-download"></i> Download Template</a> --}}
 										@if (isset($detailPengabdian['file_upload_proposal']))
 										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
 											data-id="{{ $detailPengabdian['usulan_id'] }}"><i
@@ -266,7 +266,7 @@
 										<th width="5%">No</th>
 										<th width="50%">Monev</th>
 										{{-- <th width="25%">Tanggal Upload</th> --}}
-										<th width="10%">Template</th>
+										{{-- <th width="10%">Template</th> --}}
 										<th width="10%">Upload</th>
 									</tr>
 								</thead>
@@ -275,11 +275,11 @@
 										<td width="5%">1</th>
 										<td width="50%">Monev 70%</th>
 										{{-- <td width="25%">-</th> --}}
-										<td width="10%">
+										{{-- <td width="10%">
 											<a class="btn btn-outline-success btn-sm" target="_blank"
 													href="https://docs.google.com/document/d/11QIMtvBjaVLmdq3vIw1BErw702DswCnh/edit?rtpof=true"><i
 														class="fas fa-file-download"></i> Download Template</a>
-										</th>
+										</th> --}}
 										<td width="10%">
 											<div class="btn-group">
 												@if (isset($detailPengabdian['file_upload_laporan_70']))
@@ -305,11 +305,11 @@
 										<td width="5%">2</th>
 										<td width="50%">Monev 100% (Laporan Akhir)</th>
 										{{-- <td width="25%">-</th> --}}
-										<td width="10%">
+										{{-- <td width="10%">
 											<a class="btn btn-outline-success btn-sm" target="_blank"
 													href="https://docs.google.com/document/d/11QIMtvBjaVLmdq3vIw1BErw702DswCnh/edit?rtpof=true"><i
 														class="fas fa-file-download"></i> Download Template</a>
-										</th>
+										</th> --}}
 										<td width="10%">
 											<div class="btn-group">
 												@if (isset($detailPengabdian['file_upload_laporan_akhir']))
@@ -334,11 +334,11 @@
 									<tr>
 										<td width="5%">3</th>
 										<td width="50%">Kepuasan Mitra</th>
-										<td width="25%">
+										{{-- <td width="25%">
 											<a class="btn btn-outline-success btn-sm" target="_blank"
 													href="https://docs.google.com/spreadsheets/d/1fRYWzwzxodOB1UCq3OuzAwMb_cCNN-2u/edit#gid=1392405133"><i
 														class="fas fa-file-download"></i> Download Template</a>
-										</th>
+										</th> --}}
 										<td width="10%">
 											<div class="btn-group">
 												@if (isset($detailPengabdian['file_upload_kepuasan_mitra']))

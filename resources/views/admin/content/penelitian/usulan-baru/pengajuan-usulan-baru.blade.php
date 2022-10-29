@@ -93,6 +93,22 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label for="program-studi"
+                                            class="col-sm-2 col-form-label">Program Studi</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="program-studi" name="program_studi"
+                                                required>
+                                                @foreach ($listFakultas as $fakultas)
+                                                <option {{ isset($detailPenelitian['fakultas_id']) &&
+                                                    ($detailPenelitian['fakultas_id']==$fakultas['kdfakultas'])
+                                                    ? 'selected' : '' }} value={{ $fakultas['kdfakultas'] }}>{{
+                                                    $fakultas['namafakultas'] }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label for="skema-penelitian" class="col-sm-2 col-form-label">Skema</label>
                                         <div class="col-sm-10">
                                             <select class="form-control" id="skema-penelitian" name="skema_id" required>    
@@ -180,7 +196,7 @@
                                                 required>{{ isset($detailPenelitian['keywords']) ? $detailPenelitian['keywords'] : '' }}</textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    {{-- <div class="form-group row">
                                         <label for="email" class="col-sm-2 col-form-label">Alamat Email</label>
                                         <div class="col-sm-10">
                                             <input type="email" class="form-control" id="email" placeholder="Email"
@@ -188,10 +204,10 @@
                                                 value="{{ isset($detailPenelitian['email']) ? $detailPenelitian['email'] : '' }}"
                                                 required>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
-                            <div class="card card-primary">
+                            {{-- <div class="card card-primary">
                                 <div class="card-header">
                                     <h4 class="card-title w-100">
                                         <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapseTwo"
@@ -223,7 +239,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <h4 class="card-title w-100">

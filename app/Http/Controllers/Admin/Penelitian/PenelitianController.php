@@ -294,7 +294,6 @@ class PenelitianController extends Controller
             'user_id' => $userDetail['id'],
             'jenis_usulan' => 1
         ];
-
         $getData = $this->postAPI($dataTablesParam, 'penelitian/get-filter');
 
         $data = $getData['data'];

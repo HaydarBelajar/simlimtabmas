@@ -47,10 +47,11 @@
                                 <th width="10%">Fakultas</th>
                                 <th width="10%">Skema</th>
                                 <th width="10%">Ketua</th>
-                                <th width="5%">Pengesahan</th>
+                                {{-- <th width="5%">Pengesahan</th> --}}
                                 <th width="5%">Proposal</th>
-                                <th width="5%">Proposal Revisi</th>
-                                <th width="5%">Laporan Akhir</th>
+                                <th width="5%">Penilaian Reviewer</th>
+                                <th width="5%">Revisi Proposal</th>
+                                {{-- <th width="5%">Laporan Akhir</th> --}}
                                 <th width="5%">Status Seleksi</th>
                                 <th width="10%">Tanggal Upload</th>
                                 <th width="15%">Aksi</th>
@@ -282,23 +283,23 @@
                         return '-';
                     }
                 },
-                {
-                    name: 'Pengesahan',
-                    data: 'usulan_id',
-                    className: 'text-right py-0 align-middle',
-                    render: function ( data, type, row ) {
-                        if (row.file_upload_pengesahan) {
-                            return `
-                                <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/pengesahan') }}/${row.file_upload_pengesahan}" ><i class="fas fa-file-download"></i> Download</a>
-                            `;
-                        } else {
-                            return `
-                                <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-pengesahan" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
-                            `;
-                        }
+                // {
+                //     name: 'Pengesahan',
+                //     data: 'usulan_id',
+                //     className: 'text-right py-0 align-middle',
+                //     render: function ( data, type, row ) {
+                //         if (row.file_upload_pengesahan) {
+                //             return `
+                //                 <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/pengesahan') }}/${row.file_upload_pengesahan}" ><i class="fas fa-file-download"></i> Download</a>
+                //             `;
+                //         } else {
+                //             return `
+                //                 <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-pengesahan" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                //             `;
+                //         }
 
-                    }
-                },
+                //     }
+                // },
                 {
                     name: 'Proposal',
                     data: 'usulan_id',
@@ -312,6 +313,21 @@
                             return `
                             <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
                             `;
+                        }
+
+                    }
+                },
+                {
+                    name: 'Penilaian Reviewer',
+                    data: 'usulan_id',
+                    className: 'text-right py-0 align-middle',
+                    render: function ( data, type, row ) {
+                        if (row.file_upload_penilaian_pengabdian_reviewer) {
+                            return `
+                                <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal-revisi') }}/${row.file_upload_proposal_revisi}" ><i class="fas fa-file-download"></i> Download</a>
+                            `;
+                        } else {
+                            return `-`;
                         }
 
                     }
