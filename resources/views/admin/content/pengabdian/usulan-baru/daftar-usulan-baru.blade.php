@@ -29,9 +29,13 @@
                 <div class="card-body">
                     <div class="top-button-group" style="margin-bottom: 20px;">
                         <div class="alert alert-danger" role="alert">
-                            Usulan ditutup tanggal {{\Carbon\Carbon::parse($setting['date_value'] ?? '', 'Asia/Jakarta')->format('d-m-Y H:i')}}
+                            Usulan ditutup Tanggal {{\Carbon\Carbon::parse($setting['date_value'] ?? '', 'Asia/Jakarta')->format('d-M-Y H:i')}}
                         </div>
-                        @if (in_array('create pengabdian',$user['permission_array']))
+                        @php
+                            $upload_deadline = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $setting['date_value'] ?? null);
+                            $now = \Carbon\Carbon::now('Asia/Jakarta');
+                        @endphp
+                        @if (in_array('create penelitian',$user['permission_array']) && $upload_deadline->gt($now))
                         <a href={{ route('pengabdian.tambah-pengabdian') }} type="button" class="btn btn-primary tambah-pengabdian">Tambah Usulan Pengabdian</a>
                         @endif
                     </div>
@@ -349,23 +353,23 @@
 
                     }
                 },
-                {
-                    name: 'Laporan Akhir',
-                    data: 'usulan_id',
-                    className: 'text-right py-0 align-middle',
-                    render: function ( data, type, row ) {
-                        if (row.file_upload_laporan_akhir) {
-                            return `
-                            <a  class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/laporan-akhir') }}/${row.file_upload_laporan_akhir}" ><i class="fas fa-file-download"></i> Download</a>
-                            `;
-                        } else {
-                            return `
-                            <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-laporan-akhir" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
-                            `;
-                        }
+                // {
+                //     name: 'Laporan Akhir',
+                //     data: 'usulan_id',
+                //     className: 'text-right py-0 align-middle',
+                //     render: function ( data, type, row ) {
+                //         if (row.file_upload_laporan_akhir) {
+                //             return `
+                //             <a  class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/laporan-akhir') }}/${row.file_upload_laporan_akhir}" ><i class="fas fa-file-download"></i> Download</a>
+                //             `;
+                //         } else {
+                //             return `
+                //             <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-laporan-akhir" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                //             `;
+                //         }
 
-                    }
-                },
+                //     }
+                // },
                 {
                     data: 'status',
                     name: 'Status Seleksi',

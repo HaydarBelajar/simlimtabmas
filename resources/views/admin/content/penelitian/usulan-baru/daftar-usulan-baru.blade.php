@@ -29,9 +29,13 @@
                 <div class="card-body">
                     <div class="top-button-group" style="margin-bottom: 20px;">
                         <div class="alert alert-danger" role="alert">
-                            Usulan ditutup tanggal {{\Carbon\Carbon::parse($setting['date_value'] ?? '', 'Asia/Jakarta')->format('d-m-Y H:i')}}
+                            Usulan ditutup Tanggal {{\Carbon\Carbon::parse($setting['date_value'] ?? '', 'Asia/Jakarta')->format('d-M-Y H:i')}}
                         </div>
-                        @if (in_array('create penelitian',$user['permission_array']))
+                        @php
+                            $upload_deadline = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $setting['date_value'] ?? null);
+                            $now = \Carbon\Carbon::now('Asia/Jakarta');
+                        @endphp
+                        @if (in_array('create penelitian',$user['permission_array']) && $upload_deadline->gt($now))
                         <a href={{ route('penelitian.tambah-penelitian') }} type="button" class="btn btn-primary tambah-penelitian">Tambah Usulan Penelitian</a>
                         @endif
                         </div>
