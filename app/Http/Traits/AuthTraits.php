@@ -38,9 +38,26 @@ trait AuthTraits
         return $this->connectAPI('POST', $param, 'data', $endPoint);
     }
 
-    public function connectAPI($method, $param, $type, $endPoint)
+    public function postPubAPI($data, $endPoint)
     {
-        $client = new Client();
+        $param = [
+            'form_params' => $data
+        ];
+
+        return $this->connectAPI('POST', $param, 'data', $endPoint, 'public');
+    }
+
+    public function getPubAPI($data, $endPoint)
+    {
+        $param = [];
+        return $this->connectAPI('GET', $param, 'data', $endPoint, 'public');
+    }
+
+    public function connectAPI($method, $param, $type, $endPoint, $mode = 'api')
+    {
+        $client = new Client(['headers' => ['Accept' => 'application/json']]);
+        $apiURL = $mode == 'api' ? env('API_URL') : env('API_PUB_URL');
+
         if ($method == 'POST') {
             if ($type == 'auth') {
                 try {
@@ -64,13 +81,11 @@ trait AuthTraits
 
             } elseif ($type == 'data') {
                 try {
-                    $res = $client->request('POST', env('API_URL').$endPoint, $param);
+                    $res = $client->request('POST', $apiURL.$endPoint, $param);
                     $body = json_decode($res->getBody(), true);
-
                     return $body;
                 } catch (ClientException  $e) {
                     $response = $e->getResponse();
-
                     $detail = [
                         "status_code" => $response->getStatusCode(),
                         "reason" => $response->getReasonPhrase(),
@@ -84,14 +99,47 @@ trait AuthTraits
                     return $detail;
                 } catch (ServerException | HttpException $e) {
                     $response = $e->getResponse();
+
                     $message = json_decode($response->getBody()->getContents());
 
                     $detail = [
                         "status_code" => $response->getStatusCode(),
-                        "reason" =>  $message->error,
+                        "reason" =>  $message->error ?? 'error',
                     ];
+
                     return $detail;
                 }
+            }
+        }
+
+        if ($method == 'GET') {
+            try {
+                $res = $client->request('GET', $apiURL . $endPoint, $param);
+                $body = json_decode($res->getBody(), true);
+                return $body;
+            } catch (ClientException  $e) {
+                $response = $e->getResponse();
+
+                $detail = [
+                    "status_code" => $response->getStatusCode(),
+                    "reason" => $response->getReasonPhrase(),
+                ];
+
+                if ($detail['status_code'] == 401 && $detail['reason'] == "Unauthorized") {
+                    Session::flush();
+                    return redirect('/login')->send();
+                }
+
+                return $detail;
+            } catch (ServerException | HttpException $e) {
+                $response = $e->getResponse();
+                $message = json_decode($response->getBody()->getContents());
+
+                $detail = [
+                    "status_code" => $response->getStatusCode(),
+                    "reason" =>  $message->message ?? 'Error',
+                ];
+                return $detail;
             }
         }
     }

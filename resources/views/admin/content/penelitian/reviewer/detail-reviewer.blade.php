@@ -57,11 +57,13 @@
                         </div>
                         <div class="card-body">
                             <div class="top-button-group" style="margin-bottom: 20px;">
-                                <a type="button" target="_blank"
-                                    href="{{ route('penelitian.penugasan-reviewer', $reviewerData['id'] ?? '') }}"
-                                    class="btn btn-primary tambah-catatan-harian"
-                                    style="text-decoration: none; color: #FFFFFF;">Tambah
-                                    Penelitian</a>
+                                @if (in_array('edit reviewer pengabdian', Session::get('kucingku')['user']['permission_array']))
+                                    <a type="button" target="_blank"
+                                        href="{{ route('penelitian.penugasan-reviewer', $reviewerData['id'] ?? '') }}"
+                                        class="btn btn-primary tambah-catatan-harian"
+                                        style="text-decoration: none; color: #FFFFFF;">Tambah
+                                        Reviewer Penelitian</a>
+                                @endif
                             </div>
                             <span id="notification"></span>
                             <table id="tabel-detail-reviewer" class="table table-striped table-bordered"
@@ -136,7 +138,6 @@
             }
             toastr.error("{{ session('error') }}");
         @endif
-        console.log(`/penelitian/get-penelitian-by-reviwer-datatables/${reviewerId}`)
         /**
          * Data Table
          *
@@ -161,7 +162,7 @@
                     name: 'Tahun Usulan',
                     render: function ( data, type, row ) {
                         if (data) {
-                            return data.tahun_usulan;
+                            return data.tahun;
                         } else {
                             return '-';
                         }
@@ -173,7 +174,7 @@
                     name: 'Tahun Pelaksanaan',
                     render: function ( data, type, row ) {
                         if (data) {
-                            return data.tahun_usulan;
+                            return data.tahun;
                         } else {
                             return '-';
                         }
@@ -185,19 +186,18 @@
                     name: 'Judul'
                 },
                 {
-                    data: 'peneliti_utama',
+                    data: 'wewenang_usulan',
                     name: 'Ketua Peneliti',
                     render: function ( data, type, row ) {
-                        if (data) {
-                            return data.name;
-                        } else {
-                            return '-';
+                        if (data.length){
+                            let ketuaPeneliti = data.filter(p => p.wewenang == "1");
+                            return ketuaPeneliti[0].detail_pengusul.name ?? '-';
                         }
-
+                        return '-';
                     }
                 },
                 {
-                    data: 'fakultas_penelitian',
+                    data: 'fakultas',
                     name: 'Fakultas',
                     render: function ( data, type, row ) {
                         if (data) {

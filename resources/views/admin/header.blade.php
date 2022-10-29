@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Simlitabmas | UNISA</title>
 
-    <link rel="shortcut icon" href="{{ asset('assets/images/ristekBrin.ico') }}" type="image/x-icon" />
-    <link rel="icon" href="Images/icon/ristekBrin.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/cropped-logo-unisa-crop.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('assets/images/cropped-logo-unisa-crop.ico') }}" type="image/x-icon" />
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -35,8 +35,6 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet">
 
     <!-- Datatable -->
     <link rel="stylesheet" type="text/css"

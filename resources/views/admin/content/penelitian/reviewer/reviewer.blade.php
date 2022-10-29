@@ -28,8 +28,6 @@
             <div class="card card-default color-palette-box">
                 <div class="card-body">
                     <div class="top-button-group" style="margin-bottom: 20px;">
-                        {{-- <a href={{ route('penelitian.tambah-penelitian') }} type="button"
-                            class="btn btn-primary tambah-penelitian">Tambah Usulan Penelitian</a> --}}
                     </div>
                     <span id="notification"></span>
                     <table id="reviewer-table" class="table table-striped table-bordered" style="width:100%">

@@ -28,20 +28,34 @@
             <div class="card card-default color-palette-box">
                 <div class="card-body">
                     <div class="top-button-group" style="margin-bottom: 20px;">
-                        <a href={{ route('penelitian.tambah-penelitian') }} type="button" class="btn btn-primary tambah-penelitian {{ in_array('Reviewer',
-                            Session::get('kucingku')['roles']) ? 'disabled' : '' }}">Tambah Usulan Penelitian</a>
-                    </div>
+                        <div class="alert alert-danger" role="alert">
+                            Usulan ditutup Tanggal {{\Carbon\Carbon::parse($setting['date_value'] ?? '', 'Asia/Jakarta')->format('d-M-Y H:i')}}
+                        </div>
+                        @php
+                            $upload_deadline = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $setting['date_value'] ?? null);
+                            $now = \Carbon\Carbon::now('Asia/Jakarta');
+                        @endphp
+                        @if (in_array('create penelitian',$user['permission_array']) && $upload_deadline->gt($now))
+                        <a href={{ route('penelitian.tambah-penelitian') }} type="button" class="btn btn-primary tambah-penelitian">Tambah Usulan Penelitian</a>
+                        @endif
+                        </div>
                     <span id="notification"></span>
                     <table id="penelitian-table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
+                                <th width="5%"></th>
                                 <th width="5%">No</th>
                                 <th width="20%">Judul Penelitian</th>
+                                <th width="5%">Tahun Usulan</th>
+                                <th width="5%">Tahun Pelaksanaan</th>
                                 <th width="10%">Fakultas</th>
-                                <th width="5%">Pengesahan</th>
+                                <th width="10%">Skema</th>
+                                <th width="10%">Ketua</th>
+                                {{-- <th width="5%">Pengesahan</th> --}}
                                 <th width="5%">Proposal</th>
-                                <th width="5%">Proposal Revisi</th>
-                                <th width="5%">Laporan Akhir</th>
+                                <th width="5%">Penilaian Reviewer</th>
+                                <th width="5%">Revisi Proposal</th>
+                                {{-- <th width="5%">Laporan Akhir</th> --}}
                                 <th width="5%">Status Seleksi</th>
                                 <th width="10%">Tanggal Upload</th>
                                 <th width="15%">Aksi</th>
@@ -108,251 +122,347 @@
 @push('scripts')
 <script>
     $(document).ready(function () {
-                /**
-                * Section untuk menampilkan pesan response dari back end
-                */
-                @if(Session::has('message'))
-                    toastr.options =
-                    {
-                        "closeButton" : true,
-                        "progressBar" : true
-                    }
-                    toastr.success("{{ session('message') }}");
-                @endif
+        /**
+        * Section untuk menampilkan pesan response dari back end
+        */
+        @if(Session::has('message'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
 
-                @if(Session::has('error'))
-                    toastr.options =
-                    {
-                        "closeButton" : true,
-                        "progressBar" : true
-                    }
-                    toastr.error("{{ session('error') }}");
-                @endif
-                
-                /**
-                * End Section untuk menampilkan pesan response dari back end
-                */
-                
-                /**
-                * Section untuk melakukan delete jika tombol delete di setiap row table di klick
-                */ 
-                $(document).on('click', '.delete', function() {
-                    user_id = $(this).attr('id');
-                    $('#confirmModal').modal('show');
-                });
+        @if(Session::has('error'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+        
+        /**
+        * End Section untuk menampilkan pesan response dari back end
+        */
+        
+        /**
+        * Section untuk melakukan delete jika tombol delete di setiap row table di klick
+        */ 
+        $(document).on('click', '.delete', function() {
+            user_id = $(this).attr('id');
+            $('#confirmModal').modal('show');
+        });
 
-                $('#ok-delete-button').click(function() {
-                    $.ajax({
-                        url: "/manage-user/delete/" + user_id,
-                        method: "GET",
-                        data: {
-                            "_token": "{{ csrf_token() }}",
-                        },
-                        beforeSend: function() {
-                            $('#ok-delete-button').text('Proses Menghapus...');
-                        },
-                        success: function(data) {
-                            setTimeout(function() {
-                                if (data.errors) {
-                                    $('#confirmModal').modal('hide');
-                                    $('#user-table').DataTable().ajax.reload();
-                                    alert(data.errors);
-                                } else {
-                                    $('#confirmModal').modal('hide');
-                                    $('#user-table').DataTable().ajax.reload();
-                                    alert('Data Sukses Terhapus');
-                                }
-                            }, 2000);
+        $('#ok-delete-button').click(function() {
+            $.ajax({
+                url: "/manage-user/delete/" + user_id,
+                method: "GET",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+                beforeSend: function() {
+                    $('#ok-delete-button').text('Proses Menghapus...');
+                },
+                success: function(data) {
+                    setTimeout(function() {
+                        if (data.errors) {
+                            $('#confirmModal').modal('hide');
+                            $('#user-table').DataTable().ajax.reload();
+                            alert(data.errors);
+                        } else {
+                            $('#confirmModal').modal('hide');
+                            $('#user-table').DataTable().ajax.reload();
+                            alert('Data Sukses Terhapus');
                         }
-                    })
-                });
+                    }, 2000);
+                }
+            })
+        });
 
-                /**
-                * End Section untuk melakukan delete jika tombol delete di setiap row table di klick
-                */
+        /**
+        * End Section untuk melakukan delete jika tombol delete di setiap row table di klick
+        */
 
-                /**
-                * Section untuk menampilkan data dalam bentuk datatables
-                */
+        /**
+        * Section untuk menampilkan data dalam bentuk datatables
+        */
 
-                $('#penelitian-table').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [
-                        'excel', 'pdf'
-                    ],
-                    "scrollX": true,
-                    processing: true,
-                    serverSide: true,
-                    ajax: {
-                        url: "{{ route('penelitian.get-all') }}",
-                    },
-                    columns: [
-                        {
-                            data: 'usulan_penelitian_id',
-                            name: 'No',
-                            render: function ( data, type, row, meta ) {
-                                return meta.row + meta.settings._iDisplayStart + 1;
-                            }
-                        },
-                        {
-                            data: 'judul',
-                            name: 'Judul Penelitian'
-                        },
-                        {
-                            data: 'fakultas_penelitian',
-                            name: 'Fakultas',
-                            render: function ( data, type, row ) {
-                                if (data) {
-                                    return data.namafakultas;
-                                } else {
-                                    return '-';
-                                }
+        function detailedRow ( d ) {
+            const wewenang1 = d.wewenang_usulan.find( ({wewenang}) => wewenang == 1 ) !== undefined ? d.wewenang_usulan.find( ({wewenang}) => wewenang == 1 ).detail_pengusul.name : ' - ';
+            const wewenang2 = d.wewenang_usulan.find( ({wewenang}) => wewenang == 2 ) !== undefined ? d.wewenang_usulan.find( ({wewenang}) => wewenang == 2 ).detail_pengusul.name : ' - ';
+            const wewenang3 = d.wewenang_usulan.find( ({wewenang}) => wewenang == 3 ) !== undefined ? d.wewenang_usulan.find( ({wewenang}) => wewenang == 3 ).detail_pengusul.name : ' - ';
+            const wewenang4 = d.wewenang_usulan.find( ({wewenang}) => wewenang == 4 ) !== undefined ? d.wewenang_usulan.find( ({wewenang}) => wewenang == 4 ).detail_pengusul.name : ' - ';
+            // `d` is the original data object for the row
+            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+                '<tr>'+
+                    '<td>Ketua</td>'+
+                    '<td>'+ wewenang1 +'</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<td>Anggota 1</td>'+
+                    '<td>'+ wewenang2 +'</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<td>Anggota 2</td>'+
+                    '<td>'+ wewenang3 +'</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<td>Anggota 3</td>'+
+                    '<td>'+ wewenang4 +'</td>'+
+                '</tr>'+
+            '</table>';
+        }
 
-                            }
-                        },
-                        {
-                            name: 'Pengesahan',
-                            data: 'usulan_penelitian_id',
-                            className: 'text-right py-0 align-middle',
-                            render: function ( data, type, row ) {
-                                if (row.file_upload_pengesahan) {
-                                    return `
-                                        <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/pengesahan') }}/${row.file_upload_pengesahan}" ><i class="fas fa-file-download"></i> Download</a>
-                                    `;
-                                } else {
-                                    return `
-                                        <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-pengesahan" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
-                                    `;
-                                }
-
-                            }
-                        },
-                        {
-                            name: 'Proposal',
-                            data: 'usulan_penelitian_id',
-                            className: 'text-right py-0 align-middle',
-                            render: function ( data, type, row ) {
-                                if (row.file_upload_proposal) {
-                                    return `
-                                    <a  class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal') }}/${row.file_upload_proposal}" ><i class="fas fa-file-download"></i> Download</a>
-                                    `;
-                                } else {
-                                    return `
-                                    <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
-                                    `;
-                                }
-
-                            }
-                        },
-                        {
-                            name: 'Proposal Revisi',
-                            data: 'usulan_penelitian_id',
-                            className: 'text-right py-0 align-middle',
-                            render: function ( data, type, row ) {
-                                if (row.file_upload_proposal_revisi) {
-                                    return `
-                                        <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal-revisi') }}/${row.file_upload_proposal_revisi}" ><i class="fas fa-file-download"></i> Download</a>
-                                    `;
-                                } else {
-                                    return `
-                                        <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal-revisi" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
-                                    `;
-                                }
-
-                            }
-                        },
-                        {
-                            name: 'Laporan Akhir',
-                            data: 'usulan_penelitian_id',
-                            className: 'text-right py-0 align-middle',
-                            render: function ( data, type, row ) {
-                                if (row.file_upload_laporan_akhir) {
-                                    return `
-                                    <a  class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/laporan-akhir') }}/${row.file_upload_laporan_akhir}" ><i class="fas fa-file-download"></i> Download</a>
-                                    `;
-                                } else {
-                                    return `
-                                    <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-laporan-akhir" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
-                                    `;
-                                }
-
-                            }
-                        },
-                        {
-                            data: 'status',
-                            name: 'Status Seleksi',
-                            render: function ( data, type, row ) {
-                                if (data == 0) {
-                                    return `Menunggu`;
-                                } else if (data == 1) {
-                                    return `Lolos`;
-                                }
-                            }
-                        },
-                        {
-                            data: 'created_at',
-                            name: 'Tanggal Upload',
-                            render: function ( data, type, row ) {
-                                return moment(data).tz('Asia/Jakarta').format('DD-MM-YYYY HH:MM');
-                            }
-                        },
-                        {
-                            data: 'action',
-                            name: 'action',
-                            orderable: false
+        let tabelPenelitian = $('#penelitian-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
+            "scrollX": true,
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('penelitian.get-all') }}",
+            },
+            columns: [
+                {
+                    "className":      'dt-control',
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ''
+                },
+                {
+                    data: 'usulan_id',
+                    name: 'No',
+                    render: function ( data, type, row, meta ) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    data: 'judul',
+                    name: 'Judul Penelitian'
+                },
+                {
+                    data: 'tahun.tahun',
+                    name: 'Tahun Usulan'
+                },
+                {
+                    data: 'tahun_pelaksanaan.tahun',
+                    name: 'Tahun Pelaksanaan'
+                },
+                {
+                    data: 'fakultas',
+                    name: 'Fakultas',
+                    render: function ( data, type, row ) {
+                        if (data) {
+                            return data.namafakultas;
+                        } else {
+                            return '-';
                         }
-                    ]
-                });
 
-                /**
-                * End Section untuk menampilkan data dalam bentuk datatables
-                */
+                    }
+                },
+                {
+                    data: 'skema',
+                    name: 'Skema',
+                    render: function ( data, type, row ) {
+                        if (data) {
+                            return data.skema_nama;
+                        } else {
+                            return '-';
+                        }
 
-                $(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir, .upload-proposal-revisi', function() {
-                    $('#modalUpload').modal('show');
-                    let isUploadProposal = false;
-                    let isUploadPengesahan = false;
-                    let isUploadLaporanRevisi = false;
-                    let isUploadLaporanAkhir = false;
-                    let url = '';
-                    const id = $(this).data("id")
+                    }
+                },
+                {
+                    data: 'wewenang_usulan',
+                    name: 'Ketua',
+                    render: function ( data, type, row ) {
+                        if (data.length){
+                            const ketua = data.find( ({wewenang}) => wewenang == 1 ) !== undefined ? data.find( ({wewenang}) => wewenang == 1 ).detail_pengusul.name : ' - ';
+                            return ketua;
+                        }
+                        return '-';
+                    }
+                },
+                // {
+                //     name: 'Pengesahan',
+                //     data: 'usulan_id',
+                //     className: 'text-right py-0 align-middle',
+                //     render: function ( data, type, row ) {
+                //         if (row.file_upload_pengesahan) {
+                //             return `
+                //                 <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/pengesahan') }}/${row.file_upload_pengesahan}" ><i class="fas fa-file-download"></i> Download</a>
+                //             `;
+                //         } else {
+                //             return `
+                //                 <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-pengesahan" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                //             `;
+                //         }
 
-                    var classList = this.classList.toString();
+                //     }
+                // },
+                {
+                    name: 'Proposal',
+                    data: 'usulan_id',
+                    className: 'text-right py-0 align-middle',
+                    render: function ( data, type, row ) {
+                        if (row.file_upload_proposal) {
+                            return `
+                            <a  class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal') }}/${row.file_upload_proposal}" ><i class="fas fa-file-download"></i> Download</a>
+                            `;
+                        } else {
+                            return `
+                            <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                            `;
+                        }
 
-                    $('#id-penelitian').val(id);
-                    if (classList.includes('upload-proposal')){
-                        isUploadProposal = true;
-                        isUploadPengesahan = false;
-                        url = "/penelitian/upload-proposal";
-                        $('#upload-file').attr('action', url);
-                        $('#modal-upload-title').html('Upload Proposal');
                     }
-                    if (classList.includes('upload-pengesahan')){
-                        isUploadProposal = false;
-                        isUploadPengesahan = true;
-                        url = "/penelitian/upload-pengesahan";
-                        $('#upload-file').attr('action', url);
-                        $('#modal-upload-title').html('Upload Pengesahan');
+                },
+                {
+                    name: 'Penilaian Reviewer',
+                    data: 'usulan_id',
+                    className: 'text-right py-0 align-middle',
+                    render: function ( data, type, row ) {
+                        if (row.file_upload_penilaian_penelitian_reviewer) {
+                            return `
+                                <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal-revisi') }}/${row.file_upload_proposal_revisi}" ><i class="fas fa-file-download"></i> Download</a>
+                            `;
+                        } else {
+                            return `-`;
+                        }
+
                     }
-                    if (classList.includes('upload-laporan-akhir')){
-                        isUploadProposal = false;
-                        isUploadPengesahan = false;
-                        isUploadLaporanAkhir = true;
-                        url = "/penelitian/upload-laporan-akhir";
-                        $('#upload-file').attr('action', url);
-                        $('#modal-upload-title').html('Upload Laporan Akhir');
+                },
+                {
+                    name: 'Proposal Revisi',
+                    data: 'usulan_id',
+                    className: 'text-right py-0 align-middle',
+                    render: function ( data, type, row ) {
+                        if (row.file_upload_proposal_revisi) {
+                            return `
+                                <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal-revisi') }}/${row.file_upload_proposal_revisi}" ><i class="fas fa-file-download"></i> Download</a>
+                            `;
+                        } else {
+                            return `
+                                <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal-revisi" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                            `;
+                        }
+
                     }
-                    if (classList.includes('upload-proposal-revisi')){
-                        isUploadProposal = false;
-                        isUploadPengesahan = false;
-                        isUploadProposalRevisi = true;
-                        isUploadLaporanAkhir = false;
-                        url = "/penelitian/upload-proposal-revisi";
-                        $('#upload-file').attr('action', url);
-                        $('#modal-upload-title').html('Upload Proposal Revisi');
+                },
+                // {
+                //     name: 'Laporan Akhir',
+                //     data: 'usulan_id',
+                //     className: 'text-right py-0 align-middle',
+                //     render: function ( data, type, row ) {
+                //         if (row.file_upload_laporan_akhir) {
+                //             return `
+                //             <a  class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/laporan-akhir') }}/${row.file_upload_laporan_akhir}" ><i class="fas fa-file-download"></i> Download</a>
+                //             `;
+                //         } else {
+                //             return `
+                //             <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-laporan-akhir" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                //             `;
+                //         }
+
+                //     }
+                // },
+                {
+                    data: 'status',
+                    name: 'Status Seleksi',
+                    render: function ( data, type, row ) {
+                        if (data == 0) {
+                            return `Menunggu`;
+                        } else if (data == 1) {
+                            return `Lolos`;
+                        }
                     }
-                });
-            });
+                },
+                {
+                    data: 'created_at',
+                    name: 'Tanggal Upload',
+                    render: function ( data, type, row ) {
+                        return moment(data).tz('Asia/Jakarta').format('DD-MM-YYYY HH:MM');
+                    }
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false
+                }
+            ]
+        });
+
+        $('#penelitian-table tbody').on('click', 'td.dt-control', function () {
+            var tr = $(this).closest('tr');
+            var row = tabelPenelitian.row( tr );
+    
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                if (row.data().wewenang_usulan.length > 0){
+                    row.child( detailedRow(row.data()) ).show();
+                    tr.addClass('shown');
+                }
+            }
+        });
+
+        /**
+        * End Section untuk menampilkan data dalam bentuk datatables
+        */
+
+        $(document).on('click', '.upload-proposal, .upload-pengesahan, .upload-laporan-akhir, .upload-proposal-revisi', function() {
+            $('#modalUpload').modal('show');
+            let isUploadProposal = false;
+            let isUploadPengesahan = false;
+            let isUploadLaporanRevisi = false;
+            let isUploadLaporanAkhir = false;
+            let url = '';
+            const id = $(this).data("id")
+
+            var classList = this.classList.toString();
+
+            $('#id-penelitian').val(id);
+            if (classList.includes('upload-proposal')){
+                isUploadProposal = true;
+                isUploadPengesahan = false;
+                url = "/penelitian/upload-proposal";
+                $('#upload-file').attr('action', url);
+                $('#modal-upload-title').html('Upload Proposal');
+            }
+            if (classList.includes('upload-pengesahan')){
+                isUploadProposal = false;
+                isUploadPengesahan = true;
+                url = "/penelitian/upload-pengesahan";
+                $('#upload-file').attr('action', url);
+                $('#modal-upload-title').html('Upload Pengesahan');
+            }
+            if (classList.includes('upload-laporan-akhir')){
+                isUploadProposal = false;
+                isUploadPengesahan = false;
+                isUploadLaporanAkhir = true;
+                url = "/penelitian/upload-laporan-akhir";
+                $('#upload-file').attr('action', url);
+                $('#modal-upload-title').html('Upload Laporan Akhir');
+            }
+            if (classList.includes('upload-proposal-revisi')){
+                isUploadProposal = false;
+                isUploadPengesahan = false;
+                isUploadProposalRevisi = true;
+                isUploadLaporanAkhir = false;
+                url = "/penelitian/upload-proposal-revisi";
+                $('#upload-file').attr('action', url);
+                $('#modal-upload-title').html('Upload Proposal Revisi');
+            }
+        });
+    });
 </script>
 @endpush
 @endsection

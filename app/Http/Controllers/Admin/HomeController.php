@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     use AuthTraits;
+    private $session;
+
+    public function __construct()
+    {
+        $this->session = session('kucingku');
+
+    }
     
     /**
      * Show the application dashboard.
@@ -17,18 +24,18 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $userSession = $request->session()->get('kucingku');
-        $userDetail = $userSession['user'];
-
-        $param = [
-            'userId' => $userDetail['id']
+            $param = [
+            'filter' => [
+                'user_id' => $this->session['user']['id'],
+            ]
         ];
 
         $getDataPenelitian = $this->postAPI($param, 'penelitian/get-filter');
+
         $dataPenelitian = isset($getDataPenelitian['data']) ? $getDataPenelitian['data'] : [];
         return view('admin.content.home')->with([
             'dataPenelitian' => $dataPenelitian,
-            'dataMappingDosen' => $userSession['dosenDetail']['detail_dosen'],
+            'dataMappingDosen' => $this->session['user']['detail_dosen']  ,
         ]);
 
     }

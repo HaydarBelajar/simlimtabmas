@@ -4,35 +4,35 @@
 @extends('admin.footer')
 
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>{{ $detailController['pageDescription'] ?? '' }}</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Beranda</a></li>
-                            <li class="breadcrumb-item active">{{ $detailController['currentPage'] ?? '' }}</li>
-                        </ol>
-                    </div>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>{{ $detailController['pageDescription'] ?? '' }}</h1>
                 </div>
-            </div><!-- /.container-fluid -->
-        </section>
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="card card-default color-palette-box">
-                    <div class="card-body">
-                        <div class="top-button-group" style="margin-bottom: 20px;">
-                            <button type="button" class="btn btn-primary add-user">Tambah Pengguna baru</button>
-                        </div>
-                        <span id="notification"></span>
-                        <table id="user-table" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+                        <li class="breadcrumb-item active">{{ $detailController['currentPage'] ?? '' }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default color-palette-box">
+                <div class="card-body">
+                    <div class="top-button-group" style="margin-bottom: 20px;">
+                        <button type="button" class="btn btn-primary add-user">Tambah Pengguna baru</button>
+                    </div>
+                    <span id="notification"></span>
+                    <table id="user-table" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
                             <tr>
                                 <th width="5%">No</th>
                                 <th width="35%">Nama pengguna</th>
@@ -40,205 +40,218 @@
                                 <th width="35%">Wewenang</th>
                                 <th width="25%">Aksi</th>
                             </tr>
-                            </thead>
-                        </table>
-                    </div>
+                        </thead>
+                    </table>
                 </div>
-
-                <div id="addModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Tambah Pengguna baru</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- <div class="alert alert-danger" role="alert">
-                                  This is a danger alert—check it out!
-                                </div> -->
-                                <form method="post" id="add-user-form" class="form-horizontal">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label class="col-form-label">Username : </label>
-                                        <input type="text" name="username" id="username" class="form-control"
-                                               maxlength="11" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Email : </label>
-                                        <input type="email" name="email" id="email" class="form-control" maxlength="35"
-                                               required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Role</label>
-                                        <select class="custom-select" name="role" id="role">
-                                            @if (!empty($rolesOptions))
-                                                @foreach ($rolesOptions as $role)
-                                                    <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="isCivitasUnisa" name="civitasUnisa">
-                                            <label class="form-check-label" >Civitas UNISA</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Mapping Data Dosen</label>
-                                        <select class="form-control mapping-dosen" name="dosen_id" style="width: 100%;" id="dosen" required>
-                                            @if (!empty($dosenOptions))
-                                                @foreach ($dosenOptions as $dosen)
-                                                    <option value="{{ $dosen['kdperson'] }}">{{ $dosen['username'] }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                    <div class='form-password'>
-                                        <div class="form-group">
-                                            <label class="col-form-label">Password : </label>
-                                            <input type="password" name="password" id="password" class="form-control"
-                                                maxlength="35" required/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-form-label">Confirm Password : </label>
-                                            <input type="password" name="confirmpassword" id="confirm-password"
-                                                class="form-control" maxlength="35" required/>
-                                        </div>
-                                    </div>
-                                    <br/>
-                                    <div class="modal-footer">
-                                        <input type="hidden" name="action" id="action" value="Simpan"/>
-                                        <input type="submit" name="action_button" id="action-button"
-                                               class="btn btn-primary" value="Simpan"/>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="editModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Pengguna</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- <div class="alert alert-danger" role="alert">
-                                  This is a danger alert—check it out!
-                                </div> -->
-                                <form method="post" id="edit-user-form" class="form-horizontal">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label class="col-form-label">Username : </label>
-                                        <input type="text" name="username" id="username-edit" class="form-control"
-                                               maxlength="11" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Email : </label>
-                                        <input type="email" name="email" id="email-edit" class="form-control" maxlength="35"
-                                               required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Role</label>
-                                        <select class="custom-select" name="role" id="role-edit">
-                                            @if (!empty($rolesOptions))
-                                                @foreach ($rolesOptions as $role)
-                                                    <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" class="isCivitasUnisa" name="civitasUnisa">
-                                            <label class="form-check-label" >Civitas UNISA</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Mapping Data Dosen</label>
-                                        <select class="form-control mapping-dosen" name="dosen_id" style="width: 100%;" id="dosen-edit" required>
-                                            @if (!empty($dosenOptions))
-                                                @foreach ($dosenOptions as $dosen)
-                                                    <option value="{{ $dosen['kdperson'] }}">{{ $dosen['username'] }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                    <div class='form-password'>
-                                        <div class="form-group">
-                                            <label class="col-form-label">Password : </label>
-                                            <input type="password" name="password" id="password-edit" class="form-control"
-                                                maxlength="35"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-form-label">Confirm Password : </label>
-                                            <input type="password" name="confirmpassword" id="confirm-password-edit"
-                                                class="form-control" maxlength="35"/>
-                                        </div>
-                                    </div>
-                                    <br/>
-                                    <div class="modal-footer">
-                                        <input type="hidden" name="action" id="action-edit" value="Simpan"/>
-                                        <input type="hidden" name="user_id" id="user-id" value="Simpan"/>
-                                        <input type="submit" name="action_button" id="action-button=edit"
-                                               class="btn btn-primary" value="Simpan"/>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="confirmModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <h4 style="text-align: center" style="margin:0;">Apakah anda ingin menghapus data ini ?</h4>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" name="ok_delete_button" id="ok-delete-button" class="btn btn-danger">Ok</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    @push('scripts')
-        <script>
-            $(document).ready(function () {
-                /**
-                * Form Trigger
-                */
-                $('input[type="checkbox"]').click(function(){
-                    if ($('#isCivitasUnisa').is(":checked")) {
-                        $('.form-password').hide();
-                        $("#password").attr('required', false);
-                        $("#confirm-password").attr('required', false);
-                    } else {
-                        $('.form-password').show();
-                        $("#password").attr('required', true);
-                        $("#confirm-password").attr('required', true);
-                    }
-                })
+
+            <div id="addModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Tambah Pengguna baru</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- <div class="alert alert-danger" role="alert">
+                                  This is a danger alert—check it out!
+                                </div> -->
+                            <form method="post" id="add-user-form" class="form-horizontal">
+                                @csrf
+                                <div class="form-group">
+                                    <label class="col-form-label">Username : </label>
+                                    <input type="text" name="username" id="username" class="form-control" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Email : </label>
+                                    <input type="email" name="email" id="email" class="form-control" required />
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select class="custom-select" name="role" id="role">
+                                        @if (!empty($rolesOptions))
+                                        @foreach ($rolesOptions as $role)
+                                        <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input isCivitasUnisa" type="checkbox" id="isCivitasUnisa"
+                                            name="civitasUnisa">
+                                        <label class="form-check-label">Civitas UNISA</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-mapping-dosen">
+                                    <label>Mapping Data Dosen</label>
+                                    <select class="form-control mapping-dosen dosen_id" name="dosen_id" style="width: 100%;"
+                                        id="dosen">
+                                        @if (!empty($dosenOptions))
+                                        @foreach ($dosenOptions as $dosen)
+                                        @if (!empty($dosen['detail_person']))
+                                        <option value="{{ $dosen['kdperson'] }}">{{
+                                            $dosen['detail_person']['namalengkap'] }}</option>
+                                        @endif
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class='form-password'>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Password : </label>
+                                        <input type="password" name="password" id="password" class="form-control"
+                                            maxlength="35" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Confirm Password : </label>
+                                        <input type="password" name="confirmpassword" id="confirm-password"
+                                            class="form-control" maxlength="35" required />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="modal-footer">
+                                    <input type="hidden" name="action" id="action" value="Simpan" />
+                                    <input type="submit" name="action_button" id="action-button" class="btn btn-primary"
+                                        value="Simpan" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="editModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Pengguna</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- <div class="alert alert-danger" role="alert">
+                                  This is a danger alert—check it out!
+                                </div> -->
+                            <form method="post" id="edit-user-form" class="form-horizontal">
+                                @csrf
+                                <div class="form-group">
+                                    <label class="col-form-label">Username : </label>
+                                    <input type="text" name="username" id="username-edit" class="form-control"
+                                        maxlength="11" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Email : </label>
+                                    <input type="email" name="email" id="email-edit" class="form-control" maxlength="35"
+                                        required />
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select class="custom-select" name="role" id="role-edit">
+                                        @if (!empty($rolesOptions))
+                                        @foreach ($rolesOptions as $role)
+                                        <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input isCivitasUnisa" type="checkbox" id="isCivitasUnisa"
+                                            name="civitasUnisa">
+                                        <label class="form-check-label">Civitas UNISA</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-mapping-dosen">
+                                    <label>Mapping Data Dosen</label>
+                                    <select class="form-control dosen_id" name="dosen_id" style="width: 100%;"
+                                        id="dosen-edit">
+                                        @if (!empty($dosenOptions))
+                                        @foreach ($dosenOptions as $dosen)
+                                        <option value="{{ $dosen['kdperson'] }}">{{ $dosen['username'] }}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class='form-password'>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Password : </label>
+                                        <input type="password" name="password" id="password-edit" class="form-control"
+                                            maxlength="35" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Confirm Password : </label>
+                                        <input type="password" name="confirmpassword" id="confirm-password-edit"
+                                            class="form-control" maxlength="35" />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="modal-footer">
+                                    <input type="hidden" name="action" id="action-edit" value="Simpan" />
+                                    <input type="hidden" name="user_id" id="user-id" value="Simpan" />
+                                    <input type="submit" name="action_button" id="action-button=edit"
+                                        class="btn btn-primary" value="Simpan" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="confirmModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h4 style="text-align: center" style="margin:0;">Apakah anda ingin menghapus data ini ?</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" name="ok_delete_button" id="ok-delete-button"
+                                class="btn btn-danger">Ok</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@push('scripts')
+<script>
+    $(document).ready(function () {
+        $('.form-mapping-dosen').hide();
+        /**
+        * Form Trigger
+        */
+        $('input[type="checkbox"]').click(function(){
+            if ($('.isCivitasUnisa').is(":checked")) {
+                console.log('checked');
+                $('.form-password').hide();
+                $(".password").attr('required', false);
+                $(".confirm-password").attr('required', false);
+                $('.form-mapping-dosen').show();
+                $('.dosen_id').attr('required', true);
+            } else {
+                $('.form-password').show();
+                $(".password").attr('required', true);
+                $(".confirm-password").attr('required', true);
+                $('.dosen-edit').attr('required', true);
+                $('.form-mapping-dosen').hide();
+                $('.dosen_id').attr('required', false);
+            }
+        })
 
                 /**
                 * End Form Trigger
@@ -351,10 +364,11 @@
                         url: "/manage-user/get-user/" + id,
                         dataType: "json",
                         success: function(data) {
+                            console.log(data);
                             $('#addModal').modal('hide');
                             $('#username-edit').val(data.name);
                             $('#email-edit').val(data.email);
-                            $('#role-edit').val(data.roles ? data.roles[0]['id'] : '');
+                            $('#role-edit').val(data.roles[0] ?? '');
                             $('#dosen-edit').val(data.dosen_id);
                             $('#user-id').val(id);
                             $('#editModal').modal('show');
@@ -368,7 +382,7 @@
                 $('#edit-user-form').on('submit', function(event) {
                     event.preventDefault();
                     var action_url = '';
-
+                    console.log('submit', $(this).serialize());
                     action_url = "{{ route('manage-user.update') }}";
 
                     $.ajax({
@@ -377,8 +391,7 @@
                         data: $(this).serialize(),
                         dataType: "json",
                         success: function(data) {
-                            console.log('asdasd', data);
-
+                            
                             var html = '';
                             if (data.error) {
                                 html = '<div class="alert alert-danger">';
@@ -446,6 +459,6 @@
                 * End Delete
                 */
             });
-        </script>
-    @endpush
+</script>
+@endpush
 @endsection
