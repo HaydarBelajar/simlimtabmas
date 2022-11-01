@@ -188,7 +188,7 @@ class PenelitianController extends Controller
                 "fakultasId" =>  $wewenangUsulan[$indexAnggota3]['fakultas_id']
             ]);
         }
-
+        Log::debug($detailPenelitian);
         return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
             'page' => 'edit',
             'detailController' => $this->controllerPenelitianEdit,

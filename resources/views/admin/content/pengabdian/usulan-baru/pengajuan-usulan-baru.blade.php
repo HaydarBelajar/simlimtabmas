@@ -267,7 +267,7 @@
                                     <div class="form-group row">
                                         <label for="jumlah-dana" class="col-sm-2 col-form-label">Jumlah Dana</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="jumlah-sumber-dana"
+                                            <input type="number" min="0" class="form-control" id="jumlah-sumber-dana"
                                                 placeholder="Jumlah Dana" name="jumlah_sumber_dana" required
                                                 value="{{ isset($detailPengabdian['jumlah_usulan_dana']) ? $detailPengabdian['jumlah_usulan_dana'] : '' }}">
                                         </div>
@@ -345,6 +345,12 @@
                                         </a>
                                     </h4>
                                 </div>
+                                @php
+                                $reduce = function($value) {
+                                    return $value['luaran_id'];
+                                };
+                                $list_luaran = array_map($reduce, $detailPengabdian['list_luaran']);
+                                @endphp
                                 <div class="card-body">
                                     <div class="form-group row">
                                         <label for="jenis-luaran" class="col-sm-2 col-form-label">Jenis Luaran</label>
@@ -353,9 +359,7 @@
                                                 multiple="multiple" data-dropdown-css-class="select2-purple"
                                                 style="width: 100%;">
                                                 @foreach ($listCapaianLuaran as $capaianLuaran)
-                                                <option {{ isset($detailPengabdian['jenis_luaran']) &&
-                                                    (in_array($capaianLuaran['capaian_luaran_id'],
-                                                    json_decode($detailPengabdian['jenis_luaran'], true))) ? 'selected'
+                                                <option {{ in_array($capaianLuaran['capaian_luaran_id'], $list_luaran) ? 'selected'
                                                     : '' }} value={{ $capaianLuaran['capaian_luaran_id'] }}>{{
                                                     $capaianLuaran['capaian_luaran_nama'] }}</option>
                                                 @endforeach
