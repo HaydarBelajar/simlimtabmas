@@ -52,10 +52,10 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
+      <a href="{{ route('dashboard.home') }}" class="brand-link">
         {{-- <img src="{{ asset('assets/images/logo.png') }}" alt="SIMLITABMAS Logo" class="img-fluid able-logo"> --}}
         {{-- <span class="brand-text font-weight-light"> - Unisa</span> --}}
-        <img src="{{ asset('assets/images/cropped-logo-unisa-crop.png') }}" alt="SMA Negeri 1 Grobogan Logo"
+        <img src="{{ asset('assets/images/cropped-logo-unisa-crop.png') }}" alt="Simlitabmas UNISA Yogyakarta"
           class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">{{ env('APP_NAME') }}</span>
       </a>

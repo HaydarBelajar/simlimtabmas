@@ -47,7 +47,7 @@
 									@endif
 									@endif
 									<div class="float-right">
-										<small>Tanggal Upload: 2/10/2014</small>
+										<small>Tanggal Pengajuan : {{ \Carbon\Carbon::parse($detailPenelitian['created_at'] ?? '',  'Asia/Jakarta')->format('d-m-Y H:m:s') }}</small>
 									</div>
 								</h4>
 							</div>
@@ -55,12 +55,12 @@
 						</div>
 						<!-- info row -->
 						<div class="row invoice-info">
-							<div class="col-sm-4 invoice-col">
+							{{-- <div class="col-sm-4 invoice-col">
 								<strong>Disetujui oleh : </strong>
 								<p class="well well-sm shadow-none" style="margin-top: 10px;">
 									{{ $detailPenelitian['user_menyetujui']['detail_dosen']['username'] ?? ' - ' }}
 								</p>
-							</div>
+							</div> --}}
 							<!-- /.col -->
 							<div class="col-sm-4 invoice-col">
 								<strong>Tahun Pelaksanaan</strong>
@@ -84,18 +84,18 @@
 							<!-- /.col -->
 						</div>
 						<div class="row invoice-info">
-							<div class="col-sm-4 invoice-col">
+							{{-- <div class="col-sm-4 invoice-col">
 								<strong>Bidang Fokus</strong>
 								<p class="well well-sm shadow-none" style="margin-top: 10px;">
 									{{ $detailPenelitian['bidang_fokus'] ?? '' }}
 								</p>
-							</div>
+							</div> --}}
 							<!-- /.col -->
 							<div class="col-sm-4 invoice-col">
-								<strong>Sumber Dana</strong>
+								<strong>Skema</strong>
 								<p class="well well-sm shadow-none" style="margin-top: 10px;">
-									{{ $detailPenelitian['sumber_dana'] ?
-									$detailPenelitian['sumber_dana']['sumber_dana_nama'] : '' }}
+									{{ $detailPenelitian['skema'] ?
+									$detailPenelitian['skema']['skema_nama'].' || Maksimal Biaya : Rp'.number_format($detailPenelitian['skema']['maks_biaya'] ?? '0'): '' }}
 								</p>
 							</div>
 							<!-- /.col -->
@@ -139,22 +139,13 @@
 								<div class="table-responsive card" style="margin-top: 10px;">
 									<table class="table">
 										<tbody>
+											@foreach ($detailPenelitian['wewenang_usulan'] as $team)
 											<tr>
-												<th>Peneliti Utama</th>
-												<td>{{ $detailPenelitian['peneliti_utama']['name'] ?? ' - ' }}</td>
+												<th>{{ $team['wewenang'] == 1 ? 'Ketua Pengusul' : 'Anggota' }}</th>
+												<td>{{ $team['detail_pengusul']['name'] ? $team['detail_pengusul']['name'] : '' }}</td>
+												<td>{{ $team['detail_pengusul']['roles'] ? $team['detail_pengusul']['roles'][0]['name'] : '' }}</td>
 											</tr>
-											<tr>
-												<th>Anggota 1</th>
-												<td>{{ $detailPenelitian['anggota1']['name'] ?? ' - ' }}</td>
-											</tr>
-											<tr>
-												<th>Anggota 2</th>
-												<td>{{ $detailPenelitian['anggota2']['name'] ?? ' - ' }}</td>
-											</tr>
-											<tr>
-												<th>Anggota 3</th>
-												<td>{{ $detailPenelitian['anggota3']['name'] ?? ' - ' }}</td>
-											</tr>
+											@endforeach
 										</tbody>
 									</table>
 								</div>
@@ -183,9 +174,9 @@
 									</dd>
 									<dt>Dokumen Proposal</dt>
 									<dd>
-										<a class="btn btn-outline-success btn-sm" target="_blank"
+										{{-- <a class="btn btn-outline-success btn-sm" target="_blank"
 											href="https://docs.google.com/document/d/1YJ2VXFFOMTkhkNnGOeHN4OaejuNnZG48/edit"><i
-												class="fas fa-file-download"></i> Download Template</a>
+												class="fas fa-file-download"></i> Download Template</a> --}}
 										@if (isset($detailPenelitian['file_upload_proposal']))
 										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
 											data-id="{{ $detailPenelitian['usulan_id'] }}"><i
