@@ -49,7 +49,7 @@ return [
                     [
                         'id'        => 'data-pengabdian',
                         'link'      => 'pengabdian.data-pengabdian',
-                        'title'     => 'Data Pengabdian',
+                        'title'     => 'Usulan Pengabdian',
                         'icon'      => 'far fa-circle',
                         'permission'  => 'list pengabdian',
                     ],

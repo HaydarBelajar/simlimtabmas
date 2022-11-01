@@ -48,14 +48,14 @@
                       class="fas fa-file-download"></i> Download Template</a>
                 </td>
               </tr> --}}
-              <tr>
+              {{-- <tr>
                 <td>Kepuasan Mitra</td>
                 <td>
                   <a class="btn btn-outline-success btn-sm" target="_blank"
                     href="https://docs.google.com/spreadsheets/d/1fRYWzwzxodOB1UCq3OuzAwMb_cCNN-2u/edit#gid=1392405133"><i
                       class="fas fa-file-download"></i> Download Template</a>
                 </td>
-              </tr>
+              </tr> --}}
               <tr>
                 <td>Buku Panduan Penelitian</td>
                 <td>
@@ -69,6 +69,30 @@
                 <td>
                   <a class="btn btn-outline-success btn-sm" target="_blank"
                   href="{{ asset('media/buku-panduan/Buku-Panduan-Pengabdian-Masyarakat-revisi-III.pdf') }}"><i
+                      class="fas fa-file-download"></i> Download Template</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Validasi Roadmap Penelitian</td>
+                <td>
+                  <a class="btn btn-outline-success btn-sm" target="_blank"
+                  href="https://docs.google.com/document/d/1Ck-rsUU03bPufSQBZcMcSa3ADp0X7_Xn/edit?usp=sharing&ouid=106179746642386009028&rtpof=true&sd=true"><i
+                      class="fas fa-file-download"></i> Download Template</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Validasi Roadmap Pengabdian</td>
+                <td>
+                  <a class="btn btn-outline-success btn-sm" target="_blank"
+                  href="https://docs.google.com/document/d/1OAdmlvgLK3gRy9AT6TF3GEHHGw8iYdgE/edit?usp=sharing&ouid=106179746642386009028&rtpof=true&sd=true"><i
+                      class="fas fa-file-download"></i> Download Template</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Surat Pernyataan Ketua Pengusul Penelitian dan PKM</td>
+                <td>
+                  <a class="btn btn-outline-success btn-sm" target="_blank"
+                  href="https://docs.google.com/document/d/1FUy4KbAB0MuyEpg2oWqyAhPy4gc0a-b8/edit?usp=sharing&ouid=106179746642386009028&rtpof=true&sd=true"><i
                       class="fas fa-file-download"></i> Download Template</a>
                 </td>
               </tr>
