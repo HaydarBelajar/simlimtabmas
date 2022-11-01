@@ -29,7 +29,7 @@
                                 @if (!empty($rolesOptions))
                                 <option disabled selected>Pilih role</option>
                                 @foreach ($rolesOptions as $role)
-                                @if ($role['id'] != 1 || $role['name'] != "Super Admin")
+                                @if ($role['id'] != 1 && $role['id'] != 14)
                                 <option 
                                     value="{{ $role['id'] }}"
                                     @if(old('role') == $role['id']) selected @endif
@@ -106,9 +106,9 @@
         /**
         * Form Trigger
         */
-        $('#role-select').click(function(){
-            let selectedText = ($('#role-select').find(":selected").text()).toLowerCase();
-            
+        $('#role-select').on('change', function(e){
+            let selectedText = ($("option:selected", this).text()).toLowerCase();
+            console.log(selectedText);
             if (selectedText == 'mahasiswa') {
                 $('#form-nidn').hide();
                 $('#form-nim').show();
