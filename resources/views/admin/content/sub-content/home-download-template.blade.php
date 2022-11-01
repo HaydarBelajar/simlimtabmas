@@ -60,7 +60,7 @@
                 <td>Buku Panduan Penelitian</td>
                 <td>
                   <a class="btn btn-outline-success btn-sm" target="_blank"
-                  href="{{ asset('media/buku-panduan/Buku-Panduan-Pelaksanaan-Penelitian-rev-III.pdf') }}"><i
+                  href="https://drive.google.com/file/d/1i-BP6NV8Swmy0WnDM6hNjLZzYp9U0jjG/view?usp=sharing"><i
                       class="fas fa-file-download"></i> Download Template</a>
                 </td>
               </tr>
@@ -68,7 +68,7 @@
                 <td>Buku Panduan Pengabdian</td>
                 <td>
                   <a class="btn btn-outline-success btn-sm" target="_blank"
-                  href="{{ asset('media/buku-panduan/Buku-Panduan-Pengabdian-Masyarakat-revisi-III.pdf') }}"><i
+                  href="https://drive.google.com/file/d/1GnNESJ2e_YvFtvf0JfpaHvvYGB4WrtE1/view?usp=sharing"><i
                       class="fas fa-file-download"></i> Download Template</a>
                 </td>
               </tr>
