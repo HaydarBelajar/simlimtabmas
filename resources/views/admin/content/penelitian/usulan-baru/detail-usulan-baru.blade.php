@@ -123,8 +123,8 @@
 							<div class="col-sm-4">
 								<strong>Luaran Penelitian</strong>
 								<ul>
-									@foreach ($detailPenelitian['capaian_luaran'] as $capaianLuaran)
-									<li>{{ $capaianLuaran['capaian_luaran_nama'] }}</li>
+									@foreach ($detailPenelitian['list_luaran'] ?? [] as $luaran)
+									<li>{{ $luaran['capaian_luaran']['capaian_luaran_nama'] ?? '-' }}</li>
 									@endforeach
 								</ul>
 							</div>
@@ -355,6 +355,22 @@
 											</div>
 										</th>
 									</tr>
+									@php
+									$i = 3;
+									@endphp
+									@foreach ($detailPenelitian['list_luaran'] ?? [] as $luaran)
+									<tr>
+										<td width="5%">{{$i}}</th>
+										<td width="50%">{{ $luaran['capaian_luaran']['capaian_luaran_nama'] ?? '-' }}</th>
+										<td width="10%">
+											<a href="#" class="berkas-luaran" id="berkas" data-type="text" data-pk="{{ $luaran['luaran_id'] }}" data-url="{{ route('luaran.update', $luaran['luaran_id']) }}" data-title="Url Luaran">{{ $luaran['berkas'] ?? ' - ' }}</a>
+										</th>
+									</tr>
+									@php
+									$i++;
+									@endphp
+									<li></li>
+									@endforeach
 									{{-- <tr>
 										<td width="5%">3</th>
 										<td width="50%">Monev Luaran</th>
@@ -501,7 +517,21 @@
 <!-- /.content-wrapper -->
 @push('scripts')
 <script>
+	/**
+	 * Init X-Editable
+	 * */
+	$.fn.editable.defaults.mode = 'inline';
+	$.fn.editable.defaults.params = function (params) {
+        params._token = $("meta[name=csrf-token]").attr("content");
+        return params;
+    };
+	$.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+	
 	$(document).ready(function () {
+		$(document).ready(function() {
+			$('.berkas-luaran').editable();
+		});
+
 		let catatanPenelitianID;
 		let kucingkuId = $('#kucingku-id').val();
 		/**

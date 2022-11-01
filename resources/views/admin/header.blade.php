@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Simlitabmas | UNISA</title>
 
     <link rel="shortcut icon" href="{{ asset('assets/images/cropped-logo-unisa-crop.ico') }}" type="image/x-icon" />
@@ -42,6 +43,9 @@
 
     <!-- Custom CSS by Noer-->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+
+    <!-- x-editable (bootstrap version) -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/css/jqueryui-editable.css" rel="stylesheet"/>
 
 </head>
 @endsection

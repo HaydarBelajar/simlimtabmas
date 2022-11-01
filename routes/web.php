@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\LuaranController;
 use App\Http\Controllers\Admin\RolesPermissions\RolesController;
 use App\Http\Controllers\Admin\Setting\SettingDeadlineController;
 use App\Http\Controllers\Admin\SisterData\PenelitianSisterController;
@@ -106,6 +107,10 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/delete/{id}', [UserManagementController::class, 'destroy'])->name('delete');
         Route::post('/create', [UserManagementController::class, 'store'])->name('create');
         Route::post('/update', [UserManagementController::class, 'update'])->name('update');
+    });
+
+    Route::group(['prefix' => 'luaran', 'as' => 'luaran.'], function () {
+        Route::put('/update/{id}', [LuaranController::class, 'update'])->name('update');
     });
 
     Route::group(['prefix' => 'sister', 'as' => 'sister.'], function () {
