@@ -20,6 +20,10 @@
                             <input type="text" name="username" id="username" value="{{ old('username') }}" class="form-control" required />
                         </div>
                         <div class="form-group">
+                            <label class="col-form-label">Nama Lengkap : </label>
+                            <input type="text" name="full_name" id="fullname" value="{{ old('full_name') }}" class="form-control" required />
+                        </div>
+                        <div class="form-group">
                             <label class="col-form-label">Email : </label>
                             <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control" required />
                         </div>
