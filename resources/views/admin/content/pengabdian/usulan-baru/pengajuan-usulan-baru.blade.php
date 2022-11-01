@@ -196,7 +196,7 @@
                                                 required>{{ isset($detailPengabdian['keywords']) ? $detailPengabdian['keywords'] : '' }}</textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    {{-- <div class="form-group row">
                                         <label for="email" class="col-sm-2 col-form-label">Alamat Email</label>
                                         <div class="col-sm-10">
                                             <input type="email" class="form-control" id="email" placeholder="Email"
@@ -204,7 +204,7 @@
                                                 value="{{ isset($detailPengabdian['email']) ? $detailPengabdian['email'] : '' }}"
                                                 required>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             {{-- <div class="card card-primary">
