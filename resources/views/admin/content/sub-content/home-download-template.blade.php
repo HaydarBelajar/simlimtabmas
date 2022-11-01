@@ -9,14 +9,30 @@
           <table class="table table-hover download-template">
             <tbody>
               <tr>
-                <td>Template Proposal</td>
+                <td>Template Proposal Pengabdian</td>
                 <td>
                   <a class="btn btn-outline-success btn-sm" target="_blank"
-                    href="https://docs.google.com/document/d/1YJ2VXFFOMTkhkNnGOeHN4OaejuNnZG48/edit"><i
+                    href="https://docs.google.com/document/d/1YJ2VXFFOMTkhkNnGOeHN4OaejuNnZG48/edit?usp=sharing&ouid=106179746642386009028&rtpof=true&sd=true"><i
                       class="fas fa-file-download"></i> Download Template</a>
                 </td>
               </tr>
               <tr>
+                <td>Template Proposal Penelitian</td>
+                <td>
+                  <a class="btn btn-outline-success btn-sm" target="_blank"
+                    href="https://docs.google.com/document/d/11f4GIBsLaKQDt-DCSgNv39bgk0rrM349/edit?usp=sharing&ouid=106179746642386009028&rtpof=true&sd=true"><i
+                      class="fas fa-file-download"></i> Download Template</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Surat Kesediaan Kerjasama Mitra PKM</td>
+                <td>
+                  <a class="btn btn-outline-success btn-sm" target="_blank"
+                    href="https://docs.google.com/document/d/1HAbAfslmcFoRgQ-Mx4cTlasgVJHJXMrK/edit?usp=sharing&ouid=106179746642386009028&rtpof=true&sd=true"><i
+                      class="fas fa-file-download"></i> Download Template</a>
+                </td>
+              </tr>
+              {{-- <tr>
                 <td>Template Monev 70%</td>
                 <td>
                   <a class="btn btn-outline-success btn-sm" target="_blank"
@@ -31,7 +47,7 @@
                     href="https://docs.google.com/document/d/11QIMtvBjaVLmdq3vIw1BErw702DswCnh/edit?rtpof=true"><i
                       class="fas fa-file-download"></i> Download Template</a>
                 </td>
-              </tr>
+              </tr> --}}
               <tr>
                 <td>Kepuasan Mitra</td>
                 <td>
