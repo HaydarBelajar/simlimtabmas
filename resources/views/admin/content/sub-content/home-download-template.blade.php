@@ -40,6 +40,22 @@
                       class="fas fa-file-download"></i> Download Template</a>
                 </td>
               </tr>
+              <tr>
+                <td>Buku Panduan Penelitian</td>
+                <td>
+                  <a class="btn btn-outline-success btn-sm" target="_blank"
+                  href="{{ asset('media/buku-panduan/Buku-Panduan-Pelaksanaan-Penelitian-rev-III.pdf') }}"><i
+                      class="fas fa-file-download"></i> Download Template</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Buku Panduan Pengabdian</td>
+                <td>
+                  <a class="btn btn-outline-success btn-sm" target="_blank"
+                  href="{{ asset('media/buku-panduan/Buku-Panduan-Pengabdian-Masyarakat-revisi-III.pdf') }}"><i
+                      class="fas fa-file-download"></i> Download Template</a>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
