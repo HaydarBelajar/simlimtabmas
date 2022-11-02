@@ -100,7 +100,29 @@ return [
                         'permission'  => 'deadline setting',
                     ],
                 ]
-            ]
+            ],[
+                'id'        => 'menu-publikasi',
+                'link'      => 'publikasi-penelitian.index',
+                'title'     => 'Publikasi',
+                'icon'      => 'nav-icon fa fa-edit',
+                'permission'  => 'list penelitian publikasi',
+                'submenu'   => [
+                    [
+                        'id'        => 'publikasi-penelitian',
+                        'link'      => 'publikasi-penelitian.index',
+                        'title'     => 'Publikasi Penelitian',
+                        'icon'      => 'far fa-circle',
+                        'permission'  => 'list penelitian publikasi',
+                    ],
+                    [
+                        'id'        => 'publikasi-pengabdian',
+                        'link'      => 'publikasi-pengabdian.index',
+                        'title'     => 'Publikasi Pengabdian',
+                        'icon'      => 'far fa-circle',
+                        'permission'  => 'list pengabdian publikasi',
+                    ],
+                ]
+            ],
         ],
     ],
 ];

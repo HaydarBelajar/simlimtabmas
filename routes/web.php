@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LuaranController;
+use App\Http\Controllers\Admin\Publikasi\PublikasiPenelitianController;
+use App\Http\Controllers\Admin\Publikasi\PublikasiPengabdianController;
 use App\Http\Controllers\Admin\RolesPermissions\RolesController;
 use App\Http\Controllers\Admin\Setting\SettingDeadlineController;
 use App\Http\Controllers\Admin\SisterData\PenelitianSisterController;
@@ -115,6 +117,14 @@ Route::middleware(['auth.token'])->group(function () {
 
     Route::group(['prefix' => 'luaran', 'as' => 'luaran.'], function () {
         Route::put('/update/{id}', [LuaranController::class, 'update'])->name('update');
+    });
+
+    Route::group(['prefix' => 'publikasi-penelitian', 'as' => 'publikasi-penelitian.'], function () {
+        Route::get('/', [PublikasiPenelitianController::class, 'index'])->name('index');
+    });
+
+    Route::group(['prefix' => 'publikasi-pengabdian', 'as' => 'publikasi-pengabdian.'], function () {
+        Route::get('/', [PublikasiPengabdianController::class, 'index'])->name('index');
     });
 
     Route::group(['prefix' => 'sister', 'as' => 'sister.'], function () {
