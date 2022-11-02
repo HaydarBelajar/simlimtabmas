@@ -59,6 +59,8 @@ Route::middleware(['auth.token'])->group(function () {
         Route::post('/edit-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'editCatatanHarian'])->name('edit-catatan-harian');
         Route::get('/get-catatan-harian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getCatatanHarian'])->name('get-catatan-harian');
         Route::get('/hapus-catatan-harian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'hapusCatatanHarian'])->name('hapus-catatan-harian');
+        Route::get('/delete/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'destroy'])->name('delete');
+
 
         Route::get('/reviewer', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'reviewer'])->name('reviewer');
         Route::get('/get-user-reviewer-filter-datatables', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getUserReviewerFilterDatatables'])->name('get-user-reviewer-filter-datatables');
@@ -89,6 +91,8 @@ Route::middleware(['auth.token'])->group(function () {
         Route::post('/edit-catatan-harian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'editCatatanHarian'])->name('edit-catatan-harian');
         Route::get('/get-catatan-harian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'getCatatanHarian'])->name('get-catatan-harian');
         Route::get('/hapus-catatan-harian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'hapusCatatanHarian'])->name('hapus-catatan-harian');
+        Route::get('/delete/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'destroy'])->name('delete');
+
 
         Route::get('/tambah-laporan-akhir', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'tambahLaporanAkhir'])->name('tambah-laporan-akhir');
         Route::get('/data-laporan-akhir', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'dataLaporanAkhir'])->name('data-laporan-akhir');

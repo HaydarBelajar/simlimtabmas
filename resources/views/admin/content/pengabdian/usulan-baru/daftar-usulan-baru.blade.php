@@ -151,13 +151,13 @@
         * Section untuk melakukan delete jika tombol delete di setiap row table di klick
         */ 
         $(document).on('click', '.delete', function() {
-            user_id = $(this).attr('id');
+            usulan_id = $(this).attr('id');
             $('#confirmModal').modal('show');
         });
 
         $('#ok-delete-button').click(function() {
             $.ajax({
-                url: "/manage-user/delete/" + user_id,
+                url: "/penelitian/delete/" + usulan_id,
                 method: "GET",
                 data: {
                     "_token": "{{ csrf_token() }}",
@@ -167,13 +167,13 @@
                 },
                 success: function(data) {
                     setTimeout(function() {
-                        if (data.errors) {
+                        if (data.errors || data.status_code > 400) {
                             $('#confirmModal').modal('hide');
-                            $('#user-table').DataTable().ajax.reload();
+                            $('#pengabdian-table').DataTable().ajax.reload();
                             alert(data.errors);
                         } else {
                             $('#confirmModal').modal('hide');
-                            $('#user-table').DataTable().ajax.reload();
+                            $('#pengabdian-table').DataTable().ajax.reload();
                             alert('Data Sukses Terhapus');
                         }
                     }, 2000);

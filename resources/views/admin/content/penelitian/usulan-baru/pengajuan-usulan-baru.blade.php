@@ -53,7 +53,7 @@
                                             <select class="form-control" id="tahun" name="tahun_id" required>
                                                 @foreach ($listTahun as $tahun)
                                                 <option {{ isset($detailPenelitian['tahun_id']) &&
-                                                    ($detailPenelitian['tahun_id']==$tahun['tahun_id']) ? 'selected'
+                                                    ($detailPenelitian['tahun_id'] ?? 0 == $tahun['tahun_id']) ? 'selected'
                                                     : '' }} value={{ $tahun['tahun_id'] }}>{{ $tahun['tahun'] }}
                                                 </option>
                                                 @endforeach
@@ -98,11 +98,11 @@
                                         <div class="col-sm-10">
                                             <select class="form-control" id="program-studi" name="program_studi"
                                                 required>
-                                                @foreach ($listFakultas as $fakultas)
-                                                <option {{ isset($detailPenelitian['fakultas_id']) &&
-                                                    ($detailPenelitian['fakultas_id']==$fakultas['kdfakultas'])
-                                                    ? 'selected' : '' }} value={{ $fakultas['kdfakultas'] }}>{{
-                                                    $fakultas['namafakultas'] }}
+                                                @foreach ($listProdi as $prodi)
+                                                <option {{ isset($detailPenelitian['ps_id']) &&
+                                                    ($detailPenelitian['ps_id']==$prodi['ps_id'])
+                                                    ? 'selected' : '' }} value={{ $prodi['ps_id'] }}>{{
+                                                    $prodi['ps_name'] }}
                                                 </option>
                                                 @endforeach
                                             </select>
@@ -196,50 +196,8 @@
                                                 required>{{ isset($detailPenelitian['keywords']) ? $detailPenelitian['keywords'] : '' }}</textarea>
                                         </div>
                                     </div>
-                                    {{-- <div class="form-group row">
-                                        <label for="email" class="col-sm-2 col-form-label">Alamat Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="email" placeholder="Email"
-                                                name="email"
-                                                value="{{ isset($detailPenelitian['email']) ? $detailPenelitian['email'] : '' }}"
-                                                required>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
-                            {{-- <div class="card card-primary">
-                                <div class="card-header">
-                                    <h4 class="card-title w-100">
-                                        <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapseTwo"
-                                            aria-expanded="false">
-                                            Atribut Usulan
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group row">
-                                        <label for="rumpun-ilmu" class="col-sm-2 col-form-label">Rumpun Ilmu</label>
-                                        <div class="col-sm-10">
-                                            <select class="form-control" id="rumpun-ilmu" name="rumpun_ilmu_id">
-                                                @foreach ($listRumpunIlmu as $rumpunIlmu)
-                                                <option {{ isset($detailPenelitian['rumpun_ilmu_id']) &&
-                                                    ($detailPenelitian['rumpun_ilmu_id']==$rumpunIlmu['rumpun_ilmu_id']
-                                                    ) ? 'selected' : '' }} value={{ $rumpunIlmu['rumpun_ilmu_id'] }}>{{
-                                                    $rumpunIlmu['rumpun_ilmu_nama'] }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="bidang-fokus" class="col-sm-2 col-form-label">Bidang Fokus</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="bidang-fokus"
-                                                name="bidang_fokus" placeholder="Bidang Fokus"
-                                                value="{{ isset($detailPenelitian['bidang_fokus']) ? $detailPenelitian['bidang_fokus'] : '' }}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <h4 class="card-title w-100">
@@ -250,65 +208,16 @@
                                     </h4>
                                 </div>
                                 <div class="card-body">
-                                    {{-- <div class="form-group row">
-                                        <label for="sumber-dana" class="col-sm-2 col-form-label">Sumber Dana</label>
-                                        <div class="col-sm-10">
-                                            <select class="form-control" id="sumber-dana" name="sumber_dana_id"
-                                                required>
-                                                @foreach ($listSumberDana as $sumberDana)
-                                                <option {{ isset($detailPenelitian['sumber_dana_id']) &&
-                                                    ($detailPenelitian['sumber_dana_id']==$sumberDana['sumber_dana_id']
-                                                    ) ? 'selected' : '' }} value={{ $sumberDana['sumber_dana_id'] }}>{{
-                                                    $sumberDana['sumber_dana_nama'] }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div> --}}
                                     <div class="form-group row">
                                         <label for="jumlah-dana" class="col-sm-2 col-form-label">Jumlah Dana</label>
                                         <div class="col-sm-10">
                                             <input type="number" class="form-control" id="jumlah-sumber-dana" min="0"
                                                 placeholder="Jumlah Dana" name="jumlah_sumber_dana" required
-                                                value="{{ isset($detailPenelitian['jumlah_usulan_dana']) ? $detailPenelitian['jumlah_usulan_dana'] : '' }}">
+                                                value="{{ $detailPenelitian['jumlah_usulan_dana'] ?? '' }}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="card card-primary">
-                                <div class="card-header">
-                                    <h4 class="card-title w-100">
-                                        <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapseFour"
-                                            aria-expanded="false">
-                                            Isian Pengesahan
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group row">
-                                        <label for="penandatanganan" class="col-sm-2 col-form-label">Mengetahui
-                                            Penandatanganan</label>
-                                        <div class="col-sm-10">
-                                            <select class="form-control" id="penandatanganan"
-                                                name="mengetahui_penandatanganan_id" required>
-                                                @foreach ($listUserPengusul as $userPengusul)
-                                                <option {{ isset($detailPenelitian['user_mengetahui_id']) &&
-                                                    ($detailPenelitian['user_mengetahui_id']==$userPengusul['id'] )
-                                                    ? 'selected' : '' }} value={{ $userPengusul['id'] }}>{{
-                                                    $userPengusul['name'] }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="jumlah-dana" class="col-sm-2 col-form-label">Jumlah Dana</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="jumlah-dana-penandatanganan"
-                                                name="jumlah_dana_penandatanganan" placeholder="Jumlah Dana" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            --}}
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <h4 class="card-title w-100">
@@ -349,7 +258,7 @@
                                 $reduce = function($value) {
                                     return $value['luaran_id'];
                                 };
-                                $list_luaran = array_map($reduce, $detailPenelitian['list_luaran']);
+                                $list_luaran = array_map($reduce, $detailPenelitian['list_luaran'] ?? []);
                                 @endphp
                                 <div class="card-body">
                                     <div class="form-group row">
@@ -405,7 +314,7 @@
                                             <select class="form-control" id="nama-anggota" name="nama-anggota" required>
                                                 @foreach ($listUserPengusul as $userPengusul)
                                                 <option value={{ $userPengusul['id'] }} data-nama-pengusul={{
-                                                    $userPengusul['name'] }}>{{ $userPengusul['name'] }}</option>
+                                                    $userPengusul['name'] }}>{{ $userPengusul['name'] }} ( {{ $userPengusul['full_name'] ?? '' }} )</option>
                                                 @endforeach
                                             </select>
                                         </div>

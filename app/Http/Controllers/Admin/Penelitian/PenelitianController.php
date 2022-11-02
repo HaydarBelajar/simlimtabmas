@@ -64,6 +64,16 @@ class PenelitianController extends Controller
         ]);
     }
 
+    public function destroy($id)
+    {
+        $param = [
+            'usulan_id' => $id
+        ];
+
+        $getData = $this->postAPI($param, 'penelitian/delete');
+        return $getData;
+    }
+
     public function detailPenelitian($id, Request $request)
     {
         $param = [
@@ -100,6 +110,7 @@ class PenelitianController extends Controller
         $getCapaianLuaran = $this->postAPI([], 'capaian-luaran/get-all');
         $getPeranan = $this->postAPI([], 'peranan/get-all');
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
+        $getProdi = $this->postAPI([], 'program-studi/get-cascader');
 
         return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
             'page' => 'tambah',
@@ -112,6 +123,7 @@ class PenelitianController extends Controller
             'listCapaianLuaran' => isset($getCapaianLuaran['data']) ? $getCapaianLuaran['data'] : [],
             'listPeranan' => isset($getPeranan['data']) ? $getPeranan['data'] : [],
             'listFakultas' => isset($getFakultas['data']) ? $getFakultas['data'] : [],
+            'listProdi' => isset($getProdi['data']) ? $getProdi['data'] : [],
         ]);
     }
 
@@ -145,6 +157,7 @@ class PenelitianController extends Controller
         $getPeranan = $this->postAPI([], 'peranan/get-all');
 
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
+        $getProdi = $this->postAPI([], 'program-studi/get-cascader');
         $detailPenelitian = isset($getData['data']) ? $getData['data'] : [];
         $wewenangUsulan = isset($getData['data']['wewenang_usulan']) ? $getData['data']['wewenang_usulan'] : [];
         $anggotaPenelitian = [];
@@ -188,7 +201,6 @@ class PenelitianController extends Controller
                 "fakultasId" =>  $wewenangUsulan[$indexAnggota3]['fakultas_id']
             ]);
         }
-        Log::debug($detailPenelitian);
         return view('admin.content.penelitian.usulan-baru.pengajuan-usulan-baru')->with([
             'page' => 'edit',
             'detailController' => $this->controllerPenelitianEdit,
@@ -201,6 +213,7 @@ class PenelitianController extends Controller
             'listPeranan' => isset($getPeranan['data']) ? $getPeranan['data'] : [],
             'detailPenelitian' => $detailPenelitian,
             'listFakultas' => isset($getFakultas['data']) ? $getFakultas['data'] : [],
+            'listProdi' => isset($getProdi['data']) ? $getProdi['data'] : [],
             'anggotaPenelitian' => $anggotaPenelitian,
             'anggotaPenelitianIds' => $anggotaPenelitianIds,
         ]);
@@ -230,11 +243,11 @@ class PenelitianController extends Controller
             'jenis_luaran' => $request->jenis_luaran,
             'list_anggota_penelitian' => json_decode($request->list_anggota_penelitian),
             'fakultas_id' => $request->fakultas_id,
+            'ps_id' => $request->program_studi,
             'person_id' => $userDetail['id'],
             'status' => 0,
             'jenis_usulan' => $request->jenis_usulan
         ];
-
         $simpanData = $this->postAPI($param, 'penelitian/create-penelitian');
 
         if (isset($simpanData['success'])) {
@@ -269,6 +282,7 @@ class PenelitianController extends Controller
             'jenis_luaran' => $request->jenis_luaran,
             'list_anggota_penelitian' => json_decode($request->list_anggota_penelitian),
             'fakultas_id' => $request->fakultas_id,
+            'ps_id' => $request->ps_id,
             'person_id' => $userDetail['id'],
             'status' => 0,
             'jenis_usulan' => $request->jenis_usulan
@@ -696,7 +710,7 @@ class PenelitianController extends Controller
         $param['multiple_data'] = $daftarMapping;
 
         $simpanData = $this->postAPI($param, 'reviewer/create-reviewer');
-        Log::debug($simpanData);
+
         if (isset($simpanData['success'])) {
             return redirect()->route('penelitian.reviewer-detail', $request->reviewer_id)->with('message', $simpanData['success']);
         } else {
