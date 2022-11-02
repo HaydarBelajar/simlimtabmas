@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\LuaranController;
 use App\Http\Controllers\Admin\RolesPermissions\RolesController;
 use App\Http\Controllers\Admin\Setting\SettingDeadlineController;
 use App\Http\Controllers\Admin\SisterData\PenelitianSisterController;
@@ -58,6 +59,8 @@ Route::middleware(['auth.token'])->group(function () {
         Route::post('/edit-catatan-harian', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'editCatatanHarian'])->name('edit-catatan-harian');
         Route::get('/get-catatan-harian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getCatatanHarian'])->name('get-catatan-harian');
         Route::get('/hapus-catatan-harian/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'hapusCatatanHarian'])->name('hapus-catatan-harian');
+        Route::get('/delete/{id}', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'destroy'])->name('delete');
+
 
         Route::get('/reviewer', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'reviewer'])->name('reviewer');
         Route::get('/get-user-reviewer-filter-datatables', [\App\Http\Controllers\Admin\Penelitian\PenelitianController::class, 'getUserReviewerFilterDatatables'])->name('get-user-reviewer-filter-datatables');
@@ -88,6 +91,8 @@ Route::middleware(['auth.token'])->group(function () {
         Route::post('/edit-catatan-harian', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'editCatatanHarian'])->name('edit-catatan-harian');
         Route::get('/get-catatan-harian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'getCatatanHarian'])->name('get-catatan-harian');
         Route::get('/hapus-catatan-harian/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'hapusCatatanHarian'])->name('hapus-catatan-harian');
+        Route::get('/delete/{id}', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'destroy'])->name('delete');
+
 
         Route::get('/tambah-laporan-akhir', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'tambahLaporanAkhir'])->name('tambah-laporan-akhir');
         Route::get('/data-laporan-akhir', [\App\Http\Controllers\Admin\Pengabdian\PengabdianController::class, 'dataLaporanAkhir'])->name('data-laporan-akhir');
@@ -106,6 +111,10 @@ Route::middleware(['auth.token'])->group(function () {
         Route::get('/delete/{id}', [UserManagementController::class, 'destroy'])->name('delete');
         Route::post('/create', [UserManagementController::class, 'store'])->name('create');
         Route::post('/update', [UserManagementController::class, 'update'])->name('update');
+    });
+
+    Route::group(['prefix' => 'luaran', 'as' => 'luaran.'], function () {
+        Route::put('/update/{id}', [LuaranController::class, 'update'])->name('update');
     });
 
     Route::group(['prefix' => 'sister', 'as' => 'sister.'], function () {

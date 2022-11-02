@@ -80,6 +80,16 @@ class PengabdianController extends Controller
         ]);
     }
 
+    public function destroy($id)
+    {
+        $param = [
+            'usulan_id' => $id
+        ];
+
+        $getData = $this->postAPI($param, 'pengabdian/delete');
+        return $getData;
+    }
+
     public function tambahDataPengabdian()
     {
         $paramSkema = [
@@ -101,6 +111,7 @@ class PengabdianController extends Controller
         $getCapaianLuaran = $this->postAPI([], 'capaian-luaran/get-all');
         $getPeranan = $this->postAPI([], 'peranan/get-all');
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
+        $getProdi = $this->postAPI([], 'program-studi/get-cascader');
 
         return view('admin.content.pengabdian.usulan-baru.pengajuan-usulan-baru')->with([
             'page' => 'tambah',
@@ -113,6 +124,7 @@ class PengabdianController extends Controller
             'listCapaianLuaran' => isset($getCapaianLuaran['data']) ? $getCapaianLuaran['data'] : [],
             'listPeranan' => isset($getPeranan['data']) ? $getPeranan['data'] : [],
             'listFakultas' => isset($getFakultas['data']) ? $getFakultas['data'] : [],
+            'listProdi' => isset($getProdi['data']) ? $getProdi['data'] : [],
         ]);
     }
 
@@ -146,6 +158,7 @@ class PengabdianController extends Controller
         }
 
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
+        $getProdi = $this->postAPI([], 'program-studi/get-cascader');
         $detailPengabdian = isset($getData['data']) ? $getData['data'] : [];
         $wewenangUsulan = isset($getData['data']['wewenang_usulan']) ? $getData['data']['wewenang_usulan'] : [];
         $anggotaPengabdian = [];
@@ -201,6 +214,7 @@ class PengabdianController extends Controller
             'listCapaianLuaran' => isset($getCapaianLuaran['data']) ? $getCapaianLuaran['data'] : [],
             'listPeranan' => isset($getPeranan['data']) ? $getPeranan['data'] : [],
             'detailPengabdian' => $detailPengabdian,
+            'listProdi' => isset($getProdi['data']) ? $getProdi['data'] : [],
             'listFakultas' => isset($getFakultas['data']) ? $getFakultas['data'] : [],
             'anggotaPengabdian' => $anggotaPengabdian,
             'anggotaPengabdianIds' => $anggotaPengabdianIds,
@@ -231,6 +245,7 @@ class PengabdianController extends Controller
             'jenis_luaran' => $request->jenis_luaran,
             'list_anggota_pengabdian' => json_decode($request->list_anggota_pengabdian),
             'fakultas_id' => $request->fakultas_id,
+            'ps_id' => $request->program_studi,
             'person_id' => $userDetail['id'],
             'status' => 0,
             'jenis_usulan' => $request->jenis_usulan
@@ -270,6 +285,7 @@ class PengabdianController extends Controller
             'jenis_luaran' => $request->jenis_luaran,
             'list_anggota_pengabdian' => json_decode($request->list_anggota_pengabdian),
             'fakultas_id' => $request->fakultas_id,
+            'ps_id' => $request->program_studi,
             'person_id' => $userDetail['id'],
             'status' => 0,
             'jenis_usulan' => $request->jenis_usulan
@@ -615,7 +631,6 @@ class PengabdianController extends Controller
 
     public function getPengabdianByReviewerDatatables($userId, Request $request)
     {
-        Log::debug('asdasdasdd');
         $userSession = $request->session()->get('kucingku');
         $userDetail = $userSession['user'];
 

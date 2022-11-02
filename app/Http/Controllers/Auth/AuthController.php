@@ -91,6 +91,7 @@ class AuthController extends Controller
             'isCivitasUnisa' => $request->civitasUnisa,
             'nidn' => $request->nidn,
             'nim' => $request->nim,
+            'full_name' => $request->full_name,
         ];
 
         $userCreate = $this->postPubAPI($param, 'user/create');

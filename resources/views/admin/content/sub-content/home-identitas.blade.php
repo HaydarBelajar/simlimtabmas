@@ -39,7 +39,7 @@
                   <tr>
                     <th scope="row" width="40%">Nama</th>
                     <td width="60%">
-                      <span id="ContentPlaceHolder1_ctl00_identitas_lblInstitusi" style="color:Green;"> {{Session::get('kucingku')['sister_data'][0]['sdm']['nama_sdm'] ?? Session::get('kucingku')['user']['name']}} </span>
+                      <span id="ContentPlaceHolder1_ctl00_identitas_lblInstitusi" style="color:Green;"> {{Session::get('kucingku')['sister_data'][0]['sdm']['nama_sdm'] ?? Session::get('kucingku')['user']['full_name']}} </span>
                     </td>
                   </tr>
                   <tr>
