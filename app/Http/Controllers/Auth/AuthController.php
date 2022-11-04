@@ -98,6 +98,7 @@ class AuthController extends Controller
         if (isset($userCreate['success'])) {
             return redirect()->route('login')->with('success', $userCreate['success']);
         }
-        return back()->withErrors($userCreate['error'] ?? 'error')->withInput();
+
+        return back()->withErrors($userCreate['error'] ?? $userCreate['reason'])->withInput();
     }
 }
