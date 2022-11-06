@@ -98,7 +98,7 @@ class PenelitianController extends Controller
         ];
         $paramPengusul = [
             "filter" => [
-                "role" => ["Dosen Pengusul", "Mahasiswa"]
+                "role" => ["Dosen Pengusul", "Mahasiswa", "Mitra"]
             ]
         ];
 
