@@ -96,7 +96,7 @@
                                         <label for="program-studi"
                                             class="col-sm-2 col-form-label">Program Studi</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control" id="program-studi" name="program_studi"
+                                            <select class="form-control select2" id="program-studi" name="program_studi" style="width: 100%;"
                                                 required>
                                                 @foreach ($listProdi as $prodi)
                                                 <option {{ isset($detailPenelitian['ps_id']) &&
@@ -311,7 +311,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label>Nama Anggota</label>
-                                            <select class="form-control" id="nama-anggota" name="nama-anggota" required>
+                                            <select class="form-control select2" id="nama-anggota" name="nama-anggota" required>
                                                 @foreach ($listUserPengusul as $userPengusul)
                                                 <option value={{ $userPengusul['id'] }} data-nama-pengusul={{
                                                     $userPengusul['name'] }}>{{ $userPengusul['name'] }} ( {{ $userPengusul['full_name'] ?? '' }} )</option>
@@ -369,6 +369,9 @@
                 let anggotaPenelitianIds = $('#list-anggota-penelitian').val() ? JSON.parse($('#list-anggota-penelitian').val()) : [];
                 let lengthAnggotaPenelitian = anggotaPenelitian.length;
 
+                $('#program-studi, #nama-anggota').select2({
+                    theme: 'bootstrap4'
+                });
                 $('#jenis-luaran').select2();
 
                 let anggotaPenelitianDatatables = $('#anggota-penelitian').DataTable({
