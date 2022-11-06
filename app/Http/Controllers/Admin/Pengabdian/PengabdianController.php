@@ -99,7 +99,7 @@ class PengabdianController extends Controller
         ];
         $paramPengusul = [
             "filter" => [
-                "role" => "Pengusul"
+                "role" => ["Dosen Pengusul", "Mahasiswa"]
             ]
         ];
 
@@ -107,7 +107,7 @@ class PengabdianController extends Controller
         $getSkema = $this->postAPI($paramSkema, 'skema/get-filter');
         $getRumpunIlmu = $this->postAPI([], 'rumpun-ilmu/get-filter');
         $getSumberDana = $this->postAPI([], 'sumber-dana/get-filter');
-        $getUserPengusul = $this->postAPI([], 'user/get-filter');
+        $getUserPengusul = $this->postAPI($paramPengusul, 'user/get-filter');
         $getCapaianLuaran = $this->postAPI([], 'capaian-luaran/get-all');
         $getPeranan = $this->postAPI([], 'peranan/get-all');
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
