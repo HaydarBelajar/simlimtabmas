@@ -281,7 +281,7 @@
                     name: 'Ketua',
                     render: function ( data, type, row ) {
                         if (data.length){
-                            const ketua = data.find( ({wewenang}) => wewenang == 1 ) !== undefined ? data.find( ({wewenang}) => wewenang == 1 ).detail_pengusul.name : ' - ';
+                            const ketua = data.find( ({wewenang}) => wewenang == 1 ) !== undefined ? data.find( ({wewenang}) => wewenang == 1 ).detail_pengusul?.name ?? ' - ' : ' - ';
                             return ketua;
                         }
                         return '-';
