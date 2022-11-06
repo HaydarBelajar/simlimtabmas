@@ -181,7 +181,7 @@
 												class="fas fa-file-upload"></i>
 											Reupload</a>
 										<a class="btn btn-outline-primary btn-sm" target="_blank"
-											href="{{ asset('media/proposal') }}/{{ $detailPengabdian['file_upload_pengesahan'] }}"><i
+											href="{{ asset('media/proposal') }}/{{ $detailPengabdian['file_upload_proposal'] }}"><i
 												class="fas fa-file-download"></i> Download</a>
 										@else
 										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"

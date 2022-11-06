@@ -100,7 +100,8 @@
                             </div>
                             <div class="modal-body">
                                 <input type="hidden" id="id-penelitian" name="id_penelitian">
-                                <input type="file" name="fileToUpload" id="fileToUpload">
+                                <input type="hidden" id="username-ketua-usulan" name="username_ketua_usulan">
+                                <input type="file" name="fileToUpload" id="fileToUpload" accept="application/pdf,application/vnd.ms-excel">
                             </div>
                             <div class="modal-footer">
                                 <input type="submit" name="o_upload_button" id="ok-upload-button" class="btn btn-danger"
@@ -315,7 +316,7 @@
                             `;
                         } else {
                             return `
-                            <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                            <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal" data-username-ketua-usulan="${row.user.name}" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
                             `;
                         }
 
@@ -347,7 +348,7 @@
                             `;
                         } else {
                             return `
-                                <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal-revisi" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                                <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal-revisi" data-username-ketua-usulan="${row.user.name}" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
                             `;
                         }
 
@@ -426,10 +427,12 @@
             let isUploadLaporanAkhir = false;
             let url = '';
             const id = $(this).data("id")
+            const usernameKetuaUsulan = $(this).data("username-ketua-usulan")
 
             var classList = this.classList.toString();
 
             $('#id-penelitian').val(id);
+            $('#username-ketua-usulan').val(usernameKetuaUsulan);
             if (classList.includes('upload-proposal')){
                 isUploadProposal = true;
                 isUploadPengesahan = false;

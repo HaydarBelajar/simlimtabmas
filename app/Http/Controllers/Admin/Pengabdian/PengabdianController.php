@@ -416,7 +416,7 @@ class PengabdianController extends Controller
     public function uploadProposal(Request $request)
     {
         $file = $request->file('fileToUpload');
-        $fileName = time() . '.' . $file->extension();
+        $fileName = $request->username_ketua_usulan.'_'.time() . '.' . $file->extension();
         $file->move(public_path('media/proposal'), $fileName);
         if (!$file) {
             return redirect()->route('pengabdian.data-pengabdian')->with('error', 'Gagal Menyimpan File');
@@ -512,7 +512,7 @@ class PengabdianController extends Controller
     public function uploadProposalRevisi(Request $request)
     {
         $file = $request->file('fileToUpload');
-        $fileName = time() . '.' . $file->extension();
+        $fileName = $request->username_ketua_usulan.'_'.time() . '.' . $file->extension();
         $file->move(public_path('media/proposal-revisi'), $fileName);
         if (!$file) {
             return redirect()->route('pengabdian.data-pengabdian')->with('error', 'Gagal Menyimpan File');

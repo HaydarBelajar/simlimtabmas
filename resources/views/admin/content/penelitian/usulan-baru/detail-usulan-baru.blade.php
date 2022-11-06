@@ -153,37 +153,15 @@
 							<!-- /.col -->
 							<div class="col-sm-4">
 								<dl>
-									<dt>Dokumen Pengesahan</dt>
-									<dd>
-										@if (isset($detailPenelitian['file_upload_pengesahan']))
-										<a href="#" class="btn btn-outline-danger btn-sm upload-pengesahan"
-											data-id="{{ $detailPenelitian['usulan_id'] }}"><i
-												class="fas fa-file-upload"></i>
-											Reupload</a>
-										<a class="btn btn-outline-primary btn-sm" target="_blank"
-											href="{{ asset('media/pengesahan') }}/{{ $detailPenelitian['file_upload_pengesahan'] }}"><i
-												class="fas fa-file-download"></i> Download</a>
-										@else
-											@if (in_array('edit penelitian',$user['permission_array']))
-											<a href="#" class="btn btn-outline-danger btn-sm upload-pengesahan"
-												data-id="{{ $detailPenelitian['usulan_id'] }}"><i
-													class="fas fa-file-upload"></i>
-												Upload</a>
-											@endif
-										@endif
-									</dd>
 									<dt>Dokumen Proposal</dt>
 									<dd>
-										{{-- <a class="btn btn-outline-success btn-sm" target="_blank"
-											href="https://docs.google.com/document/d/1YJ2VXFFOMTkhkNnGOeHN4OaejuNnZG48/edit"><i
-												class="fas fa-file-download"></i> Download Template</a> --}}
 										@if (isset($detailPenelitian['file_upload_proposal']))
 										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
 											data-id="{{ $detailPenelitian['usulan_id'] }}"><i
 												class="fas fa-file-upload"></i>
 											Reupload</a>
 										<a class="btn btn-outline-primary btn-sm" target="_blank"
-											href="{{ asset('media/proposal') }}/{{ $detailPenelitian['file_upload_pengesahan'] }}"><i
+											href="{{ asset('media/proposal') }}/{{ $detailPenelitian['file_upload_proposal'] }}"><i
 												class="fas fa-file-download"></i> Download</a>
 										@else
 											@if (in_array('edit penelitian',$user['permission_array']))
@@ -369,7 +347,6 @@
 									@php
 									$i++;
 									@endphp
-									<li></li>
 									@endforeach
 									{{-- <tr>
 										<td width="5%">3</th>
