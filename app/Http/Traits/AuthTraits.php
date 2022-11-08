@@ -41,7 +41,7 @@ trait AuthTraits
     public function postPubAPI($data, $endPoint)
     {
         $param = [
-            'form_params' => $data
+            'form_params' => $data,
         ];
 
         return $this->connectAPI('POST', $param, 'data', $endPoint, 'public');

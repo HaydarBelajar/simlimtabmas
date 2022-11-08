@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Traits\AuthTraits;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -78,7 +79,7 @@ class AuthController extends Controller
     public function storev2(Request $request)
     {
         if ($request->password != $request->confirmpassword) {
-            return json_encode(['error' => 'Gagal membuat user, harap periksa kembali password anda !']);
+            return back()->withErrors('Gagal membuat user, harap periksa kembali password anda !')->withInput();
         }
         
         $param = [
@@ -100,5 +101,22 @@ class AuthController extends Controller
         }
 
         return back()->withErrors($userCreate['error'] ?? $userCreate['reason'])->withInput();
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'confirmpassword' => 'required',
+        ]);
+
+        $resetUserPassword = $this->postPubAPI($request->all(), 'user/reset-password');
+
+        if (isset($resetUserPassword['success'])) {
+            return redirect()->route('login')->with('success', $resetUserPassword['success']);
+        }
+
+        return back()->withErrors($resetUserPassword['error'] ?? $resetUserPassword['reason'])->withInput();
     }
 }

@@ -32,6 +32,13 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'storev2'])->name('do-register');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->name('password.request');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
+
+   
+
 Route::middleware(['auth.token'])->group(function () {
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
