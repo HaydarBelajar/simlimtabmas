@@ -47,10 +47,10 @@
                                 <th width="5%">No</th>
                                 <th width="20%">Judul Penelitian</th>
                                 <th width="5%">Tahun Usulan</th>
-                                <th width="5%">Tahun Pelaksanaan</th>
-                                <th width="10%">Fakultas</th>
+                                {{-- <th width="5%">Tahun Pelaksanaan</th> --}}
+                                {{-- <th width="10%">Fakultas</th> --}}
                                 <th width="10%">Skema</th>
-                                <th width="10%">Ketua</th>
+                                {{-- <th width="10%">Ketua</th> --}}
                                 {{-- <th width="5%">Pengesahan</th> --}}
                                 <th width="5%">Proposal</th>
                                 <th width="5%">Penilaian Reviewer</th>
@@ -249,22 +249,22 @@
                     data: 'tahun.tahun',
                     name: 'Tahun Usulan'
                 },
-                {
-                    data: 'tahun_pelaksanaan.tahun',
-                    name: 'Tahun Pelaksanaan'
-                },
-                {
-                    data: 'fakultas',
-                    name: 'Fakultas',
-                    render: function ( data, type, row ) {
-                        if (data) {
-                            return data.namafakultas;
-                        } else {
-                            return '-';
-                        }
+                // {
+                //     data: 'tahun_pelaksanaan.tahun',
+                //     name: 'Tahun Pelaksanaan'
+                // },
+                // {
+                //     data: 'fakultas',
+                //     name: 'Fakultas',
+                //     render: function ( data, type, row ) {
+                //         if (data) {
+                //             return data.namafakultas;
+                //         } else {
+                //             return '-';
+                //         }
 
-                    }
-                },
+                //     }
+                // },
                 {
                     data: 'skema',
                     name: 'Skema',
@@ -277,17 +277,17 @@
 
                     }
                 },
-                {
-                    data: 'wewenang_usulan',
-                    name: 'Ketua',
-                    render: function ( data, type, row ) {
-                        if (data.length){
-                            const ketua = data.find( ({wewenang}) => wewenang == 1 ) !== undefined ? data.find( ({wewenang}) => wewenang == 1 ).detail_pengusul?.name ?? ' - ' : ' - ';
-                            return ketua;
-                        }
-                        return '-';
-                    }
-                },
+                // {
+                //     data: 'wewenang_usulan',
+                //     name: 'Ketua',
+                //     render: function ( data, type, row ) {
+                //         if (data.length){
+                //             const ketua = data.find( ({wewenang}) => wewenang == 1 ) !== undefined ? data.find( ({wewenang}) => wewenang == 1 ).detail_pengusul?.name ?? ' - ' : ' - ';
+                //             return ketua;
+                //         }
+                //         return '-';
+                //     }
+                // },
                 // {
                 //     name: 'Pengesahan',
                 //     data: 'usulan_id',
