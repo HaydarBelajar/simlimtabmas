@@ -23,7 +23,7 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
+        {{-- <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
             @if(Session::has('kucingku'))
@@ -44,7 +44,7 @@
             @endforeach
           </div>
           @endif
-        </li>
+        </li> --}}
       </ul>
     </nav>
     <!-- /.navbar -->
