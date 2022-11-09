@@ -228,6 +228,11 @@
                                     </h4>
                                 </div>
                                 <div class="card-body">
+                                    <div class="alert alert-warning alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+                                        Akun yang saat ini Login ke sistem harus masuk sebagai Anggota, jika tidak maka usulan tidak muncul di sistem. 
+                                    </div>
                                     <div class="top-button-group" style="margin-bottom: 20px;">
                                         <button type="button" class="btn btn-primary" id="tambah-anggota">Tambah
                                             Anggota</button>
@@ -407,7 +412,7 @@
                 anggotaPenelitian.push([namaAnggotaText, namaPerananText, namaFakultasText, `<a type="button" data-index=${lengthAnggotaPenelitian++} class="delete-anggota-pengabdian btn btn-danger" style="color:white">Hapus</a>`, namaAnggotaId, namaPerananId, namaFakultasId]);
                 anggotaPenelitianIds.push({userId: namaAnggotaId, perananId: namaPerananId, fakultasId: namaFakultasId});
             }
-
+            alert('Sukses menambah anggota usulan');
             refreshDatatablesAnggotaPenelitian();
 
         });
