@@ -167,7 +167,7 @@ class PengabdianController extends Controller
         $indexAnggota1 = array_search('2', array_column($wewenangUsulan, 'wewenang'));
         $indexAnggota2 = array_search('3', array_column($wewenangUsulan, 'wewenang'));
         $indexAnggota3 = array_search('4', array_column($wewenangUsulan, 'wewenang'));
-
+        
         // Membentuk array anggota
         if ($indexKetua !== FALSE) {
             array_push($anggotaPengabdian, [$wewenangUsulan[$indexKetua]['detail_pengusul']['name'], 'Ketua Peneliti', $wewenangUsulan[$indexKetua]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-pengabdian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexKetua]['user_id'], 1, $wewenangUsulan[$indexKetua]['fakultas_id']]);
@@ -292,7 +292,6 @@ class PengabdianController extends Controller
         ];
 
         $simpanData = $this->postAPI($param, 'pengabdian/update-pengabdian');
-
         if (isset($simpanData['success'])) {
             return redirect()->route('pengabdian.data-pengabdian')->with('message', $simpanData['success']);
         } else {

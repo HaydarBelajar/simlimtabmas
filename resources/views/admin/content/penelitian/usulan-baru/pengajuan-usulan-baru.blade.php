@@ -261,7 +261,7 @@
                                 </div>
                                 @php
                                 $reduce = function($value) {
-                                    return $value['luaran_id'];
+                                    return $value['capaian_luaran_id'];
                                 };
                                 $list_luaran = array_map($reduce, $detailPenelitian['list_luaran'] ?? []);
                                 @endphp
