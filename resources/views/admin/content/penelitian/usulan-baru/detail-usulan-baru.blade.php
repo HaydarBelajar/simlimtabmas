@@ -156,20 +156,20 @@
 									<dt>Dokumen Proposal</dt>
 									<dd>
 										@if (isset($detailPenelitian['file_upload_proposal']))
-										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
+										{{-- <a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
 											data-id="{{ $detailPenelitian['usulan_id'] }}"><i
 												class="fas fa-file-upload"></i>
-											Reupload</a>
+											Reupload</a> --}}
 										<a class="btn btn-outline-primary btn-sm" target="_blank"
 											href="{{ asset('media/proposal') }}/{{ $detailPenelitian['file_upload_proposal'] }}"><i
 												class="fas fa-file-download"></i> Download</a>
 										@else
-											@if (in_array('edit penelitian',$user['permission_array']))
+											{{-- @if (in_array('edit penelitian',$user['permission_array']))
 											<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
 												data-id="{{ $detailPenelitian['usulan_id'] }}"><i
 													class="fas fa-file-upload"></i>
 												Upload</a>
-											@endif
+											@endif --}}
 										@endif
 									</dd>
 									{{-- <dt>Dokumen Laporan Akhir</dt>

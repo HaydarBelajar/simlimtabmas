@@ -315,6 +315,7 @@
                             <a  class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal') }}/${row.file_upload_proposal}" ><i class="fas fa-file-download"></i> Download</a>
                             `;
                         } else {
+                            return '';
                             return `
                             <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal" data-username-ketua-usulan="${row.user.name}" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
                             `;
