@@ -346,6 +346,7 @@
                         if (row.file_upload_proposal_revisi) {
                             return `
                                 <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal-revisi') }}/${row.file_upload_proposal_revisi}" ><i class="fas fa-file-download"></i> Download</a>
+                                <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal-revisi') }}/${row.file_upload_proposal_revisi}" ><i class="fas fa-file-download"></i> Re-Upload</a>
                             `;
                         } else {
                             return `
