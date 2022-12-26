@@ -347,7 +347,7 @@
                             return `
                                 <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal-revisi') }}/${row.file_upload_proposal_revisi}" ><i class="fas fa-file-download"></i> Download</a>
                                 `;
-                                <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal-revisi" data-username-ketua-usulan="${row.user.name}" data-id="${data}"><i class="fas fa-file-upload"></i> Re-Upload</a>
+                                // <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal-revisi" data-username-ketua-usulan="${row.user.name}" data-id="${data}"><i class="fas fa-file-upload"></i> Re-Upload</a>
                         } else {
                             return `
                                 <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal-revisi" data-username-ketua-usulan="${row.user.name}" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
