@@ -48,7 +48,7 @@
                             <input type="text" name="nim" id="nim" value="{{ old('nim') }}" class="form-control" />
                         </div>
                         <div class="form-group" id=form-nidn>
-                            <label class="col-form-label">NIDN : </label>
+                            <label class="col-form-label">NIDN/NIP : </label>
                             <input type="text" name="nidn" id="nidn" value="{{ old('nidn') }}" class="form-control" />
                         </div>
                         {{-- <div class="form-group">

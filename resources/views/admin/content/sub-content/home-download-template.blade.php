@@ -8,6 +8,30 @@
         <div class="col-sm-12 table-responsive">
           <table class="table table-hover download-template">
             <tbody>
+              <tr style="background-color: antiquewhite;">
+                <td>Buku Panduan Penelitian</td>
+                <td>
+                  <a class="btn btn-outline-success btn-sm" target="_blank"
+                  href="https://drive.google.com/file/d/1i-BP6NV8Swmy0WnDM6hNjLZzYp9U0jjG/view?usp=sharing"><i
+                      class="fas fa-file-download"></i> Download Template</a>
+                </td>
+              </tr>
+              <tr style="background-color: antiquewhite;">
+                <td>Buku Panduan Pengabdian</td>
+                <td>
+                  <a class="btn btn-outline-success btn-sm" target="_blank"
+                  href="https://drive.google.com/file/d/1GnNESJ2e_YvFtvf0JfpaHvvYGB4WrtE1/view?usp=sharing"><i
+                      class="fas fa-file-download"></i> Download Template</a>
+                </td>
+              </tr>
+              <tr style="background-color: antiquewhite;">
+                <td>Daftar Lampiran Persyaratan</td>
+                <td>
+                  <a class="btn btn-outline-success btn-sm" target="_blank"
+                    href="https://docs.google.com/document/d/11BNUcJdCipQfJD7fQ3xXdrxE7hCkXLGG/edit?usp=sharing&ouid=106179746642386009028&rtpof=true&sd=true"><i
+                      class="fas fa-file-download"></i> Download Template</a>
+                </td>
+              </tr>
               <tr>
                 <td>Template Proposal Pengabdian</td>
                 <td>
@@ -29,6 +53,22 @@
                 <td>
                   <a class="btn btn-outline-success btn-sm" target="_blank"
                     href="https://docs.google.com/document/d/1HAbAfslmcFoRgQ-Mx4cTlasgVJHJXMrK/edit?usp=sharing&ouid=106179746642386009028&rtpof=true&sd=true"><i
+                      class="fas fa-file-download"></i> Download Template</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Surat Kesediaan Kerjasama Mitra Penelitian</td>
+                <td>
+                  <a class="btn btn-outline-success btn-sm" target="_blank"
+                    href="https://docs.google.com/document/d/1EbwBFX1EzkeaObvQCtpqQbWsqUFAA5vn/edit?usp=sharing&ouid=106179746642386009028&rtpof=true&sd=true"><i
+                      class="fas fa-file-download"></i> Download Template</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Surat Kesediaan Mitra Penelitian Terapan</td>
+                <td>
+                  <a class="btn btn-outline-success btn-sm" target="_blank"
+                    href="https://docs.google.com/document/d/1OEIpGfuTNCyfF5cMnaz5KN_jsuYodO6D/edit?usp=sharing&ouid=106179746642386009028&rtpof=true&sd=true"><i
                       class="fas fa-file-download"></i> Download Template</a>
                 </td>
               </tr>
@@ -57,18 +97,10 @@
                 </td>
               </tr> --}}
               <tr>
-                <td>Buku Panduan Penelitian</td>
+                <td>LoA Mitra Penelitian</td>
                 <td>
                   <a class="btn btn-outline-success btn-sm" target="_blank"
-                  href="https://drive.google.com/file/d/1i-BP6NV8Swmy0WnDM6hNjLZzYp9U0jjG/view?usp=sharing"><i
-                      class="fas fa-file-download"></i> Download Template</a>
-                </td>
-              </tr>
-              <tr>
-                <td>Buku Panduan Pengabdian</td>
-                <td>
-                  <a class="btn btn-outline-success btn-sm" target="_blank"
-                  href="https://drive.google.com/file/d/1GnNESJ2e_YvFtvf0JfpaHvvYGB4WrtE1/view?usp=sharing"><i
+                  href="https://docs.google.com/document/d/1ERBeQxAxnMNVCwl1F8CniRlux7xaJQDo/edit?usp=sharing&ouid=106179746642386009028&rtpof=true&sd=true"><i
                       class="fas fa-file-download"></i> Download Template</a>
                 </td>
               </tr>

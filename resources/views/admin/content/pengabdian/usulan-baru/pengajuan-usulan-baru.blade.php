@@ -96,7 +96,7 @@
                                         <label for="program-studi"
                                             class="col-sm-2 col-form-label">Program Studi</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control" id="program-studi" name="program_studi"
+                                            <select class="form-control select2" id="program-studi" name="program_studi"
                                                 required>
                                                 @foreach ($listProdi as $prodi)
                                                 <option {{ isset($detailPenelitian['ps_id']) &&
@@ -228,7 +228,15 @@
                                     </h4>
                                 </div>
                                 <div class="card-body">
-                                    <div class="top-button-group" style="margin-bottom: 20px;">
+                                    <div class="alert alert-warning alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+                                        Akun yang saat ini Login ke sistem harus masuk sebagai Anggota, jika tidak maka usulan tidak muncul di sistem. 
+                                    </div>
+                                    <div id="tim-usulan-row">
+                                        @include('admin.content.pengabdian.usulan-baru.tim-usulan')
+                                    </div>
+                                    {{-- <div class="top-button-group" style="margin-bottom: 20px;">
                                         <button type="button" class="btn btn-primary" id="tambah-anggota">Tambah
                                             Anggota</button>
                                     </div>
@@ -242,7 +250,7 @@
                                                 <th width="20%">Aksi</th>
                                             </tr>
                                         </thead>
-                                    </table>
+                                    </table> --}}
                                 </div>
                             </div>
                             <div class="card card-primary">
@@ -256,7 +264,7 @@
                                 </div>
                                 @php
                                 $reduce = function($value) {
-                                    return $value['luaran_id'];
+                                    return $value['capaian_luaran_id'];
                                 };
                                 $list_luaran = array_map($reduce, $detailPengabdian['list_luaran'] ?? []);
                                 @endphp
@@ -311,7 +319,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label>Nama Anggota</label>
-                                            <select class="form-control" id="nama-anggota" name="nama-anggota" required>
+                                            <select class="form-control select2" id="nama-anggota" name="nama-anggota" required>
                                                 @foreach ($listUserPengusul as $userPengusul)
                                                 <option value={{ $userPengusul['id'] }} data-nama-pengusul={{
                                                     $userPengusul['name'] }}>{{ $userPengusul['name'] }} ( {{ $userPengusul['full_name'] ?? '' }} ) </option>
@@ -362,93 +370,5 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-@push('scripts')
-<script>
-    $(document).ready(function() {
-        let anggotaPenelitian = $('#anggota-pengabdian-list').val() ? JSON.parse($('#anggota-pengabdian-list').val()) : [];
-        let anggotaPenelitianIds = $('#list-anggota-pengabdian').val() ? JSON.parse($('#list-anggota-pengabdian').val()) : [];
-        let lengthAnggotaPenelitian = anggotaPenelitian.length;
-
-        $('#jenis-luaran').select2();
-
-        let anggotaPenelitianDatatables = $('#anggota-pengabdian').DataTable({
-            data: anggotaPenelitian,
-            deferRender: true,
-            // scrollY: 200,
-            scrollCollapse: true,
-            scroller: true
-        });
-
-        $(document).on('click', '#tambah-anggota', function() {
-            $('#notification').html('');
-            $('#formTambahAnggotaModal').modal('show');
-            $('#action_button').val('Simpan');
-            $('#action').val('Simpan');
-        });
-
-        $('#tambah-anggota-form').on('submit', function(event) {
-            event.preventDefault();
-            const namaAnggota =  $('#nama-anggota').find(":selected");
-            const namaPeranan =  $('#peranan-pengabdian').find(":selected");
-            const namaFakultas =  $('#fakultas-pengabdian-anggota').find(":selected");
-            console.log('namaFakultas', namaFakultas.val())
-            const namaAnggotaText = namaAnggota.text();
-            const namaPerananText = namaPeranan.text();
-            const namaFakultasText = namaFakultas.text();
-
-            const namaAnggotaId = namaAnggota.val();
-            const namaPerananId =  namaPeranan.val();
-            const namaFakultasId =  namaFakultas.val();
-
-            if ($('#action').val() == 'Simpan') {
-                anggotaPenelitian.push([namaAnggotaText, namaPerananText, namaFakultasText, `<a type="button" data-index=${lengthAnggotaPenelitian++} class="delete-anggota-pengabdian btn btn-danger" style="color:white">Hapus</a>`, namaAnggotaId, namaPerananId, namaFakultasId]);
-                anggotaPenelitianIds.push({userId: namaAnggotaId, perananId: namaPerananId, fakultasId: namaFakultasId});
-            }
-
-            refreshDatatablesAnggotaPenelitian();
-
-        });
-
-        $('#anggota-pengabdian tbody').on( 'click', '.delete-anggota-pengabdian', function () {
-            anggotaPenelitianDatatables
-                .row( $(this).parents('tr') )
-                .remove()
-                .draw();
-            
-            const dataDatatables = anggotaPenelitianDatatables.data();
-            const dataDatatablesMap = dataDatatables.map( data =>  ({
-                userId: data[4],
-                perananId: data[5],
-                fakultasId: data[6],
-            }))
-
-            anggotaPenelitian = dataDatatables;
-            anggotaPenelitianIds = dataDatatablesMap;
-
-            refreshDatatablesAnggotaPenelitian();
-        } );
-        // $(document).on('click', '.delete-anggota-pengabdian', function() {
-        //     const indexData =  $(this).data('index');
-        //     anggotaPenelitian.splice(indexData, 1);
-        //     anggotaPenelitianIds.splice(indexData, 1);
-
-        //     refreshDatatablesAnggotaPenelitian();
-        // });
-
-        function refreshDatatablesAnggotaPenelitian () {
-            console.log('hello',anggotaPenelitian);
-            $('#list-anggota-pengabdian').val(JSON.stringify(anggotaPenelitianIds));
-            /**
-            * Reset Datatables
-            * $('#anggota-pengabdian').DataTable().ajax.reload(); tidak bisa, ini dilakukan hanya jika pakai ajax call
-            *
-            **/
-            $('#anggota-pengabdian').DataTable().clear().draw();
-            $('#anggota-pengabdian').DataTable().rows.add(anggotaPenelitian); // Add new data
-            $('#anggota-pengabdian').DataTable().columns.adjust().draw(); // Redraw the DataTable
-        }
-
-    });
-</script>
-@endpush
+@include('admin.content.pengabdian.usulan-baru.script')
 @endsection

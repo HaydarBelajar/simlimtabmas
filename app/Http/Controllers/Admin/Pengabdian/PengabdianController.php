@@ -99,7 +99,7 @@ class PengabdianController extends Controller
         ];
         $paramPengusul = [
             "filter" => [
-                "role" => "Pengusul"
+                "role" => ["Dosen Pengusul", "Mahasiswa"]
             ]
         ];
 
@@ -107,7 +107,7 @@ class PengabdianController extends Controller
         $getSkema = $this->postAPI($paramSkema, 'skema/get-filter');
         $getRumpunIlmu = $this->postAPI([], 'rumpun-ilmu/get-filter');
         $getSumberDana = $this->postAPI([], 'sumber-dana/get-filter');
-        $getUserPengusul = $this->postAPI([], 'user/get-filter');
+        $getUserPengusul = $this->postAPI($paramPengusul, 'user/get-filter');
         $getCapaianLuaran = $this->postAPI([], 'capaian-luaran/get-all');
         $getPeranan = $this->postAPI([], 'peranan/get-all');
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
@@ -160,48 +160,6 @@ class PengabdianController extends Controller
         $getFakultas = $this->postAPI([], 'fakultas/get-cascader');
         $getProdi = $this->postAPI([], 'program-studi/get-cascader');
         $detailPengabdian = isset($getData['data']) ? $getData['data'] : [];
-        $wewenangUsulan = isset($getData['data']['wewenang_usulan']) ? $getData['data']['wewenang_usulan'] : [];
-        $anggotaPengabdian = [];
-        $anggotaPengabdianIds = [];
-        $indexKetua = array_search('1', array_column($wewenangUsulan, 'wewenang'));
-        $indexAnggota1 = array_search('2', array_column($wewenangUsulan, 'wewenang'));
-        $indexAnggota2 = array_search('3', array_column($wewenangUsulan, 'wewenang'));
-        $indexAnggota3 = array_search('4', array_column($wewenangUsulan, 'wewenang'));
-
-        // Membentuk array anggota
-        if ($indexKetua !== FALSE) {
-            array_push($anggotaPengabdian, [$wewenangUsulan[$indexKetua]['detail_pengusul']['name'], 'Ketua Peneliti', $wewenangUsulan[$indexKetua]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-pengabdian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexKetua]['user_id'], 1, $wewenangUsulan[$indexKetua]['fakultas_id']]);
-            array_push($anggotaPengabdianIds, [
-                "userId" => $wewenangUsulan[$indexKetua]['user_id'],
-                "perananId" => 1,
-                "fakultasId" =>  $wewenangUsulan[$indexKetua]['fakultas_id']
-            ]);
-        }
-
-        if ($indexAnggota1 !== FALSE) {
-            array_push($anggotaPengabdian, [$wewenangUsulan[$indexAnggota1]['detail_pengusul']['name'], 'Anggota Peneliti 1', $wewenangUsulan[$indexAnggota1]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-pengabdian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexAnggota1]['user_id'], 2, $wewenangUsulan[$indexAnggota1]['fakultas_id']]);
-            array_push($anggotaPengabdianIds, [
-                "userId" => $wewenangUsulan[$indexAnggota1]['user_id'],
-                "perananId" => 2,
-                "fakultasId" =>  $wewenangUsulan[$indexAnggota1]['fakultas_id']
-            ]);
-        }
-        if ($indexAnggota2 !== FALSE) {
-            array_push($anggotaPengabdian, [$wewenangUsulan[$indexAnggota2]['detail_pengusul']['name'], 'Anggota Peneliti 2', $wewenangUsulan[$indexAnggota2]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-pengabdian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexAnggota2]['user_id'], 3, $wewenangUsulan[$indexAnggota2]['fakultas_id']]);
-            array_push($anggotaPengabdianIds, [
-                "userId" => $wewenangUsulan[$indexAnggota2]['user_id'],
-                "perananId" => 3,
-                "fakultasId" =>  $wewenangUsulan[$indexAnggota2]['fakultas_id']
-            ]);
-        }
-        if ($indexAnggota3 !== FALSE) {
-            array_push($anggotaPengabdian, [$wewenangUsulan[$indexAnggota3]['detail_pengusul']['name'], 'Anggota Peneliti 3', $wewenangUsulan[$indexAnggota3]['detail_fakultas']['namafakultas'], '<a type="button" data-index=1 class="delete-anggota-pengabdian btn btn-danger" style="color:white">Hapus</a>', $wewenangUsulan[$indexAnggota3]['user_id'], 4, $wewenangUsulan[$indexAnggota3]['fakultas_id']]);
-            array_push($anggotaPengabdianIds, [
-                "userId" => $wewenangUsulan[$indexAnggota3]['user_id'],
-                "perananId" => 4,
-                "fakultasId" =>  $wewenangUsulan[$indexAnggota3]['fakultas_id']
-            ]);
-        }
 
         return view('admin.content.pengabdian.usulan-baru.pengajuan-usulan-baru')->with([
             'page' => 'edit',
@@ -216,8 +174,6 @@ class PengabdianController extends Controller
             'detailPengabdian' => $detailPengabdian,
             'listProdi' => isset($getProdi['data']) ? $getProdi['data'] : [],
             'listFakultas' => isset($getFakultas['data']) ? $getFakultas['data'] : [],
-            'anggotaPengabdian' => $anggotaPengabdian,
-            'anggotaPengabdianIds' => $anggotaPengabdianIds,
         ]);
     }
 
@@ -243,7 +199,7 @@ class PengabdianController extends Controller
             'user_mengetahui_id' => $request->mengetahui_penandatanganan_id,
             'jumlah_dana_mengetahui' => $request->jumlah_dana_penandatanganan,
             'jenis_luaran' => $request->jenis_luaran,
-            'list_anggota_pengabdian' => json_decode($request->list_anggota_pengabdian),
+            'list_anggota_pengabdian' => $request->listanggotapengabdian,
             'fakultas_id' => $request->fakultas_id,
             'ps_id' => $request->program_studi,
             'person_id' => $userDetail['id'],
@@ -283,7 +239,7 @@ class PengabdianController extends Controller
             'user_mengetahui_id' => $request->mengetahui_penandatanganan_id,
             'jumlah_dana_mengetahui' => $request->jumlah_dana_penandatanganan,
             'jenis_luaran' => $request->jenis_luaran,
-            'list_anggota_pengabdian' => json_decode($request->list_anggota_pengabdian),
+            'list_anggota_pengabdian' => $request->listanggotapengabdian,
             'fakultas_id' => $request->fakultas_id,
             'ps_id' => $request->program_studi,
             'person_id' => $userDetail['id'],
@@ -292,7 +248,6 @@ class PengabdianController extends Controller
         ];
 
         $simpanData = $this->postAPI($param, 'pengabdian/update-pengabdian');
-
         if (isset($simpanData['success'])) {
             return redirect()->route('pengabdian.data-pengabdian')->with('message', $simpanData['success']);
         } else {
@@ -416,7 +371,7 @@ class PengabdianController extends Controller
     public function uploadProposal(Request $request)
     {
         $file = $request->file('fileToUpload');
-        $fileName = time() . '.' . $file->extension();
+        $fileName = $request->username_ketua_usulan.'_'.time() . '.' . $file->extension();
         $file->move(public_path('media/proposal'), $fileName);
         if (!$file) {
             return redirect()->route('pengabdian.data-pengabdian')->with('error', 'Gagal Menyimpan File');
@@ -512,7 +467,7 @@ class PengabdianController extends Controller
     public function uploadProposalRevisi(Request $request)
     {
         $file = $request->file('fileToUpload');
-        $fileName = time() . '.' . $file->extension();
+        $fileName = $request->username_ketua_usulan.'_'.time() . '.' . $file->extension();
         $file->move(public_path('media/proposal-revisi'), $fileName);
         if (!$file) {
             return redirect()->route('pengabdian.data-pengabdian')->with('error', 'Gagal Menyimpan File');

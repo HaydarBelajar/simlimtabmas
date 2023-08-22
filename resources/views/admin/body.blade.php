@@ -12,18 +12,23 @@
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <!-- Left navbar links -->
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" style="width:100%">
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
+        <li class="nav-item" style="width: 100%">
+          <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-info"></i> Alert!</h5>
+            Disarankan untuk membuka aplikasi menggunakan Browser Google Chrome
+            </div>
         </li>
       </ul>
 
       <!-- Right navbar links -->
-      <ul class="navbar-nav ml-auto">
+      {{-- <ul class="navbar-nav ml-auto"> --}}
         <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
+        {{-- <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
             @if(Session::has('kucingku'))
@@ -44,8 +49,8 @@
             @endforeach
           </div>
           @endif
-        </li>
-      </ul>
+        </li> --}}
+      {{-- </ul> --}}
     </nav>
     <!-- /.navbar -->
 

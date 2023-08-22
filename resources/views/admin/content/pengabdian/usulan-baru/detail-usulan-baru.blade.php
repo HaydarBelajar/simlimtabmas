@@ -176,18 +176,18 @@
 											href="https://docs.google.com/document/d/1YJ2VXFFOMTkhkNnGOeHN4OaejuNnZG48/edit"><i
 												class="fas fa-file-download"></i> Download Template</a> --}}
 										@if (isset($detailPengabdian['file_upload_proposal']))
-										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
+										{{-- <a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
 											data-id="{{ $detailPengabdian['usulan_id'] }}"><i
 												class="fas fa-file-upload"></i>
-											Reupload</a>
+											Reupload</a> --}}
 										<a class="btn btn-outline-primary btn-sm" target="_blank"
-											href="{{ asset('media/proposal') }}/{{ $detailPengabdian['file_upload_pengesahan'] }}"><i
+											href="{{ asset('media/proposal') }}/{{ $detailPengabdian['file_upload_proposal'] }}"><i
 												class="fas fa-file-download"></i> Download</a>
 										@else
-										<a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
+										{{-- <a href="#" class="btn btn-outline-danger btn-sm upload-proposal"
 											data-id="{{ $detailPengabdian['usulan_id'] }}"><i
 												class="fas fa-file-upload"></i>
-											Upload</a>
+											Upload</a> --}}
 										@endif
 									</dd>
 									{{-- <dt>Dokumen Laporan Akhir</dt>

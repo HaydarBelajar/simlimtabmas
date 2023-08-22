@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LuaranController;
+use App\Http\Controllers\Admin\Publikasi\PublikasiPenelitianController;
+use App\Http\Controllers\Admin\Publikasi\PublikasiPengabdianController;
 use App\Http\Controllers\Admin\RolesPermissions\RolesController;
 use App\Http\Controllers\Admin\Setting\SettingDeadlineController;
 use App\Http\Controllers\Admin\SisterData\PenelitianSisterController;
@@ -29,6 +31,13 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'storev2'])->name('do-register');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->name('password.request');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
+
+   
 
 Route::middleware(['auth.token'])->group(function () {
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
@@ -115,6 +124,14 @@ Route::middleware(['auth.token'])->group(function () {
 
     Route::group(['prefix' => 'luaran', 'as' => 'luaran.'], function () {
         Route::put('/update/{id}', [LuaranController::class, 'update'])->name('update');
+    });
+
+    Route::group(['prefix' => 'publikasi-penelitian', 'as' => 'publikasi-penelitian.'], function () {
+        Route::get('/', [PublikasiPenelitianController::class, 'index'])->name('index');
+    });
+
+    Route::group(['prefix' => 'publikasi-pengabdian', 'as' => 'publikasi-pengabdian.'], function () {
+        Route::get('/', [PublikasiPengabdianController::class, 'index'])->name('index');
     });
 
     Route::group(['prefix' => 'sister', 'as' => 'sister.'], function () {

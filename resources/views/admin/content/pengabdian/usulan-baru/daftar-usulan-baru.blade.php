@@ -47,10 +47,10 @@
                                 <th width="5%">No</th>
                                 <th width="20%">Judul Penelitian</th>
                                 <th width="5%">Tahun Usulan</th>
-                                <th width="5%">Tahun Pelaksanaan</th>
-                                <th width="10%">Fakultas</th>
+                                {{-- <th width="5%">Tahun Pelaksanaan</th> --}}
+                                {{-- <th width="10%">Fakultas</th> --}}
                                 <th width="10%">Skema</th>
-                                <th width="10%">Ketua</th>
+                                {{-- <th width="10%">Ketua</th> --}}
                                 {{-- <th width="5%">Pengesahan</th> --}}
                                 <th width="5%">Proposal</th>
                                 <th width="5%">Penilaian Reviewer</th>
@@ -100,11 +100,12 @@
                             </div>
                             <div class="modal-body">
                                 <input type="hidden" id="id-pengabdian" name="id_pengabdian">
-                                <input type="file" name="fileToUpload" id="fileToUpload">
+                                <input type="hidden" id="username-ketua-usulan" name="username_ketua_usulan">
+                                <input type="file" name="fileToUpload" id="fileToUpload" accept="application/pdf,application/vnd.ms-excel">
                             </div>
                             <div class="modal-footer">
                                 <input type="submit" name="o_upload_button" id="ok-upload-button" class="btn btn-danger"
-                                    value="Upload">
+                                    value="Upload" >
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                             </div>
                         </form>
@@ -248,22 +249,22 @@
                     data: 'tahun.tahun',
                     name: 'Tahun Usulan'
                 },
-                {
-                    data: 'tahun_pelaksanaan.tahun',
-                    name: 'Tahun Pelaksanaan'
-                },
-                {
-                    data: 'fakultas',
-                    name: 'Fakultas',
-                    render: function ( data, type, row ) {
-                        if (data) {
-                            return data.namafakultas;
-                        } else {
-                            return '-';
-                        }
+                // {
+                //     data: 'tahun_pelaksanaan.tahun',
+                //     name: 'Tahun Pelaksanaan'
+                // },
+                // {
+                //     data: 'fakultas',
+                //     name: 'Fakultas',
+                //     render: function ( data, type, row ) {
+                //         if (data) {
+                //             return data.namafakultas;
+                //         } else {
+                //             return '-';
+                //         }
 
-                    }
-                },
+                //     }
+                // },
                 {
                     data: 'skema',
                     name: 'Skema',
@@ -276,17 +277,17 @@
 
                     }
                 },
-                {
-                    data: 'wewenang_usulan',
-                    name: 'Ketua',
-                    render: function ( data, type, row ) {
-                        if (data.length){
-                            const ketua = data.find( ({wewenang}) => wewenang == 1 ) !== undefined ? data.find( ({wewenang}) => wewenang == 1 ).detail_pengusul.name : ' - ';
-                            return ketua;
-                        }
-                        return '-';
-                    }
-                },
+                // {
+                //     data: 'wewenang_usulan',
+                //     name: 'Ketua',
+                //     render: function ( data, type, row ) {
+                //         if (data.length){
+                //             const ketua = data.find( ({wewenang}) => wewenang == 1 ) !== undefined ? data.find( ({wewenang}) => wewenang == 1 ).detail_pengusul?.name ?? ' - ' : ' - ';
+                //             return ketua;
+                //         }
+                //         return '-';
+                //     }
+                // },
                 // {
                 //     name: 'Pengesahan',
                 //     data: 'usulan_id',
@@ -314,8 +315,9 @@
                             <a  class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal') }}/${row.file_upload_proposal}" ><i class="fas fa-file-download"></i> Download</a>
                             `;
                         } else {
+                            return '';
                             return `
-                            <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                            <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal" data-username-ketua-usulan="${row.user.name}" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
                             `;
                         }
 
@@ -344,10 +346,11 @@
                         if (row.file_upload_proposal_revisi) {
                             return `
                                 <a class="btn btn-outline-primary btn-block btn-sm" target="_blank" href="{{ asset('media/proposal-revisi') }}/${row.file_upload_proposal_revisi}" ><i class="fas fa-file-download"></i> Download</a>
-                            `;
+                                `;
+                                // <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal-revisi" data-username-ketua-usulan="${row.user.name}" data-id="${data}"><i class="fas fa-file-upload"></i> Re-Upload</a>
                         } else {
                             return `
-                                <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal-revisi" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
+                                <a href="#" class="btn btn-outline-danger btn-block btn-sm upload-proposal-revisi" data-username-ketua-usulan="${row.user.name}" data-id="${data}"><i class="fas fa-file-upload"></i> Upload</a>
                             `;
                         }
 
@@ -426,10 +429,12 @@
             let isUploadLaporanAkhir = false;
             let url = '';
             const id = $(this).data("id")
+            const usernameKetuaUsulan = $(this).data("username-ketua-usulan")
 
             var classList = this.classList.toString();
 
             $('#id-pengabdian').val(id);
+            $('#username-ketua-usulan').val(usernameKetuaUsulan);
             if (classList.includes('upload-proposal')){
                 isUploadProposal = true;
                 isUploadPengesahan = false;
